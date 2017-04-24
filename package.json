@@ -1,0 +1,57 @@
+{
+  "name": "react-awesome-button",
+  "version": "0.1.0",
+  "description": "Production ready generic 3D react button component with progress loading bar.",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
+  "files": [
+    "src",
+    "react-awesome-button.css"
+  ],
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.3"
+  },
+  "scripts": {
+    "start": "webpack-dev-server -d --config webpack.demo.config.js --progress --colors --display-error-details",
+    "build-demo": "NODE_ENV=production node_modules/.bin/webpack -p --config webpack.demo.config.js --progress --colors --display-error-details",
+    "build-component": "NODE_ENV=production node_modules/.bin/webpack -p --progress --colors --display-error-details",
+    "build": "npm run build-component && npm run build-demo",
+    "prepublish": "npm run build",
+    "test": "BABEL_JEST_STAGE=0 jest",
+    "lint": "eslint src/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rcaferati/react-awesome-button"
+  },
+  "keywords": [
+    "react",
+    "awesome-button",
+    "progress",
+    "button",
+    "component",
+    "javascript",
+    "react-component"
+  ],
+  "author": "Rafael Caferati",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rcaferati/react-awesome-button/issues"
+  },
+  "homepage": "https://github.com/rcaferati/react-awesome-button"
+}
