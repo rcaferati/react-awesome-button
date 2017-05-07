@@ -3,24 +3,35 @@ import { render } from 'react-dom';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
 } from 'react-router-dom';
-import highlight from 'highlight.js';
-import xml from 'highlight.js/lib/languages/xml';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-jsx';
 import AwesomeButton from './index';
 
-require('../stylesheet/react-awesome-button.scss');
-require('../stylesheet/demo-styles.scss');
-require('highlight.js/styles/github.css');
+require('prismjs/themes/prism-okaidia.css');
+require('../styles/react-awesome-button.scss');
+require('../styles/demo-styles.scss');
 
 const DATA = {
   name: 'AwesomeButton',
   title: 'React Components are awesome',
-  description: 'The <strong>Awesome Button Vanilla JS Custom Element</strong> is a cool option to quickly add<br/> share buttons (or any kind of buttons) to your projects.',
-  sise: '~1KB compressed',
+  description: 'The AwesomeButton is a performant, extendable, customisable, production ready react component that renders an animated basic set of UI buttons.',
+  size: '~3KB compressed ( js + css )',
   repository: 'https://github.com/rcaferati/react-awesome-button',
   article: '//caferati.me/labs/awesome-button',
   examples: [
+    {
+      title: 'Primary button',
+      text: `
+<AwesomeButton>Primary Button</AwesomeButton>`,
+      button: (<AwesomeButton>Primary Button</AwesomeButton>),
+    },
+    {
+      title: 'Secondary button',
+      text: `
+<AwesomeButton type="secondary">Secondary Button</AwesomeButton>`,
+      button: (<AwesomeButton type="secondary">Secondary Button</AwesomeButton>),
+    },
     {
       title: 'Animated progress button',
       text: `
@@ -32,30 +43,36 @@ const DATA = {
   }}
 >Progress Button</AwesomeButton>`,
       button: (
-        <AwesomeButton
-          progress
-          action={(element, next) => {
-            setTimeout(() => {
-              next();
-            }, 750);
-          }}
-        >Progress Button</AwesomeButton>),
+        <div>
+          <AwesomeButton
+            progress
+            action={(element, next) => {
+              setTimeout(() => {
+                next();
+              }, 600);
+            }}
+          >Progress Button</AwesomeButton>
+          <AwesomeButton
+            progress
+            type="secondary"
+            action={(element, next) => {
+              setTimeout(() => {
+                next();
+              }, 500);
+            }}
+          >Progress Button</AwesomeButton>
+        </div>),
     },
     {
       title: 'Icon font button',
+      description: `This example use font-awesome to render the icons but you can
+      use almost anything as the component's child. i.e. <img> or <svg>.`,
       text: `
 <AwesomeButton
   type="facebook"
   size="icon"
 ><i className="fa fa-facebook" /></AwesomeButton>
-<AwesomeButton
-  type="twitter"
-  size="icon"
-><i className="fa fa-twitter" /></AwesomeButton>
-<AwesomeButton
-  type="github"
-  size="icon"
-><i className="fa fa-github" /></AwesomeButton>`,
+...`,
       button: (
         <div>
           <AwesomeButton
@@ -76,21 +93,25 @@ const DATA = {
           >
             <i className="fa fa-github" />
           </AwesomeButton>
+          <AwesomeButton
+            type="linkedin"
+            size="icon"
+          >
+            <i className="fa fa-linkedin" />
+          </AwesomeButton>
+          <AwesomeButton
+            type="whatsapp"
+            size="icon"
+          >
+            <i className="fa fa-whatsapp" />
+          </AwesomeButton>
         </div>
       ),
     },
     {
-      title: 'Secondary button',
-      text: `
-<AwesomeButton type="secondary">Secondary Button</AwesomeButton>`,
-      button: (<AwesomeButton
-        type="secondary"
-      >Secondary Button</AwesomeButton>),
-    },
-    {
       title: 'Disabled button',
       text: `
-<AwesomeButton disabled>Primary Button</AwesomeButton>`,
+<AwesomeButton disabled>Disabled Button</AwesomeButton>`,
       button: (<AwesomeButton
         disabled
       >Disabled Button</AwesomeButton>),
@@ -109,27 +130,24 @@ class Demo extends React.Component {
     this.codeBlocks = [];
   }
   componentDidMount() {
-    this.codeBlocks.map((code) => {
-      highlight.highlightBlock(code);
-      return true;
-    });
   }
   renderExamples() {
     return DATA.examples.map((example, index) => (
       <li key={`example-${index}`}>
         <h3>{example.title}</h3>
-        <div>
-          {example.button}
-        </div>
+        {example.description && <p>{example.description}</p>}
         <pre>
           <code
             className="html"
             ref={(code) => {
               this.codeBlocks.push(code);
             }}
-            dangerouslySetInnerHTML={{ __html: htmlEntities(example.text.trim()) }}
+            dangerouslySetInnerHTML={{ __html: Prism.highlight(example.text.trim(), Prism.languages.jsx) }}
           />
         </pre>
+        <div>
+          {example.button}
+        </div>
       </li>
     ));
   }
@@ -138,23 +156,31 @@ class Demo extends React.Component {
       <section>
         <header>
           <h1>{DATA.title}</h1>
-          <p>{DATA.description}</p>
           <h2>
             <strong>&lt;{DATA.name}/&gt;</strong>
             <span>{DATA.size}</span>
           </h2>
-          <img className="support" src="/images/support.svg" alt="Modern Web Browsers" title="Modern Web Browsers" />
+          <p>{DATA.description}</p>
         </header>
+        <div className="features">
+          <h3>Main Features</h3>
+          <ul>
+            <li>Styles customisable and extendable via sass variables.</li>
+            <li>Render any tag as the component's child (text, icon, img, svg)</li>
+            <li>No inline-styles</li>
+            <li>Animated progress button</li>
+            <li>Button types/colors can be extended via sass list variables</li>
+          </ul>
+        </div>
         <ul className="examples">
           {this.renderExamples()}
         </ul>
         <footer>
-          <small>Star and support this project on
-            <a rel="noopener noreferrer" target="_blank" href={DATA.repository}>github</a>
-          .</small>
-          <small>Read more and discuss at the
-            <a rel="noopener noreferrer" target="_blank" href={DATA.article}>article page</a>
-          .</small>
+          <div>
+            <img className="support" src="/images/support.svg" alt="Modern Web Browsers" title="Modern Web Browsers" />
+          </div>
+          <small>Star and support this project on <a rel="noopener noreferrer" target="_blank" href={DATA.repository}>github</a>.</small>
+          <small>Read more and discuss at the <a rel="noopener noreferrer" target="_blank" href={DATA.article}>article page</a>.</small>
         </footer>
       </section>);
   }
