@@ -1,0 +1,86 @@
+$unit: 4px;
+$double: $unit * 2;
+$deca: $unit * 10;
+
+%h1 {
+  font-size: $deca;
+  line-height: $deca;
+}
+
+%h2 {
+  font-size: $double * 3;
+  line-height: $double * 3;
+}
+
+%h3 {
+  font-size: $deca / 2;
+  line-height: $deca / 2;
+}
+
+%text {
+  font-size: $double * 2;
+  line-height: $double * 7/2;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: tahoma;
+}
+header {
+  margin-bottom: $deca;
+  h1 {
+    @extend %h1;
+    margin-bottom: $double;
+  }
+  h2 {
+    @extend %h2;
+    margin-bottom: $deca / 2;
+  }
+  p {
+    @extend %text;
+    margin-bottom: $deca;
+  }
+  img {
+    max-width: 400px;
+    width: 80%;
+  }
+}
+
+main {
+  display: block;
+  max-width: 924px;
+  margin: 0 auto;
+  padding: $deca * 2;
+}
+
+ul {
+  list-style: none;
+  li {
+    margin-bottom: $deca;
+  }
+  h3 {
+    margin-bottom: $double;
+  }
+  .hljs {
+    padding: $unit * 3;
+  }
+}
+
+.aws-btn {
+  margin: $double $double $double 0;
+}
+
+pre {
+  display: flex;
+  padding: 0;
+  line-height: $deca / 2;
+}

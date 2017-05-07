@@ -1,38 +1,74 @@
 $button-root: "aws-btn";
-$button-height: 44px;
-$button-border-radius: 4px;
+
+$button-default-height: 44px;
+$button-default-font-size: 14px;
+$button-default-line-height: 20px;
+
+$button-border-radius: 2px;
 $button-font-family: inherit;
-$button-font-size: 14px;
 $button-font-color: #FFFFFF;
 $button-font-weight: 600;
-$button-line-height: 20px;
 $button-letter-spacing: 0px;
 $button-horizontal-padding: 12px;
-
-$button-tiny-width: 44px;
-$button-small-width: 88px;
-$button-medium-width: 132px;
-$button-large-width: 196px;
 
 $button-raise-level: 2px;
 $button-hover-pressure: 1;
 
-$colors-primary: #325c99;
-$colors-secondary: red;
-$colors-disabled: #9E9E9E;
+$button-color-primary: #325c99;
+$button-color-secondary: #f44336;
+$button-color-disabled: #9E9E9E;
 
 $loading-transition-speed: 6s;
-$transform-speed: 0.15s;
+$transform-speed: 0.150s;
 
-@mixin color-pattern($color) {
+/**
+ button-color: color-name, background, color
+*/
+$button-colors:
+  ("primary", $button-color-primary, lighten($button-color-primary, 55%)),
+  ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
+  ("disabled", $button-color-disabled, lighten($button-color-disabled, 30%)),
+  ("facebook", #3b5998, #FFFFFF),
+  ("twitter", #00aced, #FFFFFF),
+  ("github", #4e545a, #FFFFFF);
+
+/**
+ button-size: size-name, width, height, font-size, line-height
+*/
+$button-sizes:
+  ("icon", 44px, $button-default-height, $button-default-font-size * 1.5, $button-default-line-height * 1.5)
+  ("small", 88px, $button-default-height, $button-default-font-size, $button-default-line-height)
+  ("medium", 132px, $button-default-height, $button-default-font-size, $button-default-line-height)
+  ("large", 196px, $button-default-height, $button-default-font-size, $button-default-line-height);
+
+@mixin color-pattern($background, $color) {
   .#{$button-root}__wrapper {
     &:before {
-      background-color: darken( $color, 10% );
+      background-color: darken( $background, 10% );
     }
   }
   .#{$button-root}__content {
-    background-color: $color;
-    color: lighten($color, 55%);
+    background-color: $background;
+    color: $color;
+  }
+}
+
+@mixin getColors($colors) {
+  @each $color in $colors {
+    &--#{nth($color, 1)} {
+        @include color-pattern(nth($color, 2), nth($color, 3));
+    }
+  }
+}
+
+@mixin getSizes($sizes) {
+  @each $size in $sizes {
+    &--#{nth($size, 1)} {
+      width: nth($size, 2);
+      height: nth($size, 3);
+      font-size: nth($size, 4);
+      line-height: nth($size, 5);
+    }
   }
 }
 
@@ -79,15 +115,26 @@ $transform-speed: 0.15s;
   @extend %clear-focus;
   box-sizing: border-box;
   display: inline-block;
-  height: $button-height;
+  height: $button-default-height;
   position: relative;
   background-color: transparent;
   cursor: pointer;
+  font-style: normal;
+  font-size: $button-default-font-size;
+  line-height: $button-default-line-height;
+  font-weight: $button-font-weight;
+  font-family: $button-font-family;
+  letter-spacing: $button-letter-spacing;
+  text-decoration: none;
   text-align: center;
   transition: opacity .1s ease-out;
   border: none;
   opacity: 0;
   z-index: 5;
+  .#{$button-root}__container {
+    display: block;
+    height: 100%;
+  }
   .#{$button-root}__wrapper {
     position: relative;
 		font-family: $button-font-family;
@@ -116,6 +163,7 @@ $transform-speed: 0.15s;
     }
   }
   .#{$button-root}__content {
+    position: relative;
     display: flex;
     flex: 1;
     align-items: center;
@@ -123,13 +171,7 @@ $transform-speed: 0.15s;
 		border-radius: $button-border-radius;
 		text-indent: 0;
 		z-index: 3;
-		font-style: normal;
-    font-size: $button-font-size;
-    line-height: $button-line-height;
-    font-weight: $button-font-weight;
-    font-family: $button-font-family;
-    letter-spacing: $button-letter-spacing;
-		//overflow: hidden;
+		overflow: hidden;
     padding: 0 $button-horizontal-padding;
 		transition: transform $transform-speed ease-out, background $transform-speed ease-out, color $transform-speed ease-out;
     &:before{
@@ -162,6 +204,7 @@ $transform-speed: 0.15s;
 		z-index: 1;
 		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out;
   }
+  @include getColors($button-colors);
   &--visible {
     opacity: 1;
   }
@@ -177,7 +220,7 @@ $transform-speed: 0.15s;
   &--progress {
     .#{$button-root}__content {
       > span {
-        transition: opacity $transform-speed * 0.5 ease-out $transform-speed * 0.75;
+        transition: opacity $transform-speed * 0.50 ease-out $transform-speed * 0.75;
       }
       &:before, &:after {
         display: flex;
@@ -185,7 +228,7 @@ $transform-speed: 0.15s;
         justify-content: center;
         color: rgba(255,255,255, 0.65);
     		opacity: 0;
-        transition: transform $transform-speed ease-out, opacity $transform-speed * 0.5 ease-out;
+        transition: transform $transform-speed ease-out, opacity $transform-speed * 0.75 ease-out;
       }
       &:before {
         content: attr(data-loading);
@@ -272,32 +315,9 @@ $transform-speed: 0.15s;
   		transform: translateY($button-raise-level);
     }
   }
-  &--tiny {
-    width: $button-tiny-width;
-  }
-  &--small {
-		width: $button-small-width;
-	}
-	&--medium {
-		width: $button-medium-width;
-	}
-	&--large {
-		width: $button-large-width;
-	}
+  @include getSizes($button-sizes);
   &--fill {
     width: 100%;
-  }
-  &--primary {
-    @include color-pattern($colors-primary);
-  }
-  &--secondary {
-    @include color-pattern($colors-secondary);
-  }
-  &--disabled {
-    @include color-pattern($colors-disabled);
-    .#{$button-root}__content {
-  		color: lighten($colors-disabled, 40%);
-    }
   }
 }
 
