@@ -1,11 +1,9 @@
-const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
-  // devtool: 'inline-source-map',
   entry: {
-    'react-awesome-button': ['./src/demo.js'],
+    'react-awesome-button': ['./src/demo/demo.js'],
   },
   module: {
     loaders: [{

@@ -19,35 +19,47 @@ function setTransitionEndEvent(element, callback) {
   element.addEventListener('transitionEnd', callback);
 }
 
+function setAnimationEndEvent(element, callback) {
+  if (element.style.WebkitTransition !== undefined) {
+    element.addEventListener('webkitAnimationEnd', callback);
+  } else if (element.style.OTransition !== undefined) {
+    element.addEventListener('oanimationEnd', callback);
+  }
+  element.addEventListener('animationEnd', callback);
+}
+
 const Anchor = props => (<a {... props} />);
 const Button = props => (<button {... props} />);
 
 export default class AwesomeButton extends React.Component {
   static propTypes = {
     action: PropTypes.func,
+    bubbles: PropTypes.bool,
     children: PropTypes.node.isRequired,
     disabled: PropTypes.bool,
     element: PropTypes.func,
     href: PropTypes.string,
-    to: PropTypes.string,
     loadingLabel: PropTypes.string,
     progress: PropTypes.bool,
     resultLabel: PropTypes.string,
     rootElement: PropTypes.string,
+    moveEvents: PropTypes.bool,
     // rounded: PropTypes.bool,
     size: PropTypes.string,
     style: PropTypes.object,
     target: PropTypes.string,
+    to: PropTypes.string,
     type: PropTypes.string,
     visible: PropTypes.bool,
   };
   static defaultProps = {
-    element: null,
     action: null,
+    bubbles: false,
     disabled: false,
+    element: null,
     href: null,
-    to: null,
     loadingLabel: 'Wait ..',
+    moveEvents: true,
     progress: false,
     resultLabel: 'Success!',
     rootElement: ROOTELM,
@@ -55,6 +67,7 @@ export default class AwesomeButton extends React.Component {
     size: null,
     style: {},
     target: null,
+    to: null,
     type: 'primary',
     visible: true,
   };
@@ -69,6 +82,7 @@ export default class AwesomeButton extends React.Component {
       loadingEnd: false,
       loadingStart: false,
       blocked: false,
+      clicked: false,
     };
     this.checkProps(props);
   }
@@ -158,60 +172,97 @@ export default class AwesomeButton extends React.Component {
       );
     }
   }
-  events = {
-    onClick: () => {
-      if (this.state.disabled === true ||
-        this.state.blocked === true ||
-        (this.props.progress && !this.state.loading)
-      ) {
-        return;
-      }
-      const eventTrigger = new Event('action');
-      this.button.dispatchEvent(eventTrigger);
-      this.action();
-    },
-    onMouseMove: (event) => {
-      if (this.state.disabled === true ||
-        this.state.loading === true ||
-        this.state.blocked === true) {
-        return;
-      }
-      const button = this.button;
-      const left = button.getBoundingClientRect().left;
-      const width = button.offsetWidth;
-      this.setState({
-        pressPosition: event.pageX < (left + (width * 0.3))
-          ? `${this.rootElement}--left`
-          : event.pageX > (left + (width * 0.65))
-            ? `${this.rootElement}--right`
-            : `${this.rootElement}--middle`,
-      });
-    },
-    onMouseLeave: () => {
-      this.clearPress();
-    },
-    onMouseDown: () => {
-      if (this.state.disabled === true ||
-        this.state.loading === true ||
-        this.state.blocked === true) {
-        return;
-      }
-      this.setState({
-        loading: this.props.progress,
-        pressPosition: `${this.rootElement}--active`,
-      });
-    },
-    onMouseUp: (event) => {
-      if (this.state.disabled === true ||
-        this.state.loading === true ||
-        this.state.blocked === true) {
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
-      this.clearPress();
-    },
-  };
+  createBubble(event) {
+    const button = this.button;
+    const bounds = button.getBoundingClientRect();
+    console.log(bounds);
+    const top = window.pageYOffset || document.documentElement.scrolltop || 0;
+    const bubble = document.createElement('span');
+    const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
+    bubble.className = `${this.rootElement}__bubble`;
+    bubble.style.top = `-${(size / 2) - (event.pageY - bounds.top - top)}px`;
+    bubble.style.left = `-${(size / 2) - (event.pageX - bounds.left)}px`;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+
+    setAnimationEndEvent(bubble, () => {
+      this.content.removeChild(bubble);
+    });
+    window.requestAnimationFrame(() => {
+      this.content.appendChild(bubble);
+    });
+  }
+  moveEvents() {
+    const events = {
+      onClick: () => {
+        if (this.state.disabled === true ||
+          this.state.blocked === true ||
+          (this.props.progress && !this.state.loading)
+        ) {
+          return;
+        }
+        const eventTrigger = new Event('action');
+        this.button.dispatchEvent(eventTrigger);
+        this.action();
+      },
+      onMouseLeave: () => {
+        this.clearPress();
+      },
+      onMouseDown: (event) => {
+        if (this.state.disabled === true ||
+          this.state.loading === true ||
+          this.state.blocked === true) {
+          return;
+        }
+        console.log("HERE");
+        if (this.props.progress === false && this.props.bubbles === true) {
+          console.log("THERE");
+          this.createBubble(event);
+        }
+        this.setState({
+          loading: this.props.progress,
+          pressPosition: `${this.rootElement}--active`,
+        });
+      },
+      onMouseUp: (event) => {
+        if (this.state.disabled === true ||
+          this.state.loading === true ||
+          this.state.blocked === true) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        this.clearPress();
+      },
+    };
+
+    if (this.props.moveEvents === true) {
+      events.onMouseMove = (event) => {
+        if (this.state.disabled === true ||
+          this.state.loading === true ||
+          this.state.blocked === true) {
+          return;
+        }
+        const button = this.button;
+        const left = button.getBoundingClientRect().left;
+        const width = button.offsetWidth;
+        this.setState({
+          pressPosition: event.pageX < (left + (width * 0.3))
+            ? `${this.rootElement}--left`
+            : event.pageX > (left + (width * 0.65))
+              ? `${this.rootElement}--right`
+              : `${this.rootElement}--middle`,
+        });
+      };
+    } else {
+      events.onMouseEnter = () => {
+        this.setState({
+          pressPosition: `${this.rootElement}--middle`,
+        });
+      };
+    }
+    return events;
+  }
   render() {
     const RenderComponent = this.renderComponent;
     return (
@@ -219,11 +270,11 @@ export default class AwesomeButton extends React.Component {
         style={this.props.style}
         className={this.getClassName()}
         {... this.extraProps}
+        {... this.moveEvents()}
       >
         <span
           ref={(button) => { this.button = button; }}
           className={`${this.rootElement}__container`}
-          {... this.events}
         >
           <span
             ref={(wrapper) => { this.wrapper = wrapper; }}

@@ -6,16 +6,16 @@ import {
 } from 'react-router-dom';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
-import AwesomeButton from './index';
+import AwesomeButton from '../react-awesome-button';
 
 require('prismjs/themes/prism-okaidia.css');
-require('../styles/react-awesome-button.scss');
-require('../styles/demo-styles.scss');
+require('../react-awesome-button.scss');
+require('./demo.scss');
 
 const DATA = {
   name: 'AwesomeButton',
   title: 'React Components are awesome',
-  description: 'The AwesomeButton is a performant, extendable, customisable, production ready react component that renders an animated basic set of UI buttons.',
+  description: 'The AwesomeButton is a performant, extendable, highly customisable, production ready react component that renders an animated basic set of UI buttons.',
   size: '~3KB compressed ( js + css )',
   repository: 'https://github.com/rcaferati/react-awesome-button',
   article: '//caferati.me/labs/awesome-button',
@@ -64,9 +64,26 @@ const DATA = {
         </div>),
     },
     {
-      title: 'Icon font button',
+      title: 'Hover and Bubble Animations',
+      text: `
+    <AwesomeButton>Primary Button</AwesomeButton>`,
+      button: (
+        <div>
+          <AwesomeButton>With Move Events</AwesomeButton>
+          <AwesomeButton
+            moveEvents={false}
+          >Without Move Events</AwesomeButton>
+          <AwesomeButton
+            bubbles
+            moveEvents={false}
+          >Bubble Animation</AwesomeButton>
+        </div>
+      ),
+    },
+    {
+      title: 'Icon font button — Using children',
       description: `This example use font-awesome to render the icons but you can
-      use almost anything as the component's child. i.e. <img> or <svg>.`,
+      use almost anything as the component's child. i.e. <img> or <svg> tags.`,
       text: `
 <AwesomeButton
   type="facebook"
@@ -78,30 +95,40 @@ const DATA = {
           <AwesomeButton
             type="facebook"
             size="icon"
+            bubbles
+            moveEvents={false}
           >
             <i className="fa fa-facebook" />
           </AwesomeButton>
           <AwesomeButton
             type="twitter"
             size="icon"
+            bubbles
+            moveEvents={false}
           >
             <i className="fa fa-twitter" />
           </AwesomeButton>
           <AwesomeButton
             type="github"
             size="icon"
+            bubbles
+            moveEvents={false}
           >
             <i className="fa fa-github" />
           </AwesomeButton>
           <AwesomeButton
             type="linkedin"
             size="icon"
+            bubbles
+            moveEvents={false}
           >
             <i className="fa fa-linkedin" />
           </AwesomeButton>
           <AwesomeButton
             type="whatsapp"
             size="icon"
+            bubbles
+            moveEvents={false}
           >
             <i className="fa fa-whatsapp" />
           </AwesomeButton>
@@ -118,11 +145,6 @@ const DATA = {
     },
   ],
 };
-
-const htmlEntities = str => str
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;');
 
 class Demo extends React.Component {
   constructor(props) {
@@ -142,7 +164,9 @@ class Demo extends React.Component {
             ref={(code) => {
               this.codeBlocks.push(code);
             }}
-            dangerouslySetInnerHTML={{ __html: Prism.highlight(example.text.trim(), Prism.languages.jsx) }}
+            dangerouslySetInnerHTML={{ __html:
+              Prism.highlight(example.text.trim(), Prism.languages.jsx),
+            }}
           />
         </pre>
         <div>

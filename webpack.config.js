@@ -3,10 +3,10 @@ const path = require('path');
 
 const config = {
   entry: {
-    index: ['./src/index.js'],
+    index: ['./src/react-awesome-button.js'],
   },
   output: {
-    path: __dirname + '/lib',
+    path: path.join(__dirname, '/dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
     library: 'react-awesome-button',

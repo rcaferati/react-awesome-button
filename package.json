@@ -2,12 +2,19 @@
   "name": "react-awesome-button",
   "version": "0.1.0",
   "description": "Production ready generic 3D react button component with progress loading bar.",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "jsnext:main": "src/index.js",
   "files": [
     "src",
     "react-awesome-button.css"
   ],
+  "scripts": {
+    "start": "webpack-dev-server -d --config webpack.demo.config.js",
+    "build": "NODE_ENV=production node_modules/.bin/webpack",
+    "test": "BABEL_JEST_STAGE=0 jest",
+    "lint": "eslint src/**",
+    "prepublish": "npm run build"
+  },
   "dependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
     "highlight.js": "^9.11.0",
@@ -35,16 +42,11 @@
     "eslint-plugin-react": "^6.10.3",
     "node-sass": "^4.5.2",
     "optimize-css-assets-webpack-plugin": "^1.3.1",
+    "postcss-loader": "^2.0.3",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.3"
-  },
-  "scripts": {
-    "start": "webpack-dev-server -d --config webpack.demo.config.js",
-    "build": "NODE_ENV=production node_modules/.bin/webpack",
-    "test": "BABEL_JEST_STAGE=0 jest",
-    "lint": "eslint src/**"
   },
   "repository": {
     "type": "git",
