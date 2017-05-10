@@ -1,9 +1,8 @@
 {
   "name": "react-awesome-button",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Production ready generic 3D react button component with progress loading bar.",
   "main": "dist/index.js",
-  "jsnext:main": "src/index.js",
   "files": [
     "src",
     "react-awesome-button.css"
