@@ -10,22 +10,14 @@ export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
 
-function setTransitionEndEvent(element, callback) {
-  if (element.style.WebkitTransition !== undefined) {
-    element.addEventListener('webkitTransitionEnd', callback);
+function setCssEndEvent(element, type, callback) {
+  const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
+  if (element.style[`Webkit${capitalized}`] !== undefined) {
+    element.addEventListener(`webkit${capitalized}End`, callback);
   } else if (element.style.OTransition !== undefined) {
-    element.addEventListener('otransitionEnd', callback);
+    element.addEventListener(`o${type}End`, callback);
   }
-  element.addEventListener('transitionEnd', callback);
-}
-
-function setAnimationEndEvent(element, callback) {
-  if (element.style.WebkitTransition !== undefined) {
-    element.addEventListener('webkitAnimationEnd', callback);
-  } else if (element.style.OTransition !== undefined) {
-    element.addEventListener('oanimationEnd', callback);
-  }
-  element.addEventListener('animationEnd', callback);
+  element.addEventListener(`${type}End`, callback);
 }
 
 const Anchor = props => (<a {... props} />);
@@ -87,7 +79,7 @@ export default class AwesomeButton extends React.Component {
     this.checkProps(props);
   }
   componentDidMount() {
-    setTransitionEndEvent(this.wrapper, this.clearStagedWrapperAnimation.bind(this));
+    setCssEndEvent(this.wrapper, 'transition', this.clearStagedWrapperAnimation.bind(this));
   }
   componentWillReceiveProps(newProps) {
     this.checkProps(newProps);
@@ -175,7 +167,6 @@ export default class AwesomeButton extends React.Component {
   createBubble(event) {
     const button = this.button;
     const bounds = button.getBoundingClientRect();
-    console.log(bounds);
     const top = window.pageYOffset || document.documentElement.scrolltop || 0;
     const bubble = document.createElement('span');
     const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
@@ -185,7 +176,7 @@ export default class AwesomeButton extends React.Component {
     bubble.style.width = `${size}px`;
     bubble.style.height = `${size}px`;
 
-    setAnimationEndEvent(bubble, () => {
+    setCssEndEvent(bubble, 'animation', () => {
       this.content.removeChild(bubble);
     });
     window.requestAnimationFrame(() => {
@@ -214,9 +205,7 @@ export default class AwesomeButton extends React.Component {
           this.state.blocked === true) {
           return;
         }
-        console.log("HERE");
         if (this.props.progress === false && this.props.bubbles === true) {
-          console.log("THERE");
           this.createBubble(event);
         }
         this.setState({

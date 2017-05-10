@@ -1,40 +1,36 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
   entry: {
     'react-awesome-button': ['./src/demo/demo.js'],
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: [
-          'es2015',
-          'react',
-          'stage-0',
-        ],
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-0'],
+        },
+      }, {
+        test: /\.scss$/i,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+        }),
       },
-    },
-    {
-      test: /\.scss|\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          'css-loader',
-          'sass-loader',
-        ],
-      }),
-    }],
+      {
+        test: /\.css$/i,
+        loader: ExtractTextPlugin.extract({
+          loader: 'css-loader?importLoaders=1!postcss-loader',
+        }),
+      },
+    ],
   },
   plugins: [
     new ExtractTextPlugin({
       filename: 'styles.css',
-    }),
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: { discardComments: { removeAll: true } },
     }),
   ],
   devServer: {

@@ -26,6 +26,7 @@
     "react/no-array-index-key": 0,
     "react/no-danger": 0,
     "no-nested-ternary": 0,
-    "jsx-a11y/anchor-has-content": 0
+    "jsx-a11y/anchor-has-content": 0,
+    "import/no-extraneous-dependencies": 0
   }
 }
