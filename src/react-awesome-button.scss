@@ -125,24 +125,9 @@ $button-sizes:
 }
 
 %clear-selection {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.001);
   user-select: none;
-  // -webkit-tap-highlight-color: transparent;
-}
-
-* {
-  @extend %clear-selection;
-  &:before {
-    @extend %clear-selection;
-  }
-  &:after {
-    @extend %clear-selection;
-  }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .#{$button-root} {
@@ -168,12 +153,10 @@ $button-sizes:
   opacity: 0;
   z-index: 5;
   .#{$button-root}__container {
-    @extend %clear-selection;
     display: block;
     height: 100%;
   }
   .#{$button-root}__wrapper {
-    @extend %clear-selection;
     position: relative;
 		font-family: $button-font-family;
 		display: flex;
@@ -182,7 +165,6 @@ $button-sizes:
 		height: calc(100% - #{$button-raise-level});
     margin-top: -$button-raise-level;
     &:before{
-      @extend %clear-selection;
       @extend %fill-parent;
       content: " ";
   		border-radius: $button-default-border-radius;
@@ -192,7 +174,6 @@ $button-sizes:
   		transition: transform $transform-speed ease-out, background $transform-speed ease-out;
     }
     &:after{
-      @extend %clear-selection;
       @extend %fill-parent;
       content: " ";
   		background-color: rgba(0, 0, 0, 0.15);
@@ -203,7 +184,6 @@ $button-sizes:
     }
   }
   .#{$button-root}__content {
-    @extend %clear-selection;
     position: relative;
     display: flex;
     flex: 1;
@@ -217,11 +197,9 @@ $button-sizes:
 		transition: transform $transform-speed ease-out, background $transform-speed ease-out, color $transform-speed ease-out;
     &:before{
       @extend %fill-parent;
-      @extend %clear-selection;
     }
     &:after{
       @extend %fill-parent;
-      @extend %clear-selection;
     }
     > span {
       display: block;
@@ -236,7 +214,6 @@ $button-sizes:
     }
   }
   &:before {
-    @extend %clear-selection;
     content: " ";
 		background-color: rgba(0, 0, 0, 0.3);
 		width: calc(100% - 4px);
