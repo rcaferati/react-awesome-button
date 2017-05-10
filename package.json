@@ -3,10 +3,6 @@
   "version": "0.1.1",
   "description": "Production ready generic 3D react button component with progress loading bar.",
   "main": "dist/index.js",
-  "files": [
-    "src",
-    "react-awesome-button.css"
-  ],
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
     "build": "NODE_ENV=production webpack",
@@ -14,16 +10,14 @@
     "lint": "eslint src/**",
     "prepublish": "npm run build"
   },
-  "dependencies": {
+  "devDependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
     "prismjs": "^1.6.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
-  },
-  "devDependencies": {
+    "react-router-dom": "^4.1.1",
     "autoprefixer": "^7.0.1",
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
