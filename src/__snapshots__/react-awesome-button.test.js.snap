@@ -1,0 +1,298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button changes on mouse down -> up -> leave 1`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Button changes on mouse down -> up -> leave 2`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible    aws-btn--active"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Button changes on mouse down -> up -> leave 3`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Button changes on mouse down -> up -> leave 4`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Should render a button with a progress bar 1`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible   aws-btn--progress"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading="Wait .."
+        data-status="Success!"
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Should render a button with a progress bar 2`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible   aws-btn--progress aws-btn--active"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading="Wait .."
+        data-status="Success!"
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Should render a button without moveEvents 1`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Should render a simple primary button 1`] = `
+<button
+  className="aws-btn aws-btn--primary  aws-btn--visible"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Should render a simple secondary button 1`] = `
+<button
+  className="aws-btn aws-btn--secondary  aws-btn--visible"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  style={Object {}}
+  target={null}
+  to={null}
+>
+  <span
+    className="aws-btn__container"
+  >
+    <span
+      className="aws-btn__wrapper"
+    >
+      <span
+        className="aws-btn__content"
+        data-loading={null}
+        data-status={null}
+      >
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+  </span>
+</button>
+`;

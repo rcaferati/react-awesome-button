@@ -10,15 +10,18 @@ export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
 
-function setCssEndEvent(element, type, callback) {
+const setCssEndEvent = (element, type, callback) => {
+  if (!element) {
+    return false;
+  }
   const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
   if (element.style[`Webkit${capitalized}`] !== undefined) {
-    element.addEventListener(`webkit${capitalized}End`, callback);
+    return element.addEventListener(`webkit${capitalized}End`, callback);
   } else if (element.style.OTransition !== undefined) {
-    element.addEventListener(`o${type}End`, callback);
+    return element.addEventListener(`o${type}End`, callback);
   }
-  element.addEventListener(`${type}End`, callback);
-}
+  return element.addEventListener(`${type}End`, callback);
+};
 
 const Anchor = props => (<a {... props} />);
 const Button = props => (<button {... props} />);

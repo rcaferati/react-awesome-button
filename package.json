@@ -1,8 +1,18 @@
 {
   "name": "react-awesome-button",
-  "version": "0.1.2",
-  "description": "Production ready generic 3D react button component with progress loading bar.",
+  "version": "0.1.4",
+  "description": "Performant, extendable, highly customisable, production ready React Component that renders an animated basic set of UI buttons",
   "main": "dist/index.js",
+  "author": "Rafael Caferati",
+  "license": "MIT",
+  "homepage": "https://github.com/rcaferati/react-awesome-button",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rcaferati/react-awesome-button"
+  },
+  "bugs": {
+    "url": "https://github.com/rcaferati/react-awesome-button/issues"
+  },
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
     "build": "NODE_ENV=production webpack",
@@ -10,19 +20,17 @@
     "lint": "eslint src/**",
     "prepublish": "npm run build"
   },
-  "devDependencies": {
-    "extract-text-webpack-plugin": "^2.1.0",
-    "prismjs": "^1.6.0",
+  "dependencies": {
     "prop-types": "^15.5.8",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1",
+    "react": "^15.5.4"
+  },
+  "devDependencies": {
     "autoprefixer": "^7.0.1",
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.0",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -34,16 +42,19 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "jest": "^20.0.0",
     "node-sass": "^4.5.2",
     "postcss-loader": "^2.0.3",
+    "prismjs": "^1.6.0",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-test-renderer": "^15.5.4",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rcaferati/react-awesome-button"
   },
   "keywords": [
     "react",
@@ -54,11 +65,5 @@
     "javascript",
     "react-component",
     "react-awesome-button"
-  ],
-  "author": "Rafael Caferati",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rcaferati/react-awesome-button/issues"
-  },
-  "homepage": "https://github.com/rcaferati/react-awesome-button"
+  ]
 }
