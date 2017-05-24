@@ -106,6 +106,9 @@ footer {
     background-color: rgba(0,0,0,0.05);
     border-radius: 4px;
   }
+  button {
+    margin: $double $double $double 0;
+  }
 }
 
 .features {
@@ -139,10 +142,6 @@ footer {
       z-index: -1;
     }
   }
-}
-
-.aws-btn {
-  margin: $double $double $double 0;
 }
 
 pre {

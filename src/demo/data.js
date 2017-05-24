@@ -1,12 +1,14 @@
 import React from 'react';
 import AwesomeButton from '../react-awesome-button';
+import AwsBtnStyles from '../react-awesome-button.scss';
 
 const features = [
-  'Styles customisable and extendable via sass variables',
+  'Look and feel customisable and extendable via sass variables',
   'Render any tag as the component\'s child (text, icon, img, svg)',
   'No inline-styles',
+  'Use with CssModules or plain css (BEM based)',
   'Animated progress button',
-  'Button types/colors can be extended via sass list variables',
+  'Types (colors) can be extended via sass list variables',
 ];
 
 const examples = [
@@ -14,13 +16,13 @@ const examples = [
     title: 'Primary button',
     text: `
 <AwesomeButton>Primary Button</AwesomeButton>`,
-    button: (<AwesomeButton>Primary Button</AwesomeButton>),
+    button: (<AwesomeButton cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>),
   },
   {
     title: 'Secondary button',
     text: `
 <AwesomeButton type="secondary">Secondary Button</AwesomeButton>`,
-    button: (<AwesomeButton type="secondary">Secondary Button</AwesomeButton>),
+    button: (<AwesomeButton cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>),
   },
   {
     title: 'Animated progress button',
@@ -35,6 +37,7 @@ action={(next) => {
     button: (
       <div>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           progress
           action={(element, next) => {
             setTimeout(() => {
@@ -43,6 +46,7 @@ action={(next) => {
           }}
         >Progress Button</AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           progress
           type="secondary"
           action={(element, next) => {
@@ -59,11 +63,13 @@ action={(next) => {
   <AwesomeButton>Primary Button</AwesomeButton>`,
     button: (
       <div>
-        <AwesomeButton>With Move Events</AwesomeButton>
+        <AwesomeButton cssModule={AwsBtnStyles}>With Move Events</AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           moveEvents={false}
         >Without Move Events</AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           bubbles
           moveEvents={false}
         >Bubble Animation</AwesomeButton>
@@ -83,6 +89,7 @@ size="icon"
     button: (
       <div>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           type="facebook"
           size="icon"
           bubbles
@@ -91,6 +98,7 @@ size="icon"
           <i className="fa fa-facebook" />
         </AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           type="twitter"
           size="icon"
           bubbles
@@ -99,6 +107,7 @@ size="icon"
           <i className="fa fa-twitter" />
         </AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           type="github"
           size="icon"
           bubbles
@@ -107,6 +116,7 @@ size="icon"
           <i className="fa fa-github" />
         </AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           type="linkedin"
           size="icon"
           bubbles
@@ -115,6 +125,7 @@ size="icon"
           <i className="fa fa-linkedin" />
         </AwesomeButton>
         <AwesomeButton
+          cssModule={AwsBtnStyles}
           type="whatsapp"
           size="icon"
           bubbles
@@ -130,6 +141,7 @@ size="icon"
     text: `
 <AwesomeButton disabled>Disabled Button</AwesomeButton>`,
     button: (<AwesomeButton
+      cssModule={AwsBtnStyles}
       disabled
     >Disabled Button</AwesomeButton>),
   },

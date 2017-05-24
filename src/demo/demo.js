@@ -7,10 +7,9 @@ import {
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
 import Data from './data';
+import Styles from './demo.scss';
 
 require('prismjs/themes/prism-okaidia.css');
-require('../react-awesome-button.scss');
-require('./demo.scss');
 
 const renderFeatures = () => Data.features.map((feature, index) => (<li key={`feature-${index}`}>{feature}</li>));
 
@@ -42,13 +41,13 @@ const Demo = () => (
       </h2>
       <p>{Data.description}</p>
     </header>
-    <div className="features">
+    <div className={Styles.features}>
       <h3>Main Features</h3>
       <ul>
         {renderFeatures()}
       </ul>
     </div>
-    <ul className="examples">
+    <ul className={Styles.examples}>
       {renderExamples()}
     </ul>
     <footer>

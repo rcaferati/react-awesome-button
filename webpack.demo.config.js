@@ -17,7 +17,16 @@ const config = {
         test: /\.scss$/i,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[hash:base64:4]',
+              },
+            },
+            'postcss-loader',
+            'sass-loader'],
         }),
       },
       {

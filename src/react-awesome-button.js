@@ -10,6 +10,24 @@ export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
 
+function classToModules(className = [], cssModule) {
+  const ClassName = [];
+  let i = className.length;
+  while (i--) {
+    if (cssModule[className[i]]) {
+      ClassName.push(cssModule[className[i]]);
+    }
+  }
+  return ClassName.join(' ').trim();
+}
+
+function getClassName(className = '', cssModule) {
+  if (cssModule) {
+    return cssModule[className] || className;
+  }
+  return className;
+}
+
 const setCssEndEvent = (element, type, callback) => {
   if (!element) {
     return false;
@@ -42,6 +60,7 @@ export default class AwesomeButton extends React.Component {
     // rounded: PropTypes.bool,
     size: PropTypes.string,
     style: PropTypes.object,
+    cssModule: PropTypes.object,
     target: PropTypes.string,
     to: PropTypes.string,
     type: PropTypes.string,
@@ -103,6 +122,14 @@ export default class AwesomeButton extends React.Component {
     if (this.state.pressPosition) {
       className.push(this.state.pressPosition);
     }
+
+    if (this.props.cssModule && this.props.cssModule['aws-btn']) {
+      console.log(className);
+      console.log(this.props.cssModule);
+      console.log(classToModules(className, this.props.cssModule));
+      return classToModules(className, this.props.cssModule);
+    }
+
     return className.join(' ').trim();
   }
   checkProps(props) {
@@ -169,11 +196,12 @@ export default class AwesomeButton extends React.Component {
   }
   createBubble(event) {
     const button = this.button;
+    const className = getClassName(`${this.rootElement}__bubble`, this.props.cssModule);
     const bounds = button.getBoundingClientRect();
     const top = window.pageYOffset || document.documentElement.scrolltop || 0;
     const bubble = document.createElement('span');
     const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
-    bubble.className = `${this.rootElement}__bubble`;
+    bubble.className = className;
     bubble.style.top = `-${(size / 2) - (event.pageY - bounds.top - top)}px`;
     bubble.style.left = `-${(size / 2) - (event.pageX - bounds.left)}px`;
     bubble.style.width = `${size}px`;
@@ -266,17 +294,17 @@ export default class AwesomeButton extends React.Component {
       >
         <span
           ref={(button) => { this.button = button; }}
-          className={`${this.rootElement}__container`}
+          className={getClassName(`${this.rootElement}__container`, this.props.cssModule)}
         >
           <span
             ref={(wrapper) => { this.wrapper = wrapper; }}
-            className={`${this.rootElement}__wrapper`}
+            className={getClassName(`${this.rootElement}__wrapper`, this.props.cssModule)}
           >
             <span
               ref={(content) => { this.content = content; }}
               data-loading={(this.props.progress && this.props.loadingLabel) || null}
               data-status={(this.props.progress && this.props.resultLabel) || null}
-              className={`${this.rootElement}__content`}
+              className={getClassName(`${this.rootElement}__content`, this.props.cssModule)}
             >
               <span>{this.props.children}</span>
             </span>
