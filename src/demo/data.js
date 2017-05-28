@@ -1,7 +1,7 @@
 import React from 'react';
-import AwesomeButton from '../react-awesome-button';
-import AwsBtnStyles from '../styles/react-awesome-button-main.scss';
-import AwsBtnStylesThemeTwo from '../styles/react-awesome-button-theme-two.scss';
+import AwesomeButton from '../component';
+import AwsBtnStyles from '../styles/default.scss';
+import AwsBtnStylesThemeTwo from '../styles/theme-two.scss';
 
 const features = [
   'Look and feel customisable and extendable via SASS variables and lists',
