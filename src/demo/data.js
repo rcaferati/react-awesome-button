@@ -135,7 +135,6 @@ $button-raise-level: 4px;
     text: `
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
-  type="primary"
 >Themed Button</AwesomeButton>
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
@@ -144,14 +143,12 @@ $button-raise-level: 4px;
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
   disabled
-  type="primary"
 >Themed Button</AwesomeButton>`,
     button: (
       <div>
         <div>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
-            type="primary"
           >Themed Button</AwesomeButton>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
@@ -160,7 +157,6 @@ $button-raise-level: 4px;
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
             disabled
-            type="primary"
           >Themed Button</AwesomeButton>
         </div>
       </div>

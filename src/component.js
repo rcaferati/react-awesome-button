@@ -99,9 +99,6 @@ export default class AwesomeButton extends React.Component {
     }
 
     if (this.props.cssModule && this.props.cssModule['aws-btn']) {
-      console.log(className);
-      console.log(this.props.cssModule);
-      console.log(classToModules(className, this.props.cssModule));
       return classToModules(className, this.props.cssModule);
     }
 
@@ -139,6 +136,7 @@ export default class AwesomeButton extends React.Component {
   }
   clearStagedWrapperAnimation() {
     if (this.animationStage !== 0) {
+      console.log(this.animationStage);
       if (this.animationStage === LOADING_ANIMATION_STEPS) {
         this.animationStage = 0;
         // hold life for 350ms before releasing the button;
@@ -179,17 +177,6 @@ export default class AwesomeButton extends React.Component {
   }
   moveEvents() {
     const events = {
-      onClick: () => {
-        if (this.state.disabled === true ||
-          this.state.blocked === true ||
-          (this.props.progress && !this.state.loading)
-        ) {
-          return;
-        }
-        const eventTrigger = new Event('action');
-        this.button.dispatchEvent(eventTrigger);
-        this.action();
-      },
       onMouseLeave: () => {
         this.clearPress();
       },
@@ -206,8 +193,14 @@ export default class AwesomeButton extends React.Component {
           loading: this.props.progress,
           pressPosition: `${this.rootElement}--active`,
         });
+        window.requestAnimationFrame(() => {
+          const eventTrigger = new Event('action');
+          this.button.dispatchEvent(eventTrigger);
+          this.action();
+        });
       },
       onMouseUp: (event) => {
+        console.log('MOUSE UP');
         if (this.state.disabled === true ||
           this.state.loading === true ||
           this.state.blocked === true) {

@@ -27,7 +27,7 @@ $transform-speed: 0.150s;
 $button-colors:
   ("primary", $button-color-primary, lighten($button-color-primary, 55%)),
   ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
-  ("disabled", $button-color-disabled, lighten($button-color-disabled, 30%)),
+  ("disabled", $button-color-disabled, lighten($button-color-disabled, 15%)),
   ("facebook", #3b5998, #FFFFFF),
   ("twitter", #00aced, #FFFFFF),
   ("linkedin", #0077b5, #FFFFFF),

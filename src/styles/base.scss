@@ -192,7 +192,7 @@
         justify-content: center;
         color: rgba(255,255,255, 0.65);
     		opacity: 0;
-        transition: transform $transform-speed ease-out, opacity $transform-speed * 0.75 ease-out;
+        transition: transform $transform-speed ease-out 0.05s, opacity $transform-speed * 0.75 ease-out 0.05s;
       }
       &:before {
         content: attr(data-loading);
