@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  classToModules,
+  getClassName,
+  setCssEndEvent,
+  createBubbleEffect,
+} from './helpers';
 
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
@@ -9,37 +15,6 @@ TODO: Extend the setup with CSS custom properties;
 export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
-
-function classToModules(className = [], cssModule) {
-  const ClassName = [];
-  let i = className.length;
-  while (i--) {
-    if (cssModule[className[i]]) {
-      ClassName.push(cssModule[className[i]]);
-    }
-  }
-  return ClassName.join(' ').trim();
-}
-
-function getClassName(className = '', cssModule) {
-  if (cssModule) {
-    return cssModule[className] || className;
-  }
-  return className;
-}
-
-const setCssEndEvent = (element, type, callback) => {
-  if (!element) {
-    return false;
-  }
-  const capitalized = type.charAt(0).toUpperCase() + type.slice(1);
-  if (element.style[`Webkit${capitalized}`] !== undefined) {
-    return element.addEventListener(`webkit${capitalized}End`, callback);
-  } else if (element.style.OTransition !== undefined) {
-    return element.addEventListener(`o${type}End`, callback);
-  }
-  return element.addEventListener(`${type}End`, callback);
-};
 
 const Anchor = props => (<a {... props} />);
 const Button = props => (<button {... props} />);
@@ -195,23 +170,11 @@ export default class AwesomeButton extends React.Component {
     }
   }
   createBubble(event) {
-    const button = this.button;
-    const className = getClassName(`${this.rootElement}__bubble`, this.props.cssModule);
-    const bounds = button.getBoundingClientRect();
-    const top = window.pageYOffset || document.documentElement.scrolltop || 0;
-    const bubble = document.createElement('span');
-    const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
-    bubble.className = className;
-    bubble.style.top = `-${(size / 2) - (event.pageY - bounds.top - top)}px`;
-    bubble.style.left = `-${(size / 2) - (event.pageX - bounds.left)}px`;
-    bubble.style.width = `${size}px`;
-    bubble.style.height = `${size}px`;
-
-    setCssEndEvent(bubble, 'animation', () => {
-      this.content.removeChild(bubble);
-    });
-    window.requestAnimationFrame(() => {
-      this.content.appendChild(bubble);
+    createBubbleEffect({
+      event,
+      button: this.button,
+      content: this.content,
+      className: getClassName(`${this.rootElement}__bubble`, this.props.cssModule),
     });
   }
   moveEvents() {
