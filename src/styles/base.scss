@@ -67,18 +67,6 @@
   outline-width: 0;
 }
 
-*::selection {
-  background:transparent;
-}
-
-*::-moz-selection {
-  background:transparent;
-}
-
-*::-webkit-selection {
-  background:transparent;
-}
-
 %clear-selection {
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

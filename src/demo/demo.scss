@@ -1,5 +1,6 @@
 $unit: 4px;
 $double: $unit * 2;
+$half: $unit * 5;
 $deca: $unit * 10;
 
 %h1 {
@@ -18,6 +19,11 @@ $deca: $unit * 10;
   line-height: $deca / 2;
 }
 
+%h4 {
+  font-size: $double * 2;
+  line-height: $double * 2;
+}
+
 %text {
   font-size: $double * 2;
   line-height: $double * 7/2;
@@ -27,6 +33,11 @@ html {
   box-sizing: border-box;
   background-color: #2f2f2f;
   color: #6f6f6f;
+}
+
+::selection {
+  color: #FFF;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 *, *:before, *:after {
@@ -89,6 +100,12 @@ footer {
   }
 }
 
+.buttons {
+  div, button, a {
+    margin: $double $double $double 0;
+  }
+}
+
 .examples {
   list-style: none;
   li {
@@ -96,18 +113,18 @@ footer {
   }
   p {
     @extend %text;
+    margin-top: $double;
   }
   h3 {
     @extend %h3;
-    margin-bottom: $double;
   }
   code {
     padding: $unit * 3;
     background-color: rgba(0,0,0,0.05);
     border-radius: 4px;
   }
-  button {
-    margin: $double $double $double 0;
+  .header {
+    margin-bottom: $double * 2;
   }
 }
 
@@ -130,15 +147,15 @@ footer {
     padding-left: $double * 3;
     position: relative;
     &:before {
-      content: "";
+      content: "\F00C";
+      font-family: FontAwesome;
+      font-size: $double * 2;
       display: block;
-      width: $double * 2;
-      height: $double * 2;
+      width: $half;
+      height: $half;
       position: absolute;
       left: 0;
-      top: calc(50% - #{$double + 1});
-      background-color: rgba(0,0,0,0.1);
-      border-radius: 50%;
+      top: calc(50% - #{$half/2} - 3px);
       z-index: -1;
     }
   }
@@ -146,6 +163,12 @@ footer {
 
 pre {
   display: flex;
+  flex-direction: column;
   padding: 0;
   line-height: $deca / 2;
+  h4 {
+    @extend %h4;
+    margin-bottom: $unit;
+  }
+  margin-bottom: $double;
 }

@@ -3,6 +3,8 @@ import AwesomeButton from '../component';
 import AwsBtnStyles from '../styles/default.scss';
 import AwsBtnStylesThemeTwo from '../styles/theme-two.scss';
 
+const Div = props => (<div {... props} />);
+
 const features = [
   'Look and feel customisable and extendable via SASS variables and lists',
   'Use it with CSSModules or Plain CSS (NO inline-styles)',
@@ -95,7 +97,7 @@ const examples = [
 <AwesomeButton
 progress
 action={(next) => {
-  ... doSomething
+  ...
   next();
 }}
 >Progress Button</AwesomeButton>`,
@@ -134,32 +136,32 @@ $button-raise-level: 4px;
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
   type="primary"
->Theme One</AwesomeButton>
+>Themed Button</AwesomeButton>
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
   type="secondary"
->Theme One</AwesomeButton>
+>Themed Button</AwesomeButton>
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
   disabled
   type="primary"
->Theme One</AwesomeButton>`,
+>Themed Button</AwesomeButton>`,
     button: (
       <div>
         <div>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
             type="primary"
-          >Theme One</AwesomeButton>
+          >Themed Button</AwesomeButton>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
             type="secondary"
-          >Theme One</AwesomeButton>
+          >Themed Button</AwesomeButton>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
             disabled
             type="primary"
-          >Theme One</AwesomeButton>
+          >Themed Button</AwesomeButton>
         </div>
       </div>
     ),
@@ -179,13 +181,23 @@ $button-raise-level: 4px;
       </div>
     ),
   },
+  {
+    title: 'Overwrite Component Renderer',
+    description: 'Render overwrite is specially usefull when you want to render the button with the Link component from react-router.',
+    js: 'const Div = props => (<div {... props} />);',
+    text: `
+<AwesomeButton element={Div}>With Div Container</AwesomeButton>`,
+    button: (
+      <AwesomeButton element={Div} cssModule={AwsBtnStyles}>With Div Container</AwesomeButton>
+    ),
+  },
 ];
 
 export default {
   name: 'AwesomeButton',
   title: 'React Components are awesome',
   description: 'The AwesomeButton is a performant, extendable, highly customisable, production ready react component that renders an animated basic set of UI buttons.',
-  size: '~4KB compressed ( js + styles )',
+  size: '~4KB compressed <script + styles>',
   repository: 'https://github.com/rcaferati/react-awesome-button',
   article: '//caferati.me/labs/awesome-button',
   features,

@@ -6,37 +6,51 @@ import {
 } from 'react-router-dom';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-scss';
+import 'prismjs/themes/prism-okaidia.css';
 import Data from './data';
 import Styles from './demo.scss';
-
-require('prismjs/themes/prism-okaidia.css');
 
 const renderFeatures = () => Data.features.map((feature, index) => (<li key={`feature-${index}`}>{feature}</li>));
 
 const renderExamples = () => Data.examples.map((example, index) => (
   <li key={`example-${index}`}>
-    <h3>{example.title}</h3>
-    {example.description && <p>{example.description}</p>}
-    {example.scss && (
+    <div className={Styles.header}>
+      <h3>{example.title}</h3>
+      {example.description && <p>{example.description}</p>}
+    </div>
+    <div>
+      {example.scss && (
+        <pre>
+          <h4>.scss</h4>
+          <code
+            dangerouslySetInnerHTML={{ __html:
+              Prism.highlight(example.scss.trim(), Prism.languages.scss),
+            }}
+          />
+        </pre>
+      )}
+      {example.js && (
+        <pre>
+          <h4>.js</h4>
+          <code
+            dangerouslySetInnerHTML={{ __html:
+              Prism.highlight(example.js.trim(), Prism.languages.jsx),
+            }}
+          />
+        </pre>
+      )}
       <pre>
+        <h4>.jsx</h4>
         <code
-          className="scss"
           dangerouslySetInnerHTML={{ __html:
-            Prism.highlight(example.scss.trim(), Prism.languages.scss),
+            Prism.highlight(example.text.trim(), Prism.languages.jsx),
           }}
         />
       </pre>
-    )}
-    <pre>
-      <code
-        className="html"
-        dangerouslySetInnerHTML={{ __html:
-          Prism.highlight(example.text.trim(), Prism.languages.jsx),
-        }}
-      />
-    </pre>
-    <div>
+    </div>
+    <div className={Styles.buttons}>
       {example.button}
     </div>
   </li>
@@ -65,7 +79,7 @@ const Demo = () => (
       <div>
         <img className="support" src="/images/support.svg" alt="Modern Web Browsers" title="Modern Web Browsers" />
       </div>
-      <small>Star and support this project on <a rel="noopener noreferrer" target="_blank" href={Data.repository}>github</a>.</small>
+      <small>Promote and support this project on <a rel="noopener noreferrer" target="_blank" href={Data.repository}>github</a>.</small>
       <small>Read more and discuss at the <a rel="noopener noreferrer" target="_blank" href={Data.article}>article page</a>.</small>
     </footer>
   </section>

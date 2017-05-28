@@ -253,6 +253,7 @@ export default class AwesomeButton extends React.Component {
       <RenderComponent
         style={this.props.style}
         className={this.getRootClassName()}
+        role="button"
         {... this.extraProps}
         {... this.moveEvents()}
       >
