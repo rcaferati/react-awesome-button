@@ -3,7 +3,7 @@ const path = require('path');
 
 const config = {
   entry: {
-    index: ['./src/react-awesome-button.js'],
+    index: ['./src/component.js'],
   },
   output: {
     path: path.join(__dirname, '/dist'),

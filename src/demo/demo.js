@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-scss';
 import Data from './data';
 import Styles from './demo.scss';
 
@@ -17,6 +18,16 @@ const renderExamples = () => Data.examples.map((example, index) => (
   <li key={`example-${index}`}>
     <h3>{example.title}</h3>
     {example.description && <p>{example.description}</p>}
+    {example.scss && (
+      <pre>
+        <code
+          className="scss"
+          dangerouslySetInnerHTML={{ __html:
+            Prism.highlight(example.scss.trim(), Prism.languages.scss),
+          }}
+        />
+      </pre>
+    )}
     <pre>
       <code
         className="html"

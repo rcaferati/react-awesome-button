@@ -1,80 +1,30 @@
 import React from 'react';
 import AwesomeButton from '../react-awesome-button';
-import AwsBtnStyles from '../react-awesome-button.scss';
+import AwsBtnStyles from '../styles/react-awesome-button-main.scss';
+import AwsBtnStylesThemeTwo from '../styles/react-awesome-button-theme-two.scss';
 
 const features = [
-  'Look and feel customisable and extendable via sass variables',
+  'Look and feel customisable and extendable via SASS variables and lists',
+  'Use it with CSSModules or Plain CSS (NO inline-styles)',
   'Render any tag as the component\'s child (text, icon, img, svg)',
-  'No inline-styles',
-  'Use with CssModules or plain css (BEM based)',
   'Animated progress button',
-  'Types (colors) can be extended via sass list variables',
+  'OnClick bubble animation',
 ];
 
 const examples = [
   {
-    title: 'Primary button',
+    title: 'Primary, Secondary and Disabled buttons',
     text: `
-<AwesomeButton>Primary Button</AwesomeButton>`,
-    button: (<AwesomeButton cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>),
-  },
-  {
-    title: 'Secondary button',
-    text: `
-<AwesomeButton type="secondary">Secondary Button</AwesomeButton>`,
-    button: (<AwesomeButton cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>),
-  },
-  {
-    title: 'Animated progress button',
-    text: `
-<AwesomeButton
-progress
-action={(next) => {
-  ... doSomething
-  next();
-}}
->Progress Button</AwesomeButton>`,
+<AwesomeButton>Primary Button</AwesomeButton>
+<AwesomeButton type="secondary">Secondary Button</AwesomeButton>
+<AwesomeButton disabled>Disabled Button</AwesomeButton>`,
     button: (
       <div>
-        <AwesomeButton
-          cssModule={AwsBtnStyles}
-          progress
-          action={(element, next) => {
-            setTimeout(() => {
-              next();
-            }, 600);
-          }}
-        >Progress Button</AwesomeButton>
-        <AwesomeButton
-          cssModule={AwsBtnStyles}
-          progress
-          type="secondary"
-          action={(element, next) => {
-            setTimeout(() => {
-              next();
-            }, 500);
-          }}
-        >Progress Button</AwesomeButton>
-      </div>),
-  },
-  {
-    title: 'Hover and Bubble Animations',
-    text: `
-  <AwesomeButton>Primary Button</AwesomeButton>`,
-    button: (
-      <div>
-        <AwesomeButton cssModule={AwsBtnStyles}>With Move Events</AwesomeButton>
-        <AwesomeButton
-          cssModule={AwsBtnStyles}
-          moveEvents={false}
-        >Without Move Events</AwesomeButton>
-        <AwesomeButton
-          cssModule={AwsBtnStyles}
-          bubbles
-          moveEvents={false}
-        >Bubble Animation</AwesomeButton>
+        <AwesomeButton cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>
+        <AwesomeButton cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>
+        <AwesomeButton cssModule={AwsBtnStyles} disabled>Disabled Button</AwesomeButton>
       </div>
-    ),
+      ),
   },
   {
     title: 'Icon font button — Using children',
@@ -82,9 +32,12 @@ action={(next) => {
     use almost anything as the component's child. i.e. <img> or <svg> tags.`,
     text: `
 <AwesomeButton
-type="facebook"
-size="icon"
-><i className="fa fa-facebook" /></AwesomeButton>
+  type="facebook"
+  size="icon"
+  bubbles
+>
+  <i className="fa fa-facebook" />
+</AwesomeButton>
 ...`,
     button: (
       <div>
@@ -137,13 +90,94 @@ size="icon"
     ),
   },
   {
-    title: 'Disabled button',
+    title: 'Animated progress button',
     text: `
-<AwesomeButton disabled>Disabled Button</AwesomeButton>`,
-    button: (<AwesomeButton
-      cssModule={AwsBtnStyles}
-      disabled
-    >Disabled Button</AwesomeButton>),
+<AwesomeButton
+progress
+action={(next) => {
+  ... doSomething
+  next();
+}}
+>Progress Button</AwesomeButton>`,
+    button: (
+      <div>
+        <AwesomeButton
+          cssModule={AwsBtnStyles}
+          progress
+          action={(element, next) => {
+            setTimeout(() => {
+              next();
+            }, 600);
+          }}
+        >Progress Button</AwesomeButton>
+        <AwesomeButton
+          cssModule={AwsBtnStyles}
+          progress
+          type="secondary"
+          action={(element, next) => {
+            setTimeout(() => {
+              next();
+            }, 500);
+          }}
+        >Progress Button</AwesomeButton>
+      </div>),
+  },
+  {
+    title: 'Customisable styles and CSSModules',
+    description: 'Change button raised level, color and extend types through SCSS variables and list tweak',
+    scss: `
+$button-default-border-radius: 40px;
+$button-horizontal-padding: 20px;
+$button-raise-level: 4px;
+    `,
+    text: `
+<AwesomeButton
+  cssModule={AwsBtnStylesThemeTwo}
+  type="primary"
+>Theme One</AwesomeButton>
+<AwesomeButton
+  cssModule={AwsBtnStylesThemeTwo}
+  type="secondary"
+>Theme One</AwesomeButton>
+<AwesomeButton
+  cssModule={AwsBtnStylesThemeTwo}
+  disabled
+  type="primary"
+>Theme One</AwesomeButton>`,
+    button: (
+      <div>
+        <div>
+          <AwesomeButton
+            cssModule={AwsBtnStylesThemeTwo}
+            type="primary"
+          >Theme One</AwesomeButton>
+          <AwesomeButton
+            cssModule={AwsBtnStylesThemeTwo}
+            type="secondary"
+          >Theme One</AwesomeButton>
+          <AwesomeButton
+            cssModule={AwsBtnStylesThemeTwo}
+            disabled
+            type="primary"
+          >Theme One</AwesomeButton>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: 'Hover Animations',
+    text: `
+<AwesomeButton>With Move Events</AwesomeButton>
+<AwesomeButton moveEvents={false}>Without Move Events</AwesomeButton>`,
+    button: (
+      <div>
+        <AwesomeButton cssModule={AwsBtnStyles}>With Move Events</AwesomeButton>
+        <AwesomeButton
+          cssModule={AwsBtnStyles}
+          moveEvents={false}
+        >Without Move Events</AwesomeButton>
+      </div>
+    ),
   },
 ];
 

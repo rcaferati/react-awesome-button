@@ -81,7 +81,7 @@ export default class AwesomeButton extends React.Component {
   componentWillReceiveProps(newProps) {
     this.checkProps(newProps);
   }
-  getClassName() {
+  getRootClassName() {
     const className = [
       this.rootElement,
       this.props.type && `${this.rootElement}--${this.props.type}`,
@@ -244,6 +244,7 @@ export default class AwesomeButton extends React.Component {
         });
       };
     }
+
     return events;
   }
   render() {
@@ -251,7 +252,7 @@ export default class AwesomeButton extends React.Component {
     return (
       <RenderComponent
         style={this.props.style}
-        className={this.getClassName()}
+        className={this.getRootClassName()}
         {... this.extraProps}
         {... this.moveEvents()}
       >
