@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import AwesomeButton from './component';
+import '../helpers/tests';
+import AwesomeButton from '../component';
 
 test('Should render a simple primary button', () => {
   const component = renderer.create(<AwesomeButton>Button</AwesomeButton>);

@@ -5,10 +5,12 @@ import {
   getClassName,
   setCssEndEvent,
   createBubbleEffect,
-} from './helpers';
+} from './helpers/component';
 
+const WINDOW = window || global;
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
+
 
 /**
 TODO: Extend the setup with CSS custom properties;
@@ -136,12 +138,11 @@ export default class AwesomeButton extends React.Component {
   }
   clearStagedWrapperAnimation() {
     if (this.animationStage !== 0) {
-      console.log(this.animationStage);
       if (this.animationStage === LOADING_ANIMATION_STEPS) {
         this.animationStage = 0;
         // hold life for 350ms before releasing the button;
         setTimeout(() => {
-          window.requestAnimationFrame(() => {
+          WINDOW.requestAnimationFrame(() => {
             this.clearLoading();
             this.clearPress();
             setTimeout(() => {
@@ -193,7 +194,7 @@ export default class AwesomeButton extends React.Component {
           loading: this.props.progress,
           pressPosition: `${this.rootElement}--active`,
         });
-        window.requestAnimationFrame(() => {
+        WINDOW.requestAnimationFrame(() => {
           const eventTrigger = new Event('action');
           this.button.dispatchEvent(eventTrigger);
           this.action();
