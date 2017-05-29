@@ -1,7 +1,7 @@
 import React from 'react';
 import AwesomeButton from '../component';
 import AwsBtnStyles from '../styles/default.scss';
-import AwsBtnStylesThemeTwo from '../styles/theme-two.scss';
+import AwsBtnStylesThemeTwo from '../styles/themes/theme-two.scss';
 
 const Div = props => (<div {... props} />);
 

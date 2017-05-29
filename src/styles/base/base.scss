@@ -148,14 +148,24 @@
     }
     > span {
       display: block;
+      &:before {
+        content: " ";
+        @extend %fill-parent;
+        background-color: rgba(0, 0, 0, $button-hover-darken-opacity);
+        transition: opacity $transform-speed * 2 ease-out;
+        opacity: 0;
+        z-index: -1;
+      }
     }
   }
   &:focus {
     @extend %clear-focus;
   }
   &:hover {
-    &:before {
-      opacity: 1;
+    .#{$button-root}__content {
+      > span:before {
+        opacity: 1;
+      }
     }
   }
   &:before {

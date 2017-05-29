@@ -11,7 +11,6 @@ const WINDOW = window || global;
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
 
-
 /**
 TODO: Extend the setup with CSS custom properties;
 export const AwesomeButtonSetup = (setup = {}) => {
@@ -104,7 +103,7 @@ export default class AwesomeButton extends React.Component {
       return classToModules(className, this.props.cssModule);
     }
 
-    return className.join(' ').trim();
+    return className.join(' ').trim().replace(/[\s]+/ig, ' ');
   }
   checkProps(props) {
     this.extraProps.to = props.to || null;
@@ -184,7 +183,9 @@ export default class AwesomeButton extends React.Component {
       onMouseDown: (event) => {
         if (this.state.disabled === true ||
           this.state.loading === true ||
-          this.state.blocked === true) {
+          this.state.blocked === true ||
+          (event && event.nativeEvent.which !== 1)
+        ) {
           return;
         }
         if (this.props.progress === false && this.props.bubbles === true) {
@@ -201,7 +202,6 @@ export default class AwesomeButton extends React.Component {
         });
       },
       onMouseUp: (event) => {
-        console.log('MOUSE UP');
         if (this.state.disabled === true ||
           this.state.loading === true ||
           this.state.blocked === true) {

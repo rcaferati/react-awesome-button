@@ -16,6 +16,7 @@
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
     "build": "NODE_ENV=production webpack",
+    "build:scss": "NODE_ENV=production webpack --config webpack.scss.config.js && rm ./dist/styles.js",
     "test": "BABEL_JEST_STAGE=0 jest",
     "lint": "eslint src/**",
     "prepublish": "npm run build"
