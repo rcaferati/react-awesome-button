@@ -38,7 +38,7 @@ const examples = [
   size="icon"
   bubbles
 >
-  <i className="fa fa-facebook" />
+  <i className="fa fa-facebook" aria-hidden />
 </AwesomeButton>
 ...`,
     button: (
@@ -50,7 +50,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-facebook" />
+          <i className="fa fa-facebook" aria-hidden />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -59,7 +59,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-twitter" />
+          <i className="fa fa-twitter" aria-hidden />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -68,7 +68,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-github" />
+          <i className="fa fa-github" aria-hidden />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -77,7 +77,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-linkedin" />
+          <i className="fa fa-linkedin" aria-hidden />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -86,20 +86,23 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-whatsapp" />
+          <i className="fa fa-whatsapp" aria-hidden />
         </AwesomeButton>
       </div>
     ),
   },
   {
     title: 'Animated progress button',
+    js: `
+const action = (next) => {
+  // ... do something
+  next();
+}
+    `,
     text: `
 <AwesomeButton
-progress
-action={(next) => {
-  ...
-  next();
-}}
+  progress
+  action={action}
 >Progress Button</AwesomeButton>`,
     button: (
       <div>

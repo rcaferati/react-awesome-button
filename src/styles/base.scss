@@ -89,12 +89,14 @@
   font-weight: $button-font-weight;
   font-family: $button-font-family;
   letter-spacing: $button-letter-spacing;
+  text-rendering: auto;
   text-decoration: none;
   text-align: center;
   transition: opacity .1s ease-out;
   border: none;
   opacity: 0;
   z-index: 5;
+  -webkit-font-smoothing: antialiased;
   .#{$button-root}__container {
     display: block;
     height: 100%;
@@ -159,10 +161,10 @@
   &:before {
     content: " ";
 		background-color: rgba(0, 0, 0, 0.3);
-		width: calc(100% - 4px);
+		width: calc(100% - 2px);
 		height: calc(100% - #{$button-raise-level*2});
 		bottom: -($button-raise-level/2);
-		left: 2px;
+		left: 1px;
 		position: absolute;
 		border-radius: $button-default-border-radius;
 		z-index: 1;
