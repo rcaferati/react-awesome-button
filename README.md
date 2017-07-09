@@ -12,8 +12,8 @@
 + OnClick bubble animation
 
 ### Live demo and examples
-+ [On my portfolio](https://caferati.me/demo/react-awesome-button)
-+ [Live code at Webpackbin](https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-)
++ <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
++ <a href="https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-" target="_blank">Live code at Webpackbin</a>
 
 ## Examples
 
