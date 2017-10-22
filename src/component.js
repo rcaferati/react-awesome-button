@@ -7,7 +7,6 @@ import {
   createBubbleEffect,
 } from './helpers/component';
 
-const WINDOW = window || null;
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
 
@@ -141,16 +140,17 @@ export default class AwesomeButton extends React.Component {
         this.animationStage = 0;
         // hold life for 350ms before releasing the button;
         setTimeout(() => {
-          if(!WINDOW) return;
-          WINDOW.requestAnimationFrame(() => {
-            this.clearLoading();
-            this.clearPress();
-            setTimeout(() => {
-              this.setState({
-                blocked: false,
-              });
-            }, 500);
-          });
+          if (typeof window !== 'undefined') {
+            window.requestAnimationFrame(() => {
+              this.clearLoading();
+              this.clearPress();
+              setTimeout(() => {
+                this.setState({
+                  blocked: false,
+                });
+              }, 500);
+            });
+          }
         }, 350);
         return;
       }
@@ -196,12 +196,13 @@ export default class AwesomeButton extends React.Component {
           loading: this.props.progress,
           pressPosition: `${this.rootElement}--active`,
         });
-        if(!WINDOW) return;
-        WINDOW.requestAnimationFrame(() => {
-          const eventTrigger = new Event('action');
-          this.button.dispatchEvent(eventTrigger);
-          this.action();
-        });
+        if (typeof window !== 'undefined') {
+          window.requestAnimationFrame(() => {
+            const eventTrigger = new Event('action');
+            this.button.dispatchEvent(eventTrigger);
+            this.action();
+          });
+        }
       },
       onMouseUp: (event) => {
         if (this.state.disabled === true ||
