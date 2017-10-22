@@ -1,21 +1,21 @@
 $button-root: "aws-btn";
 
 $button-default-height: 44px;
-$button-default-font-size: inherit;
+$button-default-font-size: 16px;
 $button-default-line-height: 20px;
 $button-default-border-radius: 4px;
 
 $button-font-family: inherit;
 $button-font-color: #FFFFFF;
-$button-font-weight: 600;
+$button-font-weight: 800;
 $button-hover-darken-opacity: 0.1;
 $button-letter-spacing: 0px;
 $button-horizontal-padding: 18px;
 
 $button-raise-level: 2px;
-$button-hover-pressure: 0.75;
+$button-hover-pressure: 0.65;
 
-$button-color-primary: #325c99;
+$button-color-primary: #cc181e;
 $button-color-secondary: #e53935;
 $button-color-disabled: #9E9E9E;
 
@@ -39,7 +39,7 @@ $button-colors:
  button-size: size-name, width, height, font-size, line-height
 */
 $button-sizes:
-  ("icon", 44px, $button-default-height, $button-default-font-size * 1.6, $button-default-line-height * 1.6)
+  ("icon", 44px, $button-default-height, $button-default-font-size, $button-default-line-height)
   ("small", 88px, $button-default-height, $button-default-font-size, $button-default-line-height)
   ("medium", 132px, $button-default-height, $button-default-font-size, $button-default-line-height)
   ("large", 196px, $button-default-height, $button-default-font-size, $button-default-line-height);
