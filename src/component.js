@@ -7,7 +7,7 @@ import {
   createBubbleEffect,
 } from './helpers/component';
 
-const WINDOW = window || global;
+const WINDOW = window || null;
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
 
@@ -141,6 +141,7 @@ export default class AwesomeButton extends React.Component {
         this.animationStage = 0;
         // hold life for 350ms before releasing the button;
         setTimeout(() => {
+          if(!WINDOW) return;
           WINDOW.requestAnimationFrame(() => {
             this.clearLoading();
             this.clearPress();
@@ -195,6 +196,7 @@ export default class AwesomeButton extends React.Component {
           loading: this.props.progress,
           pressPosition: `${this.rootElement}--active`,
         });
+        if(!WINDOW) return;
         WINDOW.requestAnimationFrame(() => {
           const eventTrigger = new Event('action');
           this.button.dispatchEvent(eventTrigger);
