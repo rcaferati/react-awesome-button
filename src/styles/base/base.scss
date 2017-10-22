@@ -10,10 +10,30 @@
   }
 }
 
+@mixin color-pattern-background-manual($background, $darker, $color) {
+  .#{$button-root}__wrapper {
+    &:before {
+      background: $darker;
+    }
+  }
+  .#{$button-root}__content {
+    background: $background;
+    color: $color;
+  }
+}
+
 @mixin getColors($colors) {
   @each $color in $colors {
     &--#{nth($color, 1)} {
         @include color-pattern(nth($color, 2), nth($color, 3));
+    }
+  }
+}
+
+@mixin getColorsBackgroundManual($colors) {
+  @each $color in $colors {
+    &--#{nth($color, 1)} {
+        @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
     }
   }
 }
@@ -181,6 +201,7 @@
 		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out;
   }
   @include getColors($button-colors);
+  @include getColorsBackgroundManual($button-colors-bg-manual);
   &--visible {
     opacity: 1;
   }
