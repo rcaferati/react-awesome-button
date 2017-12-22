@@ -1,47 +1,8 @@
-$button-root: "aws-btn";
+@import '../default.scss';
 
-$button-default-height: 44px;
-$button-default-font-size: 14px;
-$button-default-line-height: 20px;
 $button-default-border-radius: 0px;
-
-$button-font-family: inherit;
-$button-font-color: #FFFFFF;
-$button-font-weight: 600;
-$button-hover-darken-opacity: 0.1;
-$button-letter-spacing: 0px;
 $button-horizontal-padding: 20px;
-
 $button-raise-level: 4px;
-$button-hover-pressure: 1;
-
-$button-color-primary: #325c99;
-$button-color-secondary: #e53935;
-$button-color-disabled: #9E9E9E;
-
-$loading-transition-speed: 6s;
 $transform-speed: 0.175s;
-
-/**
- button-color: color-name, background, color
-*/
-$button-colors:
-  ("primary", $button-color-primary, lighten($button-color-primary, 55%)),
-  ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
-  ("disabled", $button-color-disabled, lighten($button-color-disabled, 15%)),
-  ("facebook", #3b5998, #FFFFFF),
-  ("twitter", #00aced, #FFFFFF),
-  ("linkedin", #0077b5, #FFFFFF),
-  ("whatsapp", #25d366, #FFFFFF),
-  ("github", #4e545a, #FFFFFF);
-
-/**
- button-size: size-name, width, height, font-size, line-height
-*/
-$button-sizes:
-  ("icon", 44px, $button-default-height, $button-default-font-size * 1.6, $button-default-line-height * 1.6)
-  ("small", 88px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("medium", 132px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("large", 196px, $button-default-height, $button-default-font-size, $button-default-line-height);
 
 @import '../base/base.scss';

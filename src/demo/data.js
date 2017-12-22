@@ -17,13 +17,13 @@ const examples = [
   {
     title: 'Primary, Secondary and Disabled buttons',
     text: `
-<AwesomeButton>Primary Button</AwesomeButton>
-<AwesomeButton type="secondary">Secondary Button</AwesomeButton>
+<AwesomeButton bubbles>Primary Button</AwesomeButton>
+<AwesomeButton bubbles type="secondary">Secondary Button</AwesomeButton>
 <AwesomeButton disabled>Disabled Button</AwesomeButton>`,
     button: (
       <div>
-        <AwesomeButton cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>
-        <AwesomeButton cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>
+        <AwesomeButton bubbles cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>
+        <AwesomeButton bubbles cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>
         <AwesomeButton cssModule={AwsBtnStyles} disabled>Disabled Button</AwesomeButton>
       </div>
       ),
@@ -196,7 +196,7 @@ export default {
   name: 'AwesomeButton',
   title: 'React Components are awesome',
   description: 'The AwesomeButton is a performant, extendable, highly customisable, production ready react component that renders an animated basic set of UI buttons.',
-  size: '~4KB compressed <script + styles>',
+  size: '~3KB compressed <script + styles>',
   repository: 'https://github.com/rcaferati/react-awesome-button',
   article: '//caferati.me/labs/awesome-button',
   features,

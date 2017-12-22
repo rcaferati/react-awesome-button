@@ -58,13 +58,14 @@
     "webpack-dev-server": "^2.4.3"
   },
   "keywords": [
+    "react-component",
+    "react-awesome-button",
     "react",
+    "button",
     "awesome-button",
     "progress",
-    "button",
     "component",
-    "javascript",
-    "react-component",
-    "react-awesome-button"
+    "UI component",
+    "javascript"
   ]
 }

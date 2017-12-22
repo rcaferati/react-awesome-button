@@ -66,15 +66,15 @@ const Demo = () => (
       </h2>
       <p>{Data.description}</p>
     </header>
+    <ul className={Styles.examples}>
+      {renderExamples()}
+    </ul>
     <div className={Styles.features}>
       <h3>Main Features</h3>
       <ul>
         {renderFeatures()}
       </ul>
     </div>
-    <ul className={Styles.examples}>
-      {renderExamples()}
-    </ul>
     <footer>
       <div>
         <img className="support" src="/images/support.svg" alt="Modern Web Browsers" title="Modern Web Browsers" />

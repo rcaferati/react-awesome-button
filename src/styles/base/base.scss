@@ -31,9 +31,11 @@
 }
 
 @mixin getColorsBackgroundManual($colors) {
-  @each $color in $colors {
-    &--#{nth($color, 1)} {
-        @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
+  @if($colors) {
+    @each $color in $colors {
+      &--#{nth($color, 1)} {
+          @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
+      }
     }
   }
 }
@@ -51,7 +53,7 @@
 
 @mixin button-hover-skew($direction) {
   &:before {
-    transform: skewY(1deg * $button-hover-pressure * $direction) translateY(-1px * $button-hover-pressure/2);
+    transform: skewY(1deg * $button-hover-pressure * $direction) translate3d(0, -1px * $button-hover-pressure/2, 0);
   }
   .#{$button-root}__content {
     transform: skewY(1deg * $button-hover-pressure * -$direction);
@@ -60,10 +62,10 @@
 
 @mixin button-hover-middle($pressure) {
   &:before {
-    transform: translateY(-1px * $pressure);
+    transform: translate3d(0, -1px * $pressure, 0);
   }
   .#{$button-root}__content {
-    transform: translateY(1px * $pressure);
+    transform: translate3d(0, 1px * $pressure, 0);
   }
 }
 
@@ -229,11 +231,11 @@
       }
       &:before {
         content: attr(data-loading);
-    		transform: translateY(50%);
+    		transform: translate3d(0, 50%, 0);
       }
       &:after {
         content: attr(data-status);
-    		transform: translateY(-50%);
+    		transform: translate3d(0, -50%, 0);
       }
     }
     &.#{$button-root}--active {
@@ -246,18 +248,18 @@
   }
   &--active {
     &:before {
-  		transform: translateY(-$button-raise-level);
+  		transform: translate3d(0, -$button-raise-level, 0);
     }
     .#{$button-root}__content {
   		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out, color $transform-speed * 0.8 ease-out;
-  		transform: translateY($button-raise-level);
+  		transform: translate3d(0, $button-raise-level, 0);
     }
   }
   &--start {
     .#{$button-root}__content {
       &:before {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
       }
     }
     .#{$button-root}__wrapper {
@@ -277,17 +279,17 @@
     .#{$button-root}__content {
       &:after {
         opacity: 1;
-    		transform: translateY(0);
+    		transform: translate3d(0, 0, 0);
       }
       &:before {
-    		transform: translateY(50%);
+    		transform: translate3d(0, 50%, 0);
         opacity: 0;
       }
     }
   }
   &--off {
     &:before {
-  		transform: translateY(-$button-raise-level);
+  		transform: translate3d(0, -$button-raise-level, 0);
   		background-color: rgba(0, 0, 0, 0.05);
     }
     &:hover {
@@ -309,7 +311,7 @@
     .#{$button-root}__content {
       background-color: #353535;
   		color: #424242;
-  		transform: translateY($button-raise-level);
+  		transform: translate3d(0, $button-raise-level, 0);
     }
   }
   @include getSizes($button-sizes);
