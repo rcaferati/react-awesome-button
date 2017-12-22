@@ -12,9 +12,10 @@
 + OnClick bubble animation
 
 ### Live demo and examples
+
 + <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
 + <a href="https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-" target="_blank">Live code at Webpackbin</a>
-![Live Demo](https://ibb.co/dhXLWR)
+![Live Demo](https://image.ibb.co/dOzGum/react_awesome_button_demo.gif)
 
 ## Examples
 
