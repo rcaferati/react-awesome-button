@@ -5,7 +5,7 @@
 `ReactAwesomeButton` is a performant, extendable, highly customisable, production ready React Component that renders an animated set of UI buttons.
 <img width="600" alt="react-awesome-button demo" src="https://image.ibb.co/dOzGum/react_awesome_button_demo.gif">
 
-### Live demo and examples
+## Live demo
 
 + <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
 + <a href="https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-" target="_blank">Live code at Webpackbin</a>
