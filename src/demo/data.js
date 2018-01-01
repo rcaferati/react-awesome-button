@@ -88,6 +88,15 @@ const examples = [
         >
           <i className="fa fa-whatsapp" aria-hidden />
         </AwesomeButton>
+        <AwesomeButton
+          cssModule={AwsBtnStyles}
+          type="instagram"
+          size="icon"
+          bubbles
+          moveEvents={false}
+        >
+          <i className="fa fa-instagram" aria-hidden />
+        </AwesomeButton>
       </div>
     ),
   },

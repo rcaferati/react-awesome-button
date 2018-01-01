@@ -1,6 +1,6 @@
 {
   "name": "react-awesome-button",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Performant, extendable, highly customisable, production ready React Component that renders an animated basic set of UI buttons",
   "main": "dist/index.js",
   "author": "Rafael Caferati",
@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
+    "white": "webpack-dev-server -d --config webpack.demo-white.config.js",
     "build": "NODE_ENV=production webpack",
     "build:scss": "NODE_ENV=production webpack --config webpack.scss.config.js && rm ./dist/styles.js",
     "test": "BABEL_JEST_STAGE=0 jest",

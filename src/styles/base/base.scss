@@ -178,6 +178,9 @@
         opacity: 0;
         z-index: -1;
       }
+      > span, > svg, > img {
+        vertical-align: middle;
+      }
     }
   }
   &:focus {

@@ -1,16 +1,15 @@
-$button-default-font-size: 16px;
-$button-default-border-radius: 4px;
-$button-font-weight: 800;
+@import '../default.scss';
+
 $button-horizontal-padding: 18px;
 $button-hover-pressure: 0.65;
-$button-color-primary: #cc181e;
+$button-color-primary: #009688;
 $transform-speed: 0.175s;
 
 /**
  button-color: color-name, background, color
 */
 $button-colors:
-  ("primary", $button-color-primary, lighten($button-color-primary, 55%)),
+  ("primary", $button-color-primary, lighten($button-color-primary, 65%)),
   ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
   ("disabled", $button-color-disabled, lighten($button-color-disabled, 15%)),
   ("facebook", #3b5998, #FFFFFF),
@@ -18,19 +17,5 @@ $button-colors:
   ("linkedin", #0077b5, #FFFFFF),
   ("whatsapp", #25d366, #FFFFFF),
   ("github", #4e545a, #FFFFFF);
-
-
-$button-colors-bg-manual:
-  ("instagram", radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%), radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%), #FFFFFF),
-  ("youtube", #cc181e, #5d0003, #FFFFFF);
-
-/**
- button-size: size-name, width, height, font-size, line-height
-*/
-$button-sizes:
-  ("icon", 44px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("small", 88px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("medium", 132px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("large", 196px, $button-default-height, $button-default-font-size, $button-default-line-height);
 
 @import '../base/base.scss';
