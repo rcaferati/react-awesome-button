@@ -195,11 +195,9 @@ export default class AwesomeButton extends React.Component {
           pressPosition: `${this.rootElement}--active`,
         });
         if (typeof window !== 'undefined') {
-          window.requestAnimationFrame(() => {
-            const eventTrigger = new Event('action');
-            this.button.dispatchEvent(eventTrigger);
-            this.action();
-          });
+          const eventTrigger = new Event('action');
+          this.button.dispatchEvent(eventTrigger);
+          this.action();
         }
       },
       onMouseUp: (event) => {
