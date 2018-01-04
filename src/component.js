@@ -159,7 +159,7 @@ export default class AwesomeButton extends React.Component {
     if (this.props.progress) {
       this.startLoading();
     }
-    if (this.props.action) {
+    if (this.props.action && this.button) {
       this.props.action(
         this.button.parentNode,
         this.props.progress ? this.endLoading.bind(this) : null,
@@ -194,11 +194,11 @@ export default class AwesomeButton extends React.Component {
           loading: this.props.progress,
           pressPosition: `${this.rootElement}--active`,
         });
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && this.button) {
           const eventTrigger = new Event('action');
           this.button.dispatchEvent(eventTrigger);
-          this.action();
         }
+        this.action();
       },
       onMouseUp: (event) => {
         if (this.state.disabled === true ||
