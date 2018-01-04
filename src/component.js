@@ -9,7 +9,7 @@ import {
 
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
-
+const ANIMATION_DELAY = 100;
 /**
 TODO: Extend the setup with CSS custom properties;
 export const AwesomeButtonSetup = (setup = {}) => {
@@ -95,11 +95,9 @@ export default class AwesomeButton extends React.Component {
     if (this.state.pressPosition) {
       className.push(this.state.pressPosition);
     }
-
     if (this.props.cssModule && this.props.cssModule['aws-btn']) {
       return classToModules(className, this.props.cssModule);
     }
-
     return className.join(' ').trim().replace(/[\s]+/ig, ' ');
   }
   checkProps(props) {
@@ -120,6 +118,8 @@ export default class AwesomeButton extends React.Component {
     });
   }
   clearPress() {
+    // da um timeout aqui caso não esteja pressionado -- interesting
+    // timeout ou loop? pode ser que nunca seja pressionado?
     const pressPosition = this.state.loading ? this.state.pressPosition : null;
     this.setState({
       pressPosition,
@@ -187,28 +187,34 @@ export default class AwesomeButton extends React.Component {
         ) {
           return;
         }
-        if (this.props.progress === false && this.props.bubbles === true) {
-          this.createBubble(event);
-        }
+        this.pressed = new Date().getTime();
         this.setState({
-          loading: this.props.progress,
           pressPosition: `${this.rootElement}--active`,
+          loading: this.props.progress,
         });
-        if (typeof window !== 'undefined' && this.button) {
-          const eventTrigger = new Event('action');
-          this.button.dispatchEvent(eventTrigger);
-        }
-        this.action();
       },
       onMouseUp: (event) => {
         if (this.state.disabled === true ||
-          this.state.loading === true ||
           this.state.blocked === true) {
           event.preventDefault();
           event.stopPropagation();
           return;
         }
-        this.clearPress();
+        if (this.clearTimer) {
+          clearTimeout(this.clearTimer);
+        }
+        const diff = new Date().getTime() - this.pressed;
+        if (this.props.progress === false && this.props.bubbles === true) {
+          this.createBubble(event);
+        }
+        if (typeof window !== 'undefined' && this.button) {
+          const eventTrigger = new Event('action');
+          this.button.dispatchEvent(eventTrigger);
+        }
+        this.action();
+        this.clearTimer = setTimeout(() => {
+          this.clearPress();
+        }, ANIMATION_DELAY - diff);
       },
     };
 
