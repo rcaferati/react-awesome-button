@@ -2,7 +2,8 @@
 
 [![Travis](https://img.shields.io/travis/rcaferati/react-awesome-button/master.svg)](https://travis-ci.org/rcaferati/react-awesome-button) ![NPM](https://img.shields.io/npm/v/react-awesome-button.svg)
 
-`ReactAwesomeButton` is a performant, extendable, highly customisable, production ready React Component that renders an animated set of UI buttons.
+`react-awesome-button` is a performant, extendable, highly customisable, production ready React Component that renders an animated set of 3D UI buttons.
+
 <img width="600" alt="react-awesome-button demo" src="https://image.ibb.co/dOzGum/react_awesome_button_demo.gif">
 
 ## Live demo
