@@ -10,6 +10,35 @@
 + <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
 + <a href="https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-" target="_blank">Live code at Webpackbin</a>
 
+## Examples
+
+### With react-awesome-button and plain CSS
+```jsx
+  import AwesomeSocial from 'react-awesome-social';
+  import 'react-awesome-button/dist/styles.css';
+
+  function Button() {
+    return (
+      <AwesomeSocial type="facebook">Share</AwesomeSocial>
+    );
+  }
+```
+
+### With react-awesome-button CSS Modules
+```jsx
+  import AwesomeSocial from 'react-awesome-social';
+  import AwesomeButtonStyles from 'react-awesome-button/src/styles.scss'
+
+  function Button() {
+    return (
+      <AwesomeSocial
+        cssModule={AwesomeButtonStyles}
+        type="twitter"
+      >Share</AwesomeSocial>
+    );
+  }
+```
+
 ## Key Features
 
 + Look and feel customisable and extendable via SASS variables and lists ([scss config file](https://github.com/rcaferati/react-awesome-button/blob/master/src/styles/default.scss))
@@ -17,37 +46,6 @@
 + Render any tag as the component\'s child (text, icon, img, svg)
 + Animated progress button
 + OnClick bubble animation
-
-## Examples
-
-### With plain CSS
-```jsx
-  import AwesomeButton from 'react-awesome-button';
-  import 'react-awesome-button/dist/styles.css';
-  
-  function Button() {
-    return (
-      <AwesomeButton>Primary Button</AwesomeButton>
-    );
-  }
-  
-```
-
-### With CSS Modules
-```jsx
-  import AwesomeButton from 'react-awesome-button';
-  import AwesomeButtonStyles from 'react-awesome-button/src/styles.scss'
-  
-  function Button() {
-    return (
-      <AwesomeButton
-        cssModule={AwesomeButtonStyles}
-      >Primary Button</AwesomeButton>
-    );
-  }
-  
-```
-
 
 | Attributes            | Type          | Default     | Description |
 | :---------            | :--:          | :-----:     | :----------- |
