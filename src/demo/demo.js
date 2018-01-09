@@ -25,8 +25,8 @@ const renderExamples = () => Data.examples.map((example, index) => (
         <pre>
           <h4>.scss</h4>
           <code
-            dangerouslySetInnerHTML={{ __html:
-              Prism.highlight(example.scss.trim(), Prism.languages.scss),
+            dangerouslySetInnerHTML={{
+              __html: Prism.highlight(example.scss.trim(), Prism.languages.scss),
             }}
           />
         </pre>
@@ -35,8 +35,8 @@ const renderExamples = () => Data.examples.map((example, index) => (
         <pre>
           <h4>.js</h4>
           <code
-            dangerouslySetInnerHTML={{ __html:
-              Prism.highlight(example.js.trim(), Prism.languages.jsx),
+            dangerouslySetInnerHTML={{
+              __html: Prism.highlight(example.js.trim(), Prism.languages.jsx),
             }}
           />
         </pre>
@@ -44,8 +44,8 @@ const renderExamples = () => Data.examples.map((example, index) => (
       <pre>
         <h4>.jsx</h4>
         <code
-          dangerouslySetInnerHTML={{ __html:
-            Prism.highlight(example.text.trim(), Prism.languages.jsx),
+          dangerouslySetInnerHTML={{
+            __html: Prism.highlight(example.text.trim(), Prism.languages.jsx),
           }}
         />
       </pre>
@@ -85,8 +85,11 @@ const Demo = () => (
   </section>
 );
 
-render((
-  <Router>
-    <Route path="/" component={Demo} />
-  </Router>),
-  document.getElementById('root'));
+render(
+  (
+    <Router>
+      <Route path="/" component={Demo} />
+    </Router>
+  ),
+  document.getElementById('root'),
+);

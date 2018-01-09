@@ -22,11 +22,10 @@ const examples = [
 <AwesomeButton disabled>Disabled Button</AwesomeButton>`,
     button: (
       <div>
-        <AwesomeButton bubbles cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>
+        <AwesomeButton bubbles>Primary Button</AwesomeButton>
         <AwesomeButton bubbles cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>
         <AwesomeButton cssModule={AwsBtnStyles} disabled>Disabled Button</AwesomeButton>
-      </div>
-      ),
+      </div>),
   },
   {
     title: 'Icon font button — Using children',
@@ -123,7 +122,9 @@ const action = (next) => {
               next();
             }, 600);
           }}
-        >Progress Button</AwesomeButton>
+        >
+          Progress Button
+        </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
           progress
@@ -133,7 +134,9 @@ const action = (next) => {
               next();
             }, 500);
           }}
-        >Progress Button</AwesomeButton>
+        >
+          Progress Button
+        </AwesomeButton>
       </div>),
   },
   {
@@ -161,15 +164,21 @@ $button-raise-level: 4px;
         <div>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
-          >Themed Button</AwesomeButton>
+          >
+            Themed Button
+          </AwesomeButton>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
             type="secondary"
-          >Themed Button</AwesomeButton>
+          >
+            Themed Button
+          </AwesomeButton>
           <AwesomeButton
             cssModule={AwsBtnStylesThemeTwo}
             disabled
-          >Themed Button</AwesomeButton>
+          >
+            Themed Button
+          </AwesomeButton>
         </div>
       </div>
     ),
@@ -185,7 +194,9 @@ $button-raise-level: 4px;
         <AwesomeButton
           cssModule={AwsBtnStyles}
           moveEvents={false}
-        >Without Move Events</AwesomeButton>
+        >
+          Without Move Events
+        </AwesomeButton>
       </div>
     ),
   },

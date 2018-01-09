@@ -1,4 +1,9 @@
+const POSITION_STATES = ['middle', 'left', 'right'];
+
 export function classToModules(className = [], cssModule) {
+  if (!cssModule) {
+    return className.join(' ').trim();
+  }
   const ClassName = [];
   let i = className.length;
   // eslint-disable-next-line
@@ -39,7 +44,6 @@ export function toggleMoveClasses({
   if (!element) {
     return false;
   }
-  const POSITION_STATES = ['middle', 'left', 'right'];
   if (!state) {
     element.classList.remove(
       classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
