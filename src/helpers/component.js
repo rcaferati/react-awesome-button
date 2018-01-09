@@ -1,6 +1,7 @@
 export function classToModules(className = [], cssModule) {
   const ClassName = [];
   let i = className.length;
+  // eslint-disable-next-line
   while (i--) {
     if (cssModule[className[i]]) {
       ClassName.push(cssModule[className[i]]);
@@ -29,7 +30,38 @@ export function setCssEndEvent(element, type, callback) {
   return element.addEventListener(`${type}End`, callback);
 }
 
-export function createBubbleEffect({ event, button, content, className }) {
+const POSITION_STATES = ['middle', 'left', 'right'];
+
+export function toggleMoveClasses({
+  element,
+  root,
+  cssModule = null,
+  state = null,
+}) {
+  if (!state) {
+    element.classList.remove(
+      classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
+      classToModules([`${root}--${POSITION_STATES[1]}`], cssModule),
+      classToModules([`${root}--${POSITION_STATES[2]}`], cssModule),
+    );
+    return false;
+  }
+  const options = POSITION_STATES.filter(item => item !== state);
+  let i = options.length;
+  // eslint-disable-next-line
+  while (i--) {
+    element.classList.remove(classToModules([`${root}--${options[i]}`], cssModule));
+  }
+  element.classList.add(classToModules([`${root}--${state}`], cssModule));
+  return true;
+}
+
+export function createBubbleEffect({
+  event,
+  button,
+  content,
+  className,
+}) {
   const bounds = button.getBoundingClientRect();
   const top = window.pageYOffset || document.documentElement.scrolltop || 0;
   const bubble = document.createElement('span');

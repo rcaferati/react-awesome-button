@@ -5,11 +5,13 @@ import {
   getClassName,
   setCssEndEvent,
   createBubbleEffect,
+  toggleMoveClasses,
 } from './helpers/component';
 
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 5;
 const ANIMATION_DELAY = 100;
+
 /**
 TODO: Extend the setup with CSS custom properties;
 export const AwesomeButtonSetup = (setup = {}) => {
@@ -43,6 +45,7 @@ export default class AwesomeButton extends React.Component {
   static defaultProps = {
     action: null,
     bubbles: false,
+    cssModule: null,
     disabled: false,
     element: null,
     href: null,
@@ -69,7 +72,6 @@ export default class AwesomeButton extends React.Component {
       loadingEnd: false,
       loadingStart: false,
       blocked: false,
-      clicked: false,
     };
     this.checkProps(props);
   }
@@ -118,8 +120,11 @@ export default class AwesomeButton extends React.Component {
     });
   }
   clearPress() {
-    // da um timeout aqui caso não esteja pressionado -- interesting
-    // timeout ou loop? pode ser que nunca seja pressionado?
+    toggleMoveClasses({
+      element: this.button.parentNode,
+      root: this.rootElement,
+      cssModule: this.props.cssModule,
+    });
     const pressPosition = this.state.loading ? this.state.pressPosition : null;
     this.setState({
       pressPosition,
@@ -225,22 +230,24 @@ export default class AwesomeButton extends React.Component {
           this.state.blocked === true) {
           return;
         }
-        const button = this.button;
-        const left = button.getBoundingClientRect().left;
+        const { button } = this;
+        const { left } = button.getBoundingClientRect();
         const width = button.offsetWidth;
-        this.setState({
-          pressPosition: event.pageX < (left + (width * 0.3))
-            ? `${this.rootElement}--left`
-            : event.pageX > (left + (width * 0.65))
-              ? `${this.rootElement}--right`
-              : `${this.rootElement}--middle`,
+        const state = event.pageX < (left + (width * 0.3))
+          ? 'left'
+          : event.pageX > (left + (width * 0.65))
+            ? 'right'
+            : 'middle';
+        toggleMoveClasses({
+          element: this.button.parentNode,
+          root: this.rootElement,
+          cssModule: this.props.cssModule,
+          state,
         });
       };
     } else {
       events.onMouseEnter = () => {
-        this.setState({
-          pressPosition: `${this.rootElement}--middle`,
-        });
+        this.button.parentNode.classList.add(classToModules([`${this.rootElement}--middle`], this.props.cssModule));
       };
     }
 
