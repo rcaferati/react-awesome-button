@@ -5,15 +5,16 @@ const config = {
     'react-awesome-button': ['./src/demo/demo.js'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['es2015', 'react', 'stage-0'],
         },
-      }, {
+      },
+      {
         test: /\.scss$/i,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -31,8 +32,9 @@ const config = {
       },
       {
         test: /\.css$/i,
-        loader: ExtractTextPlugin.extract({
-          loader: 'css-loader?importLoaders=1!postcss-loader',
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: 'css-loader?importLoaders=1!postcss-loader',
         }),
       },
     ],

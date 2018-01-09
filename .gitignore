@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 src/demo-white
 webpack.demo-white.config.js
+.DS_Store
