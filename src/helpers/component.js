@@ -30,8 +30,6 @@ export function setCssEndEvent(element, type, callback) {
   return element.addEventListener(`${type}End`, callback);
 }
 
-const POSITION_STATES = ['middle', 'left', 'right'];
-
 export function toggleMoveClasses({
   element,
   root,
@@ -41,6 +39,7 @@ export function toggleMoveClasses({
   if (!element) {
     return false;
   }
+  const POSITION_STATES = ['middle', 'left', 'right'];
   if (!state) {
     element.classList.remove(
       classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
