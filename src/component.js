@@ -76,6 +76,7 @@ export default class AwesomeButton extends React.Component {
     this.checkProps(props);
   }
   componentDidMount() {
+    this.container = this.button && this.button.parentNode;
     setCssEndEvent(this.wrapper, 'transition', this.clearStagedWrapperAnimation.bind(this));
   }
   componentWillReceiveProps(newProps) {
@@ -121,7 +122,7 @@ export default class AwesomeButton extends React.Component {
   }
   clearPress() {
     toggleMoveClasses({
-      element: this.button.parentNode,
+      element: this.container,
       root: this.rootElement,
       cssModule: this.props.cssModule,
     });
@@ -166,7 +167,7 @@ export default class AwesomeButton extends React.Component {
     }
     if (this.props.action && this.button) {
       this.props.action(
-        this.button.parentNode,
+        this.container,
         this.props.progress ? this.endLoading.bind(this) : null,
       );
     }
@@ -239,7 +240,7 @@ export default class AwesomeButton extends React.Component {
             ? 'right'
             : 'middle';
         toggleMoveClasses({
-          element: this.button.parentNode,
+          element: this.container,
           root: this.rootElement,
           cssModule: this.props.cssModule,
           state,
@@ -247,7 +248,7 @@ export default class AwesomeButton extends React.Component {
       };
     } else {
       events.onMouseEnter = () => {
-        this.button.parentNode.classList.add(classToModules([`${this.rootElement}--middle`], this.props.cssModule));
+        this.container.classList.add(classToModules([`${this.rootElement}--middle`], this.props.cssModule));
       };
     }
 

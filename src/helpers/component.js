@@ -38,6 +38,9 @@ export function toggleMoveClasses({
   cssModule = null,
   state = null,
 }) {
+  if (!element) {
+    return false;
+  }
   if (!state) {
     element.classList.remove(
       classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
