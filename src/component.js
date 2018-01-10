@@ -32,6 +32,7 @@ export default class AwesomeButton extends React.Component {
     loadingLabel: PropTypes.string,
     placeholder: PropTypes.bool,
     progress: PropTypes.bool,
+    title: PropTypes.string,
     resultLabel: PropTypes.string,
     rootElement: PropTypes.string,
     moveEvents: PropTypes.bool,
@@ -48,6 +49,7 @@ export default class AwesomeButton extends React.Component {
     bubbles: false,
     cssModule: null,
     disabled: false,
+    title: null,
     element: null,
     href: null,
     loadingLabel: 'Wait ..',
@@ -294,29 +296,39 @@ export default class AwesomeButton extends React.Component {
   }
   render() {
     const RenderComponent = this.renderComponent;
+    const {
+      title,
+      style,
+      cssModule,
+      progress,
+      loadingLabel,
+      resultLabel,
+      children,
+    } = this.props;
     return (
       <RenderComponent
-        style={this.props.style}
+        style={style}
         className={this.getRootClassName()}
         role="button"
+        title={title}
         {... this.extraProps}
         {... this.moveEvents()}
       >
         <span
           ref={(button) => { this.button = button; }}
-          className={getClassName(`${this.rootElement}__container`, this.props.cssModule)}
+          className={getClassName(`${this.rootElement}__container`, cssModule)}
         >
           <span
             ref={(wrapper) => { this.wrapper = wrapper; }}
-            className={getClassName(`${this.rootElement}__wrapper`, this.props.cssModule)}
+            className={getClassName(`${this.rootElement}__wrapper`, cssModule)}
           >
             <span
               ref={(content) => { this.content = content; }}
-              data-loading={(this.props.progress && this.props.loadingLabel) || null}
-              data-status={(this.props.progress && this.props.resultLabel) || null}
-              className={getClassName(`${this.rootElement}__content`, this.props.cssModule)}
+              data-loading={(progress && loadingLabel) || null}
+              data-status={(progress && resultLabel) || null}
+              className={getClassName(`${this.rootElement}__content`, cssModule)}
             >
-              <span>{this.props.children}</span>
+              <span>{children}</span>
             </span>
           </span>
         </span>
