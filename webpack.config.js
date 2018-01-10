@@ -11,6 +11,20 @@ const config = {
     libraryTarget: 'umd',
     library: 'react-awesome-button',
   },
+  externals: {
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
+    'prop-types': {
+      root: 'PropTypes',
+      commonjs: 'prop-types',
+      commonjs2: 'prop-types',
+      amd: 'prop-types',
+    },
+  },
   module: {
     rules: [{
       test: /\.js$/,
