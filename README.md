@@ -1,4 +1,4 @@
-# &lt;ReactAwesomeButton /&gt;
+# &lt;AwesomeButton /&gt;
 
 [![Travis](https://img.shields.io/travis/rcaferati/react-awesome-button/master.svg)](https://travis-ci.org/rcaferati/react-awesome-button) ![NPM](https://img.shields.io/npm/v/react-awesome-button.svg)
 
