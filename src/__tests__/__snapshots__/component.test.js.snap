@@ -11,6 +11,7 @@ exports[`Button changes on mouse down -> up -> leave 1`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -44,6 +45,7 @@ exports[`Button changes on mouse down -> up -> leave 2`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -77,6 +79,7 @@ exports[`Button changes on mouse down -> up -> leave 3`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -110,6 +113,7 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -143,6 +147,7 @@ exports[`Should render a button with a progress bar 1`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -176,6 +181,7 @@ exports[`Should render a button with a progress bar 2`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -209,6 +215,7 @@ exports[`Should render a button without moveEvents 1`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -242,6 +249,7 @@ exports[`Should render a simple primary button 1`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
@@ -275,6 +283,7 @@ exports[`Should render a simple secondary button 1`] = `
   role="button"
   style={Object {}}
   target={null}
+  title={null}
   to={null}
 >
   <span
