@@ -45,7 +45,7 @@ const renderExamples = () => Data.examples.map((example, index) => (
         <h4>.jsx</h4>
         <code
           dangerouslySetInnerHTML={{
-            __html: Prism.highlight(example.text.trim(), Prism.languages.jsx),
+            __html: Prism.highlight(example.jsx.trim(), Prism.languages.jsx),
           }}
         />
       </pre>

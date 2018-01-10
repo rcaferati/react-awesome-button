@@ -4,6 +4,7 @@ $button-default-height: 44px;
 $button-default-font-size: 14px;
 $button-default-line-height: 20px;
 $button-default-border-radius: 2px;
+$button-default-placeholder-width: 120px;
 
 $button-font-family: inherit;
 $button-font-color: #FFFFFF;
@@ -18,6 +19,7 @@ $button-hover-pressure: 1;
 $button-color-primary: #325c99;
 $button-color-secondary: #e53935;
 $button-color-disabled: #9E9E9E;
+$button-color-placeholder: #BABABA;
 
 $loading-transition-speed: 6s;
 $transform-speed: 0.150s;
@@ -29,6 +31,7 @@ $button-colors:
   ("primary", $button-color-primary, lighten($button-color-primary, 55%)),
   ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
   ("disabled", $button-color-disabled, lighten($button-color-disabled, 15%)),
+  ("placeholder", $button-color-placeholder, lighten($button-color-placeholder, 15%)),
   ("facebook", #4868ad, #FFFFFF),
   ("messenger", #3186f6, #FFFFFF),
   ("twitter", #00aced, #FFFFFF),

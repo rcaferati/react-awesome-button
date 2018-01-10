@@ -16,13 +16,13 @@ const features = [
 const examples = [
   {
     title: 'Primary, Secondary and Disabled buttons',
-    text: `
+    jsx: `
 <AwesomeButton bubbles>Primary Button</AwesomeButton>
 <AwesomeButton bubbles type="secondary">Secondary Button</AwesomeButton>
 <AwesomeButton disabled>Disabled Button</AwesomeButton>`,
     button: (
       <div>
-        <AwesomeButton bubbles>Primary Button</AwesomeButton>
+        <AwesomeButton bubbles cssModule={AwsBtnStyles}>Primary Button</AwesomeButton>
         <AwesomeButton bubbles cssModule={AwsBtnStyles} type="secondary">Secondary Button</AwesomeButton>
         <AwesomeButton cssModule={AwsBtnStyles} disabled>Disabled Button</AwesomeButton>
       </div>),
@@ -31,7 +31,7 @@ const examples = [
     title: 'Icon font button — Using children',
     description: `This example use font-awesome to render the icons but you can
     use almost anything as the component's child. i.e. <img> or <svg> tags.`,
-    text: `
+    jsx: `
 <AwesomeButton
   type="facebook"
   size="icon"
@@ -107,7 +107,7 @@ const action = (next) => {
   next();
 }
     `,
-    text: `
+    jsx: `
 <AwesomeButton
   progress
   action={action}
@@ -147,7 +147,7 @@ $button-default-border-radius: 40px;
 $button-horizontal-padding: 20px;
 $button-raise-level: 4px;
     `,
-    text: `
+    jsx: `
 <AwesomeButton
   cssModule={AwsBtnStylesThemeTwo}
 >Themed Button</AwesomeButton>
@@ -185,7 +185,7 @@ $button-raise-level: 4px;
   },
   {
     title: 'Hover Animations',
-    text: `
+    jsx: `
 <AwesomeButton>With Move Events</AwesomeButton>
 <AwesomeButton moveEvents={false}>Without Move Events</AwesomeButton>`,
     button: (
@@ -204,10 +204,25 @@ $button-raise-level: 4px;
     title: 'Overwrite Component Renderer',
     description: 'Render overwrite is specially usefull when you want to render the button with the Link component from react-router.',
     js: 'const Div = props => (<div {... props} />);',
-    text: `
+    jsx: `
 <AwesomeButton element={Div}>With Div Container</AwesomeButton>`,
     button: (
       <AwesomeButton element={Div} cssModule={AwsBtnStyles}>With Div Container</AwesomeButton>
+    ),
+  },
+  {
+    title: 'Placeholder',
+    description: 'Render a placeholder before children data is available. Usefull if for any reason the children data is available in an asynchronous way.',
+    jsx: `
+<AwesomeButton placeholder></AwesomeButton>
+<AwesomeButton size="small" type="secondary" placeholder></AwesomeButton>
+<AwesomeButton size="icon" placeholder></AwesomeButton>`,
+    button: (
+      <div>
+        <AwesomeButton placeholder cssModule={AwsBtnStyles} />
+        <AwesomeButton size="small" type="secondary" placeholder cssModule={AwsBtnStyles} />
+        <AwesomeButton size="icon" placeholder cssModule={AwsBtnStyles} />
+      </div>
     ),
   },
 ];

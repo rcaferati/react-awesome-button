@@ -30,6 +30,7 @@ export default class AwesomeButton extends React.Component {
     element: PropTypes.func,
     href: PropTypes.string,
     loadingLabel: PropTypes.string,
+    placeholder: PropTypes.bool,
     progress: PropTypes.bool,
     resultLabel: PropTypes.string,
     rootElement: PropTypes.string,
@@ -52,6 +53,7 @@ export default class AwesomeButton extends React.Component {
     loadingLabel: 'Wait ..',
     moveEvents: true,
     progress: false,
+    placeholder: false,
     resultLabel: 'Success!',
     rootElement: ROOTELM,
     size: null,
@@ -67,7 +69,7 @@ export default class AwesomeButton extends React.Component {
     this.animationStage = 0;
     this.extraProps = {};
     this.state = {
-      disabled: props.disabled,
+      disabled: props.disabled || (props.placeholder && !props.children),
       loading: false,
       loadingEnd: false,
       loadingStart: false,
@@ -80,34 +82,72 @@ export default class AwesomeButton extends React.Component {
     setCssEndEvent(this.wrapper, 'transition', this.clearStagedWrapperAnimation.bind(this));
   }
   componentWillReceiveProps(newProps) {
+    this.checkPlaceholder(newProps);
     this.checkProps(newProps);
   }
   getRootClassName() {
+    const { rootElement } = this;
+    const {
+      type,
+      size,
+      placeholder,
+      children,
+      visible,
+      progress,
+      cssModule,
+    } = this.props;
+    const {
+      loadingStart,
+      loadingEnd,
+      disabled,
+      pressPosition,
+    } = this.state;
     const className = [
       this.rootElement,
-      this.props.type && `${this.rootElement}--${this.props.type}`,
-      this.props.size && `${this.rootElement}--${this.props.size}`,
-      this.props.visible && `${this.rootElement}--visible`,
-      (this.state.loadingStart && `${this.rootElement}--start`) || null,
-      (this.state.loadingEnd && `${this.rootElement}--end`) || null,
-      (this.props.progress && `${this.rootElement}--progress`) || null,
+      type && `${rootElement}--${type}`,
+      size && `${rootElement}--${size}`,
+      placeholder && !children && `${rootElement}--placeholder`,
+      visible && `${rootElement}--visible`,
+      (loadingStart && `${rootElement}--start`) || null,
+      (loadingEnd && `${rootElement}--end`) || null,
+      (progress && `${rootElement}--progress`) || null,
     ];
-    if (this.state.disabled === true) {
-      className.push(`${this.rootElement}--disabled`);
+    if (disabled === true) {
+      className.push(`${rootElement}--disabled`);
     }
-    if (this.state.pressPosition) {
-      className.push(this.state.pressPosition);
+    if (pressPosition) {
+      className.push(pressPosition);
     }
-    if (this.props.cssModule && this.props.cssModule['aws-btn']) {
-      return classToModules(className, this.props.cssModule);
+    if (cssModule && cssModule['aws-btn']) {
+      return classToModules(className, cssModule);
     }
     return className.join(' ').trim().replace(/[\s]+/ig, ' ');
   }
-  checkProps(props) {
-    this.extraProps.to = props.to || null;
-    this.extraProps.href = props.href || null;
-    this.extraProps.target = props.target || null;
-    this.renderComponent = props.element || (this.props.href ? Anchor : Button);
+  checkProps(newProps) {
+    const {
+      to,
+      href,
+      target,
+      element,
+    } = newProps;
+    this.extraProps.to = to || null;
+    this.extraProps.href = href || null;
+    this.extraProps.target = target || null;
+    this.renderComponent = element || (this.props.href ? Anchor : Button);
+  }
+  checkPlaceholder(newProps) {
+    const { placeholder, children } = newProps;
+    if (placeholder === true) {
+      if (!children) {
+        this.setState({
+          disabled: true,
+        });
+      } else {
+        this.setState({
+          disabled: false,
+        });
+      }
+    }
   }
   endLoading() {
     this.setState({ loadingEnd: true });
@@ -223,7 +263,6 @@ export default class AwesomeButton extends React.Component {
         }, ANIMATION_DELAY - diff);
       },
     };
-
     if (this.props.moveEvents === true) {
       events.onMouseMove = (event) => {
         if (this.state.disabled === true ||
@@ -251,7 +290,6 @@ export default class AwesomeButton extends React.Component {
         this.container.classList.add(classToModules([`${this.rootElement}--middle`], this.props.cssModule));
       };
     }
-
     return events;
   }
   render() {
