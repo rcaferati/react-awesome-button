@@ -3,12 +3,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const THEME = process.env.AWESOME_THEME;
+
 module.exports = {
   entry: {
-    styles: [`./${THEME}/index.js`],
+    styles: [path.resolve(__dirname, `src/styles/themes/${THEME}/index.js`)],
   },
   output: {
-    path: path.resolve(__dirname, '../../../dist/themes'),
+    path: path.resolve(__dirname, 'dist/themes'),
     filename: `${THEME}.js`,
     libraryTarget: 'umd',
   },

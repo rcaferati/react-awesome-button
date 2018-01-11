@@ -1,4 +1,4 @@
-@import '../../default.scss';
+@import '../../base/variables.scss';
 
 $button-default-border-radius: 40px;
 $button-horizontal-padding: 20px;
@@ -29,8 +29,4 @@ $button-sizes:
   ("medium", 132px, $button-default-height, $button-default-font-size, $button-default-line-height)
   ("large", 196px, $button-default-height, $button-default-font-size, $button-default-line-height);
 
-
-$button-colors-bg-manual: null;
-
-
-@import '../../base/base.scss';
+@import '../../base/main.scss';

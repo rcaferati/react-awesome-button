@@ -4,7 +4,7 @@ const path = require('path');
 
 const config = {
   entry: {
-    styles: ['./src/styles/styles.js'],
+    styles: ['./src/styles/index.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
