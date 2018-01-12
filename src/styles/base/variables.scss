@@ -17,40 +17,156 @@ $button-raise-level: 2px;
 $button-hover-pressure: 1;
 
 $button-color-primary: #325c99;
-$button-color-secondary: #e53935;
+$button-color-secondary: #afafaf;
 $button-color-disabled: #9E9E9E;
 $button-color-placeholder: #BABABA;
 
 $loading-transition-speed: 6s;
 $transform-speed: 0.150s;
 
+// Share button Colors
+$button-color-facebook: #4868ad;
+$button-color-messenger: #3186f6;
+$button-color-twitter: #00aced;
+$button-color-linkedin: #0077b5;
+$button-color-whatsapp: #25d366;
+$button-color-github: #25d366;
+$button-color-reddit: #25d366;
+$button-color-pinterest: #25d366;
+$button-color-gplus: #25d366;
+$button-color-youtube: #cc181e;
+$button-color-instagram-radial-lighten: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+$button-color-instagram-radial-darken: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%);
+
 /**
- button-color: color-name, background, color
+ button-color: color-name, background, darken-background, font-color
 */
 $button-colors:
-  ("primary", $button-color-primary, lighten($button-color-primary, 55%)),
-  ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
-  ("disabled", $button-color-disabled, lighten($button-color-disabled, 15%)),
-  ("placeholder", $button-color-placeholder, lighten($button-color-placeholder, 15%)),
-  ("facebook", #4868ad, #FFFFFF),
-  ("messenger", #3186f6, #FFFFFF),
-  ("twitter", #00aced, #FFFFFF),
-  ("linkedin", #0077b5, #FFFFFF),
-  ("whatsapp", #25d366, #FFFFFF),
-  ("github", #4e545a, #FFFFFF),
-  ("reddit", #fc461e, #FFFFFF),
-  ("pinterest", #bd091c, #FFFFFF),
-  ("gplus", #ce5b4e, #FFFFFF);
+  (
+    "primary",
+    $button-color-primary,
+    darken($button-color-primary, 17%),
+    lighten($button-color-primary, 55%)
+  ),
+  (
+    "secondary",
+    $button-color-secondary,
+    darken($button-color-secondary, 17%),
+    darken($button-color-secondary, 45%)
+  ),
+  (
+    "disabled",
+    $button-color-disabled,
+    darken($button-color-disabled, 17%),
+    lighten($button-color-disabled, 15%)
+  ),
+  (
+    "placeholder",
+    $button-color-placeholder,
+    darken($button-color-placeholder, 17%),
+    lighten($button-color-placeholder, 15%)
+  );
+
+  /**
+   button-social-color: color-name, background, darken-background, font-color
+  */
+$button-social-colors:
+  (
+    "facebook",
+    $button-color-facebook,
+    darken($button-color-facebook, 17%),
+    #FFFFFF
+  ),
+  (
+    "messenger",
+    $button-color-messenger,
+    darken($button-color-messenger, 17%),
+    #FFFFFF
+  ),
+  (
+    "twitter",
+    $button-color-twitter,
+    darken($button-color-twitter, 17%),
+    #FFFFFF
+  ),
+  (
+    "linkedin",
+    $button-color-linkedin,
+    darken($button-color-linkedin, 17%),
+    #FFFFFF
+  ),
+  (
+    "whatsapp",
+    $button-color-whatsapp,
+    darken($button-color-whatsapp, 17%),
+    #FFFFFF
+  ),
+  (
+    "github",
+    $button-color-github,
+    darken($button-color-github, 17%),
+    #FFFFFF
+  ),
+  (
+    "reddit",
+    $button-color-reddit,
+    darken($button-color-reddit, 17%),
+    #FFFFFF
+  ),
+  (
+    "pinterest",
+    $button-color-pinterest,
+    darken($button-color-pinterest, 17%),
+    #FFFFFF
+  ),
+  (
+    "gplus",
+    $button-color-gplus,
+    darken($button-color-gplus, 17%),
+    #FFFFFF
+  ),
+  (
+    "gplus",
+    $button-color-youtube,
+    darken($button-color-youtube, 17%),
+    #FFFFFF
+  ),
+  (
+    "instagram",
+    $button-color-instagram-radial-lighten,
+    $button-color-instagram-radial-darken,
+    #FFFFFF
+  );
 
 /**
  button-size: size-name, width, height, font-size, line-height
 */
 $button-sizes:
-  ("icon", 44px, $button-default-height, $button-default-font-size * 1.6, $button-default-line-height * 1.6)
-  ("small", 88px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("medium", 132px, $button-default-height, $button-default-font-size, $button-default-line-height)
-  ("large", 196px, $button-default-height, $button-default-font-size, $button-default-line-height);
-
-$button-colors-bg-manual:
-  ("instagram", radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%), radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%), #FFFFFF),
-  ("youtube", #cc181e, #5d0003, #FFFFFF);
+  (
+    "icon",
+    44px,
+    $button-default-height,
+    $button-default-font-size * 1.6,
+    $button-default-line-height * 1.6
+  )
+  (
+    "small",
+    88px,
+    $button-default-height,
+    $button-default-font-size,
+    $button-default-line-height
+  )
+  (
+    "medium",
+    132px,
+    $button-default-height,
+    $button-default-font-size,
+    $button-default-line-height
+  )
+  (
+    "large",
+    196px,
+    $button-default-height,
+    $button-default-font-size,
+    $button-default-line-height
+  );

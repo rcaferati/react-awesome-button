@@ -21,6 +21,9 @@ const renderExamples = () => Data.examples.map((example, index) => (
       {example.description && <p>{example.description}</p>}
     </div>
     <div>
+      <div className={Styles.buttons}>
+        {example.button}
+      </div>
       {example.scss && (
         <pre>
           <h4>.scss</h4>
@@ -49,9 +52,6 @@ const renderExamples = () => Data.examples.map((example, index) => (
           }}
         />
       </pre>
-    </div>
-    <div className={Styles.buttons}>
-      {example.button}
     </div>
   </li>
 ));

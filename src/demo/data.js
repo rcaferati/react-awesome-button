@@ -1,7 +1,7 @@
 import React from 'react';
 import AwesomeButton from '../component';
-import AwsBtnStyles from '../styles/default.scss';
-import AwsBtnStylesThemeTwo from '../styles/themes/theme-two.scss';
+import AwsBtnStyles from '../styles/styles.scss';
+import AwsBtnStylesThemeTwo from '../styles/themes/theme-two/styles.scss';
 
 const Div = props => (<div {... props} />);
 
@@ -37,7 +37,7 @@ const examples = [
   size="icon"
   bubbles
 >
-  <i className="fa fa-facebook" aria-hidden />
+  <i className="fa fa-facebook" />
 </AwesomeButton>
 ...`,
     button: (
@@ -49,7 +49,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-facebook" aria-hidden />
+          <i className="fa fa-facebook" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -58,7 +58,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-twitter" aria-hidden />
+          <i className="fa fa-twitter" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -67,7 +67,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-github" aria-hidden />
+          <i className="fa fa-github" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -76,7 +76,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-linkedin" aria-hidden />
+          <i className="fa fa-linkedin" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -85,7 +85,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-whatsapp" aria-hidden />
+          <i className="fa fa-whatsapp" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -94,7 +94,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-instagram" aria-hidden />
+          <i className="fa fa-instagram" />
         </AwesomeButton>
       </div>
     ),

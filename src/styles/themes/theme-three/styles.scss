@@ -9,13 +9,23 @@ $transform-speed: 0.175s;
  button-color: color-name, background, color
 */
 $button-colors:
-  ("primary", $button-color-primary, lighten($button-color-primary, 65%)),
-  ("secondary", $button-color-secondary, lighten($button-color-secondary, 55%)),
-  ("disabled", $button-color-disabled, lighten($button-color-disabled, 15%)),
-  ("facebook", #3b5998, #FFFFFF),
-  ("twitter", #00aced, #FFFFFF),
-  ("linkedin", #0077b5, #FFFFFF),
-  ("whatsapp", #25d366, #FFFFFF),
-  ("github", #4e545a, #FFFFFF);
+  (
+    "primary",
+    $button-color-primary,
+    darken($button-color-primary, 17%),
+    lighten($button-color-primary, 65%)
+  ),
+  (
+    "secondary",
+    $button-color-secondary,
+    darken($button-color-secondary, 17%),
+    lighten($button-color-secondary, 55%)
+  ),
+  (
+    "disabled",
+    $button-color-disabled,
+    darken($button-color-disabled, 17%),
+    lighten($button-color-disabled, 15%)
+  );
 
 @import '../../base/main.scss';

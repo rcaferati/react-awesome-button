@@ -1,7 +1,7 @@
-@mixin color-pattern($background, $color) {
+@mixin color-pattern($background, $darker, $color) {
   .#{$button-root}__wrapper {
     &:before {
-      background-color: darken( $background, 17% );
+      background-color: $darker;
     }
   }
   .#{$button-root}__content {
@@ -23,22 +23,24 @@
 }
 
 @mixin getColors($colors) {
-  @each $color in $colors {
-    &--#{nth($color, 1)} {
-        @include color-pattern(nth($color, 2), nth($color, 3));
-    }
-  }
-}
-
-@mixin getColorsBackgroundManual($colors) {
   @if($colors) {
     @each $color in $colors {
       &--#{nth($color, 1)} {
-          @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
+          @include color-pattern(nth($color, 2), nth($color, 3), nth($color, 4));
       }
     }
   }
 }
+
+// @mixin getColorsBackgroundManual($colors) {
+//   @if($colors) {
+//     @each $color in $colors {
+//       &--#{nth($color, 1)} {
+//           @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
+//       }
+//     }
+//   }
+// }
 
 @mixin getSizes($sizes) {
   @each $size in $sizes {
@@ -207,7 +209,7 @@
 		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out;
   }
   @include getColors($button-colors);
-  @include getColorsBackgroundManual($button-colors-bg-manual);
+  // @include getColorsBackgroundManual($button-colors-bg-manual);
   &--placeholder {
     width: $button-default-placeholder-width;
     .#{$button-root}__content {
