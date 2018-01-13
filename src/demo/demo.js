@@ -21,9 +21,6 @@ const renderExamples = () => Data.examples.map((example, index) => (
       {example.description && <p>{example.description}</p>}
     </div>
     <div>
-      <div className={Styles.buttons}>
-        {example.button}
-      </div>
       {example.scss && (
         <pre>
           <h4>.scss</h4>
@@ -44,14 +41,19 @@ const renderExamples = () => Data.examples.map((example, index) => (
           />
         </pre>
       )}
-      <pre>
-        <h4>.jsx</h4>
-        <code
-          dangerouslySetInnerHTML={{
-            __html: Prism.highlight(example.jsx.trim(), Prism.languages.jsx),
-          }}
-        />
-      </pre>
+      {example.jsx && (
+        <pre>
+          <h4>.jsx</h4>
+          <code
+            dangerouslySetInnerHTML={{
+              __html: Prism.highlight(example.jsx.trim(), Prism.languages.jsx),
+            }}
+          />
+        </pre>
+      )}
+    </div>
+    <div className={Styles.buttons}>
+      {example.button}
     </div>
   </li>
 ));

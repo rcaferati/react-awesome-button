@@ -1,24 +1,28 @@
-@mixin color-pattern($background, $darker, $color) {
+@mixin color-pattern($color) {
+  $background: nth($color, 2);
   .#{$button-root}__wrapper {
     &:before {
-      background-color: $darker;
+      background: nth($color, 3);
     }
   }
   .#{$button-root}__content {
-    background-color: $background;
-    color: $color;
-  }
-}
-
-@mixin color-pattern-background-manual($background, $darker, $color) {
-  .#{$button-root}__wrapper {
-    &:before {
-      background: $darker;
+    background: nth($color, 2);
+    color: nth($color, 4);
+    @if(length($color) > 4) {
+      border: nth($color, 5);
+    }
+    @if(length($color) > 6) {
+      > span:nth-child(1) {
+        &:before {
+          background-color: nth($color, 7)
+        }
+      }
     }
   }
-  .#{$button-root}__content {
-    background: $background;
-    color: $color;
+  .#{$button-root}__bubble {
+    @if(length($color) > 5) {
+      background-color: nth($color, 6);
+    }
   }
 }
 
@@ -26,21 +30,11 @@
   @if($colors) {
     @each $color in $colors {
       &--#{nth($color, 1)} {
-          @include color-pattern(nth($color, 2), nth($color, 3), nth($color, 4));
+          @include color-pattern($color);
       }
     }
   }
 }
-
-// @mixin getColorsBackgroundManual($colors) {
-//   @if($colors) {
-//     @each $color in $colors {
-//       &--#{nth($color, 1)} {
-//           @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
-//       }
-//     }
-//   }
-// }
 
 @mixin getSizes($sizes) {
   @each $size in $sizes {
@@ -108,11 +102,11 @@
   position: relative;
   background-color: transparent;
   cursor: pointer;
-  font-style: normal;
   font-size: $button-default-font-size;
   line-height: $button-default-line-height;
   font-weight: $button-font-weight;
   font-family: $button-font-family;
+  font-style: $button-font-style;
   letter-spacing: $button-letter-spacing;
   text-rendering: auto;
   text-decoration: none;
@@ -171,7 +165,7 @@
     &:after{
       @extend %fill-parent;
     }
-    > span {
+    > span:nth-child(1) {
       display: block;
       &:before {
         content: " ";
@@ -209,7 +203,7 @@
 		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out;
   }
   @include getColors($button-colors);
-  // @include getColorsBackgroundManual($button-colors-bg-manual);
+  @include getColors($button-social-colors);
   &--placeholder {
     width: $button-default-placeholder-width;
     .#{$button-root}__content {
@@ -337,7 +331,7 @@
   }
 }
 
-.#{$button-root}__bubble {
+span.#{$button-root}__bubble {
   display: block;
   position: absolute;
   visibility: hidden;
@@ -346,14 +340,14 @@
   width: 0px;
   height: 0px;
   border-radius: 50%;
-  background-color: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.1);
   z-index: -1;
   opacity: 0;
   transform: scale(0.1);
   animation: ping $transform-speed * 3.5 cubic-bezier(0.5, 0, 0.6, 0.4) 0.05s forwards;
-  .#{$button-root}--icon & {
-    display: none;
-  }
+  // .#{$button-root}--icon & {
+  //   display: none;
+  // }
 }
 
 @keyframes ping {

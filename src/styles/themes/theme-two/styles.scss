@@ -7,27 +7,5 @@ $button-color-primary: #607D8B;
 $button-color-secondary: #757575;
 $button-color-disabled: #B0BEC5;
 
-/**
- button-color: color-name, background, color
-*/
-$button-colors:
-  (
-    "primary",
-    $button-color-primary,
-    darken($button-color-primary, 17%),
-    lighten($button-color-primary, 55%)
-  ),
-  (
-    "secondary",
-    $button-color-secondary,
-    darken($button-color-secondary, 17%),
-    lighten($button-color-secondary, 55%)
-  ),
-  (
-    "disabled",
-    $button-color-disabled,
-    darken($button-color-disabled, 17%),
-    lighten($button-color-disabled, 15%)
-  );
-
+@import '../../base/lists.scss';
 @import '../../base/main.scss';

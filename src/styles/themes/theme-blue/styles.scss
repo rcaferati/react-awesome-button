@@ -1,0 +1,64 @@
+@import '../../base/variables.scss';
+
+$button-default-height: 53px;
+$button-default-border-radius: 2px;
+$button-horizontal-padding: 15px;
+$button-raise-level: 4px;
+$transform-speed: 0.2s;
+$button-hover-pressure: 1.5;
+
+$button-color-primary: #1E88E5;
+$button-color-secondary: #E3F2FD;
+$button-color-disabled: #E3F2FD;
+
+@import '../../base/lists.scss';
+
+/**
+  button-color:
+    color-name, (required)
+    background, (required)
+    darker-background, (required)
+    font-color, (required)
+    border,
+    hover-background,
+    bubble-background,
+*/
+$button-colors:
+  (
+    "primary",
+    $button-color-primary,
+    darken($button-color-primary, 17%),
+    lighten($button-color-primary, 55%),
+    transparent,
+    darken($button-color-primary, 15%),
+    darken($button-color-primary, 7%),
+  ),
+  (
+    "secondary",
+    $button-color-secondary,
+    darken($button-color-primary, 17%),
+    darken($button-color-secondary, 50%),
+    2px solid $button-color-primary,
+    darken($button-color-secondary, 20%),
+    darken($button-color-secondary, 5%)
+  ),
+  (
+    "disabled",
+    $button-color-disabled,
+    darken($button-color-disabled, 17%),
+    darken($button-color-disabled, 10%),
+    2px solid darken($button-color-disabled, 10%),
+    transparent,
+    transparent,
+  ),
+  (
+    "placeholder",
+    $button-color-placeholder,
+    darken($button-color-placeholder, 17%),
+    lighten($button-color-placeholder, 15%),
+    none,
+    transparent,
+    transparent,
+  );
+
+@import '../../base/main.scss';
