@@ -8,18 +8,26 @@ import ThemeList from './components/theme-list';
 import ThemeTest from './components/theme-test';
 import Styles from './demo.scss';
 
-function Demo() {
-  return (
-    <div>
-      <ThemeList
-        styles={Styles}
-      />
-      <ThemeTest
-        styles={Styles}
-        theme="theme-rickiest"
-      />
-    </div>
-  );
+class Demo extends React.Component {
+  componentWillMount() {
+    window.performance.mark('Demo');
+  }
+  componentDidMount() {
+    console.log(window.performance.now('App'));
+  }
+  render() {
+    return (
+      <div>
+        <ThemeList
+          styles={Styles}
+        />
+        <ThemeTest
+          styles={Styles}
+          theme="theme-rickiest"
+        />
+      </div>
+    );
+  }
 }
 
 render(

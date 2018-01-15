@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AwesomeButton from '../component';
 
-export default class Themes extends React.Component {
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
-  renderTheme() {
-    const { theme } = this.props;
-    return (
+export default function Themes({ theme }) {
+  return (
+    <div>
       <div>
         <AwesomeButton
           bubbles
@@ -41,13 +37,10 @@ export default class Themes extends React.Component {
           disabled
         />
       </div>
-    );
-  }
-  render() {
-    return (
-      <div>
-        {this.renderTheme()}
-      </div>
-    );
-  }
+    </div>
+  );
 }
+
+Themes.propTypes = {
+  theme: PropTypes.string.isRequired,
+};
