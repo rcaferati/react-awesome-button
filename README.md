@@ -15,27 +15,29 @@
 
 ### With react-awesome-button and plain CSS
 ```jsx
-  import AwesomeSocial from 'react-awesome-social';
+  import AwesomeButton from 'react-awesome-button';
   import 'react-awesome-button/dist/styles.css';
 
   function Button() {
     return (
-      <AwesomeSocial type="facebook">Share</AwesomeSocial>
+      <AwesomeButton type="facebook">Button</AwesomeButton>
     );
   }
 ```
 
 ### With react-awesome-button CSS Modules
 ```jsx
-  import AwesomeSocial from 'react-awesome-social';
+  import AwesomeButton from 'react-awesome-button';
   import AwesomeButtonStyles from 'react-awesome-button/src/styles.scss'
 
   function Button() {
     return (
-      <AwesomeSocial
+      <AwesomeButton
         cssModule={AwesomeButtonStyles}
         type="twitter"
-      >Share</AwesomeSocial>
+      >
+        Share
+      </AwesomeButton>
     );
   }
 ```
