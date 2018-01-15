@@ -1,7 +1,9 @@
 import React from 'react';
 import AwesomeButton from '../component';
-import AwsBtnStyles from '../styles/default.scss';
-import AwsBtnStylesThemeTwo from '../styles/themes/theme-two.scss';
+import AwsBtnStyles from '../styles/styles.scss';
+import AwsBtnThemeMorty from '../styles/themes/theme-c137/styles.scss';
+import AwsBtnThemeRick from '../styles/themes/theme-rickiest/styles.scss';
+import Themes from './themes';
 
 const Div = props => (<div {... props} />);
 
@@ -37,7 +39,7 @@ const examples = [
   size="icon"
   bubbles
 >
-  <i className="fa fa-facebook" aria-hidden />
+  <i className="fa fa-facebook" />
 </AwesomeButton>
 ...`,
     button: (
@@ -49,7 +51,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-facebook" aria-hidden />
+          <i className="fa fa-facebook" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -58,7 +60,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-twitter" aria-hidden />
+          <i className="fa fa-twitter" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -67,7 +69,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-github" aria-hidden />
+          <i className="fa fa-github" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -76,7 +78,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-linkedin" aria-hidden />
+          <i className="fa fa-linkedin" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -85,7 +87,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-whatsapp" aria-hidden />
+          <i className="fa fa-whatsapp" />
         </AwesomeButton>
         <AwesomeButton
           cssModule={AwsBtnStyles}
@@ -94,7 +96,7 @@ const examples = [
           bubbles
           moveEvents={false}
         >
-          <i className="fa fa-instagram" aria-hidden />
+          <i className="fa fa-instagram" />
         </AwesomeButton>
       </div>
     ),
@@ -111,7 +113,9 @@ const action = (next) => {
 <AwesomeButton
   progress
   action={action}
->Progress Button</AwesomeButton>`,
+>
+  Progress Button
+</AwesomeButton>`,
     button: (
       <div>
         <AwesomeButton
@@ -143,43 +147,21 @@ const action = (next) => {
     title: 'Customisable styles and CSSModules',
     description: 'Change button raised level, color and extend types through SCSS variables and list tweak',
     scss: `
-$button-default-border-radius: 40px;
-$button-horizontal-padding: 20px;
+$button-default-height: 53px;
+$button-default-border-radius: 2px;
+$button-horizontal-padding: 15px;
 $button-raise-level: 4px;
+$transform-speed: 0.2s;
+$button-hover-pressure: 1.5;
+
+$button-color-primary: #1E88E5;
+$button-color-secondary: #E3F2FD;
+$button-color-disabled: #E3F2FD;
     `,
-    jsx: `
-<AwesomeButton
-  cssModule={AwsBtnStylesThemeTwo}
->Themed Button</AwesomeButton>
-<AwesomeButton
-  cssModule={AwsBtnStylesThemeTwo}
-  type="secondary"
->Themed Button</AwesomeButton>
-<AwesomeButton
-  cssModule={AwsBtnStylesThemeTwo}
-  disabled
->Themed Button</AwesomeButton>`,
     button: (
       <div>
-        <div>
-          <AwesomeButton
-            cssModule={AwsBtnStylesThemeTwo}
-          >
-            Themed Button
-          </AwesomeButton>
-          <AwesomeButton
-            cssModule={AwsBtnStylesThemeTwo}
-            type="secondary"
-          >
-            Themed Button
-          </AwesomeButton>
-          <AwesomeButton
-            cssModule={AwsBtnStylesThemeTwo}
-            disabled
-          >
-            Themed Button
-          </AwesomeButton>
-        </div>
+        <Themes theme={AwsBtnThemeMorty} />
+        <Themes theme={AwsBtnThemeRick} />
       </div>
     ),
   },

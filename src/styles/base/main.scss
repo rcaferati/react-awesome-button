@@ -1,40 +1,36 @@
-@mixin color-pattern($background, $color) {
+@mixin color-pattern($color) {
+  $background: nth($color, 2);
   .#{$button-root}__wrapper {
     &:before {
-      background-color: darken( $background, 17% );
+      background: nth($color, 3);
     }
   }
   .#{$button-root}__content {
-    background-color: $background;
-    color: $color;
-  }
-}
-
-@mixin color-pattern-background-manual($background, $darker, $color) {
-  .#{$button-root}__wrapper {
-    &:before {
-      background: $darker;
+    background: nth($color, 2);
+    color: nth($color, 4);
+    @if(length($color) > 4) {
+      border: nth($color, 5);
+    }
+    @if(length($color) > 6) {
+      > span:nth-child(1) {
+        &:before {
+          background-color: nth($color, 7)
+        }
+      }
     }
   }
-  .#{$button-root}__content {
-    background: $background;
-    color: $color;
+  .#{$button-root}__bubble {
+    @if(length($color) > 5) {
+      background-color: nth($color, 6);
+    }
   }
 }
 
 @mixin getColors($colors) {
-  @each $color in $colors {
-    &--#{nth($color, 1)} {
-        @include color-pattern(nth($color, 2), nth($color, 3));
-    }
-  }
-}
-
-@mixin getColorsBackgroundManual($colors) {
   @if($colors) {
     @each $color in $colors {
       &--#{nth($color, 1)} {
-          @include color-pattern-background-manual(nth($color, 2), nth($color, 3), nth($color, 4));
+          @include color-pattern($color);
       }
     }
   }
@@ -106,11 +102,11 @@
   position: relative;
   background-color: transparent;
   cursor: pointer;
-  font-style: normal;
   font-size: $button-default-font-size;
   line-height: $button-default-line-height;
   font-weight: $button-font-weight;
   font-family: $button-font-family;
+  font-style: $button-font-style;
   letter-spacing: $button-letter-spacing;
   text-rendering: auto;
   text-decoration: none;
@@ -144,10 +140,10 @@
     &:after{
       @extend %fill-parent;
       content: " ";
-  		background-color: rgba(0, 0, 0, 0.15);
-  		border-radius: $button-default-border-radius;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: $button-default-border-radius;
       z-index: 3;
-  		width: 0;
+      width: 0;
       top: $button-raise-level;
     }
   }
@@ -157,19 +153,23 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-		border-radius: $button-default-border-radius;
-		text-indent: 0;
-		z-index: 3;
-		overflow: hidden;
+    border-radius: $button-default-border-radius;
+    text-indent: 0;
+    z-index: 3;
+    overflow: hidden;
     padding: 0 $button-horizontal-padding;
-		transition: transform $transform-speed ease-out, background $transform-speed ease-out, color $transform-speed ease-out;
+    transition:
+      border $transform-speed ease-out,
+      transform $transform-speed ease-out,
+      background $transform-speed ease-out,
+      color $transform-speed ease-out;
     &:before{
       @extend %fill-parent;
     }
     &:after{
       @extend %fill-parent;
     }
-    > span {
+    > span:nth-child(1) {
       display: block;
       &:before {
         content: " ";
@@ -207,14 +207,14 @@
 		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out;
   }
   @include getColors($button-colors);
-  @include getColorsBackgroundManual($button-colors-bg-manual);
+  @include getColors($button-social-colors);
   &--placeholder {
     width: $button-default-placeholder-width;
     .#{$button-root}__content {
       > span {
         width: 100%;
         height: 40%;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: $button-default-placeholder-font-color;
         border-radius: 2px;
       }
     }
@@ -335,7 +335,7 @@
   }
 }
 
-.#{$button-root}__bubble {
+span.#{$button-root}__bubble {
   display: block;
   position: absolute;
   visibility: hidden;
@@ -344,14 +344,14 @@
   width: 0px;
   height: 0px;
   border-radius: 50%;
-  background-color: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.1);
   z-index: -1;
   opacity: 0;
   transform: scale(0.1);
   animation: ping $transform-speed * 3.5 cubic-bezier(0.5, 0, 0.6, 0.4) 0.05s forwards;
-  .#{$button-root}--icon & {
-    display: none;
-  }
+  // .#{$button-root}--icon & {
+  //   display: none;
+  // }
 }
 
 @keyframes ping {

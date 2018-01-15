@@ -138,7 +138,7 @@ export default class AwesomeButton extends React.Component {
     this.renderComponent = element || (this.props.href ? Anchor : Button);
   }
   checkPlaceholder(newProps) {
-    const { placeholder, children } = newProps;
+    const { disabled, placeholder, children } = newProps;
     if (placeholder === true) {
       if (!children) {
         this.setState({
@@ -149,6 +149,10 @@ export default class AwesomeButton extends React.Component {
           disabled: false,
         });
       }
+    } else {
+      this.setState({
+        disabled,
+      });
     }
   }
   endLoading() {

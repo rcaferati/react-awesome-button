@@ -1,0 +1,139 @@
+/**
+  button-color:
+    color-name, (required)
+    background, (required)
+    darker-background, (required)
+    font-color, (required)
+    border,
+    hover-background,
+    bubble-background,
+*/
+$button-colors:
+  (
+    "primary",
+    $button-color-primary,
+    darken($button-color-primary, 17%),
+    lighten($button-color-primary, 55%)
+  ),
+  (
+    "secondary",
+    $button-color-secondary,
+    darken($button-color-secondary, 30%),
+    darken($button-color-secondary, 45%)
+  ),
+  (
+    "disabled",
+    $button-color-disabled,
+    darken($button-color-disabled, 17%),
+    lighten($button-color-disabled, 15%)
+  ),
+  (
+    "placeholder",
+    $button-color-placeholder,
+    darken($button-color-placeholder, 17%),
+    lighten($button-color-placeholder, 15%)
+  );
+
+  /**
+   button-social-color: color-name, background, darken-background, font-color
+  */
+$button-social-colors:
+  (
+    "facebook",
+    $button-color-facebook,
+    darken($button-color-facebook, 17%),
+    #FFFFFF
+  ),
+  (
+    "messenger",
+    $button-color-messenger,
+    darken($button-color-messenger, 17%),
+    #FFFFFF
+  ),
+  (
+    "twitter",
+    $button-color-twitter,
+    darken($button-color-twitter, 17%),
+    #FFFFFF
+  ),
+  (
+    "linkedin",
+    $button-color-linkedin,
+    darken($button-color-linkedin, 17%),
+    #FFFFFF
+  ),
+  (
+    "whatsapp",
+    $button-color-whatsapp,
+    darken($button-color-whatsapp, 17%),
+    #FFFFFF
+  ),
+  (
+    "github",
+    $button-color-github,
+    darken($button-color-github, 17%),
+    #FFFFFF
+  ),
+  (
+    "reddit",
+    $button-color-reddit,
+    darken($button-color-reddit, 17%),
+    #FFFFFF
+  ),
+  (
+    "pinterest",
+    $button-color-pinterest,
+    darken($button-color-pinterest, 17%),
+    #FFFFFF
+  ),
+  (
+    "gplus",
+    $button-color-gplus,
+    darken($button-color-gplus, 17%),
+    #FFFFFF
+  ),
+  (
+    "gplus",
+    $button-color-youtube,
+    darken($button-color-youtube, 17%),
+    #FFFFFF
+  ),
+  (
+    "instagram",
+    $button-color-instagram-radial-lighten,
+    $button-color-instagram-radial-darken,
+    #FFFFFF
+  );
+
+/**
+ button-size: size-name, width, height, font-size, line-height
+*/
+$button-sizes:
+  (
+    "icon",
+    44px,
+    $button-default-height,
+    $button-default-font-size * 1.6,
+    $button-default-line-height * 1.6
+  )
+  (
+    "small",
+    88px,
+    $button-default-height,
+    $button-default-font-size,
+    $button-default-line-height
+  )
+  (
+    "medium",
+    132px,
+    $button-default-height,
+    $button-default-font-size,
+    $button-default-line-height
+  )
+  (
+    "large",
+    196px,
+    $button-default-height,
+    $button-default-font-size,
+    $button-default-line-height
+  );
