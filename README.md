@@ -6,8 +6,6 @@
 
 <img width="400" alt="react-awesome-button demo" src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/images/theme-set.gif?raw=true">
 
-<img width="600" alt="react-awesome-button demo" src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/images/rickiest-theme.gif?raw=true">
-
 ## Live demo
 
 + <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
