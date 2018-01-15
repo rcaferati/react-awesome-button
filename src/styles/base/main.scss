@@ -140,10 +140,10 @@
     &:after{
       @extend %fill-parent;
       content: " ";
-  		background-color: rgba(0, 0, 0, 0.15);
-  		border-radius: $button-default-border-radius;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: $button-default-border-radius;
       z-index: 3;
-  		width: 0;
+      width: 0;
       top: $button-raise-level;
     }
   }
@@ -153,12 +153,16 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-		border-radius: $button-default-border-radius;
-		text-indent: 0;
-		z-index: 3;
-		overflow: hidden;
+    border-radius: $button-default-border-radius;
+    text-indent: 0;
+    z-index: 3;
+    overflow: hidden;
     padding: 0 $button-horizontal-padding;
-		transition: transform $transform-speed ease-out, background $transform-speed ease-out, color $transform-speed ease-out;
+    transition:
+      border $transform-speed ease-out,
+      transform $transform-speed ease-out,
+      background $transform-speed ease-out,
+      color $transform-speed ease-out;
     &:before{
       @extend %fill-parent;
     }
@@ -210,7 +214,7 @@
       > span {
         width: 100%;
         height: 40%;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: $button-default-placeholder-font-color;
         border-radius: 2px;
       }
     }

@@ -2,4 +2,13 @@
 @import './config/structure.scss';
 @import './config/colors.scss';
 @import '../../base/lists.scss';
+@import './config/lists.scss';
 @import '../../base/main.scss';
+
+.#{$button-root} {
+  &--disabled {
+    span {
+      text-decoration: line-through;
+    }
+  }
+}

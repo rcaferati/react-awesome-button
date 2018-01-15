@@ -1,9 +1,4 @@
 @import '../../base/variables.scss';
-
-$button-horizontal-padding: 18px;
-$button-hover-pressure: 0.65;
-$button-color-primary: #009688;
-$transform-speed: 0.175s;
-
+@import './config/structure.scss';
 @import '../../base/lists.scss';
 @import '../../base/main.scss';

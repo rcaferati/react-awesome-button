@@ -1,11 +1,5 @@
 @import '../../base/variables.scss';
-
-$button-default-border-radius: 40px;
-$button-horizontal-padding: 20px;
-
-$button-color-primary: #607D8B;
-$button-color-secondary: #757575;
-$button-color-disabled: #B0BEC5;
-
+@import './config/structure.scss';
+@import './config/colors.scss';
 @import '../../base/lists.scss';
 @import '../../base/main.scss';

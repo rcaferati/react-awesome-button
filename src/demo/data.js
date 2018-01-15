@@ -1,9 +1,8 @@
 import React from 'react';
 import AwesomeButton from '../component';
 import AwsBtnStyles from '../styles/styles.scss';
-import AwsBtnThemeBlue from '../styles/themes/theme-blue/styles.scss';
-import AwsBtnThemeMorty from '../styles/themes/theme-morty/styles.scss';
-import AwsBtnThemeRick from '../styles/themes/theme-rick/styles.scss';
+import AwsBtnThemeMorty from '../styles/themes/theme-c137/styles.scss';
+import AwsBtnThemeRick from '../styles/themes/theme-rickiest/styles.scss';
 import Themes from './themes';
 
 const Div = props => (<div {... props} />);
