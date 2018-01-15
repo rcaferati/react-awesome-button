@@ -147,16 +147,12 @@ const action = (next) => {
     title: 'Customisable styles and CSSModules',
     description: 'Change button raised level, color and extend types through SCSS variables and list tweak',
     scss: `
-$button-default-height: 53px;
-$button-default-border-radius: 2px;
-$button-horizontal-padding: 15px;
-$button-raise-level: 4px;
-$transform-speed: 0.2s;
-$button-hover-pressure: 1.5;
-
-$button-color-primary: #1E88E5;
-$button-color-secondary: #E3F2FD;
-$button-color-disabled: #E3F2FD;
+$button-default-height: 48px;
+$button-default-border-radius: 6px;
+$button-horizontal-padding: 20px;
+$button-raise-level: 6px;
+$transform-speed: 0.185s;
+$button-hover-pressure: 2;
     `,
     button: (
       <div>
