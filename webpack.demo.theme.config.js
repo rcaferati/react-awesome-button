@@ -2,7 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   entry: {
-    'react-awesome-button': ['./src/demo-theme/demo.js'],
+    'react-awesome-button': ['./src/demo/theme/demo.js'],
   },
   module: {
     rules: [

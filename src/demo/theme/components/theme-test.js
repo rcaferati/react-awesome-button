@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AwesomeSocial from 'react-awesome-social';
-import AwesomeButton from '../../component';
+import AwesomeButton from '../../../component';
 import Modules from '../modules';
 
 class Test extends React.Component {
