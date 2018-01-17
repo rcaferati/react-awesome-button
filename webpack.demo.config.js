@@ -23,7 +23,7 @@ const config = {
               loader: 'css-loader',
               options: {
                 modules: true,
-                localIdentName: '[hash:base64:3]',
+                localIdentName: '[local]--[hash:base64:4]',
               },
             },
             'postcss-loader',
