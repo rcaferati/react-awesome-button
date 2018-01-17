@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   AwesomeButton,
-  AwesomeButtonShare,
+  AwesomeButtonSocial,
   AwesomeButtonProgress,
 } from '../index';
 import AwsBtnStyles from '../styles/themes/theme-blue/styles.scss';
@@ -43,6 +43,39 @@ const examples = [
         <AwesomeButton bubbles size="medium" cssModule={AwsBtnStyles}>Primary</AwesomeButton>
         <AwesomeButton bubbles size="large" cssModule={AwsBtnStyles} type="secondary">Secondary</AwesomeButton>
       </div>),
+  },
+  {
+    title: 'Share Buttons',
+    description: `The AwesomeButtonSocial compent comes bundled with share methods and icons
+    for the most popular social platforms.`,
+    jsx: `
+<AwesomeButtonSocial type="facebook">Share</AwesomeButtonSocial>
+<AwesomeButtonSocial type="twitter">Share</AwesomeButtonSocial>
+<AwesomeButtonSocial
+  href="https://instagram.com/rcaferati"
+  type="instagram"
+>
+  Instagram
+</AwesomeButtonSocial>
+<AwesomeButtonSocial
+  user="caferati.me"
+  type="messenger"
+>
+  Message Us
+</AwesomeButtonSocial>`,
+    button: (
+      <div>
+        <AwesomeButtonSocial url="https://caferati.me" type="facebook" cssModule={AwsBtnStyles}>Share</AwesomeButtonSocial>
+        <AwesomeButtonSocial url="https://caferati.me" type="twitter" cssModule={AwsBtnStyles}>Share</AwesomeButtonSocial>
+        <AwesomeButtonSocial
+          user="caferati.me"
+          type="messenger"
+          cssModule={AwsBtnStyles}
+        >
+          Message Us
+        </AwesomeButtonSocial>
+      </div>
+    ),
   },
   {
     title: 'Using children elements',
@@ -193,9 +226,20 @@ $button-hover-pressure: 2;
   },
   {
     title: 'Extended Types',
-    description: 'Extending a button type is easy. Just add the new type to the $Button-Something .scss list.',
+    description: 'For extending a button type just append the new type to the button-colors .scss list.',
     scss: `
-    $new-button-color: ();
+/**
+  button-color:
+    color-name, (required)
+    background, (required)
+    bottom-darker-background, (required)
+    font-color, (required)
+    border, (optional)
+    bubble-color, (optional)
+    hover-background, (optional)
+*/
+    $new-button-color: ("link", #FFFFFF, #BBBBBB, #666666);
+
     append($button-colors, $button-link);
     `,
     jsx: `
@@ -216,7 +260,7 @@ export default {
   name: 'AwesomeButton',
   title: 'React Components are awesome',
   description: 'The AwesomeButton is a performant, extendable, highly customisable, production ready react component that renders an animated basic set of UI buttons.',
-  size: '~5KB compressed',
+  size: '~6KB compressed',
   repository: 'https://github.com/rcaferati/react-awesome-button',
   article: '//caferati.me/labs/awesome-button',
   features,

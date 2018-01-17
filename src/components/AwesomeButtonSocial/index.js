@@ -7,7 +7,7 @@ import getIcon from './icons';
 const ICON_HEIGHT = 23;
 const ICON_WIDTH = 30;
 
-export default class AwesomeButtonShare extends React.Component {
+export default class AwesomeButtonSocial extends React.Component {
   static propTypes = {
     bubbles: PropTypes.bool,
     children: PropTypes.node,
