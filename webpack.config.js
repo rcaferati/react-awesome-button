@@ -3,7 +3,7 @@ const path = require('path');
 
 const config = {
   entry: {
-    index: ['./src/component.js'],
+    index: ['./src/index.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

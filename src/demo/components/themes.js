@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AwesomeButton from '../component';
+import { AwesomeButton } from '../../index';
 
 export default function Themes({ theme }) {
   return (

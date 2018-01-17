@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import {
   classToModules,
   getClassName,
-  setCssEndEvent,
   createBubbleEffect,
   toggleMoveClasses,
-} from './helpers/component';
+} from '../../helpers/components';
 
 const ROOTELM = 'aws-btn';
-const LOADING_ANIMATION_STEPS = 5;
 const ANIMATION_DELAY = 100;
 
 /**
@@ -25,38 +23,38 @@ export default class AwesomeButton extends React.Component {
   static propTypes = {
     action: PropTypes.func,
     bubbles: PropTypes.bool,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     disabled: PropTypes.bool,
     element: PropTypes.func,
     href: PropTypes.string,
-    loadingLabel: PropTypes.string,
     placeholder: PropTypes.bool,
-    progress: PropTypes.bool,
     title: PropTypes.string,
-    resultLabel: PropTypes.string,
     rootElement: PropTypes.string,
     moveEvents: PropTypes.bool,
     size: PropTypes.string,
     style: PropTypes.object,
     cssModule: PropTypes.object,
+    className: PropTypes.string,
     target: PropTypes.string,
     to: PropTypes.string,
     type: PropTypes.string,
     visible: PropTypes.bool,
+    active: PropTypes.bool,
+    blocked: PropTypes.bool,
   };
   static defaultProps = {
     action: null,
     bubbles: false,
+    blocked: false,
     cssModule: null,
+    children: null,
     disabled: false,
     title: null,
     element: null,
     href: null,
-    loadingLabel: 'Wait ..',
+    className: null,
     moveEvents: true,
-    progress: false,
     placeholder: false,
-    resultLabel: 'Success!',
     rootElement: ROOTELM,
     size: null,
     style: {},
@@ -64,6 +62,7 @@ export default class AwesomeButton extends React.Component {
     to: null,
     type: 'primary',
     visible: true,
+    active: false,
   };
   constructor(props) {
     super(props);
@@ -72,20 +71,16 @@ export default class AwesomeButton extends React.Component {
     this.extraProps = {};
     this.state = {
       disabled: props.disabled || (props.placeholder && !props.children),
-      loading: false,
-      loadingEnd: false,
-      loadingStart: false,
-      blocked: false,
     };
     this.checkProps(props);
   }
   componentDidMount() {
     this.container = this.button && this.button.parentNode;
-    setCssEndEvent(this.wrapper, 'transition', this.clearStagedWrapperAnimation.bind(this));
   }
   componentWillReceiveProps(newProps) {
     this.checkPlaceholder(newProps);
     this.checkProps(newProps);
+    this.checkActive(newProps);
   }
   getRootClassName() {
     const { rootElement } = this;
@@ -95,12 +90,9 @@ export default class AwesomeButton extends React.Component {
       placeholder,
       children,
       visible,
-      progress,
       cssModule,
     } = this.props;
     const {
-      loadingStart,
-      loadingEnd,
       disabled,
       pressPosition,
     } = this.state;
@@ -110,9 +102,6 @@ export default class AwesomeButton extends React.Component {
       size && `${rootElement}--${size}`,
       visible && `${rootElement}--visible`,
       (placeholder && !children && `${rootElement}--placeholder`) || null,
-      (loadingStart && `${rootElement}--start`) || null,
-      (loadingEnd && `${rootElement}--end`) || null,
-      (progress && `${rootElement}--progress`) || null,
     ];
     if (disabled === true) {
       className.push(`${rootElement}--disabled`);
@@ -120,10 +109,24 @@ export default class AwesomeButton extends React.Component {
     if (pressPosition) {
       className.push(pressPosition);
     }
+    if (this.props.className) {
+      className.push(...this.props.className.split(' '));
+    }
     if (cssModule && cssModule['aws-btn']) {
       return classToModules(className, cssModule);
     }
     return className.join(' ').trim().replace(/[\s]+/ig, ' ');
+  }
+  checkActive(newProps) {
+    if (newProps.active !== this.props.active) {
+      if (newProps.active === true) {
+        this.setState({
+          pressPosition: `${this.rootElement}--active`,
+        });
+      } else {
+        this.clearPress(true);
+      }
+    }
   }
   checkProps(newProps) {
     const {
@@ -155,67 +158,20 @@ export default class AwesomeButton extends React.Component {
       });
     }
   }
-  endLoading() {
-    this.setState({ loadingEnd: true });
-    this.animationStage = 1;
-  }
-  startLoading() {
-    this.setState({
-      loading: true,
-      loadingStart: true,
-      blocked: true,
-    });
-  }
-  clearPress() {
+  clearPress(force) {
     toggleMoveClasses({
       element: this.container,
       root: this.rootElement,
       cssModule: this.props.cssModule,
     });
-    const pressPosition = this.state.loading ? this.state.pressPosition : null;
+    const pressPosition = this.props.active && !force ? `${this.rootElement}--active` : null;
     this.setState({
       pressPosition,
     });
   }
-  clearLoading() {
-    this.setState({
-      loading: false,
-      loadingStart: false,
-      loadingEnd: false,
-    });
-  }
-  clearStagedWrapperAnimation() {
-    if (this.animationStage !== 0) {
-      if (this.animationStage === LOADING_ANIMATION_STEPS) {
-        this.animationStage = 0;
-        // hold life for 350ms before releasing the button;
-        setTimeout(() => {
-          if (typeof window !== 'undefined') {
-            window.requestAnimationFrame(() => {
-              this.clearLoading();
-              this.clearPress();
-              setTimeout(() => {
-                this.setState({
-                  blocked: false,
-                });
-              }, 500);
-            });
-          }
-        }, 350);
-        return;
-      }
-      this.animationStage += 1;
-    }
-  }
   action() {
-    if (this.props.progress) {
-      this.startLoading();
-    }
     if (this.props.action && this.button) {
-      this.props.action(
-        this.container,
-        this.props.progress ? this.endLoading.bind(this) : null,
-      );
+      this.props.action(this.container);
     }
   }
   createBubble(event) {
@@ -233,8 +189,7 @@ export default class AwesomeButton extends React.Component {
       },
       onMouseDown: (event) => {
         if (this.state.disabled === true ||
-          this.state.loading === true ||
-          this.state.blocked === true ||
+          this.props.blocked === true ||
           (event && event.nativeEvent.which !== 1)
         ) {
           return;
@@ -242,12 +197,11 @@ export default class AwesomeButton extends React.Component {
         this.pressed = new Date().getTime();
         this.setState({
           pressPosition: `${this.rootElement}--active`,
-          loading: this.props.progress,
         });
       },
       onMouseUp: (event) => {
         if (this.state.disabled === true ||
-          this.state.blocked === true) {
+          this.props.blocked === true) {
           event.preventDefault();
           event.stopPropagation();
           return;
@@ -256,7 +210,7 @@ export default class AwesomeButton extends React.Component {
           clearTimeout(this.clearTimer);
         }
         const diff = new Date().getTime() - this.pressed;
-        if (this.props.progress === false && this.props.bubbles === true) {
+        if (this.props.bubbles === true) {
           this.createBubble(event);
         }
         if (typeof window !== 'undefined' && this.button) {
@@ -271,9 +225,7 @@ export default class AwesomeButton extends React.Component {
     };
     if (this.props.moveEvents === true) {
       events.onMouseMove = (event) => {
-        if (this.state.disabled === true ||
-          this.state.loading === true ||
-          this.state.blocked === true) {
+        if (this.state.disabled === true) {
           return;
         }
         const { button } = this;
@@ -304,9 +256,6 @@ export default class AwesomeButton extends React.Component {
       title,
       style,
       cssModule,
-      progress,
-      loadingLabel,
-      resultLabel,
       children,
     } = this.props;
     return (
@@ -328,8 +277,6 @@ export default class AwesomeButton extends React.Component {
           >
             <span
               ref={(content) => { this.content = content; }}
-              data-loading={(progress && loadingLabel) || null}
-              data-status={(progress && resultLabel) || null}
               className={getClassName(`${this.rootElement}__content`, cssModule)}
             >
               <span>{children}</span>

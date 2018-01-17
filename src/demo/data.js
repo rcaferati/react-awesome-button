@@ -1,9 +1,13 @@
 import React from 'react';
-import AwesomeButton from '../component';
+import {
+  AwesomeButton,
+  AwesomeButtonShare,
+  AwesomeButtonProgress,
+} from '../index';
 import AwsBtnStyles from '../styles/styles.scss';
 import AwsBtnThemeMorty from '../styles/themes/theme-c137/styles.scss';
 import AwsBtnThemeRick from '../styles/themes/theme-rickiest/styles.scss';
-import Themes from './themes';
+import Themes from './components/themes';
 
 const Div = props => (<div {... props} />);
 
@@ -30,7 +34,7 @@ const examples = [
       </div>),
   },
   {
-    title: 'Icon font button — Using children',
+    title: 'Social buttons',
     description: `This example use font-awesome to render the icons but you can
     use almost anything as the component's child. i.e. <img> or <svg> tags.`,
     jsx: `
@@ -44,15 +48,12 @@ const examples = [
 ...`,
     button: (
       <div>
-        <AwesomeButton
+        <AwesomeButtonShare
           cssModule={AwsBtnStyles}
           type="facebook"
-          size="icon"
-          bubbles
-          moveEvents={false}
         >
-          <i className="fa fa-facebook" />
-        </AwesomeButton>
+          Share
+        </AwesomeButtonShare>
         <AwesomeButton
           cssModule={AwsBtnStyles}
           type="twitter"
@@ -118,9 +119,9 @@ const action = (next) => {
 </AwesomeButton>`,
     button: (
       <div>
-        <AwesomeButton
+        <AwesomeButtonProgress
           cssModule={AwsBtnStyles}
-          progress
+          type="primary"
           action={(element, next) => {
             setTimeout(() => {
               next();
@@ -128,10 +129,9 @@ const action = (next) => {
           }}
         >
           Progress Button
-        </AwesomeButton>
-        <AwesomeButton
+        </AwesomeButtonProgress>
+        <AwesomeButtonProgress
           cssModule={AwsBtnStyles}
-          progress
           type="secondary"
           action={(element, next) => {
             setTimeout(() => {
@@ -140,7 +140,7 @@ const action = (next) => {
           }}
         >
           Progress Button
-        </AwesomeButton>
+        </AwesomeButtonProgress>
       </div>),
   },
   {
@@ -209,7 +209,7 @@ export default {
   name: 'AwesomeButton',
   title: 'React Components are awesome',
   description: 'The AwesomeButton is a performant, extendable, highly customisable, production ready react component that renders an animated basic set of UI buttons.',
-  size: '~3KB compressed <script + styles>',
+  size: '~5KB compressed',
   repository: 'https://github.com/rcaferati/react-awesome-button',
   article: '//caferati.me/labs/awesome-button',
   features,
