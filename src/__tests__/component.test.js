@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import '../helpers/tests';
-import AwesomeButton from '../component';
+import { AwesomeButton, AwesomeButtonProgress } from '../index';
 
 test('Should render a simple primary button', () => {
   const component = renderer.create(<AwesomeButton>Button</AwesomeButton>);
@@ -41,12 +41,13 @@ test('Button changes on mouse down -> up -> leave', () => {
 
 test('Should render a button with a progress bar', () => {
   const component = renderer.create(
-    <AwesomeButton
-      progress
+    <AwesomeButtonProgress
       action={(element, next) => {
         next();
       }}
-    >Button</AwesomeButton>);
+    >
+      Button
+    </AwesomeButtonProgress>);
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 

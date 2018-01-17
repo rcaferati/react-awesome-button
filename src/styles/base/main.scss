@@ -231,36 +231,6 @@
   &--middle {
     @include button-hover-middle($button-hover-pressure);
   }
-  &--progress {
-    .#{$button-root}__content {
-      > span {
-        transition: opacity $transform-speed * 0.50 ease-out $transform-speed * 0.75;
-      }
-      &:before, &:after {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255,255,255, 0.65);
-    		opacity: 0;
-        transition: transform $transform-speed ease-out 0.05s, opacity $transform-speed * 0.75 ease-out 0.05s;
-      }
-      &:before {
-        content: attr(data-loading);
-    		transform: translate3d(0, 50%, 0);
-      }
-      &:after {
-        content: attr(data-status);
-    		transform: translate3d(0, -50%, 0);
-      }
-    }
-    &.#{$button-root}--active {
-      .#{$button-root}__content {
-        > span {
-          opacity: 0.075;
-        }
-      }
-    }
-  }
   &--active {
     &:before {
   		transform: translate3d(0, -$button-raise-level, 0);
@@ -268,38 +238,6 @@
     .#{$button-root}__content {
   		transition: transform $transform-speed * 0.8 ease-out, background $transform-speed * 0.8 ease-out, color $transform-speed * 0.8 ease-out;
   		transform: translate3d(0, $button-raise-level, 0);
-    }
-  }
-  &--start {
-    .#{$button-root}__content {
-      &:before {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-    .#{$button-root}__wrapper {
-      &:after {
-    		transition: width $loading-transition-speed ease-out;
-    		width: 90%;
-      }
-    }
-  }
-  &--end {
-    .#{$button-root}__wrapper {
-      &:after {
-    		transition: width $loading-transition-speed/20 ease-out;
-    		width: 100%;
-      }
-    }
-    .#{$button-root}__content {
-      &:after {
-        opacity: 1;
-    		transform: translate3d(0, 0, 0);
-      }
-      &:before {
-    		transform: translate3d(0, 50%, 0);
-        opacity: 0;
-      }
     }
   }
   &--off {

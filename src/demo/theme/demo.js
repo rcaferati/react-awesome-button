@@ -4,9 +4,15 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import ThemeList from './components/theme-list';
-import ThemeTest from './components/theme-test';
+
+// import ThemeList from './components/theme-list';
+// import ThemeTest from './components/theme-test';
+// import '../../../dist/styles.css';
+
+import AwsBtnThemeMorty from '../../styles/themes/theme-c137/styles.scss';
 import Styles from './demo.scss';
+import { AwesomeProgress, AwesomeButton } from '../../index';
+
 
 class Demo extends React.Component {
   componentWillMount() {
@@ -17,14 +23,24 @@ class Demo extends React.Component {
   }
   render() {
     return (
-      <div>
-        <ThemeList
-          styles={Styles}
-        />
-        <ThemeTest
-          styles={Styles}
-          theme="theme-rickiest"
-        />
+      <div className={Styles.section}>
+        <AwesomeButton
+          size="large"
+          cssModule={AwsBtnThemeMorty}
+        >
+          Primary
+        </AwesomeButton>
+        <AwesomeProgress
+          size="large"
+          action={(element, next) => {
+            setTimeout(() => {
+              next();
+            }, 1000);
+          }}
+          cssModule={AwsBtnThemeMorty}
+        >
+          Progress
+        </AwesomeProgress>
       </div>
     );
   }

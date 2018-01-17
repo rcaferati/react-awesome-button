@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AwesomeButton from '../component';
+import { AwesomeButton } from '../../index';
 
-export default function Themes({ theme }) {
+export default function Theme({ theme }) {
   return (
     <div>
       <div>
@@ -41,6 +41,6 @@ export default function Themes({ theme }) {
   );
 }
 
-Themes.propTypes = {
+Theme.propTypes = {
   theme: PropTypes.string.isRequired,
 };

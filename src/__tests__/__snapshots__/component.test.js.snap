@@ -22,8 +22,6 @@ exports[`Button changes on mouse down -> up -> leave 1`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
@@ -56,8 +54,6 @@ exports[`Button changes on mouse down -> up -> leave 2`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
@@ -90,8 +86,6 @@ exports[`Button changes on mouse down -> up -> leave 3`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
@@ -124,8 +118,6 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
@@ -138,7 +130,7 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
 
 exports[`Should render a button with a progress bar 1`] = `
 <button
-  className="aws-btn aws-btn--primary aws-btn--visible aws-btn--progress"
+  className="aws-btn aws-btn--visible aws-btn--progress"
   href={null}
   onMouseDown={[Function]}
   onMouseLeave={[Function]}
@@ -158,11 +150,17 @@ exports[`Should render a button with a progress bar 1`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading="Wait .."
-        data-status="Success!"
       >
         <span>
-          Button
+          <span
+            className="aws-btn__progress"
+            data-loading="Wait.."
+            data-status="Success!"
+          >
+            <span>
+              Button
+            </span>
+          </span>
         </span>
       </span>
     </span>
@@ -172,7 +170,7 @@ exports[`Should render a button with a progress bar 1`] = `
 
 exports[`Should render a button with a progress bar 2`] = `
 <button
-  className="aws-btn aws-btn--primary aws-btn--visible aws-btn--progress aws-btn--active"
+  className="aws-btn aws-btn--visible aws-btn--active aws-btn--progress"
   href={null}
   onMouseDown={[Function]}
   onMouseLeave={[Function]}
@@ -192,11 +190,17 @@ exports[`Should render a button with a progress bar 2`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading="Wait .."
-        data-status="Success!"
       >
         <span>
-          Button
+          <span
+            className="aws-btn__progress"
+            data-loading="Wait.."
+            data-status="Success!"
+          >
+            <span>
+              Button
+            </span>
+          </span>
         </span>
       </span>
     </span>
@@ -226,8 +230,6 @@ exports[`Should render a button without moveEvents 1`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
@@ -260,8 +262,6 @@ exports[`Should render a simple primary button 1`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
@@ -294,8 +294,6 @@ exports[`Should render a simple secondary button 1`] = `
     >
       <span
         className="aws-btn__content"
-        data-loading={null}
-        data-status={null}
       >
         <span>
           Button
