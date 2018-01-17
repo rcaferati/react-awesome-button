@@ -9,7 +9,6 @@
 ## Live demo
 
 + <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
-+ <a href="https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-" target="_blank">Live code at Webpackbin</a>
 
 ## Examples
 
