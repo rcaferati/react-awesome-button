@@ -67,8 +67,8 @@
 
 ## Author
 ### Rafael Caferati
-+ <a href="https://caferati.me/demo/react-awesome-button" target="_blank">Full-Stack Web Developer</a> @ <a href="https://caferati.me" target="_blank">caferati.me</a>
-+ Checkout other open source projects at my <a href="https://caferati.me/labs">Code Laboratory</a>
++ <a href="https://caferati.me/portfolio" target="_blank">Full-Stack Web Developer</a> @ <a href="https://caferati.me" target="_blank">caferati.me</a>
++ Checkout other open source projects at my <a target="_blank" href="https://caferati.me/labs">Code Laboratory</a>
 
 ## License
 
