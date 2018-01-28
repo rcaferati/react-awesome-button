@@ -67,8 +67,9 @@
 
 ## Author
 #### Rafael Caferati
-+ <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Full-Stack Web Developer</a>
++ <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Full-Stack Web Developer Website</a>
 + Checkout other open source projects at my <a title="Web Software Developer Code Laboratory" target="_blank" href="https://caferati.me/labs">Code Laboratory</a>
++ Checkout other open source projects at my <a title="Web Software Developer Portfolio" target="_blank" href="https://caferati.me/portfolio">Portfolio</a>
 
 ## License
 
