@@ -6,12 +6,9 @@ import {
 } from 'react-router-dom';
 
 // import ThemeList from './components/theme-list';
-// import ThemeTest from './components/theme-test';
+import ThemeTest from '../components/theme-test';
 // import '../../../dist/styles.css';
-
-import AwsBtnThemeMorty from '../../styles/themes/theme-c137/styles.scss';
-import Styles from './demo.scss';
-import { AwesomeProgress, AwesomeButton } from '../../index';
+import Styles from '../demo.scss';
 
 
 class Demo extends React.Component {
@@ -24,23 +21,7 @@ class Demo extends React.Component {
   render() {
     return (
       <div className={Styles.section}>
-        <AwesomeButton
-          size="large"
-          cssModule={AwsBtnThemeMorty}
-        >
-          Primary
-        </AwesomeButton>
-        <AwesomeProgress
-          size="large"
-          action={(element, next) => {
-            setTimeout(() => {
-              next();
-            }, 1000);
-          }}
-          cssModule={AwsBtnThemeMorty}
-        >
-          Progress
-        </AwesomeProgress>
+        <ThemeTest styles={Styles} theme="theme-blue" />
       </div>
     );
   }

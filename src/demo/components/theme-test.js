@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AwesomeSocial from 'react-awesome-social';
-import AwesomeButton from '../../components/AwesomeButton';
+import { AwesomeButton, AwesomeButtonSocial } from '../../index';
 import Modules from '../../helpers/modules';
 
 class Test extends React.Component {
@@ -102,7 +101,7 @@ class Test extends React.Component {
           </span>
         </div>
         <div className={styles.section}>
-          <AwesomeSocial
+          <AwesomeButtonSocial
             iconHeight="24px"
             iconWidth="24px"
             url="https://caferati.me"
@@ -110,8 +109,8 @@ class Test extends React.Component {
             cssModule={Module}
           >
             Share
-          </AwesomeSocial>
-          <AwesomeSocial
+          </AwesomeButtonSocial>
+          <AwesomeButtonSocial
             iconHeight="24px"
             iconWidth="26px"
             type="twitter"
@@ -120,8 +119,8 @@ class Test extends React.Component {
             cssModule={Module}
           >
             Share
-          </AwesomeSocial>
-          <AwesomeSocial
+          </AwesomeButtonSocial>
+          <AwesomeButtonSocial
             iconHeight="24px"
             iconWidth="26px"
             type="reddit"
@@ -129,8 +128,8 @@ class Test extends React.Component {
             cssModule={Module}
           >
             Share
-          </AwesomeSocial>
-          <AwesomeSocial
+          </AwesomeButtonSocial>
+          <AwesomeButtonSocial
             iconHeight="24px"
             iconWidth="26px"
             type="instagram"
@@ -138,7 +137,7 @@ class Test extends React.Component {
             cssModule={Module}
           >
             Follow
-          </AwesomeSocial>
+          </AwesomeButtonSocial>
         </div>
       </section>
     );

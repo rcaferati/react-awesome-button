@@ -17,7 +17,7 @@ export const THEMES = [
 export const MODULES = [];
 THEMES.forEach((theme) => {
   // eslint-disable-next-line
-  MODULES[theme] = require(`../../styles/themes/${theme}/styles.scss`);
+  MODULES[theme] = require(`../styles/themes/${theme}/styles.scss`);
 });
 
 export default {

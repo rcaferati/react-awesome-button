@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Theme from './themes';
+import Theme from './theme';
 import Modules from '../../helpers/modules';
-
-console.log('-----------');
-console.log('modules');
 
 export default function List({ styles }) {
   return (
