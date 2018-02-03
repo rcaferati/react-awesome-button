@@ -9,13 +9,12 @@
 ## Live demo
 
 + <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
-+ <a href="https://www.webpackbin.com/bins/-Kod7WV_1sLWnwxPdZJ-" target="_blank">Live code at Webpackbin</a>
 
 ## Examples
 
 ### With react-awesome-button and plain CSS
 ```jsx
-  import AwesomeButton from 'react-awesome-button';
+  import { AwesomeButton } from 'react-awesome-button';
   import 'react-awesome-button/dist/styles.css';
 
   function Button() {
@@ -27,7 +26,7 @@
 
 ### With react-awesome-button CSS Modules
 ```jsx
-  import AwesomeButton from 'react-awesome-button';
+  import { AwesomeButton } from 'react-awesome-button';
   import AwesomeButtonStyles from 'react-awesome-button/src/styles.scss'
 
   function Button() {
@@ -65,6 +64,12 @@
 | errorLabel            | `string`      | `"Error"`   | Progress button error label text |
 | successLabel          | `string`      | `"Success"` | Progress button success label text |
 | visible               | `bool`        | `true`      | Should the button be visible |
+
+## Author
+#### Rafael Caferati
++ Checkout my <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Full-Stack Web Developer Website</a>
++ Other open source projects @ <a title="Web Software Developer Code Laboratory" target="_blank" href="https://caferati.me/labs">Code Laboratory</a>
++ A scope of my work @ <a title="Web Software Developer Portfolio" target="_blank" href="https://caferati.me/portfolio">Web Portfolio</a>
 
 ## License
 
