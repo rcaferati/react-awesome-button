@@ -18,6 +18,11 @@ $button-horizontal-padding: 16px;
 $button-raise-level: 2px;
 $button-hover-pressure: 1;
 
+$button-icon-width: 44px;
+$button-small-width: 88px;
+$button-medium-width: 136px;
+$button-large-width: 192px;
+
 $button-color-primary: #325c99;
 $button-color-secondary: #afafaf;
 $button-color-disabled: #9E9E9E;
@@ -37,5 +42,5 @@ $button-color-reddit: #fc461e;
 $button-color-pinterest: #bd091c;
 $button-color-gplus: #ce5b4e;
 $button-color-youtube: #cc181e;
-$button-color-instagram-radial-lighten: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-$button-color-instagram-radial-darken: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%);
+$button-color-instagram-radial-light: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+$button-color-instagram-radial-dark: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%);

@@ -1,5 +1,16 @@
+// [Default] variables
 @import '../../base/variables.scss';
-  @import './config/colors.scss';
-@import '../../base/lists.scss';
-@import '../../base/main.scss';
-@import '../../base/progress.scss';
+// [Overwrite] variables
+@import './config/colors.scss';
+
+// [Default] Custom Properties
+@import '../../base/with-custom-properties/custom-properties.scss';
+
+// [Default] Lists
+@import '../../base/with-custom-properties/lists.scss';
+
+// [Default] Main Styles
+@import '../../base/with-custom-properties/main.scss';
+
+// [Default] Progress Styles
+@import '../../base/with-custom-properties/progress.scss';
