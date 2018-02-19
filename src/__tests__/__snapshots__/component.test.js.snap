@@ -15,17 +15,13 @@ exports[`Button changes on mouse down -> up -> leave 1`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
@@ -47,17 +43,13 @@ exports[`Button changes on mouse down -> up -> leave 2`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
@@ -79,17 +71,13 @@ exports[`Button changes on mouse down -> up -> leave 3`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
@@ -111,17 +99,13 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
@@ -143,23 +127,19 @@ exports[`Should render a button with a progress bar 1`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          <span
-            className="aws-btn__progress"
-            data-loading="Wait.."
-            data-status="Success!"
-          >
-            <span>
-              Button
-            </span>
+      <span>
+        <span
+          className="aws-btn__progress"
+          data-loading="Wait.."
+          data-status="Success!"
+        >
+          <span>
+            Button
           </span>
         </span>
       </span>
@@ -183,23 +163,19 @@ exports[`Should render a button with a progress bar 2`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          <span
-            className="aws-btn__progress"
-            data-loading="Wait.."
-            data-status="Success!"
-          >
-            <span>
-              Button
-            </span>
+      <span>
+        <span
+          className="aws-btn__progress"
+          data-loading="Wait.."
+          data-status="Success!"
+        >
+          <span>
+            Button
           </span>
         </span>
       </span>
@@ -223,17 +199,13 @@ exports[`Should render a button without moveEvents 1`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
@@ -255,17 +227,13 @@ exports[`Should render a simple primary button 1`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
@@ -287,17 +255,13 @@ exports[`Should render a simple secondary button 1`] = `
   to={null}
 >
   <span
-    className="aws-btn__container"
+    className="aws-btn__wrapper"
   >
     <span
-      className="aws-btn__wrapper"
+      className="aws-btn__content"
     >
-      <span
-        className="aws-btn__content"
-      >
-        <span>
-          Button
-        </span>
+      <span>
+        Button
       </span>
     </span>
   </span>
