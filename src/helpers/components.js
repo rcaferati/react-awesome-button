@@ -83,7 +83,9 @@ export function createBubbleEffect({
   bubble.style.height = `${size}px`;
 
   setCssEndEvent(bubble, 'animation', () => {
-    content.removeChild(bubble);
+    window.requestAnimationFrame(() => {
+      content.removeChild(bubble);
+    });
   });
   window.requestAnimationFrame(() => {
     content.appendChild(bubble);

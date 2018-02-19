@@ -25,9 +25,12 @@
   --button-color-primary: $button-color-primary;
   --button-color-primary-dark: darken($button-color-primary, 15%);
   --button-color-primary-light: lighten($button-color-primary, 50%);
+  --button-color-primary-hover: darken($button-color-primary, 5%);
+  --button-color-primary-border: none;
   --button-color-secondary: $button-color-secondary;
   --button-color-secondary-dark: darken($button-color-secondary, 15%);
   --button-color-secondary-light: lighten($button-color-secondary, 50%);
+  --button-color-secondary-hover: darken($button-color-secondary, 5%);
   --button-color-secondary-border: 2px solid var(--button-color-primary);
   --button-color-disabled: $button-color-disabled;
   --button-color-disabled-dark: darken($button-color-disabled, 15%);

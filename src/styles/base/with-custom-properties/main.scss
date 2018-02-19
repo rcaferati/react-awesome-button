@@ -11,17 +11,19 @@
     @if(length($color) > 4) {
       border: nth($color, 5);
     }
-    @if(length($color) > 6) {
-      > span:nth-child(1) {
-        &:before {
-          background-color: nth($color, 7)
-        }
+  }
+  @if(length($color) > 5) {
+    &:hover {
+      .#{$button-root}__content {
+        background: nth($color, 6);
       }
     }
   }
-  .#{$button-root}__bubble {
-    @if(length($color) > 5) {
-      background-color: nth($color, 6);
+  @if(length($color) > 6) {
+    &.#{$button-root}--active {
+      .#{$button-root}__content {
+        background: nth($color, 7);
+      }
     }
   }
 }
@@ -107,12 +109,7 @@
   transition: opacity .1s ease-out;
   border: none;
   opacity: 0;
-  z-index: 5;
   -webkit-font-smoothing: antialiased;
-  .#{$button-root}__container {
-    display: block;
-    height: 100%;
-  }
   .#{$button-root}__wrapper {
     position: relative;
 		font-family: var(--button-font-family);
@@ -151,41 +148,34 @@
     z-index: 3;
     overflow: hidden;
     padding: 0 var(--button-horizontal-padding);
+    backface-visibility: hidden;
+    transform-style: flat;
+    transform:
+      skew(0)
+      translate3d(0, 0, 0);
     transition:
       border var(--transform-speed) ease-out,
       transform var(--transform-speed) ease-out,
       background var(--transform-speed) ease-out,
       color var(--transform-speed) ease-out;
-    &:before{
-      @extend %fill-parent;
+    &:after {
+      // content: " ";
+      // background-color: rgba(0, 0, 0, $button-hover-darken-opacity);
+      // transition: opacity calc(var(--transform-speed) * 2) ease-out;
+      // opacity: 0;
     }
     &:after{
       @extend %fill-parent;
     }
     > span:nth-child(1) {
       display: block;
-      &:before {
-        content: " ";
-        @extend %fill-parent;
-        background-color: rgba(0, 0, 0, $button-hover-darken-opacity);
-        transition: opacity calc(var(--transform-speed) * 2) ease-out;
-        opacity: 0;
-        z-index: -1;
-      }
-      > span, > svg, > img {
+      > svg, > img > span {
         vertical-align: middle;
       }
     }
   }
   &:focus {
     @extend %clear-focus;
-  }
-  &:hover {
-    .#{$button-root}__content {
-      > span:before {
-        opacity: 1;
-      }
-    }
   }
   &:before {
     content: " ";
@@ -197,6 +187,9 @@
 		position: absolute;
 		border-radius: var(--button-default-border-radius);
 		z-index: 1;
+    transform:
+      skewY(0)
+      translate3d(0, 0, 0);
 		transition: transform calc(var(--transform-speed) * 0.8) ease-out, background calc(var(--transform-speed) * 0.8) ease-out;
   }
   @include getColors($button-colors);
@@ -284,7 +277,7 @@ span.#{$button-root}__bubble {
   height: 0px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.1);
-  z-index: -1;
+  z-index: 10;
   opacity: 0;
   transform: scale(0.1);
   animation: ping calc(var(--transform-speed) * 3.5) cubic-bezier(0.5, 0, 0.6, 0.4) 0.05s forwards;

@@ -15,6 +15,7 @@ $button-colors:
     var(--button-color-primary-dark),
     var(--button-color-primary-light),
     var(--button-color-primary-border),
+    var(--button-color-primary-hover),
     var(--button-color-primary-dark),
   ),
   (
@@ -23,6 +24,7 @@ $button-colors:
     var(--button-color-primary-dark),
     var(--button-color-primary),
     var(--button-color-secondary-border),
+    var(--button-color-secondary-hover),
     var(--button-color-secondary-dark),
   ),
   (
@@ -31,15 +33,15 @@ $button-colors:
     var(--button-color-disabled-dark),
     var(--button-color-disabled-dark),
     var(--button-color-disabled-border),
-    transparent,
-    transparent,
+    var(--button-color-disabled),
+    var(--button-color-disabled),
   ),
   (
     "placeholder",
     var(--button-color-placeholder),
     var(--button-color-placeholder-dark),
     var(--button-color-placeholder-light),
-    none,
-    transparent,
-    transparent,
+    var(--button-color-placeholder-border),
+    var(--button-color-placeholder),
+    var(--button-color-placeholder),
   );

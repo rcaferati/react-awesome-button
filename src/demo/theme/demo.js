@@ -7,6 +7,7 @@ import {
 
 // import ThemeList from './components/theme-list';
 import ThemeTest from '../components/theme-test';
+import Customiser from '../components/customiser';
 // import '../../../dist/styles.css';
 import Styles from '../demo.scss';
 
@@ -20,8 +21,9 @@ class Demo extends React.Component {
   }
   render() {
     return (
-      <div className={Styles.section}>
+      <div className={Styles.doubleColumn}>
         <ThemeTest styles={Styles} theme="theme-blue" />
+        <Customiser styles={Styles} />
       </div>
     );
   }

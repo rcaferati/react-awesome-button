@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AwesomeButton, AwesomeButtonSocial } from '../../index';
+import { AwesomeButton, AwesomeButtonSocial, AwesomeButtonProgress } from '../../index';
 import Modules from '../../helpers/modules';
 
 class Test extends React.Component {
@@ -28,32 +28,32 @@ class Test extends React.Component {
       <section className={styles.container}>
         <div className={styles.section}>
           <AwesomeButton
-            bubbles
             cssModule={Module}
           >
             <i className="fa fa-codepen" aria-hidden /> Primary
-          </AwesomeButton>
-          <AwesomeButton
-            bubbles
-            cssModule={Module}
-            type="secondary"
-          >
-            <i className="fa fa-hand-spock-o" aria-hidden /> Secondary
           </AwesomeButton>
         </div>
         <div className={styles.section}>
           <AwesomeButton
             cssModule={Module}
-            progress
-            size="large"
+            type="secondary"
+          >
+            Secondary
+          </AwesomeButton>
+        </div>
+        <div className={styles.section}>
+          <AwesomeButtonProgress
+            cssModule={Module}
+            type="primary"
             action={(element, next) => {
               setTimeout(() => {
+                // debugger;
                 next();
-              }, 1000);
+              }, 750);
             }}
           >
             Progress
-          </AwesomeButton>
+          </AwesomeButtonProgress>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
           <AwesomeButton
@@ -74,7 +74,7 @@ class Test extends React.Component {
               });
             }}
           >
-            ← Set Placeholder Data
+            ← Set Data
           </span>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
@@ -110,6 +110,8 @@ class Test extends React.Component {
           >
             Share
           </AwesomeButtonSocial>
+        </div>
+        <div className={styles.section}>
           <AwesomeButtonSocial
             iconHeight="24px"
             iconWidth="26px"
@@ -120,15 +122,8 @@ class Test extends React.Component {
           >
             Share
           </AwesomeButtonSocial>
-          <AwesomeButtonSocial
-            iconHeight="24px"
-            iconWidth="26px"
-            type="reddit"
-            url="https://caferati.me"
-            cssModule={Module}
-          >
-            Share
-          </AwesomeButtonSocial>
+        </div>
+        <div className={styles.section}>
           <AwesomeButtonSocial
             iconHeight="24px"
             iconWidth="26px"
