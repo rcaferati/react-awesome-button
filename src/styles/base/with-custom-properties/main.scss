@@ -1,0 +1,303 @@
+@mixin color-pattern($color) {
+  $background: nth($color, 2);
+  .#{$button-root}__wrapper {
+    &:before {
+      background: nth($color, 3);
+    }
+  }
+  .#{$button-root}__content {
+    background: nth($color, 2);
+    color: nth($color, 4);
+    @if(length($color) > 4) {
+      border: nth($color, 5);
+    }
+  }
+  @if(length($color) > 5) {
+    &:hover {
+      .#{$button-root}__content {
+        background: nth($color, 6);
+      }
+    }
+  }
+  @if(length($color) > 6) {
+    &.#{$button-root}--active {
+      .#{$button-root}__content {
+        background: nth($color, 7);
+      }
+    }
+  }
+}
+
+@mixin getColors($colors) {
+  @if($colors) {
+    @each $color in $colors {
+      &--#{nth($color, 1)} {
+          @include color-pattern($color);
+      }
+    }
+  }
+}
+
+@mixin getSizes($sizes) {
+  @each $size in $sizes {
+    &--#{nth($size, 1)} {
+      width: nth($size, 2);
+      height: nth($size, 3);
+      font-size: nth($size, 4);
+      line-height: nth($size, 5);
+    }
+  }
+}
+
+@mixin button-hover-skew($direction) {
+  &:before {
+    transform:
+      skewY(calc(1deg * var(--button-hover-pressure) * #{$direction}))
+      translate3d(0, calc(-1px * var(--button-hover-pressure) / 2), 0);
+  }
+  .#{$button-root}__content {
+    transform: skewY(calc(1deg * var(--button-hover-pressure) * #{-$direction}));
+  }
+}
+
+%fill-parent {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+%clear-spacing {
+  padding: 0;
+  margin: 0;
+}
+
+%clear-focus {
+  outline-color: 0;
+  outline-style: none;
+  outline-width: 0;
+}
+
+%clear-selection {
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.#{$button-root} {
+  @extend %clear-spacing;
+  @extend %clear-focus;
+  @extend %clear-selection;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  height: var(--button-default-height);
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: var(--button-default-font-size);
+  line-height: var(--button-default-line-height);
+  font-weight: var(--button-font-weight);
+  font-family: var(--button-font-family);
+  font-style: var(--button-font-style);
+  letter-spacing: var(--button-letter-spacing);
+  text-rendering: auto;
+  text-decoration: none;
+  text-align: center;
+  transition: opacity .1s ease-out;
+  border: none;
+  opacity: 0;
+  -webkit-font-smoothing: antialiased;
+  .#{$button-root}__wrapper {
+    position: relative;
+		font-family: var(--button-font-family);
+		display: flex;
+    align-items: stretch;
+		width: 100%;
+		height: calc(100% - var(--button-raise-level));
+    margin-top: calc(var(--button-raise-level) * -1);
+    &:before{
+      @extend %fill-parent;
+      content: " ";
+  		border-radius: var(--button-default-border-radius);
+  		top: auto;
+  		bottom: calc(var(--button-raise-level) * -1);
+  		z-index: 1;
+  		transition: transform var(--transform-speed) ease-out, background var(--transform-speed) ease-out;
+    }
+    &:after{
+      @extend %fill-parent;
+      content: " ";
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: var(--button-default-border-radius);
+      z-index: 3;
+      width: 0;
+      top: var(--button-raise-level);
+    }
+  }
+  .#{$button-root}__content {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--button-default-border-radius);
+    text-indent: 0;
+    z-index: 3;
+    overflow: hidden;
+    padding: 0 var(--button-horizontal-padding);
+    backface-visibility: hidden;
+    transform-style: flat;
+    transform:
+      skew(0)
+      translate3d(0, 0, 0);
+    transition:
+      border var(--transform-speed) ease-out,
+      transform var(--transform-speed) ease-out,
+      background var(--transform-speed) ease-out,
+      color var(--transform-speed) ease-out;
+    &:after {
+      // content: " ";
+      // background-color: rgba(0, 0, 0, $button-hover-darken-opacity);
+      // transition: opacity calc(var(--transform-speed) * 2) ease-out;
+      // opacity: 0;
+    }
+    &:after{
+      @extend %fill-parent;
+    }
+    > span:nth-child(1) {
+      display: block;
+      > svg, > img > span {
+        vertical-align: middle;
+      }
+    }
+  }
+  &:focus {
+    @extend %clear-focus;
+  }
+  &:before {
+    content: " ";
+		background-color: rgba(0, 0, 0, 0.3);
+		width: calc(100% - 2px);
+		height: calc(100% - (var(--button-raise-level) * 2));
+		bottom: calc(0px - (var(--button-raise-level) / 2));
+		left: 1px;
+		position: absolute;
+		border-radius: var(--button-default-border-radius);
+		z-index: 1;
+    transform:
+      skewY(0)
+      translate3d(0, 0, 0);
+		transition: transform calc(var(--transform-speed) * 0.8) ease-out, background calc(var(--transform-speed) * 0.8) ease-out;
+  }
+  @include getColors($button-colors);
+  @include getColors($button-social-colors);
+  &--placeholder {
+    width: var(--button-default-placeholder-width);
+    .#{$button-root}__content {
+      > span {
+        width: 100%;
+        height: 40%;
+        background-color: var(--button-default-placeholder-font-color);
+        border-radius: 2px;
+      }
+    }
+  }
+  &--visible {
+    opacity: 1;
+  }
+  &--left {
+    @include button-hover-skew(1);
+  }
+  &--right {
+    @include button-hover-skew(-1);
+  }
+  &--middle {
+    &:before {
+      transform: translate3d(0, calc(-1px * var(--button-hover-pressure)), 0);
+    }
+    .#{$button-root}__content {
+      transform: translate3d(0, calc(1px * var(--button-hover-pressure)), 0);
+    }
+  }
+  &--active {
+    &:before {
+  		transform: translate3d(0, calc(var(--button-raise-level) * -1), 0);
+    }
+    .#{$button-root}__content {
+  		transition:
+        transform calc(var(--transform-speed) * 0.8) ease-out,
+        background calc(var(--transform-speed) * 0.8) ease-out,
+        color calc(var(--transform-speed) * 0.8) ease-out;
+  		transform: translate3d(0, var(--button-raise-level), 0);
+    }
+  }
+  &--off {
+    &:before {
+  		transform: translate3d(0, calc(var(--button-raise-level) * -1), 0);
+  		background-color: rgba(0, 0, 0, 0.05);
+    }
+    &:hover {
+      .#{$button-root}__wrapper {
+        &:before {
+          background-color: #2d2d2d;
+        }
+      }
+      .#{$button-root}__content {
+        background-color: #313131;
+    		color: #3b3b3b;
+      }
+    }
+    .#{$button-root}__wrapper {
+      &:before {
+        background-color: #323232;
+      }
+    }
+    .#{$button-root}__content {
+      background-color: #353535;
+  		color: #424242;
+  		transform: translate3d(0, var(--button-raise-level), 0);
+    }
+  }
+  @include getSizes($button-sizes);
+  &--fill {
+    width: 100%;
+  }
+}
+
+span.#{$button-root}__bubble {
+  display: block;
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0.1);
+  animation: ping calc(var(--transform-speed) * 3.5) cubic-bezier(0.5, 0, 0.6, 0.4) 0.05s forwards;
+}
+
+@keyframes ping {
+  1% {
+    visibility: visible;
+  }
+  10% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  99% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    visibility: hidden;
+  }
+}

@@ -93,20 +93,25 @@ $button-social-colors:
     #FFFFFF
   ),
   (
-    "gplus",
+    "youtube",
     $button-color-youtube,
     darken($button-color-youtube, 17%),
     #FFFFFF
   ),
   (
     "instagram",
-    $button-color-instagram-radial-lighten,
-    $button-color-instagram-radial-darken,
+    $button-color-instagram-radial-light,
+    $button-color-instagram-radial-dark,
     #FFFFFF
   );
 
 /**
- button-size: size-name, width, height, font-size, line-height
+ button-size:
+   size-name,
+   width,
+   height,
+   font-size,
+   line-height
 */
 $button-sizes:
   (

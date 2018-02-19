@@ -172,3 +172,38 @@ pre {
   }
   margin-bottom: $double;
 }
+
+.section {
+  button {
+    margin: 10px;
+  }
+}
+
+.doubleColumn {
+  display: flex;
+}
+
+.loadData {
+  display: block;
+}
+
+.customiser {
+  flex: 0 0 400px;
+  padding: 20px;
+  ul {
+    list-style: none;
+  }
+  li {
+    display: flex;
+    padding: 10px 0;
+    label {
+      display: block;
+      flex: 0 0 260px;
+      padding-right: 20px;
+      align-self: flex-start;
+    }
+    input {
+      display: block;
+    }
+  }
+}

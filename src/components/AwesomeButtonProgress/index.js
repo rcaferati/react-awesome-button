@@ -34,8 +34,8 @@ export default class AwesomeProgress extends React.Component {
     super(props);
     this.rootElement = props.rootElement || ROOTELM;
     this.animationStage = 0;
+    this.loading = false;
     this.state = {
-      loading: false,
       loadingEnd: false,
       loadingStart: false,
       blocked: false,
@@ -61,36 +61,48 @@ export default class AwesomeProgress extends React.Component {
     return className.join(' ').trim().replace(/[\s]+/ig, ' ');
   }
   endLoading() {
-    this.setState({ loadingEnd: true });
+    this.setState({
+      loadingEnd: true,
+    });
     this.animationStage = 1;
   }
   startLoading() {
+    this.loading = true;
     this.setState({
-      loading: true,
-      loadingStart: true,
       blocked: true,
       active: true,
+    }, () => {
+      /*
+        To avoid the button eventual flickering I've changed the display strategy
+        for that to work in a controlled way we need to set the loadingStart
+        at least one painting cycle ahead
+      */
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          this.setState({
+            loadingStart: true,
+          });
+        });
+      });
     });
   }
-  clearLoading() {
+  clearLoading(callback) {
+    this.loading = false;
     this.setState({
-      loading: false,
       loadingStart: false,
       loadingEnd: false,
-    });
+      active: false,
+    }, callback);
   }
   clearStagedWrapperAnimation() {
     if (this.animationStage !== 0) {
       if (this.animationStage === LOADING_ANIMATION_STEPS) {
         this.animationStage = 0;
-        // hold life for 350ms before releasing the button;
+        // hold life for 500ms before releasing the button;
         setTimeout(() => {
           if (typeof window !== 'undefined') {
             window.requestAnimationFrame(() => {
-              this.clearLoading();
-              this.setState({
-                active: false,
-              }, () => {
+              this.clearLoading(() => {
                 setTimeout(() => {
                   this.setState({
                     blocked: false,
@@ -118,19 +130,17 @@ export default class AwesomeProgress extends React.Component {
     const events = {
       onMouseDown: (event) => {
         if (this.state.disabled === true ||
-          this.state.loading === true ||
+          this.loading === true ||
           this.state.blocked === true ||
           (event && event.nativeEvent.which !== 1)
         ) {
           return;
         }
-        this.setState({
-          loading: true,
-        });
+        this.loading = true;
       },
       onMouseUp: (event) => {
         if (this.state.disabled === true ||
-          this.state.loading === true ||
+          this.loading === true ||
           this.state.blocked === true) {
           event.preventDefault();
           event.stopPropagation();

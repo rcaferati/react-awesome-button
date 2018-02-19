@@ -1,0 +1,139 @@
+/**
+  button-color:
+    color-name, (required)
+    background, (required)
+    darker-background, (required)
+    font-color, (required)
+    border,
+    hover-background,
+    bubble-background,
+*/
+$button-colors:
+  (
+    "primary",
+    var(--button-color-primary),
+    var(--button-color-primary-dark),
+    var(--button-color-primary-light)
+  ),
+  (
+    "secondary",
+    var(--button-color-secondary),
+    var(--button-color-secondary-dark),
+    var(--button-color-secondary-light)
+  ),
+  (
+    "disabled",
+    var(--button-color-disabled),
+    var(--button-color-disabled-dark),
+    var(--button-color-disabled-light),
+  ),
+  (
+    "placeholder",
+    var(--button-color-placeholder),
+    var(--button-color-placeholder-dark),
+    var(--button-color-placeholder-light),
+  );
+
+  /**
+   button-social-color: color-name, background, darken-background, font-color
+  */
+$button-social-colors:
+  (
+    "facebook",
+    var(--button-color-facebook),
+    var(--button-color-facebook-dark),
+    #FFFFFF
+  ),
+  (
+    "messenger",
+    var(--button-color-messenger),
+    var(--button-color-messenger-dark),
+    #FFFFFF
+  ),
+  (
+    "twitter",
+    var(--button-color-twitter),
+    var(--button-color-twitter-dark),
+    #FFFFFF
+  ),
+  (
+    "linkedin",
+    var(--button-color-linkedin),
+    var(--button-color-linkedin-dark),
+    #FFFFFF
+  ),
+  (
+    "whatsapp",
+    var(--button-color-whatsapp),
+    var(--button-color-whatsapp-dark),
+    #FFFFFF
+  ),
+  (
+    "github",
+    var(--button-color-github),
+    var(--button-color-github-dark),
+    #FFFFFF
+  ),
+  (
+    "reddit",
+    var(--button-color-reddit),
+    var(--button-color-reddit-dark),
+    #FFFFFF
+  ),
+  (
+    "pinterest",
+    var(--button-color-pinterest),
+    var(--button-color-pinterest-dark),
+    #FFFFFF
+  ),
+  (
+    "gplus",
+    var(--button-color-gplus),
+    var(--button-color-gplus-dark),
+    #FFFFFF
+  ),
+  (
+    "youtube",
+    var(--button-color-youtube),
+    var(--button-color-youtube-dark),
+    #FFFFFF
+  ),
+  (
+    "instagram",
+    var(--button-color-instagram-radial-light),
+    var(--button-color-instagram-radial-dark),
+    #FFFFFF
+  );
+
+/**
+ button-size: size-name, width, height, font-size, line-height
+*/
+$button-sizes:
+  (
+    "icon",
+    var(--button-icon-width),
+    var(--button-default-height),
+    calc(var(--button-default-font-size) * 1.5),
+    calc(var(--button-default-line-height) * 1.5)
+  )
+  (
+    "small",
+    var(--button-small-width),
+    var(--button-default-height),
+    var(--button-default-font-size),
+    var(--button-default-line-height)
+  )
+  (
+    "medium",
+    var(--button-medium-width),
+    var(--button-default-height),
+    var(--button-default-font-size),
+    var(--button-default-line-height)
+  )
+  (
+    "large",
+    var(--button-large-width),
+    var(--button-default-height),
+    var(--button-default-font-size),
+    var(--button-default-line-height)
+  );

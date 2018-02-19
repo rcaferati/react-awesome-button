@@ -269,18 +269,13 @@ export default class AwesomeButton extends React.Component {
       >
         <span
           ref={(button) => { this.button = button; }}
-          className={getClassName(`${this.rootElement}__container`, cssModule)}
+          className={getClassName(`${this.rootElement}__wrapper`, cssModule)}
         >
           <span
-            ref={(wrapper) => { this.wrapper = wrapper; }}
-            className={getClassName(`${this.rootElement}__wrapper`, cssModule)}
+            ref={(content) => { this.content = content; }}
+            className={getClassName(`${this.rootElement}__content`, cssModule)}
           >
-            <span
-              ref={(content) => { this.content = content; }}
-              className={getClassName(`${this.rootElement}__content`, cssModule)}
-            >
-              <span>{children}</span>
-            </span>
+            <span ref={(child) => { this.child = child; }}>{children}</span>
           </span>
         </span>
       </RenderComponent>
