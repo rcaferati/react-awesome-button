@@ -27,7 +27,7 @@
 ### With react-awesome-button CSS Modules
 ```jsx
   import { AwesomeButton } from 'react-awesome-button';
-  import AwesomeButtonStyles from 'react-awesome-button/src/styles.scss'
+  import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss'
 
   function Button() {
     return (
