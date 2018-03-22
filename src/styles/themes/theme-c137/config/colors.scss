@@ -1,6 +1,34 @@
-$button-color-primary: #475472;
-$button-color-secondary: #fffc6c;
-$button-color-disabled: #f3c8ad;
-$button-color-disabled-border: #8c633c;
-$button-color-placeholder: #333333;
-$button-default-placeholder-font-color: lighten($button-default-placeholder-font-color, 60%);
+$button-primary-color: #475472;
+$button-primary-color-dark: darken($button-primary-color, 15%);
+$button-primary-color-light: lighten($button-primary-color, 50%);
+$button-primary-color-hover: darken($button-primary-color, 5%);
+$button-primary-color-active: darken($button-primary-color, 10%);
+$button-primary-border: none;
+
+$button-secondary-color: #fffc6c;
+$button-secondary-color-dark: darken($button-secondary-color, 35%);
+$button-secondary-color-light: darken($button-secondary-color, 50%);
+$button-secondary-color-hover: darken($button-secondary-color, 7.5%);
+$button-secondary-color-active: darken($button-secondary-color, 15%);
+$button-secondary-border: none;
+
+$button-anchor-color: #f3c8ad;
+$button-anchor-color-dark: #734922;
+$button-anchor-color-light: darken($button-anchor-color-dark, 10%);
+$button-anchor-color-hover: $button-anchor-color;
+$button-anchor-color-active: $button-anchor-color;
+$button-anchor-border: 1px solid #8c633c;
+
+$button-placeholder-color: #444444;
+$button-placeholder-color-dark: darken($button-placeholder-color, 20%);
+$button-placeholder-color-light: darken($button-placeholder-color, 15%);
+$button-placeholder-color-hover: $button-placeholder-color;
+$button-placeholder-color-active: $button-placeholder-color;
+$button-placeholder-border: none;
+
+$button-disabled-color: #444444;
+$button-disabled-color-dark: darken($button-disabled-color, 20%);
+$button-disabled-color-light: darken($button-disabled-color, 15%);
+$button-disabled-color-hover: $button-disabled-color;
+$button-disabled-color-active: $button-disabled-color;
+$button-disabled-border: none;

@@ -1,0 +1,92 @@
+%custom-properties {
+  --button-default-height: $button-default-height;
+  --button-default-font-size: $button-default-font-size;
+  --button-default-line-height: $button-default-line-height;
+  --button-default-border-radius: $button-default-border-radius;
+  --button-default-placeholder-width: $button-default-placeholder-width;
+
+  --button-icon-width: $button-icon-width;
+  --button-icon-height: $button-icon-height;
+  --button-small-width: $button-small-width;
+  --button-small-height: $button-small-height;
+  --button-medium-width: $button-medium-width;
+  --button-medium-height: $button-medium-height;
+  --button-large-width: $button-large-width;
+  --button-large-height: $button-large-height;
+
+  --button-font-family: $button-font-family;
+  --button-font-color: $button-font-color;
+  --button-font-weight: $button-font-weight;
+  --button-font-style: $button-font-style;
+  --button-hover-darken-opacity: $button-hover-darken-opacity;
+  --button-letter-spacing: $button-letter-spacing;
+  --button-horizontal-padding: $button-horizontal-padding;
+
+  --button-raise-level: $button-raise-level;
+  --button-hover-pressure: $button-hover-pressure;
+
+  --loading-transition-speed: $loading-transition-speed;
+  --transform-speed: $transform-speed;
+
+  --button-primary-color: $button-primary-color;
+  --button-primary-color-dark: $button-primary-color-dark;
+  --button-primary-color-light: $button-primary-color-light;
+  --button-primary-color-hover: $button-primary-color-hover;
+  --button-primary-color-active: $button-primary-color-active;
+  --button-primary-border: $button-primary-border;
+
+  --button-secondary-color: $button-secondary-color;
+  --button-secondary-color-dark: $button-secondary-color-dark;
+  --button-secondary-color-light: $button-secondary-color-light;
+  --button-secondary-color-hover: $button-secondary-color-hover;
+  --button-secondary-color-active: $button-secondary-color-active;
+  --button-secondary-border: $button-secondary-border;
+
+  --button-anchor-color: $button-anchor-color;
+  --button-anchor-color-dark: $button-anchor-color-dark;
+  --button-anchor-color-light: $button-anchor-color-light;
+  --button-anchor-color-hover: $button-anchor-color-hover;
+  --button-anchor-color-active: $button-anchor-color-active;
+  --button-anchor-border: $button-anchor-border;
+
+  --button-disabled-color: $button-disabled-color;
+  --button-disabled-color-dark: $button-disabled-color-dark;
+  --button-disabled-color-light: $button-disabled-color-light;
+  --button-disabled-color-hover: $button-disabled-color-hover;
+  --button-disabled-color-active: $button-disabled-color-active;
+  --button-disabled-border: $button-disabled-border;
+
+  --button-placeholder-color: $button-placeholder-color;
+  --button-placeholder-color-dark: $button-placeholder-color-dark;
+  --button-placeholder-color-light: $button-placeholder-color-light;
+  --button-placeholder-color-hover: $button-placeholder-color-hover;
+  --button-placeholder-color-active: $button-placeholder-color-active;
+  --button-placeholder-border: $button-placeholder-border;
+
+  --button-facebook-color: $button-facebook-color;
+  --button-facebook-color-dark: $button-facebook-color-dark;
+  --button-messenger-color: $button-messenger-color;
+  --button-messenger-color-dark: $button-messenger-color-dark;
+  --button-twitter-color: $button-twitter-color;
+  --button-twitter-color-dark: $button-twitter-color-dark;
+  --button-linkedin-color: $button-linkedin-color;
+  --button-linkedin-color-dark: $button-linkedin-color-dark;
+  --button-whatsapp-color: $button-whatsapp-color;
+  --button-whatsapp-color-dark: $button-whatsapp-color-dark;
+  --button-github-color: $button-github-color;
+  --button-github-color-dark: $button-github-color-dark;
+  --button-reddit-color: $button-reddit-color;
+  --button-reddit-color-dark: $button-reddit-color-dark;
+  --button-pinterest-color: $button-pinterest-color;
+  --button-pinterest-color-dark: $button-pinterest-color-dark;
+  --button-gplus-color: $button-gplus-color;
+  --button-gplus-color-dark: $button-gplus-color-dark;
+  --button-youtube-color: $button-youtube-color;
+  --button-youtube-color-dark: $button-youtube-color-dark;
+  --button-instagram-radial-color: $button-instagram-radial-color;
+  --button-instagram-radial-color-dark: $button-instagram-radial-color-dark;
+}
+
+.#{$button-root} {
+  @extend %custom-properties;
+}

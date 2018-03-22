@@ -1,46 +1,4 @@
 $button-root: "aws-btn";
-
-$button-default-height: 44px;
-$button-default-font-size: 14px;
-$button-default-line-height: 24px;
-$button-default-border-radius: 2px;
-$button-default-placeholder-width: 120px;
-$button-default-placeholder-font-color: rgba(0, 0, 0, 0.1);
-
-$button-font-family: inherit;
-$button-font-color: #FFFFFF;
-$button-font-weight: 600;
-$button-font-style: normal;
-$button-hover-darken-opacity: 0.1;
-$button-letter-spacing: 0px;
-$button-horizontal-padding: 16px;
-
-$button-raise-level: 2px;
-$button-hover-pressure: 1;
-
-$button-icon-width: 44px;
-$button-small-width: 88px;
-$button-medium-width: 136px;
-$button-large-width: 192px;
-
-$button-color-primary: #325c99;
-$button-color-secondary: #afafaf;
-$button-color-disabled: #9E9E9E;
-$button-color-placeholder: #BABABA;
-
-$loading-transition-speed: 6s;
-$transform-speed: 0.150s;
-
-// Share button Colors
-$button-color-facebook: #4868ad;
-$button-color-messenger: #3186f6;
-$button-color-twitter: #00aced;
-$button-color-linkedin: #0077b5;
-$button-color-whatsapp: #25d366;
-$button-color-github: #25292e;
-$button-color-reddit: #fc461e;
-$button-color-pinterest: #bd091c;
-$button-color-gplus: #ce5b4e;
-$button-color-youtube: #cc181e;
-$button-color-instagram-radial-light: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-$button-color-instagram-radial-dark: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%);
+@import './variables/structure.scss';
+@import './variables/share.scss';
+@import './variables/types.scss';

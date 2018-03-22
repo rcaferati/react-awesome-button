@@ -1,0 +1,163 @@
+/**
+  button-color:
+    color-name, (required)
+    background, (required)
+    darker-background, (required)
+    font-color, (required)
+    hover-background,
+    border,
+*/
+$button-colors:
+  (
+    "primary",
+    var(--button-primary-color),
+    var(--button-primary-color-dark),
+    var(--button-primary-color-light),
+    var(--button-primary-color-hover),
+    var(--button-primary-color-active),
+    var(--button-primary-border)
+  ),
+  (
+    "secondary",
+    var(--button-secondary-color),
+    var(--button-secondary-color-dark),
+    var(--button-secondary-color-light),
+    var(--button-secondary-color-hover),
+    var(--button-secondary-color-active),
+    var(--button-secondary-border)
+  ),
+  (
+    "link",
+    var(--button-anchor-color),
+    var(--button-anchor-color-dark),
+    var(--button-anchor-color-light),
+    var(--button-anchor-color-hover),
+    var(--button-anchor-color-active),
+    var(--button-anchor-border)
+  ),
+  (
+    "disabled",
+    var(--button-disabled-color),
+    var(--button-disabled-color-dark),
+    var(--button-disabled-color-light),
+    var(--button-disabled-color-hover),
+    var(--button-disabled-color-active),
+    var(--button-disabled-border)
+  ),
+  (
+    "placeholder",
+    var(--button-placeholder-color),
+    var(--button-placeholder-color-dark),
+    var(--button-placeholder-color-light),
+    var(--button-placeholder-color-hover),
+    var(--button-placeholder-color-active),
+    var(--button-placeholder-border)
+  );
+
+  /**
+   button-social-color:
+     color-name,
+     background,
+     darken-background,
+     font-color
+  */
+$button-social-colors:
+  (
+    "facebook",
+    $button-facebook-color,
+    $button-facebook-color-dark,
+    #FFFFFF
+  ),
+  (
+    "messenger",
+    $button-messenger-color,
+    $button-messenger-color-dark,
+    #FFFFFF
+  ),
+  (
+    "twitter",
+    $button-twitter-color,
+    $button-twitter-color-dark,
+    #FFFFFF
+  ),
+  (
+    "linkedin",
+    $button-linkedin-color,
+    $button-linkedin-color-dark,
+    #FFFFFF
+  ),
+  (
+    "whatsapp",
+    $button-whatsapp-color,
+    $button-whatsapp-color-dark,
+    #FFFFFF
+  ),
+  (
+    "github",
+    $button-github-color,
+    $button-github-color-dark,
+    #FFFFFF
+  ),
+  (
+    "reddit",
+    $button-reddit-color,
+    $button-reddit-color-dark,
+    #FFFFFF
+  ),
+  (
+    "pinterest",
+    $button-pinterest-color,
+    $button-pinterest-color-dark,
+    #FFFFFF
+  ),
+  (
+    "gplus",
+    $button-gplus-color,
+    $button-gplus-color-dark,
+    #FFFFFF
+  ),
+  (
+    "youtube",
+    $button-youtube-color,
+    $button-youtube-color-dark,
+    #FFFFFF
+  ),
+  (
+    "instagram",
+    $button-instagram-radial-color,
+    $button-instagram-radial-color-dark,
+    #FFFFFF
+  );
+
+/**
+ button-size: size-name, width, height, font-size, line-height
+*/
+$button-sizes:
+  (
+    "icon",
+    var(--button-icon-width),
+    var(--button-icon-height),
+    calc(var(--button-default-font-size) * 1.5),
+    calc(var(--button-default-line-height) * 1.5)
+  )
+  (
+    "small",
+    var(--button-small-width),
+    var(--button-small-height),
+    var(--button-default-font-size),
+    var(--button-default-line-height)
+  )
+  (
+    "medium",
+    var(--button-medium-width),
+    var(--button-medium-height),
+    var(--button-default-font-size),
+    var(--button-default-line-height)
+  )
+  (
+    "large",
+    var(--button-large-width),
+    var(--button-large-height),
+    var(--button-default-font-size),
+    var(--button-default-line-height)
+  );

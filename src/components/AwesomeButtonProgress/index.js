@@ -160,6 +160,8 @@ export default class AwesomeProgress extends React.Component {
       resultLabel,
       type,
     } = this.props;
+    console.log(size);
+    console.log(children);
     return (
       <AwesomeButton
         size={size}

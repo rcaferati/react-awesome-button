@@ -1,0 +1,28 @@
+{
+  "name": "AwesomeButton",
+  "framework": "React",
+  "title": "Awesome Button",
+  "description": "React AwesomeButton is a performant, extendable, highly customisable, production ready javascript react component that renders an animated basic set of UI buttons.",
+  "icon": "react-js",
+  "size": "~6KB compressed",
+  "repository": "https://github.com/rcaferati/react-awesome-button",
+  "article": "//caferati.me/labs/awesome-button",
+  "themes": [
+    {
+      "name": "Blue",
+      "slug": "blue-theme"
+    },
+    {
+      "name": "Cartman",
+      "slug": "cartman-theme"
+    },
+    {
+      "name": "Rick",
+      "slug": "rick-theme"
+    },
+    {
+      "name": "Morty",
+      "slug": "morty-theme"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
     &.#{$button-root}--secondary {
       .#{$button-root}__progress {
         &:before, &:after {
-          color: $button-color-primary;
+          color: $button-primary-color;
         }
       }
     }
