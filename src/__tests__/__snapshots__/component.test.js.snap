@@ -4,10 +4,6 @@ exports[`Button changes on mouse down -> up -> leave 1`] = `
 <button
   className="aws-btn aws-btn--primary aws-btn--visible"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -16,6 +12,10 @@ exports[`Button changes on mouse down -> up -> leave 1`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -32,10 +32,6 @@ exports[`Button changes on mouse down -> up -> leave 2`] = `
 <button
   className="aws-btn aws-btn--primary aws-btn--visible aws-btn--active"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -44,6 +40,10 @@ exports[`Button changes on mouse down -> up -> leave 2`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -60,10 +60,6 @@ exports[`Button changes on mouse down -> up -> leave 3`] = `
 <button
   className="aws-btn aws-btn--primary aws-btn--visible aws-btn--active"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -72,6 +68,10 @@ exports[`Button changes on mouse down -> up -> leave 3`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -88,10 +88,6 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
 <button
   className="aws-btn aws-btn--primary aws-btn--visible"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -100,6 +96,10 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -112,14 +112,10 @@ exports[`Button changes on mouse down -> up -> leave 4`] = `
 </button>
 `;
 
-exports[`Should render a button with a progress bar 1`] = `
+exports[`Should activate a progress bar button onMouseDown 1`] = `
 <button
-  className="aws-btn aws-btn--visible aws-btn--progress"
+  className="aws-btn aws-btn--visible aws-btn--active aws-btn--progress"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -128,6 +124,10 @@ exports[`Should render a button with a progress bar 1`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -148,14 +148,10 @@ exports[`Should render a button with a progress bar 1`] = `
 </button>
 `;
 
-exports[`Should render a button with a progress bar 2`] = `
+exports[`Should render a button with a progress bar 1`] = `
 <button
-  className="aws-btn aws-btn--visible aws-btn--active aws-btn--progress"
+  className="aws-btn aws-btn--visible aws-btn--progress"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -164,6 +160,10 @@ exports[`Should render a button with a progress bar 2`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -188,10 +188,6 @@ exports[`Should render a button without moveEvents 1`] = `
 <button
   className="aws-btn aws-btn--primary aws-btn--visible"
   href={null}
-  onMouseDown={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -200,6 +196,10 @@ exports[`Should render a button without moveEvents 1`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -216,10 +216,6 @@ exports[`Should render a simple primary button 1`] = `
 <button
   className="aws-btn aws-btn--primary aws-btn--visible"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -228,6 +224,10 @@ exports[`Should render a simple primary button 1`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"
@@ -244,10 +244,6 @@ exports[`Should render a simple secondary button 1`] = `
 <button
   className="aws-btn aws-btn--secondary aws-btn--visible"
   href={null}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
   role="button"
   style={Object {}}
   target={null}
@@ -256,6 +252,10 @@ exports[`Should render a simple secondary button 1`] = `
 >
   <span
     className="aws-btn__wrapper"
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
   >
     <span
       className="aws-btn__content"

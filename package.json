@@ -15,7 +15,6 @@
   },
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
-    "start:white": "webpack-dev-server -d --config webpack.demo.theme.config.js",
     "build": "NODE_ENV=production webpack",
     "build:scss": "NODE_ENV=production webpack --config webpack.scss.config.js && rm ./dist/styles.js",
     "build:website": "webpack -p --config webpack.website.config.js",

@@ -4,13 +4,13 @@
 @import './config/colors.scss';
 
 // [Default] Custom Properties
-@import '../../base/with-custom-properties/custom-properties.scss';
+@import '../../base/custom-properties.scss';
 
 // [Default] Lists
-@import '../../base/with-custom-properties/lists.scss';
+@import '../../base/lists.scss';
 
 // [Default] Main Styles
-@import '../../base/with-custom-properties/main.scss';
+@import '../../base/main.scss';
 
 // [Default] Progress Styles
-@import '../../base/with-custom-properties/progress.scss';
+@import '../../base/progress.scss';

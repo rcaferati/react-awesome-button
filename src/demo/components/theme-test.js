@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AwesomeButton, AwesomeButtonSocial, AwesomeButtonProgress } from '../../index';
 import Modules from '../../helpers/modules';
+import styles from './theme-test.scss';
 
 class Test extends React.Component {
   static propTypes = {
-    styles: PropTypes.object.isRequired,
     theme: PropTypes.string.isRequired,
   };
 
@@ -18,7 +18,6 @@ class Test extends React.Component {
   }
   render() {
     const {
-      styles,
       theme,
     } = this.props;
 
@@ -32,13 +31,17 @@ class Test extends React.Component {
           >
             <i className="fa fa-codepen" aria-hidden /> Primary
           </AwesomeButton>
-        </div>
-        <div className={styles.section}>
           <AwesomeButton
             cssModule={Module}
             type="secondary"
           >
             Secondary
+          </AwesomeButton>
+          <AwesomeButton
+            cssModule={Module}
+            type="link"
+          >
+            Anchor
           </AwesomeButton>
         </div>
         <div className={styles.section}>
@@ -52,13 +55,12 @@ class Test extends React.Component {
               }, 750);
             }}
           >
-            Progress
+            Primary Progress
           </AwesomeButtonProgress>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
           <AwesomeButton
             bubbles
-            size="medium"
             cssModule={Module}
             placeholder
             type="secondary"
@@ -68,6 +70,7 @@ class Test extends React.Component {
           <span
             tabIndex="0"
             role="button"
+            className={styles.action}
             onClick={() => {
               this.setState({
                 placeholderButtonText: this.state.placeholderButtonText ? '' : 'Placeholder',
@@ -80,7 +83,6 @@ class Test extends React.Component {
         <div className={`${styles.loadData} ${styles.section}`}>
           <AwesomeButton
             cssModule={Module}
-            size="medium"
             bubbles
             disabled={this.state.isDisabled}
           >
@@ -89,11 +91,10 @@ class Test extends React.Component {
           <span
             tabIndex="0"
             role="button"
+            className={styles.action}
             onClick={() => {
               this.setState({
                 isDisabled: !this.state.isDisabled,
-              }, () => {
-                console.log(this.state.isDisabled);
               });
             }}
           >
@@ -102,19 +103,17 @@ class Test extends React.Component {
         </div>
         <div className={styles.section}>
           <AwesomeButtonSocial
-            iconHeight="24px"
-            iconWidth="24px"
+            iconHeight={24}
+            iconWidth={26}
             url="https://caferati.me"
             type="facebook"
             cssModule={Module}
           >
             Share
           </AwesomeButtonSocial>
-        </div>
-        <div className={styles.section}>
           <AwesomeButtonSocial
-            iconHeight="24px"
-            iconWidth="26px"
+            iconHeight={24}
+            iconWidth={26}
             type="twitter"
             message="Checkout my full portfolio @ "
             url="https://caferati.me"
@@ -122,11 +121,9 @@ class Test extends React.Component {
           >
             Share
           </AwesomeButtonSocial>
-        </div>
-        <div className={styles.section}>
           <AwesomeButtonSocial
-            iconHeight="24px"
-            iconWidth="26px"
+            iconHeight={24}
+            iconWidth={26}
             type="instagram"
             url="https://instagram.com"
             cssModule={Module}

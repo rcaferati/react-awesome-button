@@ -265,11 +265,11 @@ export default class AwesomeButton extends React.Component {
         role="button"
         title={title}
         {... this.extraProps}
-        {... this.moveEvents()}
       >
         <span
           ref={(button) => { this.button = button; }}
           className={getClassName(`${this.rootElement}__wrapper`, cssModule)}
+          {... this.moveEvents()}
         >
           <span
             ref={(content) => { this.content = content; }}

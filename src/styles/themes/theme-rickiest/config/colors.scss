@@ -1,9 +1,38 @@
-$button-color-primary: #bdddee;
-$button-color-primary-border: #d2cabf;
-$button-color-secondary: #fafafa;
-$button-color-secondary-border: #b3e5e1;
-$button-color-disabled: #e3fdd6;
-$button-color-disabled-border: #b3e39b;
-$button-color-placeholder: #95d44a;
-$button-color-placeholder-border: #5bbd3a;
-$button-default-placeholder-font-color: #bce74c;
+$button-primary-color: #a9d3e9;
+$button-primary-color-dark: darken($button-primary-color, 20%);
+$button-primary-color-light: darken($button-primary-color, 35%);
+$button-primary-color-hover: darken($button-primary-color, 3%);
+$button-primary-color-active: darken($button-primary-color, 7%);
+$button-primary-border: none;
+
+$button-secondary-color: #fafafa;
+$button-secondary-border-color: #b3e5e1;
+$button-secondary-color-dark: darken($button-secondary-border-color, 20%);
+$button-secondary-color-light: darken($button-secondary-border-color, 40%);
+$button-secondary-color-hover: lighten($button-secondary-border-color, 17.5%);
+$button-secondary-color-active: lighten($button-secondary-border-color, 15%);
+$button-secondary-border: 2px solid $button-secondary-border-color;
+
+$button-disabled-color: #e3fdd6;
+$button-disabled-border-color: #b3e39b;
+$button-disabled-color-dark: darken($button-disabled-border-color, 2%);
+$button-disabled-color-light: darken($button-disabled-border-color, 5%);
+$button-disabled-color-hover: $button-disabled-color;
+$button-disabled-color-active: $button-disabled-color;
+$button-disabled-border: 2px solid $button-disabled-border-color;
+
+$button-placeholder-color: #e3fdd6;
+$button-placeholder-border-color: #b3e39b;
+$button-placeholder-color-dark: darken($button-placeholder-border-color, 2%);
+$button-placeholder-color-light: darken($button-placeholder-border-color, 5%);
+$button-placeholder-color-hover: $button-placeholder-color;
+$button-placeholder-color-active: $button-placeholder-color;
+$button-placeholder-border: 2px solid $button-placeholder-border-color;
+
+$button-link-color: #95d44a;
+$button-link-border-color: #5bbd3a;
+$button-link-color-dark: darken($button-link-border-color, 5%);
+$button-link-color-light: darken($button-link-border-color, 15%);
+$button-link-color-hover: $button-link-color;
+$button-link-color-active: $button-link-color;
+$button-link-border: 2px solid $button-link-border-color;

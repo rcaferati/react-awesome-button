@@ -3,11 +3,11 @@ import {
   AwesomeButton,
   AwesomeButtonSocial,
   AwesomeButtonProgress,
-} from '../index';
-import AwsBtnStyles from '../styles/themes/theme-blue/styles.scss';
-import AwsBtnThemeMorty from '../styles/themes/theme-c137/styles.scss';
-import AwsBtnThemeRick from '../styles/themes/theme-rickiest/styles.scss';
-import Theme from './components/theme';
+} from '../../index';
+import AwsBtnStyles from '../../styles/themes/theme-blue/styles.scss';
+import AwsBtnThemeMorty from '../../styles/themes/theme-c137/styles.scss';
+import AwsBtnThemeRick from '../../styles/themes/theme-rickiest/styles.scss';
+import Theme from '../components/theme';
 
 const Div = props => (<div {... props} />);
 

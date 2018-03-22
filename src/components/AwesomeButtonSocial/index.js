@@ -15,16 +15,17 @@ export default class AwesomeButtonSocial extends React.Component {
     disabled: PropTypes.bool,
     element: PropTypes.func,
     height: PropTypes.string,
+    href: PropTypes.string,
     icon: PropTypes.bool,
     iconHeight: PropTypes.number,
     iconWidth: PropTypes.number,
     image: PropTypes.string,
     message: PropTypes.string,
-    target: PropTypes.string,
     moveEvents: PropTypes.bool,
     phone: PropTypes.string,
-    href: PropTypes.string,
+    size: PropTypes.string,
     style: PropTypes.object,
+    target: PropTypes.string,
     type: PropTypes.string.isRequired,
     url: PropTypes.string,
     user: PropTypes.string,
@@ -39,16 +40,17 @@ export default class AwesomeButtonSocial extends React.Component {
     disabled: false,
     element: null,
     height: null,
-    target: null,
+    href: null,
     icon: true,
     iconHeight: ICON_HEIGHT,
     iconWidth: ICON_WIDTH,
     image: null,
-    href: null,
     message: null,
     moveEvents: true,
     phone: null,
+    size: null,
     style: {},
+    target: null,
     url: null,
     user: null,
     visible: true,
@@ -123,12 +125,13 @@ export default class AwesomeButtonSocial extends React.Component {
       iconWidth,
       iconHeight,
       href,
+      size,
       target,
     } = this.props;
-
     return (
       <AwesomeButton
         type={type}
+        size={size}
         target={target}
         cssModule={cssModule}
         bubbles
