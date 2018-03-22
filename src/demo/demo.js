@@ -39,6 +39,8 @@ const HeaderComponent = ({ match }) => {
       title={Data.title}
       framework={Data.framework}
       name={Data.name}
+      repository={Data.repository}
+      module={data[theme].module}
       size={Data.size}
       description={Data.description}
       themes={Data.themes}

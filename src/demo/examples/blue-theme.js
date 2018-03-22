@@ -14,7 +14,7 @@ const component = (
 const module = Modules.Modules[THEME];
 
 const example = {
-  title: 'Blue-Theme',
+  title: 'Boring Blue Theme',
   items,
   component,
   componentClass: Modules.Modules['theme-blue']['aws-btn'],

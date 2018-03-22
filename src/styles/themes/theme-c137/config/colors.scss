@@ -12,12 +12,12 @@ $button-secondary-color-hover: darken($button-secondary-color, 7.5%);
 $button-secondary-color-active: darken($button-secondary-color, 15%);
 $button-secondary-border: none;
 
-$button-link-color: #f3c8ad;
-$button-link-color-dark: #734922;
-$button-link-color-light: darken($button-link-color-dark, 10%);
-$button-link-color-hover: $button-link-color;
-$button-link-color-active: $button-link-color;
-$button-link-border: 1px solid #8c633c;
+$button-anchor-color: #f3c8ad;
+$button-anchor-color-dark: #734922;
+$button-anchor-color-light: darken($button-anchor-color-dark, 10%);
+$button-anchor-color-hover: $button-anchor-color;
+$button-anchor-color-active: $button-anchor-color;
+$button-anchor-border: 1px solid #8c633c;
 
 $button-placeholder-color: #444444;
 $button-placeholder-color-dark: darken($button-placeholder-color, 20%);

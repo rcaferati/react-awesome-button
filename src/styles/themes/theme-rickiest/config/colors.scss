@@ -29,10 +29,10 @@ $button-placeholder-color-hover: $button-placeholder-color;
 $button-placeholder-color-active: $button-placeholder-color;
 $button-placeholder-border: 2px solid $button-placeholder-border-color;
 
-$button-link-color: #95d44a;
-$button-link-border-color: #5bbd3a;
-$button-link-color-dark: darken($button-link-border-color, 5%);
-$button-link-color-light: darken($button-link-border-color, 15%);
-$button-link-color-hover: $button-link-color;
-$button-link-color-active: $button-link-color;
-$button-link-border: 2px solid $button-link-border-color;
+$button-anchor-color: #95d44a;
+$button-anchor-border-color: #5bbd3a;
+$button-anchor-color-dark: darken($button-anchor-border-color, 5%);
+$button-anchor-color-light: darken($button-anchor-border-color, 15%);
+$button-anchor-color-hover: $button-anchor-color;
+$button-anchor-color-active: $button-anchor-color;
+$button-anchor-border: 2px solid $button-anchor-border-color;

@@ -28,12 +28,12 @@ $button-colors:
   ),
   (
     "link",
-    var(--button-link-color),
-    var(--button-link-color-dark),
-    var(--button-link-color-light),
-    var(--button-link-color-hover),
-    var(--button-link-color-active),
-    var(--button-link-border)
+    var(--button-anchor-color),
+    var(--button-anchor-color-dark),
+    var(--button-anchor-color-light),
+    var(--button-anchor-color-hover),
+    var(--button-anchor-color-active),
+    var(--button-anchor-border)
   ),
   (
     "disabled",
