@@ -8,7 +8,8 @@
 
 ## Live demo
 
-+ <a href="https://caferati.me/demo/react-awesome-button" target="_blank">On my portfolio</a>
+Checkout the `CSS customizer` at <a title="React Awesome Button - CSS Customizer" href="https://caferati.me/demo/react-awesome-button" target="_blank">my portfolio</a>
+[<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/images/react-awesome-button-customizer?raw=true" width="400" />](https://caferati.me/demo/react-awesome-button)
 
 ## Examples
 
@@ -54,15 +55,15 @@
 | action                | `function`    | `null`      | Default click function |
 | bubbles               | `bool`        | `false`     | Should render the bubbles onClick animation |
 | disabled              | `bool`        | `false`     | Should render a disabled button |
-| type                  | `string`      | `"primary"` | Render a specific button type, styled by the .scss type list |
-| size                  | `string`      | `"auto"`    | Render a specific button size, styled by the .scss size list |
+| type                  | `string`      | `primary` | Render a specific button type, styled by the .scss type list |
+| size                  | `string`      | `auto`    | Render a specific button size, styled by the .scss size list |
 | element               | `node`        | `null`      | Overwrites the default container element renderer, useful for using it with react-router Link container. |
 | href                  | `string`      | `null`      | Forces the button to be rendered on an `anchor` container and sets the href to the specified value |
 | target                | `string`      | `null`      | Render an anchor with a specific target attribute |
 | progress              | `bool`        | `false`     | Should render a progress button |
-| loadingLabel          | `string`      | `"Wait .."` | Progress button loading label text |
-| errorLabel            | `string`      | `"Error"`   | Progress button error label text |
-| successLabel          | `string`      | `"Success"` | Progress button success label text |
+| loadingLabel          | `string`      | `Wait ..` | Progress button loading label text |
+| errorLabel            | `string`      | `Error`   | Progress button error label text |
+| successLabel          | `string`      | `Success` | Progress button success label text |
 | visible               | `bool`        | `true`      | Should the button be visible |
 
 ## Author
