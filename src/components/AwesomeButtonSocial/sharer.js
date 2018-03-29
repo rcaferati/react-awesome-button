@@ -1,6 +1,12 @@
 import { serialize } from '../../helpers/components';
 
 function centerWindow(width, height) {
+  if (typeof window === 'undefined') {
+    return {
+      top: 0,
+      left: 0,
+    };
+  }
   const screenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
   const screenTop = window.screenTop !== undefined ? window.screenTop : screen.top;
   const windowWidth = window.innerWidth ?
