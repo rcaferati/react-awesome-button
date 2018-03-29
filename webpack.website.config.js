@@ -4,10 +4,10 @@ const path = require('path');
 
 const config = {
   entry: {
-    'react-awesome-button': ['./src/demo/demo.js'],
+    'react-awesome-button': ['./demo/index.js'],
   },
   output: {
-    path: path.resolve(__dirname, 'demo/website'),
+    path: path.resolve(__dirname, 'demo/public/website'),
     filename: '[name].js',
     libraryTarget: 'umd',
     library: 'react-awesome-button',
@@ -41,7 +41,7 @@ const config = {
       {
         test: /\.css$/i,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: 'css-loader?importLoaders=1!postcss-loader',
         }),
       },

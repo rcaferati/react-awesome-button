@@ -17,7 +17,7 @@
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
     "build": "NODE_ENV=production webpack",
     "build:scss": "NODE_ENV=production webpack --config webpack.scss.config.js && rm ./dist/styles.js",
-    "build:website": "webpack -p --config ./demo/webpack.website.config.js",
+    "build:website": "webpack -p --config webpack.website.config.js",
     "build:themes": "babel-node ./theme-builder.js",
     "test": "BABEL_JEST_STAGE=0 jest",
     "lint": "eslint src/**",
