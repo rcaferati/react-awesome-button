@@ -2,7 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   entry: {
-    'react-awesome-button': ['./src/demo/demo.js'],
+    'react-awesome-button': ['./demo/index.js'],
   },
   module: {
     rules: [
@@ -22,7 +22,7 @@ const config = {
               loader: 'css-loader',
               options: {
                 modules: true,
-                localIdentName: '[local]--[hash:base64:4]',
+                localIdentName: '[name]--[local]--[hash:base64:4]',
               },
             },
             'postcss-loader',
@@ -44,7 +44,7 @@ const config = {
     }),
   ],
   devServer: {
-    contentBase: './demo',
+    contentBase: './demo/public',
     historyApiFallback: true,
     inline: true,
   },

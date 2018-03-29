@@ -1,4 +1,8 @@
-const POSITION_STATES = ['middle', 'left', 'right'];
+const POSITION_STATES = [
+  'middle',
+  'left',
+  'right',
+];
 
 export function serialize(obj, separator = '&') {
   return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join(separator);
