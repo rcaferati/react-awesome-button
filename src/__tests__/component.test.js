@@ -22,7 +22,7 @@ test('Button changes on mouse down -> up -> leave', () => {
   const component = renderer.create(<AwesomeButton>Button</AwesomeButton>);
   expect(component.toJSON()).toMatchSnapshot();
 
-  const span = component.root.findByType('span');
+  const span = component.root.findByType('button');
 
   span.props.onMouseDown();
   expect(component.toJSON()).toMatchSnapshot();
@@ -55,6 +55,6 @@ test('Should activate a progress bar button onMouseDown', () => {
     >
       Button
     </AwesomeButtonProgress>);
-  component.root.findByType('span').props.onMouseDown();
+  component.root.findByType('button').props.onMouseDown();
   expect(component.toJSON()).toMatchSnapshot();
 });
