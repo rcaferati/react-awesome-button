@@ -7,13 +7,14 @@ export default class Navigation extends React.Component {
   static propTypes = {
     themes: PropTypes.array.isRequired,
     theme: PropTypes.string.isRequired,
+    domain: PropTypes.string.isRequired,
   };
 
   renderButtons() {
     return this.props.themes.map((theme, index) => (
       <Link
         key={`${theme.name}-${index}`}
-        to={`/${theme.slug}`}
+        to={`${this.props.domain}/${theme.slug}`}
         onClick={this.onClick}
         className={theme.slug === this.props.theme ? Styles.selected : null}
       >

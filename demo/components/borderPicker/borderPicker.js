@@ -19,7 +19,6 @@ class CustomiseBorder extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       color: '',
       width: 0,
@@ -56,8 +55,6 @@ class CustomiseBorder extends React.Component {
     this.setState({
       color,
       width,
-    }, () => {
-      console.log(this.state);
     });
   }
 

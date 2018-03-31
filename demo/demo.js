@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
+  StaticRouter,
   Route,
 } from 'react-router-dom';
 import styles from './demo.scss';
@@ -47,6 +49,7 @@ const HeaderComponent = ({ match }) => {
       repository={Data.repository}
       module={data[theme].module}
       size={Data.size}
+      domain={Data.domain}
       description={Data.description}
       themes={Data.themes}
       theme={theme}
@@ -55,6 +58,14 @@ const HeaderComponent = ({ match }) => {
 };
 
 class Demo extends React.Component {
+  static propTypes = {
+    server: PropTypes.bool,
+    location: PropTypes.string,
+  };
+  static defaultProps = {
+    server: false,
+    location: '',
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -68,8 +79,15 @@ class Demo extends React.Component {
   }
 
   render() {
+    const {
+      server,
+      location,
+    } = this.props;
+    const Router = server === true ? StaticRouter : BrowserRouter;
     return (
-      <Router>
+      <Router
+        location={location}
+      >
         <div>
           <PageRibbon
             href={Data.repository}
@@ -81,9 +99,9 @@ class Demo extends React.Component {
             <span>Support it on Github</span><span role="img" aria-label="hi?">🙌🏻</span>
           </PageRibbon>
           <Body>
-            <Route path="/:theme?" component={HeaderComponent} />
+            <Route path={`${Data.domain}/:theme?`} component={HeaderComponent} />
             <Route
-              path="/:theme?"
+              path={`${Data.domain}/:theme?`}
               render={({ match }) => (
                 <DemoComponent
                   match={match}
@@ -96,7 +114,7 @@ class Demo extends React.Component {
           </Body>
           <Composer>
             <Route
-              path="/:theme?"
+              path={`${Data.domain}/:theme?`}
               render={({ match }) => (
                 <ComposerComponent
                   match={match}

@@ -190,7 +190,6 @@ class Customiser extends React.Component {
           );
           break;
         case 'border':
-          console.log();
           input = (
             <BorderPicker
               value={this.state[buttonName] || this.values[buttonName] || ''}
@@ -208,7 +207,7 @@ class Customiser extends React.Component {
             />
           );
       }
-
+      const buttonValue = this.state[buttonName] ? `${this.state[buttonName] || this.values[buttonName]}${cssProperty.suffix || ''}` || '' : '';
       return (
         <li key={buttonName}>
           <label>
@@ -218,7 +217,7 @@ class Customiser extends React.Component {
             {input}
           </div>
           <div>
-            <span>{`${this.state[buttonName] || this.values[buttonName]}${cssProperty.suffix || ''}`}</span>
+            <span>{buttonValue}</span>
           </div>
         </li>
       );

@@ -22,9 +22,7 @@ class Popover extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('WOOP - 1');
     if (this.props.opened !== newProps.opened) {
-      console.log('WOOP - 2');
       this.toggleVisibility(newProps.opened);
     }
   }
@@ -37,7 +35,6 @@ class Popover extends React.Component {
 
   toggleVisibility(toggle, timed) {
     if (this.animating) {
-      console.log('IS ANIMATING');
       if (timed) {
         return;
       }
@@ -46,18 +43,14 @@ class Popover extends React.Component {
       }, 175);
       return;
     }
-    console.log('ISN`T ANIMATING');
     this.animating = true;
     if (toggle === true) {
-      console.log('TOGGLE TRUE');
       this.container.classList.add(Styles.show);
       setCssEndEvent(this.container, 'animation').then(() => {
-        console.log('RUNNING ENGING THINGS NICELY');
         this.animating = false;
       });
       return;
     }
-    console.log('TOGGLE FALSE');
     this.container.classList.add(Styles.hide);
     setCssEndEvent(this.container, 'animation').then(() => {
       this.container.classList.remove(Styles.show);

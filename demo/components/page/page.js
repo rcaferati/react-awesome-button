@@ -30,9 +30,6 @@ const Page = ({
       opened={popoverOpened}
       text={popoverText}
       handlePopover={handlePopover}
-      onClose={() => {
-        console.log('closing');
-      }}
     />
   </Section>
 );
