@@ -147,7 +147,7 @@ export function examples(theme) {
   return [
     {
       title: 'Installation',
-      command: 'npm install --save react-native-awesome-button',
+      command: 'npm install --save react-awesome-button',
     },
     {
       title: 'Multiple Import',
@@ -155,7 +155,7 @@ export function examples(theme) {
 import {
   AwesomeButton,
   AwesomeButtonProgress,
-  AwesomeButtonShare,
+  AwesomeButtonSocial,
 } from 'react-awesome-button';
 `,
     },
