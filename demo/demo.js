@@ -12,7 +12,12 @@ import data from './examples';
 
 const DEFAULT_THEME = 'blue-theme';
 
-const DemoComponent = ({ match, handlePopover, popoverOpened, popoverText }) => {
+const DemoComponent = ({
+  match,
+  handlePopover,
+  popoverOpened,
+  popoverText,
+}) => {
   const theme = match.params.theme || DEFAULT_THEME;
   return (
     <Page
@@ -23,6 +28,13 @@ const DemoComponent = ({ match, handlePopover, popoverOpened, popoverText }) => 
       popoverText={popoverText}
     />
   );
+};
+
+DemoComponent.propTypes = {
+  match: PropTypes.object.isRequired,
+  handlePopover: PropTypes.func.isRequired,
+  popoverOpened: PropTypes.bool.isRequired,
+  popoverText: PropTypes.string.isRequired,
 };
 
 const ComposerComponent = ({ match, handlePopover }) => {
@@ -37,6 +49,11 @@ const ComposerComponent = ({ match, handlePopover }) => {
       properties={data[theme].properties}
     />
   );
+};
+
+ComposerComponent.propTypes = {
+  match: PropTypes.object.isRequired,
+  handlePopover: PropTypes.func.isRequired,
 };
 
 const HeaderComponent = ({ match }) => {
@@ -55,6 +72,10 @@ const HeaderComponent = ({ match }) => {
       theme={theme}
     />
   );
+};
+
+HeaderComponent.propTypes = {
+  match: PropTypes.object.isRequired,
 };
 
 class Demo extends React.Component {
@@ -94,7 +115,7 @@ class Demo extends React.Component {
             title="Github Repository"
             target="_blank"
             className={styles.ribbon}
-            delay={300}
+            delay={1250}
           >
             <span>Support it on Github</span><span role="img" aria-label="hi?">🙌🏻</span>
           </PageRibbon>

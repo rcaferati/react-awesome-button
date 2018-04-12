@@ -4,7 +4,7 @@ const path = require('path');
 
 const config = {
   entry: {
-    'react-awesome-button': ['./demo/index.js'],
+    'react-awesome-button': ['./demo/demo.js'],
   },
   output: {
     path: path.resolve(__dirname, 'demo/public/website'),
