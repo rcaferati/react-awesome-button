@@ -250,6 +250,13 @@ export default class AwesomeButton extends React.Component {
     }
     return events;
   }
+
+  componentWillUnmount() {
+    if (this.clearTimer) {
+      clearTimeout(this.clearTimer);
+    }
+  }
+
   render() {
     const RenderComponent = this.renderComponent;
     const {
