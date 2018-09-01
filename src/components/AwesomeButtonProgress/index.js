@@ -19,6 +19,7 @@ export default class AwesomeProgress extends React.Component {
     children: PropTypes.node,
     size: PropTypes.string,
     type: PropTypes.string,
+    releaseDelay: PropTypes.number,
   };
   static defaultProps = {
     action: null,
@@ -29,6 +30,7 @@ export default class AwesomeProgress extends React.Component {
     children: null,
     size: null,
     type: null,
+    releaseDelay: 500,
   };
   constructor(props) {
     super(props);
@@ -38,6 +40,8 @@ export default class AwesomeProgress extends React.Component {
     this.state = {
       loadingEnd: false,
       loadingStart: false,
+      loadingError: false,
+      errorLabel: null,
       blocked: false,
       active: false,
     };
@@ -52,17 +56,21 @@ export default class AwesomeProgress extends React.Component {
     const {
       loadingStart,
       loadingEnd,
+      loadingError,
     } = this.state;
     const className = [
       (loadingStart && `${rootElement}--start`) || null,
       (loadingEnd && `${rootElement}--end`) || null,
+      (loadingError && `${rootElement}--errored`) || null,
       `${rootElement}--progress`,
     ];
     return className.join(' ').trim().replace(/[\s]+/ig, ' ');
   }
-  endLoading() {
+  endLoading(state = true, errorLabel = null) {
     this.setState({
       loadingEnd: true,
+      loadingError: !state,
+      errorLabel,
     });
     this.animationStage = 1;
   }
@@ -98,7 +106,6 @@ export default class AwesomeProgress extends React.Component {
     if (this.animationStage !== 0) {
       if (this.animationStage === LOADING_ANIMATION_STEPS) {
         this.animationStage = 0;
-        // hold life for 500ms before releasing the button;
         setTimeout(() => {
           if (typeof window !== 'undefined') {
             window.requestAnimationFrame(() => {
@@ -111,7 +118,7 @@ export default class AwesomeProgress extends React.Component {
               });
             });
           }
-        }, 500);
+        }, this.props.releaseDelay);
         return;
       }
       this.animationStage += 1;
@@ -120,10 +127,12 @@ export default class AwesomeProgress extends React.Component {
   action = () => {
     this.startLoading();
     if (this.props.action) {
-      this.props.action(
-        this.container,
-        this.endLoading.bind(this),
-      );
+      setTimeout(() => {
+        this.props.action(
+          this.container,
+          this.endLoading.bind(this),
+        );
+      }, 250);
     }
   }
   moveEvents() {
@@ -160,6 +169,11 @@ export default class AwesomeProgress extends React.Component {
       resultLabel,
       type,
     } = this.props;
+    const {
+      active,
+      blocked,
+      errorLabel,
+    } = this.state;
     return (
       <AwesomeButton
         size={size}
@@ -167,14 +181,14 @@ export default class AwesomeProgress extends React.Component {
         className={this.getRootClassName()}
         action={this.action}
         cssModule={cssModule}
-        active={this.state.active}
-        blocked={this.state.blocked}
+        active={active}
+        blocked={blocked}
         {... this.moveEvents()}
       >
         <span
           ref={(content) => { this.content = content; }}
           data-loading={(loadingLabel) || null}
-          data-status={(resultLabel) || null}
+          data-status={(errorLabel) || (resultLabel) || null}
           className={getClassName(`${this.rootElement}__progress`, cssModule)}
         >
           <span>{children}</span>

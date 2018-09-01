@@ -1,17 +1,14 @@
 // TODO: create array on build.
 export const THEMES = [
-  'theme-amber',
   'theme-blue',
+  'theme-red',
+  'theme-amber',
+  'theme-orange',
+  'theme-indigo',
   'theme-c137',
   'theme-eric',
   'theme-flat',
-  'theme-indigo',
-  'theme-one',
-  'theme-orange',
-  'theme-red',
   'theme-rickiest',
-  'theme-three',
-  'theme-two',
 ];
 
 export const MODULES = [];

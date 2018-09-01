@@ -24,13 +24,24 @@
     "build:themes": "babel-node ./theme-builder.js",
     "test": "BABEL_JEST_STAGE=0 jest",
     "lint": "eslint src/**",
-    "prepublish": "npm run build && npm run build:scss && npm run build:themes"
+    "prepublish": "npm run build && npm run build:scss && npm run build:themes",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.2.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.10",
+    "@storybook/addon-centered": "^3.4.10",
+    "@storybook/addon-info": "^3.4.10",
+    "@storybook/addon-knobs": "^3.4.10",
+    "@storybook/addon-links": "^3.4.10",
+    "@storybook/addon-storysource": "^3.4.10",
+    "@storybook/addon-viewport": "^3.4.10",
+    "@storybook/addons": "^3.4.10",
+    "@storybook/react": "^3.4.10",
     "autoprefixer": "^7.0.1",
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
@@ -42,6 +53,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "css-loader": "^0.28.1",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -60,6 +72,7 @@
     "react-test-renderer": "^16.2.0",
     "sass-loader": "^6.0.3",
     "shelljs": "^0.7.8",
+    "storybook-addon-smart-knobs": "^3.3.1",
     "style-loader": "^0.19.1",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.10.0"

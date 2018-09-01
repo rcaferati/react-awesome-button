@@ -75,6 +75,11 @@
       }
     }
   }
+  &--errored {
+    .#{$button-root}__progress:after {
+      color: red !important;
+    }
+  }
   &--end {
     .#{$button-root}__content {
       &:after {
