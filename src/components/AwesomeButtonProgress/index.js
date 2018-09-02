@@ -113,6 +113,8 @@ export default class AwesomeProgress extends React.Component {
                 setTimeout(() => {
                   this.setState({
                     blocked: false,
+                    loadingError: false,
+                    errorLabel: null,
                   });
                 }, 500);
               });

@@ -1,0 +1,35 @@
+// Basic Buttons
+$button-primary-color: #5e6fbf;
+$button-primary-color-dark: darken($button-primary-color, 15%);
+$button-primary-color-light: lighten($button-primary-color, 50%);
+$button-primary-color-hover: darken($button-primary-color, 5%);
+$button-primary-color-active: darken($button-primary-color, 10%);
+$button-primary-border: none;
+
+$button-secondary-color: #7a7587;
+$button-secondary-color-dark: darken($button-secondary-color, 15%);
+$button-secondary-color-light: lighten($button-secondary-color, 50%);;
+$button-secondary-color-hover: darken($button-secondary-color, 5%);
+$button-secondary-color-active: darken($button-secondary-color, 10%);
+$button-secondary-border: none;
+
+$button-anchor-color: #55a1b6;
+$button-anchor-color-dark: darken($button-anchor-color, 15%);
+$button-anchor-color-light: lighten($button-anchor-color, 75%);
+$button-anchor-color-hover: darken($button-anchor-color, 2%);
+$button-anchor-color-active: darken($button-anchor-color, 5%);
+$button-anchor-border: none;
+
+$button-disabled-color: #eac3da;
+$button-disabled-color-dark: darken($button-disabled-color, 15%);
+$button-disabled-color-light: darken($button-disabled-color, 10%);
+$button-disabled-color-hover: $button-disabled-color;
+$button-disabled-color-active: $button-disabled-color;
+$button-disabled-border: none;
+
+$button-placeholder-color: #eac3da;
+$button-placeholder-color-dark: darken($button-placeholder-color, 15%);
+$button-placeholder-color-light: darken($button-placeholder-color, 10%);
+$button-placeholder-color-hover: $button-placeholder-color;
+$button-placeholder-color-active: $button-placeholder-color;
+$button-placeholder-border: none;

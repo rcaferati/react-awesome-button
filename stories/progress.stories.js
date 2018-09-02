@@ -2,15 +2,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { List } from './ui';
+import { withKnobs, text, select, number } from '@storybook/addon-knobs';
 import cssModule from '../src/styles';
 import { AwesomeButtonProgress } from '../src/index';
 
 storiesOf('AwesomeButtonProgress', module)
   .addDecorator(centered)
   .addDecorator(withKnobs)
-  .add('Progress', () => (
+  .add('Default', () => (
     <AwesomeButtonProgress
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
@@ -42,22 +41,20 @@ storiesOf('AwesomeButtonProgress', module)
       {text('Text', 'Progress')}
     </AwesomeButtonProgress>
   ))
-  .add('Error Handling', () => {
-    return (
-      <AwesomeButtonProgress
-        loadingLabel="Wait for it.."
-        resultLabel="Done!"
-        releaseDelay={1000}
-        size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
-        type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-        cssModule={cssModule}
-        action={(element, next) => {
-          setTimeout(() => {
-            next(false, 'Error 23 :(');
-          }, 500);
-        }}
-      >
-        {text('Text', 'Progress')}
-      </AwesomeButtonProgress>
-    );
-  });
+  .add('Error Handling', () => (
+    <AwesomeButtonProgress
+      loadingLabel={text('loadingLabel', 'Wait for it..')}
+      resultLabel={text('resultLabel', 'Done!')}
+      releaseDelay={number('ReleaseDelay', 1000)}
+      size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
+      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      cssModule={cssModule}
+      action={(element, next) => {
+        setTimeout(() => {
+          next(false, 'Error Message :(');
+        }, 500);
+      }}
+    >
+      {text('Text', 'Progress')}
+    </AwesomeButtonProgress>
+  ));

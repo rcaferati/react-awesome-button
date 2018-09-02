@@ -76,8 +76,10 @@
     }
   }
   &--errored {
-    .#{$button-root}__progress:after {
-      color: red !important;
+    .#{$button-root}__content {
+      &:after {
+        background-color: rgba(255, 0, 0, 0.75);
+      }
     }
   }
   &--end {

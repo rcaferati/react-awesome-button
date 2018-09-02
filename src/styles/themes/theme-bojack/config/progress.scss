@@ -1,0 +1,11 @@
+.#{$button-root} {
+  &--progress {
+    &.#{$button-root}--secondary {
+      .#{$button-root}__progress {
+        &:before, &:after {
+          color: $button-primary-color;
+        }
+      }
+    }
+  }
+}

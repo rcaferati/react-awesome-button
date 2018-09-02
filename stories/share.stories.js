@@ -1,23 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { List } from './ui';
 import defaultStyles from '../src/styles';
 import { AwesomeButtonSocial } from '../src/index';
 
-const sharable = [
-];
-
-const others = [
-  'mail',
-  'instagram',
-];
-
 storiesOf('AwesomeButtonShare', module)
   .addDecorator(centered)
-  .addDecorator(withKnobs)
   .add('Icons', () => (
     <List>
       <AwesomeButtonSocial

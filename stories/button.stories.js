@@ -60,6 +60,7 @@ storiesOf('AwesomeButton', module)
       size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
       disabled={boolean('Disabled', false)}
+      bubbles={boolean('Bubbles', false)}
       cssModule={defaultStyles}
       action={action('clicked')}
     >

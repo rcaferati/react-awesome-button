@@ -1,8 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
 import centered from '@storybook/addon-centered';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { List } from './ui';
 import { THEMES, MODULES } from '../demo/helpers/modules';
 import { AwesomeButton } from '../src/index';
@@ -19,12 +17,8 @@ const renderTheme = module => (
   </List>
 );
 
-themes.addDecorator(centered).addDecorator(withKnobs);
+themes.addDecorator(centered);
 
 THEMES.forEach((theme) => {
-  themes.add(theme, withInfo({
-    header: true,
-    source: true,
-    text: 'Progress button usage.',
-  })(() => renderTheme(MODULES[theme])));
+  themes.add(theme, () => renderTheme(MODULES[theme]));
 });
