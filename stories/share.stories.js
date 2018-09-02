@@ -115,7 +115,7 @@ storiesOf('AwesomeButtonShare', module)
       target="_blank"
       href="https://youtube.com/"
     >
-      Github
+      Youtube
     </AwesomeButtonSocial>
   ))
   .add('Instagram', () => (
