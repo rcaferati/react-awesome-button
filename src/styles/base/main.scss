@@ -254,6 +254,15 @@ button.#{$button-root} {
       transform: translate3d(0, calc(1px * var(--button-hover-pressure)), 0);
     }
   }
+  &--icon {
+    .#{$button-root}__content {
+      > span:nth-child(1) {
+        > svg {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
   &--active {
     &:before {
       transform: translate3d(0, calc(var(--button-raise-level) * -1), 0);
