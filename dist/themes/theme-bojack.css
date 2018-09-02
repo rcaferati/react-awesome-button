@@ -1,8 +1,8 @@
 .aws-btn {
-  --button-default-height: 48px;
+  --button-default-height: 51px;
   --button-default-font-size: 14px;
-  --button-default-line-height: 24px;
-  --button-default-border-radius: 6px;
+  --button-default-line-height: 28px;
+  --button-default-border-radius: 2px;
   --button-default-placeholder-width: 120px;
   --button-icon-width: 44px;
   --button-icon-height: 44px;
@@ -19,40 +19,40 @@
   --button-hover-darken-opacity: 0.1;
   --button-letter-spacing: 0px;
   --button-horizontal-padding: 20px;
-  --button-raise-level: 5px;
-  --button-hover-pressure: 2;
+  --button-raise-level: 4px;
+  --button-hover-pressure: 1;
   --loading-transition-speed: 6s;
-  --transform-speed: 0.185s;
-  --button-primary-color: #a9d3e9;
-  --button-primary-color-dark: #58a9d4;
-  --button-primary-color-light: #2e84b2;
-  --button-primary-color-hover: #95c9e4;
-  --button-primary-color-active: #8dc4e2;
+  --transform-speed: 0.175s;
+  --button-primary-color: #5e6fbf;
+  --button-primary-color-dark: #3b4b95;
+  --button-primary-color-light: white;
+  --button-primary-color-hover: #4c5fb8;
+  --button-primary-color-active: #4354a7;
   --button-primary-border: none;
-  --button-secondary-color: #fafafa;
-  --button-secondary-color-dark: #67cbc3;
-  --button-secondary-color-light: #349890;
-  --button-secondary-color-hover: #ecf9f8;
-  --button-secondary-color-active: #d9f2f0;
-  --button-secondary-border: 2px solid #b3e5e1;
-  --button-anchor-color: #95d44a;
-  --button-anchor-color-dark: #52a934;
-  --button-anchor-color-light: #3f8228;
-  --button-anchor-color-hover: #89cf35;
-  --button-anchor-color-active: #7cbe2d;
-  --button-anchor-border: 2px solid #5bbd3a;
-  --button-disabled-color: #e3fdd6;
-  --button-disabled-color-dark: #ade193;
-  --button-disabled-color-light: #a4dd87;
-  --button-disabled-color-hover: #e3fdd6;
-  --button-disabled-color-active: #e3fdd6;
-  --button-disabled-border: 2px solid #b3e39b;
-  --button-placeholder-color: #e3fdd6;
-  --button-placeholder-color-dark: #ade193;
-  --button-placeholder-color-light: #a4dd87;
-  --button-placeholder-color-hover: #e3fdd6;
-  --button-placeholder-color-active: #e3fdd6;
-  --button-placeholder-border: 2px solid #b3e39b;
+  --button-secondary-color: #7a7587;
+  --button-secondary-color-dark: #55515e;
+  --button-secondary-color-light: #fdfdfe;
+  --button-secondary-color-hover: #6e6979;
+  --button-secondary-color-active: #615d6c;
+  --button-secondary-border: none;
+  --button-anchor-color: #55a1b6;
+  --button-anchor-color-dark: #397585;
+  --button-anchor-color-light: white;
+  --button-anchor-color-hover: #4e9db3;
+  --button-anchor-color-active: #4994a9;
+  --button-anchor-border: none;
+  --button-disabled-color: #eac3da;
+  --button-disabled-color-dark: #d68ab7;
+  --button-disabled-color-light: #dd9dc3;
+  --button-disabled-color-hover: #eac3da;
+  --button-disabled-color-active: #eac3da;
+  --button-disabled-border: none;
+  --button-placeholder-color: #eac3da;
+  --button-placeholder-color-dark: #d68ab7;
+  --button-placeholder-color-light: #dd9dc3;
+  --button-placeholder-color-hover: #eac3da;
+  --button-placeholder-color-active: #eac3da;
+  --button-placeholder-border: none;
   --button-mail-color: #cfcfcf;
   --button-mail-color-dark: #9c9c9c;
   --button-facebook-color: #4868ad;
@@ -789,17 +789,17 @@ span.aws-btn__bubble {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-radius: 6px;
+  border-radius: 2px;
   text-indent: 0;
   z-index: 3;
   overflow: hidden;
-  -webkit-transition: border 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out, -webkit-transform 0.185s ease-out;
-  transition: border 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out, -webkit-transform 0.185s ease-out;
-  transition: border 0.185s ease-out, transform 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out;
-  transition: border 0.185s ease-out, transform 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out, -webkit-transform 0.185s ease-out; }
+  -webkit-transition: border 0.175s ease-out, background 0.175s ease-out, color 0.175s ease-out, -webkit-transform 0.175s ease-out;
+  transition: border 0.175s ease-out, background 0.175s ease-out, color 0.175s ease-out, -webkit-transform 0.175s ease-out;
+  transition: border 0.175s ease-out, transform 0.175s ease-out, background 0.175s ease-out, color 0.175s ease-out;
+  transition: border 0.175s ease-out, transform 0.175s ease-out, background 0.175s ease-out, color 0.175s ease-out, -webkit-transform 0.175s ease-out; }
   .aws-btn--progress .aws-btn__progress > span {
-    -webkit-transition: opacity 0.0925s ease-out 0.13875s;
-    transition: opacity 0.0925s ease-out 0.13875s; }
+    -webkit-transition: opacity 0.0875s ease-out 0.13125s;
+    transition: opacity 0.0875s ease-out 0.13125s; }
   .aws-btn--progress .aws-btn__progress:before, .aws-btn--progress .aws-btn__progress:after {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -812,10 +812,10 @@ span.aws-btn__bubble {
             justify-content: center;
     color: rgba(255, 255, 255, 0.65);
     opacity: 0;
-    -webkit-transition: opacity 0.13875s ease-out 0.05s, -webkit-transform 0.185s ease-out 0.05s;
-    transition: opacity 0.13875s ease-out 0.05s, -webkit-transform 0.185s ease-out 0.05s;
-    transition: transform 0.185s ease-out 0.05s, opacity 0.13875s ease-out 0.05s;
-    transition: transform 0.185s ease-out 0.05s, opacity 0.13875s ease-out 0.05s, -webkit-transform 0.185s ease-out 0.05s; }
+    -webkit-transition: opacity 0.13125s ease-out 0.05s, -webkit-transform 0.175s ease-out 0.05s;
+    transition: opacity 0.13125s ease-out 0.05s, -webkit-transform 0.175s ease-out 0.05s;
+    transition: transform 0.175s ease-out 0.05s, opacity 0.13125s ease-out 0.05s;
+    transition: transform 0.175s ease-out 0.05s, opacity 0.13125s ease-out 0.05s, -webkit-transform 0.175s ease-out 0.05s; }
   .aws-btn--progress .aws-btn__progress:before {
     content: attr(data-loading);
     display: none;
@@ -876,3 +876,6 @@ span.aws-btn__bubble {
   -webkit-transform: translate3d(0, 50%, 0);
           transform: translate3d(0, 50%, 0);
   opacity: 0; }
+
+.aws-btn--progress.aws-btn--secondary .aws-btn__progress:before, .aws-btn--progress.aws-btn--secondary .aws-btn__progress:after {
+  color: #5e6fbf; }

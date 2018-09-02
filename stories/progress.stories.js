@@ -9,7 +9,7 @@ import { AwesomeButtonProgress } from '../src/index';
 storiesOf('AwesomeButtonProgress', module)
   .addDecorator(centered)
   .addDecorator(withKnobs)
-  .add('Default', () => (
+  .add('Success', () => (
     <AwesomeButtonProgress
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}

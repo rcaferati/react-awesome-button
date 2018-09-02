@@ -54,8 +54,8 @@ const buttons = (
 storiesOf('AwesomeButton', module)
   .addDecorator(centered)
   .addDecorator(withKnobs)
-  .add('Default', () => buttons)
-  .add('Customizable', () => (
+  .add('All Types', () => buttons)
+  .add('Primary', () => (
     <AwesomeButton
       size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
@@ -64,6 +64,57 @@ storiesOf('AwesomeButton', module)
       cssModule={defaultStyles}
       action={action('clicked')}
     >
-      {text('Text', 'Customizable')}
+      {text('Text', 'Primary')}
+    </AwesomeButton>
+  ))
+  .add('Secondary', () => (
+    <AwesomeButton
+      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('Type', ['primary', 'secondary', 'link'], 'secondary')}
+      disabled={boolean('Disabled', false)}
+      bubbles={boolean('Bubbles', false)}
+      cssModule={defaultStyles}
+      action={action('clicked')}
+    >
+      {text('Text', 'Primary')}
+    </AwesomeButton>
+  ))
+  .add('Link', () => (
+    <AwesomeButton
+      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('Type', ['primary', 'secondary', 'link'], 'link')}
+      disabled={boolean('Disabled', false)}
+      bubbles={boolean('Bubbles', false)}
+      href="https://github.com/rcaferati"
+      target="_blank"
+      cssModule={defaultStyles}
+      action={action('clicked')}
+    >
+      {text('Text', 'Link')}
+    </AwesomeButton>
+  ))
+  .add('Disabled', () => (
+    <AwesomeButton
+      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('Disabled', true)}
+      bubbles={boolean('Bubbles', false)}
+      cssModule={defaultStyles}
+      action={action('clicked')}
+    >
+      {text('Text', 'Disabled')}
+    </AwesomeButton>
+  ))
+  .add('Placeholder', () => (
+    <AwesomeButton
+      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('Disabled', false)}
+      bubbles={boolean('Bubbles', false)}
+      placeholder={boolean('Placeholder', true)}
+      cssModule={defaultStyles}
+      action={action('clicked')}
+    >
+      {text('Text', null)}
     </AwesomeButton>
   ));
