@@ -82,6 +82,12 @@ export default class AwesomeButton extends React.Component {
     this.checkProps(newProps);
     this.checkActive(newProps);
   }
+  componentWillUnmount() {
+    if (this.clearTimer) {
+      clearTimeout(this.clearTimer);
+    }
+  }
+
   getRootClassName() {
     const { rootElement } = this;
     const {
@@ -249,12 +255,6 @@ export default class AwesomeButton extends React.Component {
       };
     }
     return events;
-  }
-
-  componentWillUnmount() {
-    if (this.clearTimer) {
-      clearTimeout(this.clearTimer);
-    }
   }
 
   render() {

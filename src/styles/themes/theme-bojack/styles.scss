@@ -1,0 +1,23 @@
+// Base variables
+@import '../../base/variables.scss';
+
+// Variables overwrite
+@import './config/structure.scss';
+@import './config/colors.scss';
+
+// Base Custom Properties
+@import '../../base/custom-properties.scss';
+
+// Base Lists
+@import '../../base/lists.scss';
+
+// Base Main with Custom Properties
+@import '../../base/main.scss';
+// [Extend] Main Styles
+@import './config/main.scss';
+
+// Base Progress with Custom Properties
+@import '../../base/progress.scss';
+
+// Progress overwrite
+@import './config/progress.scss';

@@ -78,7 +78,7 @@ export default function Sharer({
       args.width = 850;
       break;
     case 'whatsapp':
-      params.phone = phone;
+      params.phone = phone.replace(/\+|(|)/mig, '');
       params.title = message || title;
       args.url = `https://api.whatsapp.com/send?${serialize(params, '&')}`;
       args.title = 'Whatsapp Message';

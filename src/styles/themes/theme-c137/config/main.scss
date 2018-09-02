@@ -4,4 +4,11 @@
       text-decoration: line-through;
     }
   }
+  &--placeholder {
+    .#{$button-root}__content {
+      > span:before {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
 }

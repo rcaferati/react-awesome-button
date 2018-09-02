@@ -75,6 +75,13 @@
       }
     }
   }
+  &--errored {
+    .#{$button-root}__content {
+      &:after {
+        background-color: rgba(255, 0, 0, 0.75);
+      }
+    }
+  }
   &--end {
     .#{$button-root}__content {
       &:after {
