@@ -186,8 +186,9 @@ button.#{$button-root} {
     }
     > span:nth-child(1) {
       display: block;
-      > svg, > img > span {
-        vertical-align: middle;
+      > svg {
+        vertical-align: text-top;
+        margin-top: -2px;
       }
     }
   }

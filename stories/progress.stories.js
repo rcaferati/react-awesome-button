@@ -24,7 +24,7 @@ storiesOf('AwesomeButtonProgress', module)
       {text('Text', 'Progress')}
     </AwesomeButtonProgress>
   ))
-  .add('Custom Text', () => (
+  .add('Custom Labels', () => (
     <AwesomeButtonProgress
       loadingLabel="Wait for it.."
       resultLabel="Done!"
