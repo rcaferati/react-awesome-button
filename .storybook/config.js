@@ -1,4 +1,5 @@
 import { configure } from '@storybook/react';
+import 'loki/configure-react';
 import { configureViewport } from '@storybook/addon-viewport';
 
 // automatically import all files ending in *.stories.js
