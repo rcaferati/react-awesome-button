@@ -17,6 +17,7 @@ export default class AwesomeProgress extends React.Component {
     rootElement: PropTypes.node,
     cssModule: PropTypes.object,
     children: PropTypes.node,
+    disabled: PropTypes.bool,
     size: PropTypes.string,
     type: PropTypes.string,
     releaseDelay: PropTypes.number,
@@ -26,6 +27,7 @@ export default class AwesomeProgress extends React.Component {
     rootElement: null,
     loadingLabel: 'Wait..',
     resultLabel: 'Success!',
+    disabled: false,
     cssModule: null,
     children: null,
     size: null,
@@ -140,7 +142,7 @@ export default class AwesomeProgress extends React.Component {
   moveEvents() {
     const events = {
       onMouseDown: (event) => {
-        if (this.state.disabled === true ||
+        if (this.props.disabled === true ||
           this.loading === true ||
           this.state.blocked === true ||
           (event && event.nativeEvent.which !== 1)
@@ -150,7 +152,7 @@ export default class AwesomeProgress extends React.Component {
         this.loading = true;
       },
       onMouseUp: (event) => {
-        if (this.state.disabled === true ||
+        if (this.props.disabled === true ||
           this.loading === true ||
           this.state.blocked === true) {
           event.preventDefault();
@@ -169,7 +171,9 @@ export default class AwesomeProgress extends React.Component {
       cssModule,
       loadingLabel,
       resultLabel,
+      action,
       type,
+      ...extra
     } = this.props;
     const {
       active,
@@ -186,6 +190,7 @@ export default class AwesomeProgress extends React.Component {
         active={active}
         blocked={blocked}
         {... this.moveEvents()}
+        {...extra}
       >
         <span
           ref={(content) => { this.content = content; }}

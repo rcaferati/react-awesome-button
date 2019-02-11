@@ -21,6 +21,7 @@ function getIcon({
   width,
   height,
   margin,
+  color,
 }) {
   return (
     <svg
@@ -36,7 +37,7 @@ function getIcon({
       height={height}
     >
       <path
-        fill="#FFFFFF"
+        fill={color}
         d={ICONS[type]}
       />
     </svg>
@@ -48,6 +49,7 @@ getIcon.propTypes = {
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
   margin: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default getIcon;

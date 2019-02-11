@@ -8,6 +8,9 @@
   .#{$button-root}__content {
     background: nth($color, 2);
     color: nth($color, 4);
+    path {
+      fill: nth($color, 4);
+    }
     @if(length($color) > 6) {
       border: nth($color, 7);
     }
@@ -210,8 +213,10 @@ button.#{$button-root} {
     translate3d(0, 0, 0);
     transition: transform calc(var(--transform-speed) * 0.8) ease-out, background calc(var(--transform-speed) * 0.8) ease-out;
   }
-  @include getColors($button-colors);
+  
   @include getColors($button-social-colors);
+  @include getColors($button-colors);
+
   &--placeholder {
     width: var(--button-default-placeholder-width);
     .#{$button-root}__content {

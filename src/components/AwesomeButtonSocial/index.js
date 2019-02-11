@@ -9,6 +9,7 @@ const ICON_WIDTH = 30;
 
 export default class AwesomeButtonSocial extends React.Component {
   static propTypes = {
+    action: PropTypes.func,
     bubbles: PropTypes.bool,
     children: PropTypes.node,
     cssModule: PropTypes.object,
@@ -34,6 +35,7 @@ export default class AwesomeButtonSocial extends React.Component {
   };
 
   static defaultProps = {
+    action: null,
     bubbles: false,
     children: null,
     cssModule: null,
@@ -118,30 +120,28 @@ export default class AwesomeButtonSocial extends React.Component {
 
   render() {
     const {
-      cssModule,
       children,
-      type,
       icon,
+      type,
+      action,
       iconWidth,
       iconHeight,
       href,
-      size,
-      target,
+      ...extra
     } = this.props;
+
     return (
       <AwesomeButton
         type={type}
-        size={size}
-        target={target}
-        cssModule={cssModule}
-        bubbles
         action={this.action}
         href={href}
+        {...extra}
       >
         {icon && getIcon({
           type,
           width: iconWidth,
           height: iconHeight,
+          color: this.props.disabled ? 'rgba(255,255,255,0.35)' : '#FFF'
         })} {children}
       </AwesomeButton>
     );
