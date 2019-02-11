@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
-import { withKnobs, text, select, number } from '@storybook/addon-knobs';
+import { withKnobs, text, select, number, boolean } from '@storybook/addon-knobs';
 import cssModule from '../src/styles';
 import { AwesomeButtonProgress } from '../src/index';
 
@@ -13,6 +13,7 @@ storiesOf('AwesomeButtonProgress', module)
     <AwesomeButtonProgress
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('Disabled', true)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -30,6 +31,7 @@ storiesOf('AwesomeButtonProgress', module)
       resultLabel="Done!"
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('Disabled', true)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -48,11 +50,28 @@ storiesOf('AwesomeButtonProgress', module)
       releaseDelay={number('ReleaseDelay', 1000)}
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('Disabled', false)}
       cssModule={cssModule}
       action={(element, next) => {
         setTimeout(() => {
           next(false, 'Error Message :(');
         }, 500);
+      }}
+    >
+      {text('Text', 'Progress')}
+    </AwesomeButtonProgress>
+  ))
+  .add('Disabled Button', () => (
+    <AwesomeButtonProgress
+      disabled={boolean('Disabled', true)}
+      size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
+      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      cssModule={cssModule}
+      action={(element, next) => {
+        action('clicked');
+        setTimeout(() => {
+          next();
+        }, 600);
       }}
     >
       {text('Text', 'Progress')}
