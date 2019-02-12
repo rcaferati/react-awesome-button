@@ -14,6 +14,7 @@ storiesOf('AwesomeButtonProgress', module)
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
       disabled={boolean('Disabled', false)}
+      fakePress={boolean('FakePress', false)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -32,6 +33,7 @@ storiesOf('AwesomeButtonProgress', module)
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
       disabled={boolean('Disabled', false)}
+      fakePress={boolean('FakePress', false)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -51,6 +53,7 @@ storiesOf('AwesomeButtonProgress', module)
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
       disabled={boolean('Disabled', false)}
+      fakePress={boolean('FakePress', false)}
       cssModule={cssModule}
       action={(element, next) => {
         setTimeout(() => {

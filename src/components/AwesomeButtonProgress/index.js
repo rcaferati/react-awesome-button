@@ -9,6 +9,7 @@ import {
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 4;
 
+
 export default class AwesomeProgress extends React.Component {
   static propTypes = {
     action: PropTypes.func,
@@ -20,6 +21,7 @@ export default class AwesomeProgress extends React.Component {
     disabled: PropTypes.bool,
     size: PropTypes.string,
     type: PropTypes.string,
+    fakePress: PropTypes.bool,
     releaseDelay: PropTypes.number,
   };
   static defaultProps = {
@@ -29,6 +31,7 @@ export default class AwesomeProgress extends React.Component {
     resultLabel: 'Success!',
     disabled: false,
     cssModule: null,
+    fakePress: false,
     children: null,
     size: null,
     type: null,
@@ -51,6 +54,9 @@ export default class AwesomeProgress extends React.Component {
   componentDidMount() {
     setCssEndEvent(this.content, 'transition', this.clearStagedWrapperAnimation.bind(this));
   }
+  componentWillReceiveProps(newProps) {
+    this.checkFakePress(newProps);
+  }
   getRootClassName() {
     const {
       rootElement,
@@ -67,6 +73,13 @@ export default class AwesomeProgress extends React.Component {
       `${rootElement}--progress`,
     ];
     return className.join(' ').trim().replace(/[\s]+/ig, ' ');
+  }
+  checkFakePress(newProps) {
+    if (newProps.fakePress !== this.props.fakePress) {
+      if (newProps.fakePress === true) {
+        this.action();
+      }
+    }
   }
   endLoading(state = true, errorLabel = null) {
     this.setState({
@@ -189,7 +202,7 @@ export default class AwesomeProgress extends React.Component {
         cssModule={cssModule}
         active={active}
         blocked={blocked}
-        {... this.moveEvents()}
+        {...this.moveEvents()}
         {...extra}
       >
         <span
