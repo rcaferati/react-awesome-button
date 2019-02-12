@@ -13,7 +13,7 @@
   --button-large-width: 192px;
   --button-large-height: 44px;
   --button-font-family: inherit;
-  --button-font-color: #FFFFFF;
+  --button-font-color: #ffffff;
   --button-font-weight: 600;
   --button-font-style: normal;
   --button-hover-darken-opacity: 0.1;
@@ -21,7 +21,9 @@
   --button-horizontal-padding: 20px;
   --button-raise-level: 5px;
   --button-hover-pressure: 2;
+  --loading-transition-timing: ease-out;
   --loading-transition-speed: 6s;
+  --loading-transition-end-speed: 0.3s;
   --transform-speed: 0.185s;
   --button-primary-color: #a9d3e9;
   --button-primary-color-dark: #58a9d4;
@@ -226,12 +228,266 @@ button.aws-btn .aws-btn__wrapper {
     transition: background calc(var(--transform-speed) * 0.8) ease-out, -webkit-transform calc(var(--transform-speed) * 0.8) ease-out;
     transition: transform calc(var(--transform-speed) * 0.8) ease-out, background calc(var(--transform-speed) * 0.8) ease-out;
     transition: transform calc(var(--transform-speed) * 0.8) ease-out, background calc(var(--transform-speed) * 0.8) ease-out, -webkit-transform calc(var(--transform-speed) * 0.8) ease-out; }
+  .aws-btn--facebook .aws-btn__wrapper:before {
+    background: #324877; }
+  .aws-btn--facebook .aws-btn__content {
+    background: #4868ad;
+    color: #FFFFFF; }
+    .aws-btn--facebook .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--facebook.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--facebook.aws-btn--progress .aws-btn__progress:before, .aws-btn--facebook.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--messenger .aws-btn__wrapper:before {
+    background: #0960d1; }
+  .aws-btn--messenger .aws-btn__content {
+    background: #3186f6;
+    color: #FFFFFF; }
+    .aws-btn--messenger .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--messenger.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--messenger.aws-btn--progress .aws-btn__progress:before, .aws-btn--messenger.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--twitter .aws-btn__wrapper:before {
+    background: #0074a1; }
+  .aws-btn--twitter .aws-btn__content {
+    background: #00aced;
+    color: #FFFFFF; }
+    .aws-btn--twitter .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--twitter.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--twitter.aws-btn--progress .aws-btn__progress:before, .aws-btn--twitter.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--linkedin .aws-btn__wrapper:before {
+    background: #004569; }
+  .aws-btn--linkedin .aws-btn__content {
+    background: #0077b5;
+    color: #FFFFFF; }
+    .aws-btn--linkedin .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--linkedin.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--linkedin.aws-btn--progress .aws-btn__progress:before, .aws-btn--linkedin.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--whatsapp .aws-btn__wrapper:before {
+    background: #1a9247; }
+  .aws-btn--whatsapp .aws-btn__content {
+    background: #25d366;
+    color: #FFFFFF; }
+    .aws-btn--whatsapp .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--whatsapp.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--whatsapp.aws-btn--progress .aws-btn__progress:before, .aws-btn--whatsapp.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--github .aws-btn__wrapper:before {
+    background: #030304; }
+  .aws-btn--github .aws-btn__content {
+    background: #25292e;
+    color: #FFFFFF; }
+    .aws-btn--github .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--github.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--github.aws-btn--progress .aws-btn__progress:before, .aws-btn--github.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--reddit .aws-btn__wrapper:before {
+    background: #cb2703; }
+  .aws-btn--reddit .aws-btn__content {
+    background: #fc461e;
+    color: #FFFFFF; }
+    .aws-btn--reddit .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--reddit.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--reddit.aws-btn--progress .aws-btn__progress:before, .aws-btn--reddit.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--pinterest .aws-btn__wrapper:before {
+    background: #740611; }
+  .aws-btn--pinterest .aws-btn__content {
+    background: #bd091c;
+    color: #FFFFFF; }
+    .aws-btn--pinterest .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--pinterest.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--pinterest.aws-btn--progress .aws-btn__progress:before, .aws-btn--pinterest.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--gplus .aws-btn__wrapper:before {
+    background: #a3392d; }
+  .aws-btn--gplus .aws-btn__content {
+    background: #ce5b4e;
+    color: #FFFFFF; }
+    .aws-btn--gplus .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--gplus.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--gplus.aws-btn--progress .aws-btn__progress:before, .aws-btn--gplus.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--youtube .aws-btn__wrapper:before {
+    background: #881014; }
+  .aws-btn--youtube .aws-btn__content {
+    background: #cc181e;
+    color: #FFFFFF; }
+    .aws-btn--youtube .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--youtube.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--youtube.aws-btn--progress .aws-btn__progress:before, .aws-btn--youtube.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--mail .aws-btn__wrapper:before {
+    background: #9c9c9c; }
+  .aws-btn--mail .aws-btn__content {
+    background: #cfcfcf;
+    color: #FFFFFF; }
+    .aws-btn--mail .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--mail.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--mail.aws-btn--progress .aws-btn__progress:before, .aws-btn--mail.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--instagram .aws-btn__wrapper:before {
+    background: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%, #8c0061 60%, #002ca9 90%); }
+  .aws-btn--instagram .aws-btn__content {
+    background: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    color: #FFFFFF; }
+    .aws-btn--instagram .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--instagram.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--instagram.aws-btn--progress .aws-btn__progress:before, .aws-btn--instagram.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
   .aws-btn--primary .aws-btn__wrapper:before {
     background: var(--button-primary-color-dark); }
   .aws-btn--primary .aws-btn__content {
     background: var(--button-primary-color);
     color: var(--button-primary-color-light);
     border: var(--button-primary-border); }
+    .aws-btn--primary .aws-btn__content path {
+      fill: var(--button-primary-color-light); }
   .aws-btn--primary .aws-btn__wrapper:hover .aws-btn__content {
     background: var(--button-primary-color-hover); }
   .aws-btn--primary.aws-btn--active .aws-btn__wrapper .aws-btn__content {
@@ -256,6 +512,8 @@ button.aws-btn .aws-btn__wrapper {
     background: var(--button-secondary-color);
     color: var(--button-secondary-color-light);
     border: var(--button-secondary-border); }
+    .aws-btn--secondary .aws-btn__content path {
+      fill: var(--button-secondary-color-light); }
   .aws-btn--secondary .aws-btn__wrapper:hover .aws-btn__content {
     background: var(--button-secondary-color-hover); }
   .aws-btn--secondary.aws-btn--active .aws-btn__wrapper .aws-btn__content {
@@ -280,6 +538,8 @@ button.aws-btn .aws-btn__wrapper {
     background: var(--button-anchor-color);
     color: var(--button-anchor-color-light);
     border: var(--button-anchor-border); }
+    .aws-btn--link .aws-btn__content path {
+      fill: var(--button-anchor-color-light); }
   .aws-btn--link .aws-btn__wrapper:hover .aws-btn__content {
     background: var(--button-anchor-color-hover); }
   .aws-btn--link.aws-btn--active .aws-btn__wrapper .aws-btn__content {
@@ -304,6 +564,8 @@ button.aws-btn .aws-btn__wrapper {
     background: var(--button-disabled-color);
     color: var(--button-disabled-color-light);
     border: var(--button-disabled-border); }
+    .aws-btn--disabled .aws-btn__content path {
+      fill: var(--button-disabled-color-light); }
   .aws-btn--disabled .aws-btn__wrapper:hover .aws-btn__content {
     background: var(--button-disabled-color-hover); }
   .aws-btn--disabled.aws-btn--active .aws-btn__wrapper .aws-btn__content {
@@ -328,6 +590,8 @@ button.aws-btn .aws-btn__wrapper {
     background: var(--button-placeholder-color);
     color: var(--button-placeholder-color-light);
     border: var(--button-placeholder-border); }
+    .aws-btn--placeholder .aws-btn__content path {
+      fill: var(--button-placeholder-color-light); }
   .aws-btn--placeholder .aws-btn__wrapper:hover .aws-btn__content {
     background: var(--button-placeholder-color-hover); }
   .aws-btn--placeholder.aws-btn--active .aws-btn__wrapper .aws-btn__content {
@@ -346,234 +610,6 @@ button.aws-btn .aws-btn__wrapper {
             justify-content: center; }
   .aws-btn--placeholder.aws-btn--progress .aws-btn__progress:before, .aws-btn--placeholder.aws-btn--progress .aws-btn__progress:after {
     color: var(--button-placeholder-color-light); }
-  .aws-btn--facebook .aws-btn__wrapper:before {
-    background: #324877; }
-  .aws-btn--facebook .aws-btn__content {
-    background: #4868ad;
-    color: #FFFFFF; }
-  .aws-btn--facebook.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--facebook.aws-btn--progress .aws-btn__progress:before, .aws-btn--facebook.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--messenger .aws-btn__wrapper:before {
-    background: #0960d1; }
-  .aws-btn--messenger .aws-btn__content {
-    background: #3186f6;
-    color: #FFFFFF; }
-  .aws-btn--messenger.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--messenger.aws-btn--progress .aws-btn__progress:before, .aws-btn--messenger.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--twitter .aws-btn__wrapper:before {
-    background: #0074a1; }
-  .aws-btn--twitter .aws-btn__content {
-    background: #00aced;
-    color: #FFFFFF; }
-  .aws-btn--twitter.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--twitter.aws-btn--progress .aws-btn__progress:before, .aws-btn--twitter.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--linkedin .aws-btn__wrapper:before {
-    background: #004569; }
-  .aws-btn--linkedin .aws-btn__content {
-    background: #0077b5;
-    color: #FFFFFF; }
-  .aws-btn--linkedin.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--linkedin.aws-btn--progress .aws-btn__progress:before, .aws-btn--linkedin.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--whatsapp .aws-btn__wrapper:before {
-    background: #1a9247; }
-  .aws-btn--whatsapp .aws-btn__content {
-    background: #25d366;
-    color: #FFFFFF; }
-  .aws-btn--whatsapp.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--whatsapp.aws-btn--progress .aws-btn__progress:before, .aws-btn--whatsapp.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--github .aws-btn__wrapper:before {
-    background: #030304; }
-  .aws-btn--github .aws-btn__content {
-    background: #25292e;
-    color: #FFFFFF; }
-  .aws-btn--github.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--github.aws-btn--progress .aws-btn__progress:before, .aws-btn--github.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--reddit .aws-btn__wrapper:before {
-    background: #cb2703; }
-  .aws-btn--reddit .aws-btn__content {
-    background: #fc461e;
-    color: #FFFFFF; }
-  .aws-btn--reddit.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--reddit.aws-btn--progress .aws-btn__progress:before, .aws-btn--reddit.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--pinterest .aws-btn__wrapper:before {
-    background: #740611; }
-  .aws-btn--pinterest .aws-btn__content {
-    background: #bd091c;
-    color: #FFFFFF; }
-  .aws-btn--pinterest.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--pinterest.aws-btn--progress .aws-btn__progress:before, .aws-btn--pinterest.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--gplus .aws-btn__wrapper:before {
-    background: #a3392d; }
-  .aws-btn--gplus .aws-btn__content {
-    background: #ce5b4e;
-    color: #FFFFFF; }
-  .aws-btn--gplus.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--gplus.aws-btn--progress .aws-btn__progress:before, .aws-btn--gplus.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--youtube .aws-btn__wrapper:before {
-    background: #881014; }
-  .aws-btn--youtube .aws-btn__content {
-    background: #cc181e;
-    color: #FFFFFF; }
-  .aws-btn--youtube.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--youtube.aws-btn--progress .aws-btn__progress:before, .aws-btn--youtube.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--mail .aws-btn__wrapper:before {
-    background: #9c9c9c; }
-  .aws-btn--mail .aws-btn__content {
-    background: #cfcfcf;
-    color: #FFFFFF; }
-  .aws-btn--mail.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--mail.aws-btn--progress .aws-btn__progress:before, .aws-btn--mail.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
-  .aws-btn--instagram .aws-btn__wrapper:before {
-    background: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%, #8c0061 60%, #002ca9 90%); }
-  .aws-btn--instagram .aws-btn__content {
-    background: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    color: #FFFFFF; }
-  .aws-btn--instagram.aws-btn--progress .aws-btn__content > span {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-  .aws-btn--instagram.aws-btn--progress .aws-btn__progress:before, .aws-btn--instagram.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
   .aws-btn--placeholder {
     width: var(--button-default-placeholder-width); }
     .aws-btn--placeholder .aws-btn__content > span {
@@ -793,13 +829,13 @@ span.aws-btn__bubble {
   text-indent: 0;
   z-index: 3;
   overflow: hidden;
-  -webkit-transition: border 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out, -webkit-transform 0.185s ease-out;
-  transition: border 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out, -webkit-transform 0.185s ease-out;
-  transition: border 0.185s ease-out, transform 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out;
-  transition: border 0.185s ease-out, transform 0.185s ease-out, background 0.185s ease-out, color 0.185s ease-out, -webkit-transform 0.185s ease-out; }
+  -webkit-transition: border var(--transform-speed) ease-out, background var(--transform-speed) ease-out, color var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out;
+  transition: border var(--transform-speed) ease-out, background var(--transform-speed) ease-out, color var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out;
+  transition: border var(--transform-speed) ease-out, transform var(--transform-speed) ease-out, background var(--transform-speed) ease-out, color var(--transform-speed) ease-out;
+  transition: border var(--transform-speed) ease-out, transform var(--transform-speed) ease-out, background var(--transform-speed) ease-out, color var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out; }
   .aws-btn--progress .aws-btn__progress > span {
-    -webkit-transition: opacity 0.0925s ease-out 0.13875s;
-    transition: opacity 0.0925s ease-out 0.13875s; }
+    -webkit-transition: opacity calc(var(--transform-speed) * 0.5) ease-out calc(var(--transform-speed) * 0.75);
+    transition: opacity calc(var(--transform-speed) * 0.5) ease-out calc(var(--transform-speed) * 0.75); }
   .aws-btn--progress .aws-btn__progress:before, .aws-btn--progress .aws-btn__progress:after {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -812,10 +848,10 @@ span.aws-btn__bubble {
             justify-content: center;
     color: rgba(255, 255, 255, 0.65);
     opacity: 0;
-    -webkit-transition: opacity 0.13875s ease-out 0.05s, -webkit-transform 0.185s ease-out 0.05s;
-    transition: opacity 0.13875s ease-out 0.05s, -webkit-transform 0.185s ease-out 0.05s;
-    transition: transform 0.185s ease-out 0.05s, opacity 0.13875s ease-out 0.05s;
-    transition: transform 0.185s ease-out 0.05s, opacity 0.13875s ease-out 0.05s, -webkit-transform 0.185s ease-out 0.05s; }
+    -webkit-transition: opacity calc(var(--transform-speed) * 0.75) ease-out 0.05s, -webkit-transform var(--transform-speed) ease-out 0.05s;
+    transition: opacity calc(var(--transform-speed) * 0.75) ease-out 0.05s, -webkit-transform var(--transform-speed) ease-out 0.05s;
+    transition: transform var(--transform-speed) ease-out 0.05s, opacity calc(var(--transform-speed) * 0.75) ease-out 0.05s;
+    transition: transform var(--transform-speed) ease-out 0.05s, opacity calc(var(--transform-speed) * 0.75) ease-out 0.05s, -webkit-transform var(--transform-speed) ease-out 0.05s; }
   .aws-btn--progress .aws-btn__progress:before {
     content: attr(data-loading);
     display: none;
@@ -849,10 +885,10 @@ span.aws-btn__bubble {
           transform: translate3d(0, 0, 0); }
 
 .aws-btn--start .aws-btn__content:after {
-  -webkit-transition: -webkit-transform 6s ease-out;
-  transition: -webkit-transform 6s ease-out;
-  transition: transform 6s ease-out;
-  transition: transform 6s ease-out, -webkit-transform 6s ease-out;
+  -webkit-transition: -webkit-transform var(--loading-transition-speed) ease-out;
+  transition: -webkit-transform var(--loading-transition-speed) ease-out;
+  transition: transform var(--loading-transition-speed) ease-out;
+  transition: transform var(--loading-transition-speed) ease-out, -webkit-transform var(--loading-transition-speed) ease-out;
   -webkit-transform: translate3d(-15%, 0, 0);
           transform: translate3d(-15%, 0, 0); }
 
@@ -860,10 +896,10 @@ span.aws-btn__bubble {
   background-color: rgba(255, 0, 0, 0.75); }
 
 .aws-btn--end .aws-btn__content:after {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  transition: -webkit-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  -webkit-transition: -webkit-transform var(--loading-transition-end-speed) var(--loading-transition-timing);
+  transition: -webkit-transform var(--loading-transition-end-speed) var(--loading-transition-timing);
+  transition: transform var(--loading-transition-end-speed) var(--loading-transition-timing);
+  transition: transform var(--loading-transition-end-speed) var(--loading-transition-timing), -webkit-transform var(--loading-transition-end-speed) var(--loading-transition-timing);
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0); }
 

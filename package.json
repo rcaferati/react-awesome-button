@@ -28,9 +28,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "dependencies": {
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0"
+  "peer-dependencies": {
+    "react": "^15.0.1 || ^16.0.0",
+    "prop-types": "^15.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
@@ -66,7 +66,8 @@
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.0.10",
     "prismjs": "^1.9.0",
-    "react-awesome-social": "^0.1.7",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",

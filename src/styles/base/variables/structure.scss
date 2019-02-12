@@ -6,7 +6,7 @@ $button-default-placeholder-width: 120px;
 $button-default-placeholder-font-color: rgba(0, 0, 0, 0.1);
 
 $button-font-family: inherit;
-$button-font-color: #FFFFFF;
+$button-font-color: #ffffff;
 $button-font-weight: 600;
 $button-font-style: normal;
 $button-hover-darken-opacity: 0.1;
@@ -17,7 +17,8 @@ $button-raise-level: 2px;
 $button-hover-pressure: 1;
 
 $loading-transition-speed: 6s;
-$transform-speed: 0.150s;
+$loading-transition-timing: ease-out;
+$transform-speed: 0.15s;
 
 $button-icon-width: 44px;
 $button-icon-height: $button-default-height;

@@ -25,7 +25,9 @@
   --button-raise-level: #{$button-raise-level};
   --button-hover-pressure: #{$button-hover-pressure};
 
+  --loading-transition-timing: #{$loading-transition-timing};
   --loading-transition-speed: #{$loading-transition-speed};
+  --loading-transition-end-speed: #{$loading-transition-speed / 20};
   --transform-speed: #{$transform-speed};
 
   --button-primary-color: #{$button-primary-color};

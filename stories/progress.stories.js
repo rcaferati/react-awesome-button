@@ -13,7 +13,7 @@ storiesOf('AwesomeButtonProgress', module)
     <AwesomeButtonProgress
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', true)}
+      disabled={boolean('Disabled', false)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -27,11 +27,11 @@ storiesOf('AwesomeButtonProgress', module)
   ))
   .add('Custom Labels', () => (
     <AwesomeButtonProgress
-      loadingLabel="Wait for it.."
-      resultLabel="Done!"
+      loadingLabel={text('loadingLabel', 'Wait for it..')}
+      resultLabel={text('resultLabel', 'Done!')}
       size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', true)}
+      disabled={boolean('Disabled', false)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
