@@ -31,7 +31,6 @@ Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" 
 
 ```
 npm install --save react-awesome-button
-
 ```
 
 ## Styling with plain CSS and CSS Modules
