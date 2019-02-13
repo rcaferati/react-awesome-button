@@ -6,6 +6,15 @@
 
 [<img width="400" alt="react-awesome-button demo" src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/theme-set.gif?raw=true">](https://caferati.me/demo/react-awesome-button)
 
+## Key Features
+
+- 60fps 3D animated button
+- Animated **progress** button
+- **Social icons** and network specific **share methods**
+- OnPress ripple effect
+- Look and feel customisable and extendable in two ways: via **CSS custom properties** or **SASS** variables and lists ([scss config file](https://github.com/rcaferati/react-awesome-button/blob/master/src/styles/default.scss)).
+- Use it with **CSSModules** or **Plain CSS
+
 ## Live demo
 
 Checkout the live demo with the `CSS customizer` at my <a title="React Awesome Button - CSS Customizer" href="https://caferati.me/demo/react-awesome-button" target="_blank">web portfolio</a> page.
@@ -17,15 +26,6 @@ Checkout the live demo with the `CSS customizer` at my <a title="React Awesome B
 Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" href="https://caferati.me/demo/react-awesome-button/storybook" target="_blank">web portfolio</a> page.
 
 [<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-storybook.png?raw=true" width="800" />](https://caferati.me/demo/react-awesome-button/storybook)
-
-## Key Features
-
-- 60fps 3D animated button
-- Animated progress button
-- Social icons and network specific share methods
-- OnPress ripple effect
-- Look and feel customisable and extendable in two ways: via CSS custom properties or SASS variables and lists ([scss config file](https://github.com/rcaferati/react-awesome-button/blob/master/src/styles/default.scss)).
-- Use it with CSSModules or Plain CSS
 
 ## Styling with plain CSS and CSS Modules
 
@@ -55,11 +55,10 @@ function Button() {
 }
 ```
 
-### &lt;AwesomeButton /&gt; button tag example
+### &lt;AwesomeButton /&gt; rendered with a button tag
 
-Renders a `Button` tag with a callback function on animation release.
-Checkout this example live on the storyboard.
-
+Renders the component with a `Button` tag and an onPress prop called on animation release.
+Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Primary).
 ```jsx
 import { AwesomeButton } from "react-awesome-button";
 import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
@@ -71,7 +70,7 @@ function Button() {
       type="primary"
       ripple
       onPress={() => {
-        alert("pressed");
+        // do something
       }}
     >
       Button
@@ -80,10 +79,11 @@ function Button() {
 }
 ```
 
-### &lt;AwesomeButton /&gt; anchor tag example
+### &lt;AwesomeButton /&gt; rendered with an anchor tag
 
 Render the component with an `anchor` tag setting the href and target attributes.
-Checkout this example live on the storyboard.
+
+Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Link).
 
 ```jsx
 import { AwesomeButton } from "react-awesome-button";
@@ -103,7 +103,7 @@ function Button() {
 }
 ```
 
-### &lt;AwesomeButton /&gt; Props
+### &lt;AwesomeButton /&gt; props
 
 | Attribute |    Type    |  Default  | Description                                                                                              |
 | :-------- | :--------: | :-------: | :------------------------------------------------------------------------------------------------------- |
@@ -119,7 +119,7 @@ function Button() {
 
 ### &lt;AwesomeButtonProgress /&gt; Basic Example
 
-Checkout this example live on the storyboard.
+Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonProgress&selectedStory=Success).
 
 ```jsx
   import { AwesomeButtonProgress } from 'react-awesome-button';
@@ -131,7 +131,7 @@ Checkout this example live on the storyboard.
         cssModule={AwesomeButtonStyles}
         type="primary"
         onPress={next => {
-          // do something async, then call `next()`
+          // do a sync/async task then call `next()`
         }}
       >
         Button
@@ -142,19 +142,18 @@ Checkout this example live on the storyboard.
 
 ### &lt;AwesomeButtonProgress /&gt; props
 
-Being a wrapper on the &lt;AwesomeButton /&gt; it accepts the props plus the following ones.
+Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the following ones.
 
 | Attribute    |   Type    |  Default  | Description                                                 |
 | :----------- | :-------: | :-------: | :---------------------------------------------------------- |
 | loadingLabel | `string`  | `Wait ..` | Progress button loading label text                          |
-| resultLabel  | `string`  | `Success` | Progress button success label text                          |
 | resultLabel  | `string`  | `Success` | Progress button success label text                          |
 | releaseDelay | `number`  |    500    | Delay for releasing the button after the progress animation |
 | fakePress    | `boolean` |  `false`  | When set to `true` triggers a fake button press             |
 
 ### &lt;AwesomeButtonSocial /&gt; basic example
 
-Checkout this example live on the storyboard.
+Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonSocial&selectedStory=Facebook).
 
 ```jsx
   import { AwesomeButtonSocial } from 'react-awesome-button';
@@ -164,11 +163,8 @@ Checkout this example live on the storyboard.
     return (
       <AwesomeButtonSocial
         cssModule={AwesomeButtonStyles}
-        icon
         type="facebook"
-        onPress={next => {
-          // do something async, then call `next()`
-        }}
+        url="https://caferati.me"
       >
         Button
       </AwesomeButton>
@@ -178,7 +174,7 @@ Checkout this example live on the storyboard.
 
 ### &lt;AwesomeButtonSocial /&gt; Props
 
-Being a wrapper on the &lt;AwesomeButton /&gt; it accepts the props plus the following ones.
+Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the following ones.
 
 | type | `string` | `primary` | Render a specific button type. Bundled with Facebook, Instagram, Twitter, Github, Youtube, Linkedin, Pinterest, Reddit, Messenger, Whatsapp and Google Plus (RIP) types and share methods |
 | icon | `bool` | `false` | Should render the social icon relative to the button type |
