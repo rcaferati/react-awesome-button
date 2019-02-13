@@ -176,15 +176,17 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
 
 Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the following ones.
 
-| type | `string` | `primary` | Render a specific button type. Bundled with Facebook, Instagram, Twitter, Github, Youtube, Linkedin, Pinterest, Reddit, Messenger, Whatsapp and Google Plus (RIP) types and share methods |
-| icon | `bool` | `false` | Should render the social icon relative to the button type |
-| iconHeight | `number` | `23` | Rendered icon height |
-| icon | `number` | `30` | Rendered icon width |
-| url | `string` | `null` | Url string to be used on the sharer |
-| image | `string` | `null` | Image url to be rendered on the sharer |
-| message | `string` | `null` | Message string to be rendered on the share post |
-| phone | `string` | `null` | Phone number to be used when using the Whatsapp sharer |
-| user | `string` | `null` | Username to be redirected to when using the Messenger sharer |
+| Attribute    |   Type    |  Default  | Description                                                 |
+| :----------- | :-------: | :-------: | :---------------------------------------------------------- |
+| type         | `string`  | `primary` | Render a specific button type. Bundled with Facebook, Instagram, Twitter, Github, Youtube, Linkedin, Pinterest, Reddit, Messenger, Whatsapp and Google Plus (RIP) types and share methods |
+| icon         | `bool`    | `false`   | Should render the social icon relative to the button type |
+| iconHeight   | `number`  | `23`      | Rendered icon height |
+| icon         | `number`  | `30`      | Rendered icon width |
+| url          | `string`  | `null`    | Url string to be used on the sharer |
+| image        | `string`  | `null`    | Image url to be rendered on the sharer |
+| message      | `string`  | `null`    | Message string to be rendered on the share post |
+| phone        | `string`  | `null`    | Phone number to be used when using the Whatsapp sharer |
+| user         | `string`  | `null`    | Username to be redirected to when using the Messenger sharer |
 
 ## Author
 
