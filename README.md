@@ -55,7 +55,7 @@ function Button() {
 }
 ```
 
-### &lt;AwesomeButton /&gt; rendered with a button tag
+### `AwesomeButton` rendered with a button tag
 
 Renders the component with a `Button` tag and an onPress prop called on animation release.
 Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Primary).
@@ -79,7 +79,7 @@ function Button() {
 }
 ```
 
-### &lt;AwesomeButton /&gt; rendered with an anchor tag
+### `AwesomeButton` rendered with an anchor tag
 
 Render the component with an `anchor` tag setting the href and target attributes.
 
@@ -103,7 +103,7 @@ function Button() {
 }
 ```
 
-### &lt;AwesomeButton /&gt; props
+### `AwesomeButton` props
 
 | Attribute |    Type    |  Default  | Description                                                                                              |
 | :-------- | :--------: | :-------: | :------------------------------------------------------------------------------------------------------- |
@@ -117,7 +117,7 @@ function Button() {
 | href      |  `string`  |  `null`   | Forces the button to be rendered on an `anchor` container and sets the href to the specified value       |
 | target    |  `string`  |  `null`   | When used together with `href` renders an anchor with a specific target attribute                        |
 
-### &lt;AwesomeButtonProgress /&gt; Basic Example
+### `AwesomeButtonProgress` basic example
 
 Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonProgress&selectedStory=Success).
 
@@ -140,9 +140,9 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
   }
 ```
 
-### &lt;AwesomeButtonProgress /&gt; props
+### `AwesomeButtonProgress` specific props
 
-Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the following ones.
+Being a wrapper on the `AwesomeButton` component, it accepts all its props plus the following ones.
 
 | Attribute    |   Type    |  Default  | Description                                                 |
 | :----------- | :-------: | :-------: | :---------------------------------------------------------- |
@@ -151,7 +151,7 @@ Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the fol
 | releaseDelay | `number`  |    500    | Delay for releasing the button after the progress animation |
 | fakePress    | `boolean` |  `false`  | When set to `true` triggers a fake button press             |
 
-### &lt;AwesomeButtonSocial /&gt; basic example
+### `AwesomeButtonSocial` basic example
 
 Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonSocial&selectedStory=Facebook).
 
@@ -172,7 +172,7 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
   }
 ```
 
-### &lt;AwesomeButtonSocial /&gt; Props
+### `AwesomeButtonSocial` specific props
 
 Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the following ones.
 
