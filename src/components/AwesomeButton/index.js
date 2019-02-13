@@ -22,7 +22,7 @@ const Button = props => (<button {...props} />);
 export default class AwesomeButton extends React.Component {
   static propTypes = {
     action: PropTypes.func,
-    bubbles: PropTypes.bool,
+    ripple: PropTypes.bool,
     children: PropTypes.node,
     disabled: PropTypes.bool,
     element: PropTypes.func,
@@ -44,7 +44,7 @@ export default class AwesomeButton extends React.Component {
   };
   static defaultProps = {
     action: null,
-    bubbles: false,
+    ripple: false,
     blocked: false,
     cssModule: null,
     children: null,
@@ -191,7 +191,7 @@ export default class AwesomeButton extends React.Component {
       clearTimeout(this.clearTimer);
     }
     const diff = new Date().getTime() - this.pressed;
-    if (this.props.bubbles === true) {
+    if (this.props.ripple === true) {
       this.createBubble(event);
     }
     if (typeof window !== 'undefined' && this.button) {
@@ -218,6 +218,12 @@ export default class AwesomeButton extends React.Component {
   }
   moveEvents() {
     const events = {
+      onClick: (event) => {
+        if (this.props.href && this.state.disabled) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      },
       onMouseLeave: () => {
         this.clearPress();
       },

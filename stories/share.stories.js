@@ -6,7 +6,7 @@ import defaultStyles from '../src/styles';
 import { withKnobs, text, select, number, boolean } from '@storybook/addon-knobs';
 import { AwesomeButtonSocial } from '../src/index';
 
-storiesOf('AwesomeButtonShare', module)
+storiesOf('AwesomeButtonSocial', module)
   .addDecorator(centered)
   .addDecorator(withKnobs)
   .add('Icons', () => (

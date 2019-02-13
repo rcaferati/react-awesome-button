@@ -11,10 +11,10 @@ storiesOf('AwesomeButtonProgress', module)
   .addDecorator(withKnobs)
   .add('Success', () => (
     <AwesomeButtonProgress
-      size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', false)}
-      fakePress={boolean('FakePress', false)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'large')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', false)}
+      fakePress={boolean('fakePress', false)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -23,17 +23,17 @@ storiesOf('AwesomeButtonProgress', module)
         }, 600);
       }}
     >
-      {text('Text', 'Progress')}
+      {text('text', 'Progress')}
     </AwesomeButtonProgress>
   ))
   .add('Custom Labels', () => (
     <AwesomeButtonProgress
       loadingLabel={text('loadingLabel', 'Wait for it..')}
       resultLabel={text('resultLabel', 'Done!')}
-      size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', false)}
-      fakePress={boolean('FakePress', false)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'large')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', false)}
+      fakePress={boolean('fakePress', false)}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -42,18 +42,18 @@ storiesOf('AwesomeButtonProgress', module)
         }, 600);
       }}
     >
-      {text('Text', 'Progress')}
+      {text('text', 'Progress')}
     </AwesomeButtonProgress>
   ))
   .add('Error Handling', () => (
     <AwesomeButtonProgress
       loadingLabel={text('loadingLabel', 'Wait for it..')}
       resultLabel={text('resultLabel', 'Done!')}
-      releaseDelay={number('ReleaseDelay', 1000)}
-      size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', false)}
-      fakePress={boolean('FakePress', false)}
+      releaseDelay={number('releaseDelay', 1000)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'large')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', false)}
+      fakePress={boolean('fakePress', false)}
       cssModule={cssModule}
       action={(element, next) => {
         setTimeout(() => {
@@ -61,14 +61,14 @@ storiesOf('AwesomeButtonProgress', module)
         }, 500);
       }}
     >
-      {text('Text', 'Progress')}
+      {text('text', 'Progress')}
     </AwesomeButtonProgress>
   ))
   .add('Disabled Button', () => (
     <AwesomeButtonProgress
-      disabled={boolean('Disabled', true)}
-      size={select('Size', [null, 'small', 'medium', 'large'], 'large')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', true)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'large')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
       cssModule={cssModule}
       action={(element, next) => {
         action('clicked');
@@ -77,6 +77,6 @@ storiesOf('AwesomeButtonProgress', module)
         }, 600);
       }}
     >
-      {text('Text', 'Progress')}
+      {text('text', 'Progress')}
     </AwesomeButtonProgress>
   ));
