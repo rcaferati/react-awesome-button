@@ -142,7 +142,7 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
 
 ### `AwesomeButtonProgress` specific props
 
-Being a wrapper on the `AwesomeButton` component, it accepts all its props plus the following ones.
+Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus the following ones.
 
 | Attribute    |   Type    |  Default  | Description                                                 |
 | :----------- | :-------: | :-------: | :---------------------------------------------------------- |
@@ -174,7 +174,7 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
 
 ### `AwesomeButtonSocial` specific props
 
-Being a wrapper on the &lt;AwesomeButton /&gt; it accepts its props plus the following ones.
+Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus the following ones.
 
 | Attribute    |   Type    |  Default  | Description                                                 |
 | :----------- | :-------: | :-------: | :---------------------------------------------------------- |
