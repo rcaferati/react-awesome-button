@@ -10,7 +10,7 @@ import { Header, Customiser, Body, Composer, Page, PageRibbon } from './componen
 import Data from './data.json';
 import data from './examples';
 
-const DEFAULT_THEME = 'blue-theme';
+const DEFAULT_THEME = 'morty-theme';
 
 const DemoComponent = ({
   match,
@@ -87,6 +87,7 @@ class Demo extends React.Component {
     server: false,
     location: '',
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -149,6 +150,5 @@ class Demo extends React.Component {
     );
   }
 }
-
 
 export default Demo;

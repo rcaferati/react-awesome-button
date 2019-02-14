@@ -16,13 +16,13 @@ export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
 
-const Anchor = props => (<a {... props} />);
-const Button = props => (<button {... props} />);
+const Anchor = props => (<a {...props} />);
+const Button = props => (<button {...props} />);
 
 export default class AwesomeButton extends React.Component {
   static propTypes = {
     action: PropTypes.func,
-    bubbles: PropTypes.bool,
+    ripple: PropTypes.bool,
     children: PropTypes.node,
     disabled: PropTypes.bool,
     element: PropTypes.func,
@@ -44,7 +44,7 @@ export default class AwesomeButton extends React.Component {
   };
   static defaultProps = {
     action: null,
-    bubbles: false,
+    ripple: false,
     blocked: false,
     cssModule: null,
     children: null,
@@ -175,6 +175,34 @@ export default class AwesomeButton extends React.Component {
       pressPosition,
     });
   }
+  pressIn() {
+    if (this.state.disabled === true ||
+      this.props.blocked === true
+    ) {
+      return;
+    }
+    this.pressed = new Date().getTime();
+    this.setState({
+      pressPosition: `${this.rootElement}--active`,
+    });
+  }
+  pressOut() {
+    if (this.clearTimer) {
+      clearTimeout(this.clearTimer);
+    }
+    const diff = new Date().getTime() - this.pressed;
+    if (this.props.ripple === true) {
+      this.createBubble(event);
+    }
+    if (typeof window !== 'undefined' && this.button) {
+      const eventTrigger = new Event('action');
+      this.button.dispatchEvent(eventTrigger);
+    }
+    this.action();
+    this.clearTimer = setTimeout(() => {
+      this.clearPress();
+    }, ANIMATION_DELAY - diff);
+  }
   action() {
     if (this.props.action && this.button) {
       this.props.action(this.container);
@@ -190,20 +218,20 @@ export default class AwesomeButton extends React.Component {
   }
   moveEvents() {
     const events = {
+      onClick: (event) => {
+        if (this.props.href && this.state.disabled) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      },
       onMouseLeave: () => {
         this.clearPress();
       },
       onMouseDown: (event) => {
-        if (this.state.disabled === true ||
-          this.props.blocked === true ||
-          (event && event.nativeEvent.which !== 1)
-        ) {
+        if (event && event.nativeEvent.which !== 1) {
           return;
         }
-        this.pressed = new Date().getTime();
-        this.setState({
-          pressPosition: `${this.rootElement}--active`,
-        });
+        this.pressIn();
       },
       onMouseUp: (event) => {
         if (this.state.disabled === true ||
@@ -212,21 +240,7 @@ export default class AwesomeButton extends React.Component {
           event.stopPropagation();
           return;
         }
-        if (this.clearTimer) {
-          clearTimeout(this.clearTimer);
-        }
-        const diff = new Date().getTime() - this.pressed;
-        if (this.props.bubbles === true) {
-          this.createBubble(event);
-        }
-        if (typeof window !== 'undefined' && this.button) {
-          const eventTrigger = new Event('action');
-          this.button.dispatchEvent(eventTrigger);
-        }
-        this.action();
-        this.clearTimer = setTimeout(() => {
-          this.clearPress();
-        }, ANIMATION_DELAY - diff);
+        this.pressOut();
       },
     };
     if (this.props.moveEvents === true) {
@@ -271,8 +285,8 @@ export default class AwesomeButton extends React.Component {
         className={this.getRootClassName()}
         role="button"
         title={title}
-        {... this.extraProps}
-        {... this.moveEvents()}
+        {...this.extraProps}
+        {...this.moveEvents()}
       >
         <span
           ref={(button) => { this.button = button; }}

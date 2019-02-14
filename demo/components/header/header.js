@@ -16,13 +16,12 @@ const Header = ({
   <header className={Styles.container}>
     <div className={Styles.wrapper}>
       <h1>
-        <span>{framework}</span>
-        <span>{title}</span>
+        <span>{framework}</span>{' '}<span>{title}</span>{' '}<span>Component</span>
       </h1>
-      <h2>
+      <h4>
         <strong>&lt;{name}/&gt;</strong>
         <span>{size}</span>
-      </h2>
+      </h4>
       <p>{description}</p>
       <Navigation
         domain={domain}

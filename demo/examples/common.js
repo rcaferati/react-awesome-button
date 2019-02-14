@@ -163,6 +163,8 @@ import {
       title: 'Single Import',
       jsx: `
 import AwesomeButton from 'react-awesome-button/src/components/AwesomeButton';
+import AwesomeButtonProgress from 'react-awesome-button/src/components/AwesomeButtonProgress';
+import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButtonSocial';
 `,
     },
     {

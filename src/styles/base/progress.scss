@@ -10,22 +10,24 @@
       text-indent: 0;
       z-index: 3;
       overflow: hidden;
-      transition:
-        border $transform-speed ease-out,
-        transform $transform-speed ease-out,
-        background $transform-speed ease-out,
-        color $transform-speed ease-out;
+      transition: border var(--transform-speed) ease-out,
+        transform var(--transform-speed) ease-out,
+        background var(--transform-speed) ease-out,
+        color var(--transform-speed) ease-out;
       > span {
-        transition: opacity $transform-speed * 0.50 ease-out $transform-speed * 0.75;
+        transition: opacity calc(var(--transform-speed) * 0.5) ease-out
+          calc(var(--transform-speed) * 0.75);
       }
-      &:before, &:after {
+      &:before,
+      &:after {
         @extend %fill-parent;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: rgba(255,255,255, 0.65);
+        color: rgba(255, 255, 255, 0.65);
         opacity: 0;
-        transition: transform $transform-speed ease-out 0.05s, opacity $transform-speed * 0.75 ease-out 0.05s;
+        transition: transform var(--transform-speed) ease-out 0.05s,
+          opacity calc(var(--transform-speed) * 0.75) ease-out 0.05s;
       }
       &:before {
         content: attr(data-loading);
@@ -54,7 +56,7 @@
       &:after {
         @extend %fill-parent;
         content: " ";
-        background-color: rgba(0,0,0,0.15);
+        background-color: rgba(0, 0, 0, 0.15);
         transform: translate3d(-100%, 0, 0);
         width: 100%;
         display: none;
@@ -70,8 +72,8 @@
     }
     .#{$button-root}__content {
       &:after {
-    		transition: transform $loading-transition-speed ease-out;
-    		transform: translate3d(-15%, 0, 0);
+        transition: transform var(--loading-transition-speed) ease-out;
+        transform: translate3d(-15%, 0, 0);
       }
     }
   }
@@ -85,17 +87,18 @@
   &--end {
     .#{$button-root}__content {
       &:after {
-    		transition: transform $loading-transition-speed/20 ease-out;
-    		transform: translate3d(0, 0, 0);
+        transition: transform var(--loading-transition-end-speed)
+          var(--loading-transition-timing);
+        transform: translate3d(0, 0, 0);
       }
     }
     .#{$button-root}__progress {
       &:after {
         opacity: 1;
-    		transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
       }
       &:before {
-    		transform: translate3d(0, 50%, 0);
+        transform: translate3d(0, 50%, 0);
         opacity: 0;
       }
     }

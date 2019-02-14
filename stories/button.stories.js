@@ -57,48 +57,48 @@ storiesOf('AwesomeButton', module)
   .add('All Types', () => buttons)
   .add('Primary', () => (
     <AwesomeButton
-      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', false)}
-      bubbles={boolean('Bubbles', false)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', false)}
+      ripple={boolean('ripple', false)}
       cssModule={defaultStyles}
       action={action('clicked')}
     >
-      {text('Text', 'Primary')}
+      {text('text', 'Primary')}
     </AwesomeButton>
   ))
   .add('Secondary', () => (
     <AwesomeButton
-      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'secondary')}
-      disabled={boolean('Disabled', false)}
-      bubbles={boolean('Bubbles', false)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('type', ['primary', 'secondary', 'link'], 'secondary')}
+      disabled={boolean('disabled', false)}
+      ripple={boolean('ripple', false)}
       cssModule={defaultStyles}
       action={action('clicked')}
     >
-      {text('Text', 'Primary')}
+      {text('text', 'Secondary')}
     </AwesomeButton>
   ))
   .add('Link', () => (
     <AwesomeButton
-      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'link')}
-      disabled={boolean('Disabled', false)}
-      bubbles={boolean('Bubbles', false)}
-      href="https://github.com/rcaferati"
-      target="_blank"
+      size={select('size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('type', ['primary', 'secondary', 'link'], 'link')}
+      disabled={boolean('disabled', false)}
+      ripple={boolean('ripple', false)}
+      href={text('href', 'https://github.com/rcaferati')}
+      target={select('target', ['_blank', '_self', '_parent', '_top'], '_blank')}
       cssModule={defaultStyles}
       action={action('clicked')}
     >
-      {text('Text', 'Link')}
+      {text('text', 'Anchored Link')}
     </AwesomeButton>
   ))
   .add('Disabled', () => (
     <AwesomeButton
-      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', true)}
-      bubbles={boolean('Bubbles', false)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', true)}
+      ripple={boolean('ripple', false)}
       cssModule={defaultStyles}
       action={action('clicked')}
     >
@@ -107,14 +107,14 @@ storiesOf('AwesomeButton', module)
   ))
   .add('Placeholder', () => (
     <AwesomeButton
-      size={select('Size', [null, 'small', 'medium', 'large'], 'medium')}
-      type={select('Type', ['primary', 'secondary', 'link'], 'primary')}
-      disabled={boolean('Disabled', false)}
-      bubbles={boolean('Bubbles', false)}
-      placeholder={boolean('Placeholder', true)}
+      size={select('size', [null, 'small', 'medium', 'large'], 'medium')}
+      type={select('type', ['primary', 'secondary', 'link'], 'primary')}
+      disabled={boolean('disabled', false)}
+      ripple={boolean('ripple', false)}
+      placeholder={boolean('placeholder', true)}
       cssModule={defaultStyles}
       action={action('clicked')}
     >
-      {text('Text', null)}
+      {text('text', null)}
     </AwesomeButton>
   ));
