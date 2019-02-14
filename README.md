@@ -1,4 +1,4 @@
-# &lt;AwesomeButton /&gt;
+React # &lt;AwesomeButton /&gt;
 
 [![Travis](https://img.shields.io/travis/rcaferati/react-awesome-button/master.svg)](https://travis-ci.org/rcaferati/react-awesome-button) ![NPM](https://img.shields.io/npm/v/react-awesome-button.svg)
 
@@ -26,6 +26,12 @@ Checkout the live demo with the `CSS customizer` at my <a title="React Awesome B
 Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" href="https://caferati.me/demo/react-awesome-button/storybook" target="_blank">web portfolio</a> page.
 
 [<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-storybook.png?raw=true" width="800" />](https://caferati.me/demo/react-awesome-button/storybook)
+
+## Installation
+
+```
+npm install --save react-awesome-button
+```
 
 ## Styling with plain CSS and CSS Modules
 
