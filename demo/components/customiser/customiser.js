@@ -244,7 +244,7 @@ class Customiser extends React.Component {
       <section className={Styles.container}>
         <header>
           <h2>Custom Properties</h2>
-          <p>Basic customization through CSS custom-properties.</p>
+          <p>Button customization through CSS custom-properties.</p>
           <div
             ref={(control) => { this.control = control; }}
             className={Styles.control}

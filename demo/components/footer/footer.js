@@ -8,11 +8,12 @@ const Footer = ({ repository, article }) => (
       <img className="support" src="/images/support.svg" alt="Modern Web Browsers" title="Modern Web Browsers" />
     </div>
     <small>
-      Promote and support this project on <a rel="noopener noreferrer" target="_blank" href={repository}>github</a>.
+      Promote and support this project on <a href={repository}>github</a>.
     </small>
     <small>
-      Read more and discuss at the <a rel="noopener noreferrer" target="_blank" href={article}>article page</a>.
+      Read more and discuss at the <a href={article}>article page</a>.
     </small>
+    <small>Built by <a href="https://caferati.me"><b>@rcaferati</b></a></small>
   </footer>
 );
 
