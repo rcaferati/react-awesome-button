@@ -16,12 +16,13 @@ export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
 
-const Anchor = props => (<a {...props} />);
-const Button = props => (<button {...props} />);
+const Anchor = (props) => <a {...props} />;
+const Button = (props) => <button {...props} />;
 
 export default class AwesomeButton extends React.Component {
   static propTypes = {
     action: PropTypes.func,
+    onPress: PropTypes.func,
     ripple: PropTypes.bool,
     children: PropTypes.node,
     disabled: PropTypes.bool,
@@ -42,8 +43,10 @@ export default class AwesomeButton extends React.Component {
     active: PropTypes.bool,
     blocked: PropTypes.bool,
   };
+
   static defaultProps = {
     action: null,
+    onPress: null,
     ripple: false,
     blocked: false,
     cssModule: null,
@@ -64,6 +67,7 @@ export default class AwesomeButton extends React.Component {
     visible: true,
     active: false,
   };
+
   constructor(props) {
     super(props);
     this.rootElement = props.rootElement || ROOTELM;
@@ -74,14 +78,17 @@ export default class AwesomeButton extends React.Component {
     };
     this.checkProps(props);
   }
+
   componentDidMount() {
     this.container = this.button && this.button.parentNode;
   }
+
   componentWillReceiveProps(newProps) {
     this.checkPlaceholder(newProps);
     this.checkProps(newProps);
     this.checkActive(newProps);
   }
+
   componentWillUnmount() {
     if (this.clearTimer) {
       clearTimeout(this.clearTimer);
@@ -90,18 +97,8 @@ export default class AwesomeButton extends React.Component {
 
   getRootClassName() {
     const { rootElement } = this;
-    const {
-      type,
-      size,
-      placeholder,
-      children,
-      visible,
-      cssModule,
-    } = this.props;
-    const {
-      disabled,
-      pressPosition,
-    } = this.state;
+    const { type, size, placeholder, children, visible, cssModule } = this.props;
+    const { disabled, pressPosition } = this.state;
     const className = [
       this.rootElement,
       type && `${rootElement}--${type}`,
@@ -121,8 +118,12 @@ export default class AwesomeButton extends React.Component {
     if (cssModule && cssModule['aws-btn']) {
       return classToModules(className, cssModule);
     }
-    return className.join(' ').trim().replace(/[\s]+/ig, ' ');
+    return className
+      .join(' ')
+      .trim()
+      .replace(/[\s]+/gi, ' ');
   }
+
   checkActive(newProps) {
     if (newProps.active !== this.props.active) {
       if (newProps.active === true) {
@@ -134,18 +135,15 @@ export default class AwesomeButton extends React.Component {
       }
     }
   }
+
   checkProps(newProps) {
-    const {
-      to,
-      href,
-      target,
-      element,
-    } = newProps;
+    const { to, href, target, element } = newProps;
     this.extraProps.to = to || null;
     this.extraProps.href = href || null;
     this.extraProps.target = target || null;
     this.renderComponent = element || (this.props.href ? Anchor : Button);
   }
+
   checkPlaceholder(newProps) {
     const { disabled, placeholder, children } = newProps;
     if (placeholder === true) {
@@ -164,6 +162,7 @@ export default class AwesomeButton extends React.Component {
       });
     }
   }
+
   clearPress(force) {
     toggleMoveClasses({
       element: this.container,
@@ -175,10 +174,9 @@ export default class AwesomeButton extends React.Component {
       pressPosition,
     });
   }
+
   pressIn() {
-    if (this.state.disabled === true ||
-      this.props.blocked === true
-    ) {
+    if (this.state.disabled === true || this.props.blocked === true) {
       return;
     }
     this.pressed = new Date().getTime();
@@ -186,6 +184,7 @@ export default class AwesomeButton extends React.Component {
       pressPosition: `${this.rootElement}--active`,
     });
   }
+
   pressOut() {
     if (this.clearTimer) {
       clearTimeout(this.clearTimer);
@@ -203,11 +202,21 @@ export default class AwesomeButton extends React.Component {
       this.clearPress();
     }, ANIMATION_DELAY - diff);
   }
+
   action() {
-    if (this.props.action && this.button) {
-      this.props.action(this.container);
+    const { action, onPress } = this.props;
+
+    if (this.button) {
+      if (action) {
+        action(this.container);
+        return;
+      }
+      if (onPress) {
+        onPress(this.container);
+      }
     }
   }
+
   createBubble(event) {
     createBubbleEffect({
       event,
@@ -216,6 +225,7 @@ export default class AwesomeButton extends React.Component {
       className: getClassName(`${this.rootElement}__bubble`, this.props.cssModule),
     });
   }
+
   moveEvents() {
     const events = {
       onClick: (event) => {
@@ -234,8 +244,7 @@ export default class AwesomeButton extends React.Component {
         this.pressIn();
       },
       onMouseUp: (event) => {
-        if (this.state.disabled === true ||
-          this.props.blocked === true) {
+        if (this.state.disabled === true || this.props.blocked === true) {
           event.preventDefault();
           event.stopPropagation();
           return;
@@ -251,9 +260,10 @@ export default class AwesomeButton extends React.Component {
         const { button } = this;
         const { left } = button.getBoundingClientRect();
         const width = button.offsetWidth;
-        const state = event.pageX < (left + (width * 0.3))
-          ? 'left'
-          : event.pageX > (left + (width * 0.65))
+        const state =
+          event.pageX < (left + width) * 0.3
+            ? 'left'
+            : event.pageX > (left + width) * 0.65
             ? 'right'
             : 'middle';
         toggleMoveClasses({
@@ -265,7 +275,9 @@ export default class AwesomeButton extends React.Component {
       };
     } else {
       events.onMouseEnter = () => {
-        this.container.classList.add(classToModules([`${this.rootElement}--middle`], this.props.cssModule));
+        this.container.classList.add(
+          classToModules([`${this.rootElement}--middle`], this.props.cssModule)
+        );
       };
     }
     return events;
@@ -273,12 +285,7 @@ export default class AwesomeButton extends React.Component {
 
   render() {
     const RenderComponent = this.renderComponent;
-    const {
-      title,
-      style,
-      cssModule,
-      children,
-    } = this.props;
+    const { title, style, cssModule, children } = this.props;
     return (
       <RenderComponent
         style={style}
@@ -289,14 +296,24 @@ export default class AwesomeButton extends React.Component {
         {...this.moveEvents()}
       >
         <span
-          ref={(button) => { this.button = button; }}
+          ref={(button) => {
+            this.button = button;
+          }}
           className={getClassName(`${this.rootElement}__wrapper`, cssModule)}
         >
           <span
-            ref={(content) => { this.content = content; }}
+            ref={(content) => {
+              this.content = content;
+            }}
             className={getClassName(`${this.rootElement}__content`, cssModule)}
           >
-            <span ref={(child) => { this.child = child; }}>{children}</span>
+            <span
+              ref={(child) => {
+                this.child = child;
+              }}
+            >
+              {children}
+            </span>
           </span>
         </span>
       </RenderComponent>

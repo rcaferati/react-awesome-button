@@ -10,6 +10,7 @@ const ICON_WIDTH = 30;
 export default class AwesomeButtonSocial extends React.Component {
   static propTypes = {
     action: PropTypes.func,
+    onPress: PropTypes.func,
     children: PropTypes.node,
     disabled: PropTypes.bool,
     href: PropTypes.string,
@@ -26,6 +27,7 @@ export default class AwesomeButtonSocial extends React.Component {
 
   static defaultProps = {
     action: null,
+    onPress: null,
     children: null,
     disabled: false,
     href: null,
@@ -80,11 +82,20 @@ export default class AwesomeButtonSocial extends React.Component {
     return null;
   }
 
-  action = () => {
-    if (this.props.href !== null) {
+  action = (container) => {
+    const { action, onPress, href, type, user, phone } = this.props;
+
+    if (action) {
+      action(container);
       return;
     }
-    const { type, user, phone } = this.props;
+    if (onPress) {
+      onPress(container);
+      return;
+    }
+    if (href !== null) {
+      return;
+    }
 
     const sharer = Sharer({
       height: 600,
@@ -95,10 +106,11 @@ export default class AwesomeButtonSocial extends React.Component {
       user,
       phone,
     });
+
     if (this.window) {
       window.open(sharer.url, sharer.title, sharer.extra);
     }
-  }
+  };
 
   render() {
     const {
@@ -106,6 +118,7 @@ export default class AwesomeButtonSocial extends React.Component {
       icon,
       type,
       action,
+      onPress,
       iconWidth,
       iconHeight,
       href,
@@ -113,18 +126,15 @@ export default class AwesomeButtonSocial extends React.Component {
     } = this.props;
 
     return (
-      <AwesomeButton
-        type={type}
-        action={this.action}
-        href={href}
-        {...extra}
-      >
-        {icon && getIcon({
-          type,
-          width: iconWidth,
-          height: iconHeight,
-          color: this.props.disabled ? 'rgba(255,255,255,0.35)' : '#FFF',
-        })} {children}
+      <AwesomeButton type={type} action={this.action} href={href} {...extra}>
+        {icon &&
+          getIcon({
+            type,
+            width: iconWidth,
+            height: iconHeight,
+            color: this.props.disabled ? 'rgba(255,255,255,0.35)' : '#FFF',
+          })}{' '}
+        {children}
       </AwesomeButton>
     );
   }

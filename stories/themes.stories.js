@@ -7,12 +7,20 @@ import { AwesomeButton } from '../src/index';
 
 const themes = storiesOf('Themes', module);
 
-const renderTheme = module => (
+const renderTheme = (module) => (
   <List>
-    <AwesomeButton size="medium" type="primary" cssModule={module}>Primary</AwesomeButton>
-    <AwesomeButton size="medium" type="secondary" cssModule={module}>Secondary</AwesomeButton>
-    <AwesomeButton size="medium" type="link" cssModule={module}>Link</AwesomeButton>
-    <AwesomeButton size="medium" disabled cssModule={module}>Disabled</AwesomeButton>
+    <AwesomeButton size="medium" type="primary" cssModule={module}>
+      Primary
+    </AwesomeButton>
+    <AwesomeButton size="medium" type="secondary" cssModule={module}>
+      Secondary
+    </AwesomeButton>
+    <AwesomeButton size="medium" type="link" cssModule={module}>
+      Link
+    </AwesomeButton>
+    <AwesomeButton size="medium" disabled cssModule={module}>
+      Disabled
+    </AwesomeButton>
     <AwesomeButton size="medium" disabled placeholder cssModule={module} />
   </List>
 );
