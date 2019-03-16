@@ -21,11 +21,15 @@ Checkout the live demo with the `CSS customizer` at my <a title="React Awesome B
 
 [<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-customizer.png?raw=true" width="800" />](https://caferati.me/demo/react-awesome-button)
 
+You can run this demo locally on `8080` by cloning this repository and running `npm start`
+
 ## Storybook
 
 Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" href="https://caferati.me/demo/react-awesome-button/storybook" target="_blank">web portfolio</a> page.
 
 [<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-storybook.png?raw=true" width="800" />](https://caferati.me/demo/react-awesome-button/storybook)
+
+You can run the storybook locally on `6006` by cloning this repository and running `npm run storybook`
 
 ## Installation
 
