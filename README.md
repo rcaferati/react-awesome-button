@@ -208,4 +208,4 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 
 ## License
 
-MIT. Copyright (c) 2017 Rafael Caferati.
+MIT. Copyright (c) 2019 Rafael Caferati.
