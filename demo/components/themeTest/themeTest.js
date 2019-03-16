@@ -17,30 +17,20 @@ class Test extends React.Component {
     };
   }
   render() {
-    const {
-      theme,
-    } = this.props;
+    const { theme } = this.props;
 
     const Module = Modules.Modules[theme];
 
     return (
       <section className={styles.container}>
         <div className={styles.section}>
-          <AwesomeButton
-            cssModule={Module}
-          >
+          <AwesomeButton cssModule={Module}>
             <i className="fa fa-codepen" aria-hidden /> Primary
           </AwesomeButton>
-          <AwesomeButton
-            cssModule={Module}
-            type="secondary"
-          >
+          <AwesomeButton cssModule={Module} type="secondary">
             Secondary
           </AwesomeButton>
-          <AwesomeButton
-            cssModule={Module}
-            type="link"
-          >
+          <AwesomeButton cssModule={Module} type="link">
             Anchor
           </AwesomeButton>
         </div>
@@ -48,7 +38,7 @@ class Test extends React.Component {
           <AwesomeButtonProgress
             cssModule={Module}
             type="primary"
-            action={(element, next) => {
+            onPress={(element, next) => {
               setTimeout(() => {
                 // debugger;
                 next();
@@ -59,12 +49,7 @@ class Test extends React.Component {
           </AwesomeButtonProgress>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
-          <AwesomeButton
-            bubbles
-            cssModule={Module}
-            placeholder
-            type="secondary"
-          >
+          <AwesomeButton bubbles cssModule={Module} placeholder type="secondary">
             {this.state.placeholderButtonText}
           </AwesomeButton>
           <span
@@ -81,11 +66,7 @@ class Test extends React.Component {
           </span>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
-          <AwesomeButton
-            cssModule={Module}
-            bubbles
-            disabled={this.state.isDisabled}
-          >
+          <AwesomeButton cssModule={Module} bubbles disabled={this.state.isDisabled}>
             Disabled
           </AwesomeButton>
           <span
@@ -125,7 +106,8 @@ class Test extends React.Component {
             iconHeight={24}
             iconWidth={26}
             type="instagram"
-            url="https://instagram.com"
+            target="_blank"
+            href="https://instagram.com/rcaferati"
             cssModule={Module}
           >
             Follow

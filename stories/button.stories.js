@@ -13,7 +13,7 @@ const buttons = (
       size="medium"
       type="primary"
       cssModule={defaultStyles} /* Skipped props */
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       Primary
     </AwesomeButton>
@@ -21,24 +21,14 @@ const buttons = (
       size="medium"
       type="secondary"
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       Secondary
     </AwesomeButton>
-    <AwesomeButton
-      size="medium"
-      type="link"
-      cssModule={defaultStyles}
-      action={action('clicked')}
-    >
+    <AwesomeButton size="medium" type="link" cssModule={defaultStyles} onPress={action('clicked')}>
       Link
     </AwesomeButton>
-    <AwesomeButton
-      size="medium"
-      disabled
-      cssModule={defaultStyles}
-      action={action('clicked')}
-    >
+    <AwesomeButton size="medium" disabled cssModule={defaultStyles} onPress={action('clicked')}>
       Disabled
     </AwesomeButton>
     <AwesomeButton
@@ -46,7 +36,7 @@ const buttons = (
       disabled
       placeholder
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     />
   </List>
 );
@@ -62,7 +52,7 @@ storiesOf('AwesomeButton', module)
       disabled={boolean('disabled', false)}
       ripple={boolean('ripple', false)}
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       {text('text', 'Primary')}
     </AwesomeButton>
@@ -74,7 +64,7 @@ storiesOf('AwesomeButton', module)
       disabled={boolean('disabled', false)}
       ripple={boolean('ripple', false)}
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       {text('text', 'Secondary')}
     </AwesomeButton>
@@ -88,7 +78,7 @@ storiesOf('AwesomeButton', module)
       href={text('href', 'https://github.com/rcaferati')}
       target={select('target', ['_blank', '_self', '_parent', '_top'], '_blank')}
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       {text('text', 'Anchored Link')}
     </AwesomeButton>
@@ -100,7 +90,7 @@ storiesOf('AwesomeButton', module)
       disabled={boolean('disabled', true)}
       ripple={boolean('ripple', false)}
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       {text('Text', 'Disabled')}
     </AwesomeButton>
@@ -113,7 +103,7 @@ storiesOf('AwesomeButton', module)
       ripple={boolean('ripple', false)}
       placeholder={boolean('placeholder', true)}
       cssModule={defaultStyles}
-      action={action('clicked')}
+      onPress={action('clicked')}
     >
       {text('text', null)}
     </AwesomeButton>

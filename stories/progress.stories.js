@@ -16,7 +16,7 @@ storiesOf('AwesomeButtonProgress', module)
       disabled={boolean('disabled', false)}
       fakePress={boolean('fakePress', false)}
       cssModule={cssModule}
-      action={(element, next) => {
+      onPress={(element, next) => {
         action('clicked');
         setTimeout(() => {
           next();
@@ -35,7 +35,7 @@ storiesOf('AwesomeButtonProgress', module)
       disabled={boolean('disabled', false)}
       fakePress={boolean('fakePress', false)}
       cssModule={cssModule}
-      action={(element, next) => {
+      onPress={(element, next) => {
         action('clicked');
         setTimeout(() => {
           next();
@@ -55,7 +55,7 @@ storiesOf('AwesomeButtonProgress', module)
       disabled={boolean('disabled', false)}
       fakePress={boolean('fakePress', false)}
       cssModule={cssModule}
-      action={(element, next) => {
+      onPress={(element, next) => {
         setTimeout(() => {
           next(false, 'Error Message :(');
         }, 500);
@@ -70,7 +70,7 @@ storiesOf('AwesomeButtonProgress', module)
       size={select('size', [null, 'small', 'medium', 'large'], 'large')}
       type={select('type', ['primary', 'secondary', 'link'], 'primary')}
       cssModule={cssModule}
-      action={(element, next) => {
+      onPress={(element, next) => {
         action('clicked');
         setTimeout(() => {
           next();

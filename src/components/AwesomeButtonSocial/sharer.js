@@ -9,29 +9,23 @@ function centerWindow(width, height) {
   }
   const screenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
   const screenTop = window.screenTop !== undefined ? window.screenTop : screen.top;
-  const windowWidth = window.innerWidth ?
-    window.innerWidth : document.documentElement.clientWidth ?
-      document.documentElement.clientWidth : screen.width;
-  const windowHeight = window.innerHeight ?
-    window.innerHeight : document.documentElement.clientHeight ?
-      document.documentElement.clientHeight : screen.height;
+  const windowWidth = window.innerWidth
+    ? window.innerWidth
+    : document.documentElement.clientWidth
+    ? document.documentElement.clientWidth
+    : screen.width;
+  const windowHeight = window.innerHeight
+    ? window.innerHeight
+    : document.documentElement.clientHeight
+    ? document.documentElement.clientHeight
+    : screen.height;
   return {
-    top: ((windowHeight / 2) - (height / 2)) + screenTop,
-    left: ((windowWidth / 2) - (width / 2)) + screenLeft,
+    top: windowHeight / 2 - height / 2 + screenTop,
+    left: windowWidth / 2 - width / 2 + screenLeft,
   };
 }
 
-export default function Sharer({
-  url,
-  message,
-  title,
-  image,
-  user,
-  type,
-  phone,
-  width,
-  height,
-}) {
+export default function Sharer({ url, message, title, image, user, type, phone, width, height }) {
   const args = {};
   const params = {};
   switch (type) {
@@ -78,7 +72,7 @@ export default function Sharer({
       args.width = 850;
       break;
     case 'whatsapp':
-      params.phone = phone.replace(/\+|(|)/mig, '');
+      params.phone = phone.replace(/\+|(|)/gim, '');
       params.title = message || title;
       args.url = `https://api.whatsapp.com/send?${serialize(params, '&')}`;
       args.title = 'Whatsapp Message';
@@ -93,13 +87,22 @@ export default function Sharer({
       args.url = `mailto:${url}`;
       args.title = '_self';
       break;
+    case 'instagram':
+      args.url = url;
+      args.title = '_self';
+      break;
     default:
       return args;
   }
-  args.extra = serialize({
-    width: `${args.width || width}px`,
-    height: `${args.height || height}px`,
-    ...centerWindow(args.width || width, args.height || height),
-  }, ',');
+
+  args.extra = serialize(
+    {
+      width: `${args.width || width}px`,
+      height: `${args.height || height}px`,
+      ...centerWindow(args.width || width, args.height || height),
+    },
+    ','
+  );
+
   return args;
 }
