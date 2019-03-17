@@ -198,6 +198,13 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 | phone        | `string`  | `null`    | Phone number to be used when using the Whatsapp sharer |
 | user         | `string`  | `null`    | Username to be redirected to when using the Messenger sharer |
 
+
+## React Native
+
+Checkout the React Native version of the Awesome Button UI Component at [rcaferati/react-native-really-awesome-button](https://github.com/rcaferati/react-native-really-awesome-button)
+
+<img width="280" src='https://raw.githubusercontent.com/rcaferati/react-native-really-awesome-button/master/demo/demo-button-cartman.gif?raw=true' />
+
 ## Author
 
 #### Rafael Caferati
