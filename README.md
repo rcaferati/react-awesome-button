@@ -199,7 +199,7 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 | user         | `string`  | `null`    | Username to be redirected to when using the Messenger sharer |
 
 
-## React Native
+## React Native Version
 
 Checkout the React Native version of the Awesome Button UI Component at [rcaferati/react-native-really-awesome-button](https://github.com/rcaferati/react-native-really-awesome-button)
 
