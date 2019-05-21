@@ -145,7 +145,7 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
         }}
       >
         Button
-      </AwesomeButton>
+      </AwesomeButtonProgress>
     );
   }
 ```
