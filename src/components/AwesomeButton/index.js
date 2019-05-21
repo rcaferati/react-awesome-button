@@ -261,11 +261,12 @@ export default class AwesomeButton extends React.Component {
         const { left } = button.getBoundingClientRect();
         const width = button.offsetWidth;
         const state =
-          event.pageX < (left + width) * 0.3
+          event.pageX < left + (width * 0.3)
             ? 'left'
-            : event.pageX > (left + width) * 0.65
-            ? 'right'
-            : 'middle';
+            : event.pageX > left + (width * 0.65)
+              ? 'right'
+              : 'middle';
+
         toggleMoveClasses({
           element: this.container,
           root: this.rootElement,
@@ -275,9 +276,12 @@ export default class AwesomeButton extends React.Component {
       };
     } else {
       events.onMouseEnter = () => {
-        this.container.classList.add(
-          classToModules([`${this.rootElement}--middle`], this.props.cssModule)
-        );
+        toggleMoveClasses({
+          element: this.container,
+          root: this.rootElement,
+          cssModule: this.props.cssModule,
+          state: 'middle',
+        })
       };
     }
     return events;
