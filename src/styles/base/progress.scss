@@ -8,7 +8,7 @@
       justify-content: center;
       border-radius: $button-default-border-radius;
       text-indent: 0;
-      z-index: 3;
+      z-index: 0;
       overflow: hidden;
       transition: border var(--transform-speed) ease-out,
         transform var(--transform-speed) ease-out,

@@ -166,7 +166,7 @@ button.aws-btn .aws-btn__wrapper {
       border-radius: var(--button-default-border-radius);
       top: auto;
       bottom: calc(var(--button-raise-level) * -1);
-      z-index: 1;
+      z-index: 0;
       -webkit-transition: background var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out;
       transition: background var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out;
       transition: transform var(--transform-speed) ease-out, background var(--transform-speed) ease-out;
@@ -175,7 +175,7 @@ button.aws-btn .aws-btn__wrapper {
       content: " ";
       background-color: rgba(0, 0, 0, 0.15);
       border-radius: var(--button-default-border-radius);
-      z-index: 3;
+      z-index: 0;
       width: 0;
       top: var(--button-raise-level); }
   .aws-btn .aws-btn__content {
@@ -194,7 +194,7 @@ button.aws-btn .aws-btn__wrapper {
             justify-content: center;
     border-radius: var(--button-default-border-radius);
     text-indent: 0;
-    z-index: 3;
+    z-index: 0;
     overflow: hidden;
     padding: 0 var(--button-horizontal-padding);
     -webkit-backface-visibility: hidden;
@@ -221,7 +221,7 @@ button.aws-btn .aws-btn__wrapper {
     left: 1px;
     position: absolute;
     border-radius: var(--button-default-border-radius);
-    z-index: 1;
+    z-index: 0;
     -webkit-transform: skewY(0) translate3d(0, 0, 0);
             transform: skewY(0) translate3d(0, 0, 0);
     -webkit-transition: background calc(var(--transform-speed) * 0.8) ease-out, -webkit-transform calc(var(--transform-speed) * 0.8) ease-out;
@@ -711,7 +711,7 @@ span.aws-btn__bubble {
   height: 0px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 0;
   opacity: 0;
   -webkit-transform: scale(0.1);
           transform: scale(0.1);
@@ -824,7 +824,7 @@ span.aws-btn__bubble {
           justify-content: center;
   border-radius: 2px;
   text-indent: 0;
-  z-index: 3;
+  z-index: 0;
   overflow: hidden;
   -webkit-transition: border var(--transform-speed) ease-out, background var(--transform-speed) ease-out, color var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out;
   transition: border var(--transform-speed) ease-out, background var(--transform-speed) ease-out, color var(--transform-speed) ease-out, -webkit-transform var(--transform-speed) ease-out;

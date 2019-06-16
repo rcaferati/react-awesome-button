@@ -151,7 +151,7 @@ button.#{$button-root} {
       border-radius: var(--button-default-border-radius);
       top: auto;
       bottom: calc(var(--button-raise-level) * -1);
-      z-index: 1;
+      z-index: 0;
       transition: transform var(--transform-speed) ease-out, background var(--transform-speed) ease-out;
     }
     &:after{
@@ -159,7 +159,7 @@ button.#{$button-root} {
       content: " ";
       background-color: rgba(0, 0, 0, 0.15);
       border-radius: var(--button-default-border-radius);
-      z-index: 3;
+      z-index: 0;
       width: 0;
       top: var(--button-raise-level);
     }
@@ -172,7 +172,7 @@ button.#{$button-root} {
     justify-content: center;
     border-radius: var(--button-default-border-radius);
     text-indent: 0;
-    z-index: 3;
+    z-index: 0;
     overflow: hidden;
     padding: 0 var(--button-horizontal-padding);
     backface-visibility: hidden;
@@ -208,7 +208,7 @@ button.#{$button-root} {
     left: 1px;
     position: absolute;
     border-radius: var(--button-default-border-radius);
-    z-index: 1;
+    z-index: 0;
     transform:
     skewY(0)
     translate3d(0, 0, 0);
@@ -324,7 +324,7 @@ span.#{$button-root}__bubble {
   height: 0px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 0;
   opacity: 0;
   transform: scale(0.1);
   animation: bubble-ping calc(var(--transform-speed) * 3.5) cubic-bezier(0.5, 0, 0.6, 0.4) 0.05s forwards;
