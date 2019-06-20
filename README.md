@@ -31,7 +31,7 @@ Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" 
 
 ## Figma File
 
-Copy it directly into your `Figma` project.
+Import it directly into your [Figma](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue) project.
 
 [<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/figma.png?raw=true" width="800" />](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue)
 
