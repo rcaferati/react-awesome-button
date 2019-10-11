@@ -83,7 +83,7 @@ export default class AwesomeButton extends React.Component {
     this.container = this.button && this.button.parentNode;
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.checkPlaceholder(newProps);
     this.checkProps(newProps);
     this.checkActive(newProps);

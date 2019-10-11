@@ -34,7 +34,7 @@ class Customiser extends React.Component {
     element: null,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.updateProperties(this.props);
   }
 
@@ -43,7 +43,7 @@ class Customiser extends React.Component {
     this.updateAllValues(this.props);
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.values = {};
     if (this.props.theme !== newProps.theme) {
       this.updateValues = true;

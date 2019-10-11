@@ -56,7 +56,7 @@ export default class AwesomeProgress extends React.Component {
     setCssEndEvent(this.content, 'transition', this.clearStagedWrapperAnimation.bind(this));
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.checkFakePress(newProps);
   }
 
