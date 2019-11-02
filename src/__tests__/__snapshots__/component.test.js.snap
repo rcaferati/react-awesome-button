@@ -54,6 +54,7 @@ ShallowWrapper {
       "onMouseDown": [Function],
       "onMouseUp": [Function],
       "onPress": null,
+      "onReleased": null,
       "placeholder": false,
       "releaseDelay": 500,
       "ripple": false,
@@ -123,6 +124,7 @@ ShallowWrapper {
         "onMouseDown": [Function],
         "onMouseUp": [Function],
         "onPress": null,
+        "onReleased": null,
         "placeholder": false,
         "releaseDelay": 500,
         "ripple": false,
@@ -188,7 +190,9 @@ ShallowWrapper {
         },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
   Symbol(enzyme.__childContext__): null,
 }
 `;
@@ -207,6 +211,7 @@ ShallowWrapper {
     href={null}
     moveEvents={false}
     onPress={null}
+    onReleased={null}
     placeholder={false}
     ripple={false}
     rootElement="aws-btn"
@@ -400,7 +405,9 @@ ShallowWrapper {
         },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
   Symbol(enzyme.__childContext__): null,
 }
 `;
@@ -419,6 +426,7 @@ ShallowWrapper {
     href={null}
     moveEvents={true}
     onPress={null}
+    onReleased={null}
     placeholder={false}
     ripple={false}
     rootElement="aws-btn"
@@ -612,7 +620,9 @@ ShallowWrapper {
         },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
   Symbol(enzyme.__childContext__): null,
 }
 `;
@@ -631,6 +641,7 @@ ShallowWrapper {
     href={null}
     moveEvents={true}
     onPress={null}
+    onReleased={null}
     placeholder={false}
     ripple={false}
     rootElement="aws-btn"
@@ -824,7 +835,9 @@ ShallowWrapper {
         },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
   Symbol(enzyme.__childContext__): null,
 }
 `;
