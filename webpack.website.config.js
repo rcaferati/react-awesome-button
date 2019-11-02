@@ -1,4 +1,5 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -12,6 +13,15 @@ const config = {
     libraryTarget: 'umd',
     library: 'react-awesome-button',
   },
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'demo/components'),
+      examples: path.resolve(__dirname, 'demo/examples'),
+      helpers: path.resolve(__dirname, 'demo/helpers'),
+      src: path.resolve(__dirname, 'src'),
+      dist: path.resolve(__dirname, 'dist'),
+    },
+  },
   module: {
     rules: [
       {
@@ -24,35 +34,48 @@ const config = {
       },
       {
         test: /\.scss$/i,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[hash:base64:4]',
-              },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]--[hash:base64:4]',
             },
-            'postcss-loader',
-            'sass-loader'],
-        }),
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.css$/i,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader?importLoaders=1!postcss-loader',
-        }),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader?importLoaders=1!postcss-loader',
+        ],
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
+  },
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'react-awesome-button.css',
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false,
+    new MiniCssExtractPlugin({
+      filename: 'react-awesome-slider.css',
     }),
     new webpack.DefinePlugin({
       'process.env': {

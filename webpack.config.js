@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -10,6 +11,7 @@ const config = {
     filename: '[name].js',
     libraryTarget: 'umd',
     library: 'react-awesome-button',
+    globalObject: 'this',
   },
   externals: {
     react: {
@@ -26,19 +28,31 @@ const config = {
     },
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      options: {
-        presets: ['es2015', 'react', 'stage-0'],
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['es2015', 'react', 'stage-0'],
+        },
       },
-    }],
+    ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),

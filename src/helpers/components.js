@@ -1,11 +1,9 @@
-const POSITION_STATES = [
-  'middle',
-  'left',
-  'right',
-];
+const POSITION_STATES = ['middle', 'left', 'right'];
 
 export function serialize(obj, separator = '&') {
-  return Object.entries(obj).map(([key, val]) => `${key}=${val}`).join(separator);
+  return Object.entries(obj)
+    .map(([key, val]) => `${key}=${val}`)
+    .join(separator);
 }
 
 export function classToModules(className = [], cssModule) {
@@ -56,7 +54,7 @@ export function toggleMoveClasses({
     element.classList.remove(
       classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
       classToModules([`${root}--${POSITION_STATES[1]}`], cssModule),
-      classToModules([`${root}--${POSITION_STATES[2]}`], cssModule),
+      classToModules([`${root}--${POSITION_STATES[2]}`], cssModule)
     );
     return false;
   }
@@ -64,25 +62,22 @@ export function toggleMoveClasses({
   let i = options.length;
   // eslint-disable-next-line
   while (i--) {
-    element.classList.remove(classToModules([`${root}--${options[i]}`], cssModule));
+    element.classList.remove(
+      classToModules([`${root}--${options[i]}`], cssModule)
+    );
   }
   element.classList.add(classToModules([`${root}--${state}`], cssModule));
   return true;
 }
 
-export function createBubbleEffect({
-  event,
-  button,
-  content,
-  className,
-}) {
+export function createBubbleEffect({ event, button, content, className }) {
   const bounds = button.getBoundingClientRect();
   const top = window.pageYOffset || document.documentElement.scrolltop || 0;
   const bubble = document.createElement('span');
   const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
   bubble.className = className;
-  bubble.style.top = `-${(size / 2) - (event.pageY - bounds.top - top)}px`;
-  bubble.style.left = `-${(size / 2) - (event.pageX - bounds.left)}px`;
+  bubble.style.top = `-${size / 2 - (event.pageY - bounds.top - top)}px`;
+  bubble.style.left = `-${size / 2 - (event.pageX - bounds.left)}px`;
   bubble.style.width = `${size}px`;
   bubble.style.height = `${size}px`;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Styles from './header.scss';
-import { Navigation } from '../index';
+import { Navigation, ReactLogo } from '../index';
 
 const Header = ({
   title,
@@ -15,13 +15,16 @@ const Header = ({
 }) => (
   <header className={Styles.container}>
     <div className={Styles.wrapper}>
-      <h1>
-        <span>{framework}</span>{' '}<span>{title}</span>{' '}<span>Component</span>
-      </h1>
-      <h4>
+      <div className={Styles.title}>
+        <ReactLogo />
+        <h1>
+          <span>{framework}</span>{' '}<span>{title}</span>{' '}<span>Component</span>
+        </h1>
+      </div>
+      <h2>
         <strong>&lt;{name}/&gt;</strong>
         <span>{size}</span>
-      </h4>
+      </h2>
       <p>{description}</p>
       <Navigation
         domain={domain}

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { setCssEndEvent } from 'web-animation-club';
 import {
   classToModules,
   getClassName,
@@ -16,13 +17,14 @@ export const AwesomeButtonSetup = (setup = {}) => {
 };
 */
 
-const Anchor = (props) => <a {...props} />;
-const Button = (props) => <button {...props} />;
+const Anchor = props => <a {...props} />;
+const Button = props => <button {...props} />;
 
 export default class AwesomeButton extends React.Component {
   static propTypes = {
     action: PropTypes.func,
     onPress: PropTypes.func,
+    onReleased: PropTypes.func,
     ripple: PropTypes.bool,
     children: PropTypes.node,
     disabled: PropTypes.bool,
@@ -47,6 +49,7 @@ export default class AwesomeButton extends React.Component {
   static defaultProps = {
     action: null,
     onPress: null,
+    onReleased: null,
     ripple: false,
     blocked: false,
     cssModule: null,
@@ -97,7 +100,14 @@ export default class AwesomeButton extends React.Component {
 
   getRootClassName() {
     const { rootElement } = this;
-    const { type, size, placeholder, children, visible, cssModule } = this.props;
+    const {
+      type,
+      size,
+      placeholder,
+      children,
+      visible,
+      cssModule,
+    } = this.props;
     const { disabled, pressPosition } = this.state;
     const className = [
       this.rootElement,
@@ -130,9 +140,9 @@ export default class AwesomeButton extends React.Component {
         this.setState({
           pressPosition: `${this.rootElement}--active`,
         });
-      } else {
-        this.clearPress(true);
+        return;
       }
+      this.clearPress({ force: true });
     }
   }
 
@@ -163,13 +173,26 @@ export default class AwesomeButton extends React.Component {
     }
   }
 
-  clearPress(force) {
+  clearPress({ force = false, leave = false } = {}) {
+    // clear class movement (no-state)
     toggleMoveClasses({
       element: this.container,
       root: this.rootElement,
       cssModule: this.props.cssModule,
     });
-    const pressPosition = this.props.active && !force ? `${this.rootElement}--active` : null;
+
+    const pressPosition =
+      this.props.active && !force ? `${this.rootElement}--active` : null;
+
+    if (pressPosition === null && leave === false) {
+      setCssEndEvent(this.content, 'transition', {
+        tolerance: 1,
+      }).then(() => {
+        if (this.props.onReleased) {
+          this.props.onReleased(this.container);
+        }
+      });
+    }
     this.setState({
       pressPosition,
     });
@@ -185,7 +208,7 @@ export default class AwesomeButton extends React.Component {
     });
   }
 
-  pressOut() {
+  pressOut(event) {
     if (this.clearTimer) {
       clearTimeout(this.clearTimer);
     }
@@ -222,38 +245,41 @@ export default class AwesomeButton extends React.Component {
       event,
       button: this.button,
       content: this.content,
-      className: getClassName(`${this.rootElement}__bubble`, this.props.cssModule),
+      className: getClassName(
+        `${this.rootElement}__bubble`,
+        this.props.cssModule
+      ),
     });
   }
 
   moveEvents() {
     const events = {
-      onClick: (event) => {
+      onClick: event => {
         if (this.props.href && this.state.disabled) {
           event.preventDefault();
           event.stopPropagation();
         }
       },
       onMouseLeave: () => {
-        this.clearPress();
+        this.clearPress({ leave: true });
       },
-      onMouseDown: (event) => {
+      onMouseDown: event => {
         if (event && event.nativeEvent.which !== 1) {
           return;
         }
         this.pressIn();
       },
-      onMouseUp: (event) => {
+      onMouseUp: event => {
         if (this.state.disabled === true || this.props.blocked === true) {
           event.preventDefault();
           event.stopPropagation();
           return;
         }
-        this.pressOut();
+        this.pressOut(event);
       },
     };
     if (this.props.moveEvents === true) {
-      events.onMouseMove = (event) => {
+      events.onMouseMove = event => {
         if (this.state.disabled === true) {
           return;
         }
@@ -261,11 +287,11 @@ export default class AwesomeButton extends React.Component {
         const { left } = button.getBoundingClientRect();
         const width = button.offsetWidth;
         const state =
-          event.pageX < left + (width * 0.3)
+          event.pageX < left + width * 0.3
             ? 'left'
-            : event.pageX > left + (width * 0.65)
-              ? 'right'
-              : 'middle';
+            : event.pageX > left + width * 0.65
+            ? 'right'
+            : 'middle';
 
         toggleMoveClasses({
           element: this.container,
@@ -281,7 +307,7 @@ export default class AwesomeButton extends React.Component {
           root: this.rootElement,
           cssModule: this.props.cssModule,
           state: 'middle',
-        })
+        });
       };
     }
     return events;
@@ -300,19 +326,19 @@ export default class AwesomeButton extends React.Component {
         {...this.moveEvents()}
       >
         <span
-          ref={(button) => {
+          ref={button => {
             this.button = button;
           }}
           className={getClassName(`${this.rootElement}__wrapper`, cssModule)}
         >
           <span
-            ref={(content) => {
+            ref={content => {
               this.content = content;
             }}
             className={getClassName(`${this.rootElement}__content`, cssModule)}
           >
             <span
-              ref={(child) => {
+              ref={child => {
                 this.child = child;
               }}
             >

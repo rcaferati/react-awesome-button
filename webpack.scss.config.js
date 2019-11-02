@@ -1,5 +1,6 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 const config = {
@@ -20,32 +21,35 @@ const config = {
         options: {
           presets: ['es2015', 'react', 'stage-0'],
         },
-      }, {
+      },
+      {
         test: /\.scss$/i,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
-        }),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.css$/i,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader?importLoaders=1!postcss-loader',
-        }),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader?importLoaders=1!postcss-loader',
+        ],
       },
     ],
   },
+  optimization: {
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
+  },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false,
-    }),
-    new ExtractTextPlugin({
-      filename: 'styles.css',
+    new MiniCssExtractPlugin({
+      filename: `styles.css`,
     }),
   ],
 };

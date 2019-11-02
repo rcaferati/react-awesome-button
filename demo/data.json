@@ -14,6 +14,14 @@
       "slug": "blue-theme"
     },
     {
+      "name": "Red",
+      "slug": "red-theme"
+    },
+    {
+      "name": "Indigo",
+      "slug": "indigo-theme"
+    },
+    {
       "name": "Cartman",
       "slug": "cartman-theme"
     },
@@ -24,6 +32,10 @@
     {
       "name": "Morty",
       "slug": "morty-theme"
+    },
+    {
+      "name": "Bojack",
+      "slug": "bojack-theme"
     }
   ]
 }

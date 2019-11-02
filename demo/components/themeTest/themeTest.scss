@@ -1,5 +1,13 @@
 .container {
+}
 
+.share {
+  margin-top: 24px;
+
+  h4 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
 }
 
 .loadData {
@@ -10,9 +18,11 @@
 .section {
   position: relative;
 
-  button, a {
+  button,
+  a {
     margin-right: 12px;
   }
+
   .action {
     display: block;
     padding: 8px;

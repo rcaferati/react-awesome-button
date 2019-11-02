@@ -1,6 +1,8 @@
 // [Default] variables
 @import '../../base/variables.scss';
+
 // [Overwrite] variables
+@import './config/structure.scss';
 @import './config/colors.scss';
 
 // [Default] Custom Properties
