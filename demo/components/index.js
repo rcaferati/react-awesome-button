@@ -14,3 +14,4 @@ export { default as Popover } from './popover/popover';
 export { default as Theme } from './theme/theme';
 export { default as ThemeTest } from './themeTest/themeTest';
 export { default as ThemeList } from './themeList/themeList';
+export { default as ReactLogo } from './react-logo/react-logo';

@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  BrowserRouter,
-  StaticRouter,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter, StaticRouter, Route } from 'react-router-dom';
 import styles from './demo.scss';
-import { Header, Customiser, Body, Composer, Page, PageRibbon } from './components';
+import {
+  Header,
+  Customiser,
+  Body,
+  Composer,
+  Page,
+  PageRibbon,
+} from './components';
 import Data from './data.json';
 import data from './examples';
 
-const DEFAULT_THEME = 'morty-theme';
+const DEFAULT_THEME = 'blue-theme';
 
 const DemoComponent = ({
   match,
@@ -96,20 +99,15 @@ class Demo extends React.Component {
     };
   }
 
-  handlePopover = (popover) => {
+  handlePopover = popover => {
     this.setState(popover);
-  }
+  };
 
   render() {
-    const {
-      server,
-      location,
-    } = this.props;
+    const { server, location } = this.props;
     const Router = server === true ? StaticRouter : BrowserRouter;
     return (
-      <Router
-        location={location}
-      >
+      <Router location={location}>
         <div>
           <PageRibbon
             href={Data.repository}
@@ -118,10 +116,16 @@ class Demo extends React.Component {
             className={styles.ribbon}
             delay={1250}
           >
-            <span>Support it on Github</span><span role="img" aria-label="hi?">🙌🏻</span>
+            <span>Support it on Github</span>
+            <span role="img" aria-label="hi?">
+              🙌🏻
+            </span>
           </PageRibbon>
           <Body>
-            <Route path={`${Data.domain}/:theme?`} component={HeaderComponent} />
+            <Route
+              path={`${Data.domain}/:theme?`}
+              component={HeaderComponent}
+            />
             <Route
               path={`${Data.domain}/:theme?`}
               render={({ match }) => (
