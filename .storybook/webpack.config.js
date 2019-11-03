@@ -5,13 +5,12 @@
 // IMPORTANT
 // When you add this file, we won't add the default configurations which is similar
 // to "React Create App". This only has babel loader to load JavaScript.
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   plugins: [
-    // your custom plugins
-    new ExtractTextPlugin({
-      filename: 'styles.css',
+    new MiniCssExtractPlugin({
+      filename: `styles.css`,
     }),
   ],
   module: {
@@ -23,20 +22,21 @@ module.exports = {
       },
       {
         test: /\.scss$/i,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[name]--[local]--[hash:base64:4]',
-              },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]--[hash:base64:4]',
             },
-            'postcss-loader',
-            'sass-loader'],
-        }),
-      }
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
     ],
   },
 };

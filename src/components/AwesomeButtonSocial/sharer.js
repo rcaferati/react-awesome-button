@@ -7,8 +7,10 @@ function centerWindow(width, height) {
       left: 0,
     };
   }
-  const screenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
-  const screenTop = window.screenTop !== undefined ? window.screenTop : screen.top;
+  const screenLeft =
+    window.screenLeft !== undefined ? window.screenLeft : screen.left;
+  const screenTop =
+    window.screenTop !== undefined ? window.screenTop : screen.top;
   const windowWidth = window.innerWidth
     ? window.innerWidth
     : document.documentElement.clientWidth
@@ -25,14 +27,26 @@ function centerWindow(width, height) {
   };
 }
 
-export default function Sharer({ url, message, title, image, user, type, phone, width, height }) {
+export default function Sharer({
+  url,
+  message,
+  title,
+  image,
+  user,
+  type,
+  phone,
+  width,
+  height,
+}) {
   const args = {};
   const params = {};
   switch (type) {
     case 'facebook':
-      params.s = 100;
-      params['p[url]'] = url;
-      args.url = `https://www.facebook.com/sharer.php?${serialize(params, '&')}`;
+      params.u = encodeURIComponent(url);
+      args.url = `https://www.facebook.com/sharer.php?${serialize(
+        params,
+        '&'
+      )}`;
       args.title = 'Facebook Sharer';
       break;
     case 'twitter':
@@ -47,7 +61,10 @@ export default function Sharer({ url, message, title, image, user, type, phone, 
       if (image) {
         params.media = image;
       }
-      args.url = `https://pinterest.com/pin/create/button/?${serialize(params, '&')}`;
+      args.url = `https://pinterest.com/pin/create/button/?${serialize(
+        params,
+        '&'
+      )}`;
       args.title = 'Pinterest Sharer';
       break;
     case 'google':
@@ -61,7 +78,10 @@ export default function Sharer({ url, message, title, image, user, type, phone, 
       params.mini = true;
       params.url = url;
       params.title = message || title;
-      args.url = `https://www.linkedin.com/shareArticle?${serialize(params, '&')}`;
+      args.url = `https://www.linkedin.com/shareArticle?${serialize(
+        params,
+        '&'
+      )}`;
       args.title = 'Linkedin Sharer';
       break;
     case 'reddit':

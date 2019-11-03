@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  onceTransitionEnd,
+  beforeFutureCssLayout,
+  setCssEndEvent,
+} from 'web-animation-club';
 import { AwesomeButton } from '../../index';
-import { getClassName, setCssEndEvent } from '../../helpers/components';
+import { getClassName } from '../../helpers/components';
 
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 4;
@@ -42,6 +47,7 @@ export default class AwesomeProgress extends React.Component {
     this.rootElement = props.rootElement || ROOTELM;
     this.animationStage = 0;
     this.loading = false;
+    this.timeout = null;
     this.state = {
       loadingEnd: false,
       loadingStart: false,
@@ -52,12 +58,14 @@ export default class AwesomeProgress extends React.Component {
     };
   }
 
-  componentDidMount() {
-    setCssEndEvent(this.content, 'transition', this.clearStagedWrapperAnimation.bind(this));
-  }
-
   UNSAFE_componentWillReceiveProps(newProps) {
     this.checkFakePress(newProps);
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
 
   getRootClassName() {
@@ -103,13 +111,11 @@ export default class AwesomeProgress extends React.Component {
         /*
         To avoid the button eventual flickering I've changed the display strategy
         for that to work in a controlled way we need to set the loadingStart
-        at least one painting cycle ahead
+        at least two painting cycle ahead
       */
-        window.requestAnimationFrame(() => {
-          window.requestAnimationFrame(() => {
-            this.setState({
-              loadingStart: true,
-            });
+        beforeFutureCssLayout(2, () => {
+          this.setState({
+            loadingStart: true,
           });
         });
       }
@@ -128,44 +134,42 @@ export default class AwesomeProgress extends React.Component {
     );
   }
 
-  clearStagedWrapperAnimation() {
-    if (this.animationStage !== 0) {
-      if (this.animationStage === LOADING_ANIMATION_STEPS) {
-        this.animationStage = 0;
-        setTimeout(() => {
-          if (typeof window !== 'undefined') {
-            window.requestAnimationFrame(() => {
-              this.clearLoading(() => {
-                setTimeout(() => {
-                  this.setState({
-                    blocked: false,
-                    loadingError: false,
-                    errorLabel: null,
-                  });
-                }, 500);
+  clearStagedWrapperAnimation = () => {
+    this.timeout = setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        window.requestAnimationFrame(() => {
+          this.clearLoading(() => {
+            setTimeout(() => {
+              this.setState({
+                blocked: false,
+                loadingError: false,
+                errorLabel: null,
               });
-            });
-          }
-        }, this.props.releaseDelay);
-        return;
+            }, 500);
+          });
+        });
       }
-      this.animationStage += 1;
-    }
-  }
+    }, this.props.releaseDelay);
+  };
 
   action = () => {
-    this.startLoading();
     const action = this.props.action || this.props.onPress;
-    if (action) {
-      setTimeout(() => {
-        action(this.container, this.endLoading.bind(this));
-      }, 250);
-    }
+    this.startLoading();
+    onceTransitionEnd(this.content).then(() => {
+      if (action) {
+        action(this.content, this.endLoading.bind(this));
+      }
+      setCssEndEvent(this.content, 'transition', {
+        tolerance: LOADING_ANIMATION_STEPS,
+      }).then(() => {
+        this.clearStagedWrapperAnimation();
+      });
+    });
   };
 
   moveEvents() {
     const events = {
-      onMouseDown: (event) => {
+      onMouseDown: event => {
         if (
           this.props.disabled === true ||
           this.loading === true ||
@@ -176,8 +180,12 @@ export default class AwesomeProgress extends React.Component {
         }
         this.loading = true;
       },
-      onMouseUp: (event) => {
-        if (this.props.disabled === true || this.loading === true || this.state.blocked === true) {
+      onMouseUp: event => {
+        if (
+          this.props.disabled === true ||
+          this.loading === true ||
+          this.state.blocked === true
+        ) {
           event.preventDefault();
           event.stopPropagation();
           return;
@@ -215,7 +223,7 @@ export default class AwesomeProgress extends React.Component {
         {...extra}
       >
         <span
-          ref={(content) => {
+          ref={content => {
             this.content = content;
           }}
           data-loading={loadingLabel || null}
