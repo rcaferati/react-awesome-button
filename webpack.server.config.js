@@ -1,6 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const webpack = require('webpack');
 const path = require('path');
 
 const config = {
@@ -77,11 +76,6 @@ const config = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'react-awesome-slider.css',
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
     }),
   ],
 };

@@ -19,10 +19,10 @@
   },
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.demo.config.js",
-    "build": "NODE_ENV=production webpack",
-    "build:scss": "NODE_ENV=production webpack --config webpack.scss.config.js && rm ./dist/styles.js",
-    "build:website": "webpack -p --config webpack.website.config.js",
-    "build:server": "webpack -p --config webpack.server.config.js",
+    "build": "webpack --mode production",
+    "build:scss": "webpack --mode production --config webpack.scss.config.js && rm ./dist/styles.js",
+    "build:website": "webpack --mode production --config webpack.website.config.js",
+    "build:server": "webpack --mode production --config webpack.server.config.js",
     "build:themes": "babel-node ./theme-builder.js",
     "test": "BABEL_JEST_STAGE=0 jest",
     "lint": "eslint src/**",
@@ -80,6 +80,7 @@
     "sass-loader": "^6.0.3",
     "shelljs": "^0.7.8",
     "storybook-addon-smart-knobs": "^3.3.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^0.19.1",
     "terser-webpack-plugin": "^2.1.2",
     "webpack": "^4.40.2",
@@ -98,8 +99,7 @@
     "javascript"
   ],
   "dependencies": {
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "web-animation-club": "^0.5.0"
+    "web-animation-club": "^0.6.0"
   },
   "loki": {
     "configurations": {
