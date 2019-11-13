@@ -1,4 +1,3 @@
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
@@ -43,9 +42,7 @@ const config = {
       },
     ],
   },
-  optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin({})],
-  },
+  optimization: {},
   plugins: [
     new MiniCssExtractPlugin({
       filename: `styles.css`,
