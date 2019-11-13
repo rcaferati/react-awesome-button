@@ -1,5 +1,5 @@
 const TerserPlugin = require('terser-webpack-plugin');
-const webpack = require('webpack');
+
 const path = require('path');
 
 const config = {
@@ -39,26 +39,6 @@ const config = {
       },
     ],
   },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          output: {
-            comments: false,
-          },
-        },
-        extractComments: false,
-      }),
-    ],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-  ],
 };
 
 module.exports = config;
