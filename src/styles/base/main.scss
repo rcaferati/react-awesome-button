@@ -124,7 +124,7 @@ button.#{$button-root} {
   vertical-align: middle;
   height: var(--button-default-height);
   position: relative;
-  z-index: 0;
+  z-index: 1;
   background-color: transparent;
   font-size: var(--button-default-font-size);
   line-height: var(--button-default-line-height);
@@ -142,7 +142,6 @@ button.#{$button-root} {
   -webkit-font-smoothing: antialiased;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  transform-style: preserve-3d;
 
   .#{$button-root}__wrapper {
     position: relative;
