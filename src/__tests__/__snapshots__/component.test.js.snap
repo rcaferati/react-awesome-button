@@ -3,7 +3,7 @@
 exports[`Examining the syntax of Jest tests Should render a button with a progress bar 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <AwesomeProgress
+  Symbol(enzyme.__unrendered__): <AwesomeButtonProgress
     action={[Function]}
     cssModule={null}
     disabled={false}
@@ -17,7 +17,7 @@ ShallowWrapper {
     type={null}
   >
     Button
-  </AwesomeProgress>,
+  </AwesomeButtonProgress>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
