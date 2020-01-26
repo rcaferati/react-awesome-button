@@ -82,7 +82,7 @@ export default class AwesomeButtonSocial extends React.Component {
     return null;
   }
 
-  action = (container) => {
+  action = container => {
     const { action, onPress, href, type, user, phone } = this.props;
 
     if (action) {

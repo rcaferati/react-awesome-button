@@ -11,7 +11,7 @@ import { getClassName } from '../../helpers/components';
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 4;
 
-export default class AwesomeProgress extends React.Component {
+export default class AwesomeButtonProgress extends React.Component {
   static propTypes = {
     action: PropTypes.func,
     onPress: PropTypes.func,
