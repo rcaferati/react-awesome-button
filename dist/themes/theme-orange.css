@@ -31,13 +31,13 @@
   --button-primary-border: none;
   --button-secondary-color: #afafaf;
   --button-secondary-color-dark: #898989;
-  --button-secondary-color-light: white;
+  --button-secondary-color-light: #ffffff;
   --button-secondary-color-hover: #a2a2a2;
   --button-secondary-color-active: #969696;
   --button-secondary-border: none;
   --button-anchor-color: #afafaf;
   --button-anchor-color-dark: #898989;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #a2a2a2;
   --button-anchor-color-active: #969696;
   --button-anchor-border: none;

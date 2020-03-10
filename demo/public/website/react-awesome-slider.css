@@ -785,7 +785,7 @@ pre[class*="language-"] {
   --transform-speed: 0.175s;
   --button-primary-color: #FFB300;
   --button-primary-color-dark: #cc8f00;
-  --button-primary-color-light: white;
+  --button-primary-color-light: #ffffff;
   --button-primary-color-hover: #f2aa00;
   --button-primary-color-active: #cc8f00;
   --button-primary-border: none;
@@ -797,7 +797,7 @@ pre[class*="language-"] {
   --button-secondary-border: none;
   --button-anchor-color: #FF6F00;
   --button-anchor-color-dark: #b34e00;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #f56b00;
   --button-anchor-color-active: #e66400;
   --button-anchor-border: none;
@@ -1721,7 +1721,7 @@ span.aws-btn__bubble--Zt4- {
   --transform-speed: 0.175s;
   --button-primary-color: #1e88e5;
   --button-primary-color-dark: #1360a4;
-  --button-primary-color-light: white;
+  --button-primary-color-light: #ffffff;
   --button-primary-color-hover: #187bd1;
   --button-primary-color-active: #166dba;
   --button-primary-border: none;
@@ -1733,7 +1733,7 @@ span.aws-btn__bubble--Zt4- {
   --button-secondary-border: none;
   --button-anchor-color: #0e4f88;
   --button-anchor-color-dark: #072743;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #0d4a7f;
   --button-anchor-color-active: #0c4271;
   --button-anchor-border: none;
@@ -2660,7 +2660,7 @@ span.aws-btn__bubble--36XZ {
   --transform-speed: 0.175s;
   --button-primary-color: #5e6fbf;
   --button-primary-color-dark: #3b4b95;
-  --button-primary-color-light: white;
+  --button-primary-color-light: #ffffff;
   --button-primary-color-hover: #4c5fb8;
   --button-primary-color-active: #4354a7;
   --button-primary-border: none;
@@ -2672,7 +2672,7 @@ span.aws-btn__bubble--36XZ {
   --button-secondary-border: none;
   --button-anchor-color: #55a1b6;
   --button-anchor-color-dark: #397585;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #4e9db3;
   --button-anchor-color-active: #4994a9;
   --button-anchor-border: none;
@@ -5483,7 +5483,7 @@ span.aws-btn__bubble--2bLu {
   --transform-speed: 0.15s;
   --button-primary-color: #1E88E5;
   --button-primary-color-dark: #1360a4;
-  --button-primary-color-light: white;
+  --button-primary-color-light: #ffffff;
   --button-primary-color-hover: #187bd1;
   --button-primary-color-active: #166dba;
   --button-primary-border: none;
@@ -5495,7 +5495,7 @@ span.aws-btn__bubble--2bLu {
   --button-secondary-border: 2px solid #1E88E5;
   --button-anchor-color: #0e4f88;
   --button-anchor-color-dark: #072743;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #0d4a7f;
   --button-anchor-color-active: #0c4271;
   --button-anchor-border: none;
@@ -6431,7 +6431,7 @@ span.aws-btn__bubble--1m7t {
   --button-secondary-border: none;
   --button-anchor-color: #3D5AFE;
   --button-anchor-color-dark: #0125ed;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #3351fe;
   --button-anchor-color-active: #2444fe;
   --button-anchor-border: none;
@@ -7355,7 +7355,7 @@ span.aws-btn__bubble--3bDC {
   --transform-speed: 0.165s;
   --button-primary-color: #f44336;
   --button-primary-color-dark: #ba160a;
-  --button-primary-color-light: white;
+  --button-primary-color-light: #ffffff;
   --button-primary-color-hover: #f3382a;
   --button-primary-color-active: #ea1c0d;
   --button-primary-border: none;
@@ -7367,7 +7367,7 @@ span.aws-btn__bubble--3bDC {
   --button-secondary-border: none;
   --button-anchor-color: #c62828;
   --button-anchor-color-dark: #470e0e;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #be2626;
   --button-anchor-color-active: #b12424;
   --button-anchor-border: none;

@@ -27,7 +27,7 @@
   --transform-speed: 0.175s;
   --button-primary-color: #5e6fbf;
   --button-primary-color-dark: #3b4b95;
-  --button-primary-color-light: white;
+  --button-primary-color-light: #ffffff;
   --button-primary-color-hover: #4c5fb8;
   --button-primary-color-active: #4354a7;
   --button-primary-border: none;
@@ -39,7 +39,7 @@
   --button-secondary-border: none;
   --button-anchor-color: #55a1b6;
   --button-anchor-color-dark: #397585;
-  --button-anchor-color-light: white;
+  --button-anchor-color-light: #ffffff;
   --button-anchor-color-hover: #4e9db3;
   --button-anchor-color-active: #4994a9;
   --button-anchor-border: none;

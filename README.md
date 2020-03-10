@@ -13,7 +13,7 @@
 - **Social icons** and network specific **share methods**
 - OnPress ripple effect
 - Look and feel customisable and extendable in two ways: via **CSS custom properties** or **SASS** variables and lists ([scss config file](https://github.com/rcaferati/react-awesome-button/blob/master/src/styles/default.scss)).
-- Use it with **CSSModules** or **Plain CSS
+- Use it with **CSSModules** or **Plain CSS**
 
 ## Live demo
 
@@ -97,7 +97,7 @@ function Button() {
 
 ### `AwesomeButton` rendered with an anchor tag
 
-Render the component with an `anchor` tag setting the href and target attributes.
+Render the component with an `anchor` tag setting the **href** and **target** attributes.
 
 Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Link).
 
