@@ -74,7 +74,7 @@ function Button() {
 ### `AwesomeButton` rendered with a button tag
 
 Renders the component with a `Button` tag and an onPress prop called on animation release.
-Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Primary).
+Checkout this example live on the [storybook](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Primary).
 ```jsx
 import { AwesomeButton } from "react-awesome-button";
 import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
@@ -99,7 +99,7 @@ function Button() {
 
 Render the component with an `anchor` tag setting the **href** and **target** attributes.
 
-Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Link).
+Checkout this example live on the [storybook](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButton&selectedStory=Link).
 
 ```jsx
 import { AwesomeButton } from "react-awesome-button";
@@ -135,7 +135,7 @@ function Button() {
 
 ### `AwesomeButtonProgress` basic example
 
-Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonProgress&selectedStory=Success).
+Checkout this example live on the [storybook](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonProgress&selectedStory=Success).
 
 ```jsx
   import { AwesomeButtonProgress } from 'react-awesome-button';
@@ -169,7 +169,7 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 
 ### `AwesomeButtonSocial` basic example
 
-Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonSocial&selectedStory=Facebook).
+Checkout this example live on the [storybook](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonSocial&selectedStory=Facebook).
 
 ```jsx
   import { AwesomeButtonSocial } from 'react-awesome-button';
