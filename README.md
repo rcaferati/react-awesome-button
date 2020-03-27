@@ -183,7 +183,7 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
         url="https://caferati.me"
       >
         Button
-      </AwesomeButton>
+      </AwesomeButtonSocial>
     );
   }
 ```
