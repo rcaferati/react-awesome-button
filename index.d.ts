@@ -31,7 +31,7 @@ declare module 'react-awesome-button' {
     visible: boolean;
   }
 
-  export default class AwesomeButton extends Component<
+  export class AwesomeButton extends Component<
     AwesomeButtonProps,
     {}
   > {}
@@ -51,7 +51,7 @@ declare module 'react-awesome-button' {
     type: string;
   }
 
-  export default class AwesomeButtonProgress extends Component<
+  export class AwesomeButtonProgress extends Component<
     AwesomeButtonProgressProps,
     {}
   > {}
@@ -73,7 +73,7 @@ declare module 'react-awesome-button' {
     user: string;
   }
 
-  export default class AwesomeButtonSocial extends Component<
+  export class AwesomeButtonSocial extends Component<
     AwesomeButtonSocialProps,
     {}
   > {}
