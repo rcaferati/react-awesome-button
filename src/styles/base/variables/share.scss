@@ -45,3 +45,7 @@ $button-youtube-color-dark: darken($button-youtube-color, 15%);
 // Instagram
 $button-instagram-radial-color: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
 $button-instagram-radial-color-dark: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%,#8c0061 60%,#002ca9 90%);
+
+// VK
+$button-vk-color: #4680C2;
+$button-vk-color-dark: darken($button-vk-color, 15%);

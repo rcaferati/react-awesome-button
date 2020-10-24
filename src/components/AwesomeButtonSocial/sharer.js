@@ -111,6 +111,9 @@ export default function Sharer({
       args.url = url;
       args.title = '_self';
       break;
+    case 'vk':
+      args.url = url;
+      args.title ='_self';
     default:
       return args;
   }
