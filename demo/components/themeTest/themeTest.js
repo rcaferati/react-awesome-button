@@ -169,6 +169,16 @@ class Test extends React.Component {
             >
               Whatsapp
             </AwesomeButtonSocial>
+            <AwesomeButtonSocial
+              iconHeight={24}
+              iconWidth={26}
+              type="vk"
+              href="https://vk.com/durov"
+              target="_blank"
+              cssModule={Module}
+            >
+              Follow
+            </AwesomeButtonSocial>
           </div>
         </div>
       </section>
