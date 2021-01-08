@@ -78,6 +78,10 @@ export const properties = [
         type: 'color',
       },
       {
+        name: 'button-primary-color-active',
+        type: 'color',
+      },
+      {
         name: 'button-primary-border',
         type: 'border',
       },
@@ -103,6 +107,10 @@ export const properties = [
         type: 'color',
       },
       {
+        name: 'button-secondary-color-active',
+        type: 'color',
+      },
+      {
         name: 'button-secondary-border',
         type: 'border',
       },
@@ -125,6 +133,10 @@ export const properties = [
       },
       {
         name: 'button-anchor-color-hover',
+        type: 'color',
+      },
+      {
+        name: 'button-anchor-color-active',
         type: 'color',
       },
       {
