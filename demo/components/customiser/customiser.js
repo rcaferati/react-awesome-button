@@ -261,7 +261,7 @@ class Customiser extends React.Component {
               size="medium"
               href={this.props.repository}
               target="_blank"
-              type="github"
+              variant="github"
               cssModule={this.props.module}
             >
               Source
