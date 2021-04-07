@@ -37,6 +37,12 @@
   --button-secondary-color-hover: #ecf9f8;
   --button-secondary-color-active: #d9f2f0;
   --button-secondary-border: 2px solid #b3e5e1;
+  --button-plain-color: #ffffff;
+  --button-plain-color-dark: #1360a4;
+  --button-plain-color-light: #1E88E5;
+  --button-plain-color-hover: #f2f2f2;
+  --button-plain-color-active: #e6e6e6;
+  --button-plain-border: 2px solid #1E88E5;
   --button-anchor-color: #95d44a;
   --button-anchor-color-dark: #52a934;
   --button-anchor-color-light: #3f8228;
@@ -253,9 +259,9 @@ button.aws-btn .aws-btn__wrapper {
     background: #324877; }
   .aws-btn--facebook .aws-btn__content {
     background: #4868ad;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--facebook .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--facebook.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -269,14 +275,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--facebook.aws-btn--progress .aws-btn__progress:before, .aws-btn--facebook.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--messenger .aws-btn__wrapper:before {
     background: #0960d1; }
   .aws-btn--messenger .aws-btn__content {
     background: #3186f6;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--messenger .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--messenger.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -290,14 +296,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--messenger.aws-btn--progress .aws-btn__progress:before, .aws-btn--messenger.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--twitter .aws-btn__wrapper:before {
     background: #0074a1; }
   .aws-btn--twitter .aws-btn__content {
     background: #00aced;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--twitter .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--twitter.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -311,14 +317,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--twitter.aws-btn--progress .aws-btn__progress:before, .aws-btn--twitter.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--linkedin .aws-btn__wrapper:before {
     background: #004569; }
   .aws-btn--linkedin .aws-btn__content {
     background: #0077b5;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--linkedin .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--linkedin.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -332,14 +338,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--linkedin.aws-btn--progress .aws-btn__progress:before, .aws-btn--linkedin.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--whatsapp .aws-btn__wrapper:before {
     background: #1a9247; }
   .aws-btn--whatsapp .aws-btn__content {
     background: #25d366;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--whatsapp .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--whatsapp.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -353,14 +359,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--whatsapp.aws-btn--progress .aws-btn__progress:before, .aws-btn--whatsapp.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--github .aws-btn__wrapper:before {
     background: #030304; }
   .aws-btn--github .aws-btn__content {
     background: #25292e;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--github .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--github.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -374,14 +380,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--github.aws-btn--progress .aws-btn__progress:before, .aws-btn--github.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--reddit .aws-btn__wrapper:before {
     background: #cb2703; }
   .aws-btn--reddit .aws-btn__content {
     background: #fc461e;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--reddit .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--reddit.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -395,14 +401,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--reddit.aws-btn--progress .aws-btn__progress:before, .aws-btn--reddit.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--pinterest .aws-btn__wrapper:before {
     background: #740611; }
   .aws-btn--pinterest .aws-btn__content {
     background: #bd091c;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--pinterest .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--pinterest.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -416,14 +422,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--pinterest.aws-btn--progress .aws-btn__progress:before, .aws-btn--pinterest.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--gplus .aws-btn__wrapper:before {
     background: #a3392d; }
   .aws-btn--gplus .aws-btn__content {
     background: #ce5b4e;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--gplus .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--gplus.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -437,14 +443,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--gplus.aws-btn--progress .aws-btn__progress:before, .aws-btn--gplus.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--youtube .aws-btn__wrapper:before {
     background: #881014; }
   .aws-btn--youtube .aws-btn__content {
     background: #cc181e;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--youtube .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--youtube.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -458,14 +464,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--youtube.aws-btn--progress .aws-btn__progress:before, .aws-btn--youtube.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--mail .aws-btn__wrapper:before {
     background: #9c9c9c; }
   .aws-btn--mail .aws-btn__content {
     background: #cfcfcf;
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--mail .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--mail.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -479,14 +485,14 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--mail.aws-btn--progress .aws-btn__progress:before, .aws-btn--mail.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--instagram .aws-btn__wrapper:before {
     background: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%, #8c0061 60%, #002ca9 90%); }
   .aws-btn--instagram .aws-btn__content {
     background: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    color: #FFFFFF; }
+    color: #ffffff; }
     .aws-btn--instagram .aws-btn__content path {
-      fill: #FFFFFF; }
+      fill: #ffffff; }
   .aws-btn--instagram.aws-btn--progress .aws-btn__content > span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -500,7 +506,7 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--instagram.aws-btn--progress .aws-btn__progress:before, .aws-btn--instagram.aws-btn--progress .aws-btn__progress:after {
-    color: #FFFFFF; }
+    color: #ffffff; }
   .aws-btn--primary .aws-btn__wrapper:before {
     background: var(--button-primary-color-dark); }
   .aws-btn--primary .aws-btn__content {
@@ -553,6 +559,32 @@ button.aws-btn .aws-btn__wrapper {
             justify-content: center; }
   .aws-btn--secondary.aws-btn--progress .aws-btn__progress:before, .aws-btn--secondary.aws-btn--progress .aws-btn__progress:after {
     color: var(--button-secondary-color-light); }
+  .aws-btn--plain .aws-btn__wrapper:before {
+    background: var(--button-plain-color-dark); }
+  .aws-btn--plain .aws-btn__content {
+    background: var(--button-plain-color);
+    color: var(--button-plain-color-light);
+    border: var(--button-plain-border); }
+    .aws-btn--plain .aws-btn__content path {
+      fill: var(--button-plain-color-light); }
+  .aws-btn--plain .aws-btn__wrapper:hover .aws-btn__content {
+    background: var(--button-plain-color-hover); }
+  .aws-btn--plain.aws-btn--active .aws-btn__wrapper .aws-btn__content {
+    background: var(--button-plain-color-active); }
+  .aws-btn--plain.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--plain.aws-btn--progress .aws-btn__progress:before, .aws-btn--plain.aws-btn--progress .aws-btn__progress:after {
+    color: var(--button-plain-color-light); }
   .aws-btn--link .aws-btn__wrapper:before {
     background: var(--button-anchor-color-dark); }
   .aws-btn--link .aws-btn__content {

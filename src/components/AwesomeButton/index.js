@@ -41,6 +41,7 @@ export default class AwesomeButton extends React.Component {
     target: PropTypes.string,
     to: PropTypes.string,
     type: PropTypes.string,
+    variant: PropTypes.string,
     visible: PropTypes.bool,
     active: PropTypes.bool,
     blocked: PropTypes.bool,
@@ -66,7 +67,8 @@ export default class AwesomeButton extends React.Component {
     style: {},
     target: null,
     to: null,
-    type: 'primary',
+    type: 'button',
+    variant: 'primary',
     visible: true,
     active: false,
   };
@@ -101,7 +103,7 @@ export default class AwesomeButton extends React.Component {
   getRootClassName() {
     const { rootElement } = this;
     const {
-      type,
+      variant,
       size,
       placeholder,
       children,
@@ -111,7 +113,7 @@ export default class AwesomeButton extends React.Component {
     const { disabled, pressPosition } = this.state;
     const className = [
       this.rootElement,
-      type && `${rootElement}--${type}`,
+      variant && `${rootElement}--${variant}`,
       size && `${rootElement}--${size}`,
       visible && `${rootElement}--visible`,
       (placeholder && !children && `${rootElement}--placeholder`) || null,
@@ -147,10 +149,11 @@ export default class AwesomeButton extends React.Component {
   }
 
   checkProps(newProps) {
-    const { to, href, target, element } = newProps;
+    const { to, href, target, element, type } = newProps;
     this.extraProps.to = to || null;
     this.extraProps.href = href || null;
     this.extraProps.target = target || null;
+    this.extraProps.type = type || null;
     this.renderComponent = element || (this.props.href ? Anchor : Button);
   }
 

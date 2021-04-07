@@ -20,7 +20,8 @@ export default class AwesomeButtonSocial extends React.Component {
     image: PropTypes.string,
     message: PropTypes.string,
     phone: PropTypes.string,
-    type: PropTypes.string.isRequired,
+    variant: PropTypes.string.isRequired,
+    type: PropTypes.string,
     url: PropTypes.string,
     user: PropTypes.string,
   };
@@ -117,6 +118,7 @@ export default class AwesomeButtonSocial extends React.Component {
       children,
       icon,
       type,
+      variant,
       action,
       onPress,
       iconWidth,
@@ -126,7 +128,7 @@ export default class AwesomeButtonSocial extends React.Component {
     } = this.props;
 
     return (
-      <AwesomeButton type={type} action={this.action} href={href} {...extra}>
+      <AwesomeButton type={type} variant={variant} action={this.action} href={href} {...extra}>
         {icon &&
           getIcon({
             type,

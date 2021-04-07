@@ -20,6 +20,13 @@ $button-secondary-color-hover: darken($button-secondary-color, 5%);
 $button-secondary-color-active: darken($button-secondary-color, 10%);
 $button-secondary-border: 2px solid $button-primary-color;
 
+$button-plain-color: #ffffff;
+$button-plain-color-dark: darken($button-primary-color, 15%);
+$button-plain-color-light: $button-primary-color;
+$button-plain-color-hover: darken($button-plain-color, 5%);
+$button-plain-color-active: darken($button-plain-color, 10%);
+$button-plain-border: 2px solid $button-primary-color;
+
 $button-disabled-color: #AFAFAF;
 $button-disabled-color-dark: darken($button-disabled-color, 15%);
 $button-disabled-color-light: darken($button-disabled-color, 10%);

@@ -169,11 +169,11 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
     },
     {
       title: 'Primary Button',
-      jsx: '<AwesomeButton type="primary">Primary</AwesomeButton>',
+      jsx: '<AwesomeButton variant="primary">Primary</AwesomeButton>',
       component: (
         <AwesomeButton
           cssModule={Modules.Modules[theme]}
-          type="primary"
+          variant="primary"
         >
           Primary
         </AwesomeButton>
@@ -183,7 +183,7 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
       title: 'Secondary Progress Button',
       jsx: `
 <AwesomeButtonProgress
-  type="secondary"
+  variant="secondary"
   size="medium"
   action={(element, next) => doSomethingThenCall(next)}
 >
@@ -191,7 +191,7 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
 </AwesomeButtonProgress>`,
       component: (
         <AwesomeButtonProgress
-          type="secondary"
+          variant="secondary"
           size="medium"
           action={(element, next) => {
             setTimeout(() => {
@@ -209,25 +209,25 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
       jsx: `
 <AwesomeButton
   size="icon"
-  type="primary"
+  variant="primary"
 >
   <i className="fa fa-codepen" />
 </AwesomeButton>
 <AwesomeButton
   size="small"
-  type="primary"
+  variant="primary"
 >
   Small
 </AwesomeButton>
 <AwesomeButton
   size="small"
-  type="primary"
+  variant="primary"
 >
   Medium
 </AwesomeButton>
 <AwesomeButton
   size="small"
-  type="primary"
+  variant="primary"
 >
   Large
 </AwesomeButton>`,
@@ -236,28 +236,28 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
           <AwesomeButton
             cssModule={Modules.Modules[theme]}
             size="icon"
-            type="primary"
+            variant="primary"
           >
             <i className="fa fa-codepen" aria-hidden />
           </AwesomeButton>
           <AwesomeButton
             cssModule={Modules.Modules[theme]}
             size="small"
-            type="primary"
+            variant="primary"
           >
             Small
           </AwesomeButton>
           <AwesomeButton
             cssModule={Modules.Modules[theme]}
             size="medium"
-            type="primary"
+            variant="primary"
           >
             Medium
           </AwesomeButton>
           <AwesomeButton
             cssModule={Modules.Modules[theme]}
             size="large"
-            type="primary"
+            variant="primary"
           >
             Large
           </AwesomeButton>
@@ -282,7 +282,7 @@ function Component() {
   return (
     <AwesomeButton
       cssModule={styles}
-      type="primary"
+      variant="primary"
     >
       Primary Blue Themed Button
     </AwesomeButton>

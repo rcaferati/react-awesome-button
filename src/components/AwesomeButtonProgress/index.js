@@ -23,6 +23,7 @@ export default class AwesomeButtonProgress extends React.Component {
     disabled: PropTypes.bool,
     size: PropTypes.string,
     type: PropTypes.string,
+    variant: PropTypes.string,
     fakePress: PropTypes.bool,
     releaseDelay: PropTypes.number,
   };
@@ -205,6 +206,7 @@ export default class AwesomeButtonProgress extends React.Component {
       resultLabel,
       action,
       type,
+      variant,
       ...extra
     } = this.props;
 
@@ -214,6 +216,7 @@ export default class AwesomeButtonProgress extends React.Component {
       <AwesomeButton
         size={size}
         type={type}
+        variant={variant}
         className={this.getRootClassName()}
         action={this.action}
         cssModule={cssModule}
