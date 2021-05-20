@@ -204,6 +204,61 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 | phone        | `string`  | `null`    | Phone number to be used when using the Whatsapp sharer |
 | user         | `string`  | `null`    | Username to be redirected to when using the Messenger sharer |
 
+## Adding Custom Button Colors
+
+There are two ways to accomplish this. Which one is easier might depend on your specific use case.
+
+### Method 1: Add a New Button Type
+
+This works well if you expect to re-use the same color over and over again.
+
+You can but an arbitrary string in the `type` attribute, e.g. `<AwesomeButton type="plain">Button</AwesomeButton>`. The generated HTML will create an element with CSS class name `aws-btn--plain`.
+
+You can then create a bunch of CSS rules that will style the color for that button. There's a good reference commit illustrating how to do that in https://github.com/michael616kriel/react-awesome-button/commit/2ccbfd6e82d70f1d14568c8fcc3e85aeff9eeb36 but it'll look something like this:
+
+```css
+.aws-btn {
+  --button-plain-color: #ffffff;
+  --button-plain-color-dark: #1360a4;
+  --button-plain-color-light: #1E88E5;
+  --button-plain-color-hover: #f2f2f2;
+  --button-plain-color-active: #e6e6e6;
+  --button-plain-border: 2px solid #1E88E5;
+}
+.aws-btn--plain .aws-btn__wrapper:before {
+  background: var(--button-plain-color-dark);
+}
+.aws-btn--plain .aws-btn__content {
+  background: var(--button-plain-color);
+  color: var(--button-plain-color-light);
+  border: var(--button-plain-border);
+}
+.aws-btn--plain .aws-btn__content path {
+  fill: var(--button-plain-color-light);
+}
+.aws-btn--plain .aws-btn__wrapper:hover .aws-btn__content {
+  background: var(--button-plain-color-hover);
+}
+.aws-btn--plain.aws-btn--active .aws-btn__wrapper .aws-btn__content {
+  background: var(--button-plain-color-active);
+}
+```
+
+### Method 2: Use Inline CSS to Override the Colors
+
+This works well if you have a single button whose color you want to be a special color.
+
+You can use the `style` attribute to provide arbitrary CSS overrides, and in particular, you can override the color variables used by the system. It would look something like this:
+
+```jsx
+<AwesomeButton type="secondary" style={{
+  '--button-secondary-color': "#ff8585",
+  '--button-secondary-color-dark': "#722222",
+  '--button-secondary-color-light': "#4b1616",
+  '--button-secondary-color-hover': "#ff0000",
+  '--button-secondary-color-active': "#ff0505",
+}}>Button</AwesomeButton>
+```
 
 ## React Native Version
 
