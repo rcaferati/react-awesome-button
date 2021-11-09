@@ -78,7 +78,9 @@
   --button-youtube-color: #cc181e;
   --button-youtube-color-dark: #881014;
   --button-instagram-radial-color: radial-gradient(circle at 25% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-  --button-instagram-radial-color-dark: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%, #8c0061 60%, #002ca9 90%); }
+  --button-instagram-radial-color-dark: radial-gradient(circle at 25% 110%, #b9a800 0%, #938500 5%, #b10f00 45%, #8c0061 60%, #002ca9 90%);
+  --button-tumblr-color: #36465D;
+  --button-tumblr-color-dark: #1a222d; }
 
 /**
   button-color:
@@ -458,6 +460,27 @@ button.aws-btn .aws-btn__wrapper {
         -ms-flex-pack: center;
             justify-content: center; }
   .aws-btn--youtube.aws-btn--progress .aws-btn__progress:before, .aws-btn--youtube.aws-btn--progress .aws-btn__progress:after {
+    color: #FFFFFF; }
+  .aws-btn--tumblr .aws-btn__wrapper:before {
+    background: #1a222d; }
+  .aws-btn--tumblr .aws-btn__content {
+    background: #36465D;
+    color: #FFFFFF; }
+    .aws-btn--tumblr .aws-btn__content path {
+      fill: #FFFFFF; }
+  .aws-btn--tumblr.aws-btn--progress .aws-btn__content > span {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .aws-btn--tumblr.aws-btn--progress .aws-btn__progress:before, .aws-btn--tumblr.aws-btn--progress .aws-btn__progress:after {
     color: #FFFFFF; }
   .aws-btn--mail .aws-btn__wrapper:before {
     background: #9c9c9c; }

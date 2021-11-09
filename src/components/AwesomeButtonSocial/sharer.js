@@ -111,6 +111,10 @@ export default function Sharer({
       args.url = url;
       args.title = '_self';
       break;
+    case 'tumblr':
+      args.url = url;
+      args.title = '_self';
+      break;
     default:
       return args;
   }
