@@ -146,8 +146,10 @@ Checkout this example live on the [storyboard](https://caferati.me/demo/react-aw
       <AwesomeButtonProgress
         cssModule={AwesomeButtonStyles}
         type="primary"
-        onPress={next => {
+        onPress={(ref, next) => {
           // do a sync/async task then call `next()`
+          console.log("Async operations 🔄");
+          next();
         }}
       >
         Button
