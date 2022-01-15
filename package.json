@@ -78,7 +78,7 @@
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "^16.8.6",
     "sass-loader": "^6.0.3",
-    "shelljs": "^0.7.8",
+    "shelljs": "^0.8.5",
     "storybook-addon-smart-knobs": "^3.3.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^0.19.1",
