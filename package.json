@@ -68,7 +68,7 @@
     "jest": "^22.0.4",
     "loki": "^0.14.2",
     "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^7.0.0",
     "postcss-loader": "^2.0.10",
     "prismjs": "^1.9.0",
     "prop-types": "^15.6.0",
