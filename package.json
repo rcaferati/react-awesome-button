@@ -68,7 +68,7 @@
     "jest": "^22.0.4",
     "loki": "^0.14.2",
     "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.7.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^2.0.10",
     "prismjs": "^1.9.0",
     "prop-types": "^15.6.0",
@@ -80,7 +80,6 @@
     "sass-loader": "^6.0.3",
     "shelljs": "^0.7.8",
     "storybook-addon-smart-knobs": "^3.3.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^0.19.1",
     "terser-webpack-plugin": "^2.1.2",
     "webpack": "^4.40.2",
@@ -99,6 +98,7 @@
     "javascript"
   ],
   "dependencies": {
+    "node-sass": "^7.0.3",
     "web-animation-club": "^0.6.0"
   },
   "loki": {
