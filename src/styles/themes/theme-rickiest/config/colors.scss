@@ -1,17 +1,17 @@
-$button-primary-color: #a9d3e9;
-$button-primary-color-dark: darken($button-primary-color, 20%);
-$button-primary-color-light: darken($button-primary-color, 35%);
+$button-primary-color: #aad3ea;
+$button-primary-color-dark: #57a9d4;
+$button-primary-color-light: darken($button-primary-color, 40%);
 $button-primary-color-hover: darken($button-primary-color, 5%);
-$button-primary-color-active: darken($button-primary-color, 7%);
-$button-primary-border: none;
+$button-primary-color-active: darken($button-primary-color, 10%);
+$button-primary-border: 2px solid #57a9d4;
 
-$button-secondary-color: #fafafa;
-$button-secondary-border-color: #b3e5e1;
+$button-secondary-color: #FAFAFA;
+$button-secondary-border-color: #67cbc3;
 $button-secondary-color-dark: darken($button-secondary-border-color, 20%);
 $button-secondary-color-light: darken($button-secondary-border-color, 40%);
-$button-secondary-color-hover: lighten($button-secondary-border-color, 15%);
-$button-secondary-color-active: lighten($button-secondary-border-color, 10%);
-$button-secondary-border: 2px solid $button-secondary-border-color;
+$button-secondary-color-hover: lighten($button-secondary-border-color, 35%);
+$button-secondary-color-active: lighten($button-secondary-border-color, 25%);
+$button-secondary-border: 2px solid #b3e5e1;
 
 $button-disabled-color: #e3fdd6;
 $button-disabled-border-color: #b3e39b;
@@ -36,3 +36,10 @@ $button-anchor-color-light: darken($button-anchor-border-color, 15%);
 $button-anchor-color-hover: darken($button-anchor-color, 5%);
 $button-anchor-color-active: darken($button-anchor-color, 10%);
 $button-anchor-border: 2px solid $button-anchor-border-color;
+
+$button-danger-color: #8B3357;
+$button-danger-color-dark: #531849;
+$button-danger-color-light: lighten($button-danger-color, 75%);
+$button-danger-color-hover: darken($button-danger-color, 2%);
+$button-danger-color-active: darken($button-danger-color, 5%);
+$button-danger-border: 2px solid #531849;

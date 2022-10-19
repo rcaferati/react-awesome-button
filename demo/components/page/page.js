@@ -1,19 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  Footer,
-  Example,
-  Section,
-  Popover,
-} from '../index';
+import { Footer, Example, Section, Popover } from '../index';
 
-const Page = ({
-  theme,
-  data,
-  popoverOpened,
-  popoverText,
-  handlePopover,
-}) => (
+const Page = ({ theme, data }) => (
   <Section>
     <Example
       title={theme.example.title}
@@ -21,25 +9,9 @@ const Page = ({
       component={theme.example.component}
       examples={theme.example.items}
     />
-    <Footer
-      repository={data.repository}
-      article={data.article}
-    />
-    <Popover
-      module={theme.module}
-      opened={popoverOpened}
-      text={popoverText}
-      handlePopover={handlePopover}
-    />
+    <Footer repository={data.repository} article={data.article} />
+    <Popover module={theme.module} />
   </Section>
 );
-
-Page.propTypes = {
-  theme: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
-  popoverOpened: PropTypes.bool.isRequired,
-  popoverText: PropTypes.string.isRequired,
-  handlePopover: PropTypes.func.isRequired,
-};
 
 export default Page;

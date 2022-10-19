@@ -2,9 +2,11 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
+  mode: 'production',
   entry: {
     'react-awesome-button': ['./demo/index.js'],
   },
+  devtool: 'source-map',
   resolve: {
     alias: {
       components: path.resolve(__dirname, 'demo/components'),
@@ -17,11 +19,16 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(ts|tsx)?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['es2015', 'react', 'stage-0'],
+          presets: ['@babel/env', '@babel/react'],
         },
       },
       {
@@ -33,8 +40,10 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[local]--[hash:base64:4]',
+              // modules: true,
+              modules: {
+                localIdentName: '[local]--[hash:base64:4]',
+              },
             },
           },
           'postcss-loader',
@@ -52,15 +61,25 @@ const config = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: `styles.css`,
     }),
   ],
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
   devServer: {
-    contentBase: './demo/public',
+    static: {
+      directory: path.join(__dirname, '/demo/public'),
+    },
+    port: 9000,
     historyApiFallback: true,
-    inline: true,
   },
 };
 

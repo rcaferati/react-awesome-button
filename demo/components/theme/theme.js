@@ -6,36 +6,16 @@ export default function Theme({ theme }) {
   return (
     <div>
       <div>
-        <AwesomeButton
-          bubbles
-          size="medium"
-          cssModule={theme}
-        >
+        <AwesomeButton size="medium" cssModule={theme}>
           Primary
         </AwesomeButton>
-        <AwesomeButton
-          bubbles
-          size="medium"
-          cssModule={theme}
-          type="secondary"
-        >
+        <AwesomeButton size="medium" cssModule={theme} type="secondary">
           Secondary
         </AwesomeButton>
-        <AwesomeButton
-          bubbles
-          size="medium"
-          cssModule={theme}
-          disabled
-        >
+        <AwesomeButton size="medium" cssModule={theme} disabled>
           Disabled
         </AwesomeButton>
-        <AwesomeButton
-          bubbles
-          placeholder
-          size="medium"
-          cssModule={theme}
-          disabled
-        />
+        <AwesomeButton placeholder size="medium" cssModule={theme} disabled />
       </div>
     </div>
   );

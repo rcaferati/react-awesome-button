@@ -4,7 +4,7 @@ import {
   AwesomeButton,
   AwesomeButtonSocial,
   AwesomeButtonProgress,
-} from '../../../src/index';
+} from '../../../src/index.ts';
 import Modules from '../../helpers/modules';
 import styles from './themeTest.scss';
 
@@ -22,7 +22,6 @@ class Test extends React.Component {
   }
   render() {
     const { theme } = this.props;
-
     const Module = Modules.Modules[theme];
 
     return (
@@ -46,19 +45,13 @@ class Test extends React.Component {
               setTimeout(() => {
                 // debugger;
                 next();
-              }, 750);
-            }}
-          >
+              }, 3000);
+            }}>
             Primary Progress
           </AwesomeButtonProgress>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
-          <AwesomeButton
-            bubbles
-            cssModule={Module}
-            placeholder
-            type="secondary"
-          >
+          <AwesomeButton cssModule={Module} placeholder type="secondary">
             {this.state.placeholderButtonText}
           </AwesomeButton>
           <span
@@ -71,17 +64,12 @@ class Test extends React.Component {
                   ? ''
                   : 'Placeholder',
               });
-            }}
-          >
+            }}>
             ← Set Data
           </span>
         </div>
         <div className={`${styles.loadData} ${styles.section}`}>
-          <AwesomeButton
-            cssModule={Module}
-            bubbles
-            disabled={this.state.isDisabled}
-          >
+          <AwesomeButton cssModule={Module} disabled={this.state.isDisabled}>
             Disabled
           </AwesomeButton>
           <span
@@ -92,8 +80,7 @@ class Test extends React.Component {
               this.setState({
                 isDisabled: !this.state.isDisabled,
               });
-            }}
-          >
+            }}>
             ← Toggle
           </span>
         </div>
@@ -105,8 +92,7 @@ class Test extends React.Component {
               iconWidth={26}
               url="https://caferati.me"
               type="facebook"
-              cssModule={Module}
-            >
+              cssModule={Module}>
               Share
             </AwesomeButtonSocial>
             <AwesomeButtonSocial
@@ -115,8 +101,7 @@ class Test extends React.Component {
               type="twitter"
               message="Checkout my full portfolio @ "
               url="https://caferati.me"
-              cssModule={Module}
-            >
+              cssModule={Module}>
               Share
             </AwesomeButtonSocial>
             <AwesomeButtonSocial
@@ -125,8 +110,7 @@ class Test extends React.Component {
               type="instagram"
               target="_blank"
               href="https://instagram.com/rcaferati"
-              cssModule={Module}
-            >
+              cssModule={Module}>
               Follow
             </AwesomeButtonSocial>
             <AwesomeButtonSocial
@@ -135,9 +119,8 @@ class Test extends React.Component {
               type="github"
               target="_blank"
               href="https://github.com/rcaferati"
-              cssModule={Module}
-            >
-              Fork me
+              cssModule={Module}>
+              Support
             </AwesomeButtonSocial>
             <AwesomeButtonSocial
               iconHeight={24}
@@ -145,8 +128,7 @@ class Test extends React.Component {
               type="linkedin"
               target="_blank"
               href="https://linkedin.com/in/rcaferati"
-              cssModule={Module}
-            >
+              cssModule={Module}>
               Connect
             </AwesomeButtonSocial>
             <AwesomeButtonSocial
@@ -155,8 +137,7 @@ class Test extends React.Component {
               type="messenger"
               target="_blank"
               user="caferati.me"
-              cssModule={Module}
-            >
+              cssModule={Module}>
               Message
             </AwesomeButtonSocial>
             <AwesomeButtonSocial
@@ -165,8 +146,7 @@ class Test extends React.Component {
               type="whatsapp"
               phone="+5551995300000"
               message="Heloo Whatsapp!"
-              cssModule={Module}
-            >
+              cssModule={Module}>
               Whatsapp
             </AwesomeButtonSocial>
           </div>

@@ -1,32 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Styles from './customiser.scss';
-import { AwesomeButton, AwesomeButtonSocial } from '../../../src/index';
+import styles from './customiser.scss';
+import { AwesomeButton, AwesomeButtonSocial } from '../../../src/index.ts';
 import { rgba2hex } from '../../helpers/examples';
 import { ColorPicker, BorderPicker } from '../index';
 
 function applyStyles(elements, { property, value }) {
-  elements.forEach((element) => {
+  elements.forEach(element => {
     element.style.setProperty(property, value);
   });
 }
 
 class Customiser extends React.Component {
-  static propTypes = {
-    repository: PropTypes.string.isRequired,
-    module: PropTypes.object.isRequired,
-    handlePopover: PropTypes.func.isRequired,
-    theme: PropTypes.string.isRequired,
-    componentClass: PropTypes.string.isRequired,
-    properties: PropTypes.array.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.values = {};
     this.state = {
       customized: false,
-      popoverOpened: false,
     };
   }
 
@@ -60,10 +49,13 @@ class Customiser extends React.Component {
   getStylesText() {
     // this.element
     const text = ['<p><b>.aws-btn</b> {</p><ul>'];
-    this.props.properties.forEach((section) => {
-      section.props.forEach((prop) => {
+    this.props.properties.forEach(section => {
+      section.props.forEach(prop => {
         const name = `--${prop.name}`;
-        text.push(`<li><b>${name}</b>: <em>${this.state[name]}${prop.suffix || ''}</em>;</li>`);
+        text.push(
+          `<li><b>${name}</b>: <em>${this.state[name]}${prop.suffix ||
+            ''}</em>;</li>`
+        );
       });
     });
     text.push('</ul><p>}</p>');
@@ -77,25 +69,32 @@ class Customiser extends React.Component {
     if (!this.element) {
       return false;
     }
-    newProps.properties.forEach((section) => {
-      section.props.forEach((prop) => {
+    newProps.properties.forEach(section => {
+      section.props.forEach(prop => {
         const name = `--${prop.name}`;
-        let style = getComputedStyle(this.element).getPropertyValue(name).trim();
+        let style = getComputedStyle(this.element)
+          .getPropertyValue(name)
+          .trim();
         if (style.match(/(#)([a-z0-9]{3})($)/)) {
           style = style.replace(/(#)([a-z0-9]{3})/, '$1$2$2');
         }
         if (style.match(/(px|em|s)$/)) {
-          style = style.replace(/px|em|s/ig, '');
+          style = style.replace(/px|em|s/gi, '');
         }
         if (style.match(/rgb/)) {
           style = rgba2hex(style);
         }
         state[name] = style;
         if (typeof window !== 'undefined') {
-          applyStyles(document.querySelectorAll(`[data-role="customizable"] .${this.props.componentClass}`), {
-            property: name,
-            value: style + (prop.suffix || ''),
-          });
+          applyStyles(
+            document.querySelectorAll(
+              `[data-role="customizable"] .${this.props.componentClass}`
+            ),
+            {
+              property: name,
+              value: style + (prop.suffix || ''),
+            }
+          );
         }
       });
     });
@@ -106,8 +105,8 @@ class Customiser extends React.Component {
   updateProperties(newProps) {
     if (newProps.properties) {
       const state = {};
-      newProps.properties.forEach((section) => {
-        section.props.forEach((prop) => {
+      newProps.properties.forEach(section => {
+        section.props.forEach(prop => {
           state[`--${prop.name}`] = null;
         });
       });
@@ -126,27 +125,18 @@ class Customiser extends React.Component {
       customized: false,
     });
     this.updateAllValues(this.props);
-  }
+  };
 
   exportStyles = () => {
-    this.setState({
-      popoverOpened: true,
-    }, () => {
-      this.props.handlePopover({
-        popoverOpened: true,
-        popoverText: this.getStylesText(),
-      });
-    });
-  }
+    this.props.openPopover({ text: this.getStylesText() });
+  };
 
   updatePopoverText() {
-    this.props.handlePopover({
-      popoverText: this.getStylesText(),
-    });
+    // this.props.openPopover({ text: this.getStylesText() });
   }
 
   renderInputs(props) {
-    return props.map((cssProperty) => {
+    return props.map(cssProperty => {
       const { name, type } = cssProperty;
       const buttonName = `--${name}`;
       const extraProps = {};
@@ -157,7 +147,7 @@ class Customiser extends React.Component {
         extraProps.max = cssProperty.max || 10;
         extraProps.step = cssProperty.step || 1;
       }
-      const onChange = (event) => {
+      const onChange = event => {
         if (this.state.customized === false) {
           this.setState({ customized: true });
         }
@@ -171,10 +161,15 @@ class Customiser extends React.Component {
           if (cssProperty.suffix) {
             value = `${value}${cssProperty.suffix}`;
           }
-          applyStyles(document.querySelectorAll(`[data-role="customizable"] .${this.props.componentClass}`), {
-            property: buttonName,
-            value,
-          });
+          applyStyles(
+            document.querySelectorAll(
+              `[data-role="customizable"] .${this.props.componentClass}`
+            ),
+            {
+              property: buttonName,
+              value,
+            }
+          );
         }
       };
       let input = null;
@@ -185,7 +180,7 @@ class Customiser extends React.Component {
               value={this.state[buttonName] || this.values[buttonName] || ''}
               setTransparency={onChange}
               onChange={onChange}
-              {... extraProps}
+              {...extraProps}
             />
           );
           break;
@@ -194,7 +189,7 @@ class Customiser extends React.Component {
             <BorderPicker
               value={this.state[buttonName] || this.values[buttonName] || ''}
               onChange={onChange}
-              {... extraProps}
+              {...extraProps}
             />
           );
           break;
@@ -203,19 +198,20 @@ class Customiser extends React.Component {
             <input
               value={this.state[buttonName] || this.values[buttonName] || ''}
               onChange={onChange}
-              {... extraProps}
+              {...extraProps}
             />
           );
       }
-      const buttonValue = this.state[buttonName] ? `${this.state[buttonName] || this.values[buttonName]}${cssProperty.suffix || ''}` || '' : '';
+      const buttonValue = this.state[buttonName]
+        ? `${this.state[buttonName] ||
+            this.values[buttonName]}${cssProperty.suffix || ''}` || ''
+        : '';
       return (
         <li key={buttonName}>
           <label>
             <code>{name}</code>
           </label>
-          <div>
-            {input}
-          </div>
+          <div>{input}</div>
           <div>
             <span>{buttonValue}</span>
           </div>
@@ -228,9 +224,7 @@ class Customiser extends React.Component {
     return (
       <section key={section.name}>
         <h3>{section.name}</h3>
-        <ul>
-          {this.renderInputs(section.props)}
-        </ul>
+        <ul>{this.renderInputs(section.props)}</ul>
       </section>
     );
   }
@@ -241,18 +235,20 @@ class Customiser extends React.Component {
 
   render() {
     return (
-      <section className={Styles.container}>
+      <section className={styles.container}>
         <header>
           <h2>Custom Properties</h2>
           <p>Button customization through CSS custom-properties.</p>
           <div
-            ref={(control) => { this.control = control; }}
-            className={Styles.control}
+            ref={control => {
+              this.control = control;
+            }}
+            className={styles.control}
           >
             <AwesomeButton
               size="medium"
               disabled={!this.state.customized}
-              action={this.resetStyles}
+              onPress={this.resetStyles}
               cssModule={this.props.module}
             >
               Reset Styles
@@ -268,20 +264,24 @@ class Customiser extends React.Component {
             </AwesomeButtonSocial>
           </div>
         </header>
-        <ul>
-          { this.renderSections(this.props.properties) }
-        </ul>
+        <ul>{this.renderSections(this.props.properties)}</ul>
         <footer>
-          <div className={Styles.export}>
+          <div className={styles.export}>
             <AwesomeButton
               size="medium"
-              action={this.exportStyles}
+              onPress={this.exportStyles}
               cssModule={this.props.module}
             >
               Export Styles
             </AwesomeButton>
           </div>
-          <p>Access the source on <a target="_blank" href={this.props.repository}>github</a> to check all customisable options</p>
+          <p>
+            Access the source on{' '}
+            <a target="_blank" href={this.props.repository}>
+              github
+            </a>{' '}
+            to check all customisable options
+          </p>
         </footer>
       </section>
     );

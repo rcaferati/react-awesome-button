@@ -3,8 +3,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 const config = {
+  mode: 'production',
   entry: {
-    index: ['./src/index.js'],
+    index: ['./src/index.ts'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -30,6 +31,11 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
@@ -38,6 +44,9 @@ const config = {
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   optimization: {
     minimize: true,

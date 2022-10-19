@@ -1,9 +1,19 @@
 .#{$button-root} {
   &--progress {
+    .#{$button-root}__wrapper > span:nth-child(2) {
+      position: absolute;
+      top: var(--button-raise-level);
+      left:0;
+      right:0;
+      bottom: calc(var(--button-raise-level) * -1);
+      display: flex;
+    }
     .#{$button-root}__progress {
+      @extend %fill-parent;
       position: relative;
       display: flex;
       flex: 1;
+      flex-direction:column;
       align-items: center;
       justify-content: center;
       border-radius: $button-default-border-radius;
@@ -20,7 +30,6 @@
       }
       &:before,
       &:after {
-        @extend %fill-parent;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -32,19 +41,25 @@
       &:before {
         content: attr(data-loading);
         display: none;
-        transform: translate3d(0, 50%, 0);
+        transform: translate3d(0, 100%, 0);
       }
       &:after {
         content: attr(data-status);
         display: none;
-        transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -100%, 0);
+      }
+    }
+    .#{$button-root}__content {
+      > * {
+        transition: opacity 200ms ease-out;
       }
     }
     &.#{$button-root}--active {
-      .#{$button-root}__progress {
-        > span {
+      .#{$button-root}__content {
+        > * {
           opacity: 0.075;
         }
+        
       }
       .#{$button-root}__progress:after,
       .#{$button-root}__progress:before,
@@ -67,7 +82,7 @@
     .#{$button-root}__progress {
       &:before {
         opacity: 1;
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 50%, 0);
       }
     }
     .#{$button-root}__content {
@@ -95,7 +110,7 @@
     .#{$button-root}__progress {
       &:after {
         opacity: 1;
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, -50%, 0);
       }
       &:before {
         transform: translate3d(0, 50%, 0);

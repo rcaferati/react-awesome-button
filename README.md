@@ -165,7 +165,6 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 | loadingLabel | `string`  | `Wait ..` | Progress button loading label text                          |
 | resultLabel  | `string`  | `Success` | Progress button success label text                          |
 | releaseDelay | `number`  |    500    | Delay for releasing the button after the progress animation |
-| fakePress    | `boolean` |  `false`  | When set to `true` triggers a fake button press             |
 
 ### `AwesomeButtonSocial` basic example
 

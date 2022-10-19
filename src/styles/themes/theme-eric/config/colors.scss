@@ -7,15 +7,15 @@ $button-primary-color-hover: darken($button-primary-color, 5%);
 $button-primary-color-active: darken($button-primary-color, 10%);
 $button-primary-border: 1px solid $cartman-yellow;
 
-$button-secondary-color: #EE3253;
+$button-secondary-color: #DB4557;
 $button-secondary-color-dark: darken($cartman-yellow, 15%);
 $button-secondary-color-light: $cartman-yellow;
 $button-secondary-color-hover: darken($button-secondary-color, 5%);
 $button-secondary-color-active: darken($button-secondary-color, 10%);
 $button-secondary-border: 1px solid $cartman-yellow;
 
-$button-anchor-color: #293b83;
-$button-anchor-border-color: #9f2d6a;
+$button-anchor-color: #2D2D3A;
+$button-anchor-border-color: #876753;
 $button-anchor-color-dark: darken($button-anchor-border-color, 10%);
 $button-anchor-color-light: lighten($button-anchor-border-color, 5%);
 $button-anchor-color-hover: $button-anchor-color;
@@ -37,3 +37,10 @@ $button-disabled-color-light: lighten($button-disabled-border-color, 5%);
 $button-disabled-color-hover: $button-disabled-color;
 $button-disabled-color-active: $button-disabled-color;
 $button-disabled-border: 1px solid $button-disabled-border-color;
+
+$button-danger-color: #2D2D3A;
+$button-danger-color-dark: darken($button-danger-color, 15%);
+$button-danger-color-light: lighten($button-danger-color, 75%);
+$button-danger-color-hover: darken($button-danger-color, 2%);
+$button-danger-color-active: darken($button-danger-color, 5%);
+$button-danger-border: none;

@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Examining the syntax of Jest tests Should render a button with a progress bar 1`] = `
+<button
+  className="aws-btn aws-btn--visible false aws-btn--progress"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span>
+        <span>
+          Button
+        </span>
+      </span>
+    </span>
+    <span>
+      <span
+        className="aws-btn__progress"
+        data-loading="Wait.."
+        data-status="Success!"
+      />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Examining the syntax of Jest tests Should render a button without moveEvents 1`] = `
+<button
+  className="aws-btn aws-btn--primary aws-btn--visible false"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span>
+        Button
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Examining the syntax of Jest tests Should render a primary button 1`] = `
+<button
+  className="aws-btn aws-btn--primary aws-btn--visible false"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span>
+        Button
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Examining the syntax of Jest tests Should render a secondary button 1`] = `
+<button
+  className="aws-btn aws-btn--secondary aws-btn--visible false"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span>
+        Button
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Examining the syntax of Jest tests renders AB without crashing 1`] = `
+<button
+  className="aws-btn aws-btn--primary aws-btn--visible false"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Examining the syntax of Jest tests renders ABP without crashing 1`] = `
+<button
+  className="aws-btn aws-btn--visible false aws-btn--progress"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span>
+        <span />
+      </span>
+    </span>
+    <span>
+      <span
+        className="aws-btn__progress"
+        data-loading="Wait.."
+        data-status="Success!"
+      />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Examining the syntax of Jest tests renders ABS without crashing 1`] = `
+<button
+  className="aws-btn aws-btn--primary aws-btn--visible false"
+  href={null}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  role="button"
+  style={{}}
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <svg
+        height={23}
+        preserveAspectRatio="xMidYMid meet"
+        version="1.1"
+        viewBox="0 0 50 50"
+        width={30}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#FFF"
+        />
+      </svg>
+      <span />
+    </span>
+  </span>
+</button>
+`;

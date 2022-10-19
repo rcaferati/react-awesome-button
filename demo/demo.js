@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, StaticRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 import styles from './demo.scss';
 import {
   Header,
@@ -12,25 +13,23 @@ import {
 } from './components';
 import Data from './data.json';
 import data from './examples';
+import { DemoProvider, useDemoContext } from './context';
 
 const DEFAULT_THEME = 'blue-theme';
 
-const DemoComponent = ({
-  match,
-  handlePopover,
-  popoverOpened,
-  popoverText,
-}) => {
-  const theme = match.params.theme || DEFAULT_THEME;
-  return (
-    <Page
-      theme={data[theme]}
-      data={Data}
-      handlePopover={handlePopover}
-      popoverOpened={popoverOpened}
-      popoverText={popoverText}
-    />
-  );
+const getRouteTheme = params => {
+  if (!params?.['*']) {
+    return DEFAULT_THEME;
+  }
+  const split = params['*'].replace(/(.*)(\/(.*))?/gim, '$1');
+  return split;
+};
+
+const DemoComponent = () => {
+  const params = useParams();
+  const theme = getRouteTheme(params);
+
+  return <Page theme={data[theme]} data={Data} />;
 };
 
 DemoComponent.propTypes = {
@@ -40,12 +39,16 @@ DemoComponent.propTypes = {
   popoverText: PropTypes.string.isRequired,
 };
 
-const ComposerComponent = ({ match, handlePopover }) => {
-  const theme = match.params.theme || DEFAULT_THEME;
+const ComposerComponent = () => {
+  const params = useParams();
+  const theme = getRouteTheme(params);
+  const { openPopover, isPopoverOpened } = useDemoContext();
+
   return (
     <Customiser
       theme={theme}
-      handlePopover={handlePopover}
+      openPopover={openPopover}
+      isPopoverOpened={isPopoverOpened}
       repository={Data.repository}
       module={data[theme].module}
       componentClass={data[theme].example.componentClass}
@@ -54,13 +57,10 @@ const ComposerComponent = ({ match, handlePopover }) => {
   );
 };
 
-ComposerComponent.propTypes = {
-  match: PropTypes.object.isRequired,
-  handlePopover: PropTypes.func.isRequired,
-};
+const HeaderComponent = () => {
+  const params = useParams();
+  const theme = getRouteTheme(params);
 
-const HeaderComponent = ({ match }) => {
-  const theme = match.params.theme || DEFAULT_THEME;
   return (
     <Header
       title={Data.title}
@@ -75,10 +75,6 @@ const HeaderComponent = ({ match }) => {
       theme={theme}
     />
   );
-};
-
-HeaderComponent.propTypes = {
-  match: PropTypes.object.isRequired,
 };
 
 class Demo extends React.Component {
@@ -106,50 +102,46 @@ class Demo extends React.Component {
   render() {
     const { server, location } = this.props;
     const Router = server === true ? StaticRouter : BrowserRouter;
+
     return (
       <Router location={location}>
-        <div>
-          <PageRibbon
-            href={Data.repository}
-            title="Github Repository"
-            target="_blank"
-            className={styles.ribbon}
-            delay={1250}
-          >
-            <span>Support it on Github</span>
-            <span role="img" aria-label="hi?">
-              🙌🏻
-            </span>
-          </PageRibbon>
-          <Body>
-            <Route
-              path={`${Data.domain}/:theme?`}
-              component={HeaderComponent}
-            />
-            <Route
-              path={`${Data.domain}/:theme?`}
-              render={({ match }) => (
-                <DemoComponent
-                  match={match}
-                  popoverOpened={this.state.popoverOpened}
-                  popoverText={this.state.popoverText}
-                  handlePopover={this.handlePopover}
+        <DemoProvider>
+          <div>
+            <PageRibbon
+              href={Data.repository}
+              title="Github Repository"
+              target="_blank"
+              className={styles.ribbon}
+              delay={1223}
+            >
+              <span>Support it on Github</span>
+              <span role="img" aria-label="hi?">
+                🙌🏻
+              </span>
+            </PageRibbon>
+            <Body>
+              <Routes>
+                <Route
+                  path={`${Data.domain}/*`}
+                  element={
+                    <>
+                      <HeaderComponent />
+                      <DemoComponent />
+                    </>
+                  }
                 />
-              )}
-            />
-          </Body>
-          <Composer>
-            <Route
-              path={`${Data.domain}/:theme?`}
-              render={({ match }) => (
-                <ComposerComponent
-                  match={match}
-                  handlePopover={this.handlePopover}
+              </Routes>
+            </Body>
+            <Composer>
+              <Routes>
+                <Route
+                  path={`${Data.domain}/*`}
+                  element={<ComposerComponent />}
                 />
-              )}
-            />
-          </Composer>
-        </div>
+              </Routes>
+            </Composer>
+          </div>
+        </DemoProvider>
       </Router>
     );
   }
