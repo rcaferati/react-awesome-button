@@ -1,6 +1,6 @@
 {
   "name": "react-awesome-button",
-  "version": "6.5.1",
+  "version": "7.0.0",
   "description": "Performant, extendable, highly customisable, production ready React Component that renders an animated basic set of UI buttons",
   "main": "dist/index",
   "types": "dist/src/index.d.ts",
@@ -100,7 +100,7 @@
     "javascript"
   ],
   "dependencies": {
-    "web-animation-club": "^0.6.0"
+    "web-animation-club": "^1.0.0"
   },
   "loki": {
     "configurations": {

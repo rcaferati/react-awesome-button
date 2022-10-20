@@ -37,26 +37,38 @@ export function toggleMoveClasses({
   cssModule = null,
   state = null,
 }: any) {
-  if (!element) {
+  if (!element?.classList?.remove) {
     return false;
   }
   if (!state) {
-    element.classList.remove(
+    const states = [
       classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
       classToModules([`${root}--${POSITION_STATES[1]}`], cssModule),
-      classToModules([`${root}--${POSITION_STATES[2]}`], cssModule)
-    );
+      classToModules([`${root}--${POSITION_STATES[2]}`], cssModule),
+    ];
+    states.forEach((state) => {
+      if (state) {
+        element.classList.remove(state);
+      }
+    });
     return false;
   }
+
   const options = POSITION_STATES.filter((item) => item !== state);
   let i = options.length;
   // eslint-disable-next-line
   while (i--) {
-    element.classList.remove(
-      classToModules([`${root}--${options[i]}`], cssModule)
-    );
+    const cls = classToModules([`${root}--${options[i]}`], cssModule);
+    if (cls) {
+      element.classList.remove(cls);
+    }
   }
-  element.classList.add(classToModules([`${root}--${state}`], cssModule));
+
+  const cls = classToModules([`${root}--${state}`], cssModule);
+  if (cls) {
+    element.classList.add(cls);
+  }
+
   return true;
 }
 
@@ -71,7 +83,7 @@ export function createRippleEffect({ event, button, content, className }: any) {
   bubble.style.width = `${size}px`;
   bubble.style.height = `${size}px`;
 
-  setCssEndEvent(bubble, 'animation', () => {
+  setCssEndEvent(bubble, 'animation').then(() => {
     window.requestAnimationFrame(() => {
       content.removeChild(bubble);
     });
