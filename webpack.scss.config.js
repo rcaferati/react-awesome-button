@@ -2,8 +2,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 const config = {
+  mode: 'production',
   entry: {
-    styles: ['./src/styles/index.js'],
+    styles: ['./src/styles/index.ts'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -19,6 +20,11 @@ const config = {
         options: {
           presets: ['es2015', 'react', 'stage-0'],
         },
+      },
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/i,

@@ -1,6 +1,6 @@
 import React from 'react';
 import Modules from '../helpers/modules';
-import { AwesomeButton, AwesomeButtonProgress } from '../../src/index';
+import { AwesomeButton, AwesomeButtonProgress } from '../../src/index.ts';
 
 export const properties = [
   {
@@ -185,7 +185,7 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
 <AwesomeButtonProgress
   type="secondary"
   size="medium"
-  action={(element, next) => doSomethingThenCall(next)}
+  onPress={(element, next) => doSomethingThenCall(next)}
 >
   Primary
 </AwesomeButtonProgress>`,
@@ -193,7 +193,7 @@ import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButt
         <AwesomeButtonProgress
           type="secondary"
           size="medium"
-          action={(element, next) => {
+          onPress={(element, next) => {
             setTimeout(() => {
               next();
             }, 1000);

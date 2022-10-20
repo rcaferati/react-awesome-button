@@ -12,9 +12,11 @@ export const THEMES = [
 ];
 
 export const MODULES = [];
+
 THEMES.forEach(theme => {
   // eslint-disable-next-line
-  MODULES[theme] = require(`../../src/styles/themes/${theme}/styles.scss`);
+  const module = require(`../../src/styles/themes/${theme}/styles.module.scss`);
+  MODULES[theme] = module.default;
 });
 
 export default {

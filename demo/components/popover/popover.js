@@ -1,99 +1,82 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Styles from './popover.scss';
+import React, { useRef, useEffect } from 'react';
+import styles from './popover.scss';
 import { setCssEndEvent } from '../../helpers/examples';
-import { AwesomeButton } from '../../../src/index';
+import { AwesomeButton } from '../../../src/index.ts';
+import { useDemoContext } from '../../context';
 
-class Popover extends React.Component {
-  static propTypes = {
-    opened: PropTypes.bool.isRequired,
-    module: PropTypes.object.isRequired,
-    handlePopover: PropTypes.func.isRequired,
-    text: PropTypes.string,
-  };
-  static defaultProps = {
-    text: '',
-  };
+const Popover = () => {
+  const {
+    isPopoverOpened,
+    popoverText,
+    cssModule,
+    closePopover,
+  } = useDemoContext();
+  const animating = useRef(false);
+  const toggleTimer = useRef(null);
+  const container = useRef(null);
 
-  constructor(props) {
-    super(props);
-    this.animating = false;
-    this.toggleTimer = null;
-  }
+  useEffect(() => {
+    toggleVisibility(isPopoverOpened);
+  }, [isPopoverOpened]);
 
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (this.props.opened !== newProps.opened) {
-      this.toggleVisibility(newProps.opened);
-    }
-  }
+  useEffect(() => {
+    return () => {
+      clearTimeout(toggleTimer.current);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    if (this.toggleTimer) {
-      clearTimeout(this.toggleTimer);
-    }
-  }
-
-  toggleVisibility(toggle, timed) {
-    if (this.animating) {
+  const toggleVisibility = (toggle, timed) => {
+    if (animating.current) {
       if (timed) {
         return;
       }
-      this.toggleTimer = setTimeout(() => {
-        this.toggleVisibility(toggle, true);
+      toggleTimer.current = setTimeout(() => {
+        toggleVisibility(toggle, true);
       }, 175);
       return;
     }
-    this.animating = true;
+    animating.current = true;
+    const element = container.current;
     if (toggle === true) {
-      this.container.classList.add(Styles.show);
-      setCssEndEvent(this.container, 'animation').then(() => {
-        this.animating = false;
+      element.classList.add(styles.show);
+      setCssEndEvent(element, 'animation').then(() => {
+        animating.current = false;
       });
       return;
     }
-    this.container.classList.add(Styles.hide);
-    setCssEndEvent(this.container, 'animation').then(() => {
-      this.container.classList.remove(Styles.show);
-      this.container.classList.remove(Styles.hide);
-      this.animating = false;
+    element.classList.add(styles.hide);
+    setCssEndEvent(element, 'animation').then(() => {
+      element.classList.remove(styles.show);
+      element.classList.remove(styles.hide);
+      animating.current = false;
     });
-  }
+  };
 
-  render() {
-    const {
-      text,
-      module,
-    } = this.props;
-    return (
-      <div
-        ref={(container) => { this.container = container; }}
-        className={Styles.container}
-      >
-        <div className={Styles.window}>
-          <div
-            className={Styles.body}
-            dangerouslySetInnerHTML={{
-              __html: text,
-            }}
-          />
-          <div className={Styles.control}>
-            <AwesomeButton
-              size="medium"
-              type="secondary"
-              cssModule={module}
-              action={() => {
-                this.props.handlePopover({
-                  popoverOpened: false,
-                });
-              }}
-            >
-              Close
-            </AwesomeButton>
-          </div>
+  return (
+    <div
+      ref={container}
+      className={styles.container}
+    >
+      <div className={styles.window}>
+        <div
+          className={styles.body}
+          dangerouslySetInnerHTML={{
+            __html: popoverText,
+          }}
+        />
+        <div className={styles.control}>
+          <AwesomeButton
+            size="medium"
+            type="secondary"
+            cssModule={cssModule}
+            onPress={closePopover}
+          >
+            Close
+          </AwesomeButton>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Popover;

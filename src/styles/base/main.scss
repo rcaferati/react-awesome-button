@@ -194,9 +194,11 @@ button.#{$button-root} {
       transform var(--transform-speed) ease-out,
       background var(--transform-speed) ease-out,
       color var(--transform-speed) ease-out;
+    
     &:after {
       @extend %fill-parent;
     }
+
     > span:nth-child(1) {
       display: flex;
       align-items: center;
@@ -204,10 +206,17 @@ button.#{$button-root} {
       backface-visibility: hidden;
       transform: skew(0) translate3d(0, 0, 0);
 
-      > svg {
-        margin-top: -2px;
-        margin-right: 3px;
+      > svg:only-child {
+        margin: 0;
       }
+    }
+
+    > svg:nth-child(1) {
+      margin-right: 4px;
+    }
+
+    > svg:nth-last-child(1) {
+      margin-left: 4px;
     }
   }
   &:focus {
@@ -259,6 +268,11 @@ button.#{$button-root} {
   &--visible {
     opacity: 1;
   }
+  &--between {
+    .#{$button-root}__content {
+      justify-content: space-between;
+    }
+  }
   &--left {
     @include button-hover-skew(1);
   }
@@ -285,14 +299,22 @@ button.#{$button-root} {
   &--active {
     &:before {
       will-change: transform;
-      transform: translate3d(0, calc(var(--button-raise-level) * -1), 0);
+      transform: translate3d(
+        0,
+        calc((var(--button-raise-level) - var(--button-pressed-level)) * -1),
+        0
+      );
     }
     .#{$button-root}__content {
       will-change: transform;
       transition: transform calc(var(--transform-speed) * 0.8) ease-out,
         background calc(var(--transform-speed) * 0.8) ease-out,
         color calc(var(--transform-speed) * 0.8) ease-out;
-      transform: translate3d(0, var(--button-raise-level), 0);
+      transform: translate3d(
+        0,
+        calc(var(--button-raise-level) - var(--button-pressed-level)),
+        0
+      );
     }
   }
   &--off {
@@ -359,6 +381,19 @@ span.#{$button-root}__bubble {
   }
   100% {
     transform: translateX(-110%);
+  }
+}
+
+@keyframes release {
+  0% {
+  }
+  25% {
+  }
+  50% {
+  }
+  75% {
+  }
+  100% {
   }
 }
 

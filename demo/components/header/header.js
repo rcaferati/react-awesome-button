@@ -18,7 +18,7 @@ const Header = ({
       <div className={Styles.title}>
         <ReactLogo />
         <h1>
-          <span>{framework}</span>{' '}<span>{title}</span>{' '}<span>Component</span>
+          <span>{framework}</span>{' '}<span>{title}</span>
         </h1>
       </div>
       <h2>

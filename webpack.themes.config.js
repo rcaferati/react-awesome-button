@@ -4,8 +4,9 @@ const path = require('path');
 const THEME = process.env.AWESOME_THEME;
 
 module.exports = {
+  mode: 'production',
   entry: {
-    styles: [path.resolve(__dirname, `src/styles/themes/${THEME}/index.js`)],
+    styles: [path.resolve(__dirname, `src/styles/themes/${THEME}/index.ts`)],
   },
   output: {
     path: path.resolve(__dirname, 'dist/themes'),
@@ -21,6 +22,11 @@ module.exports = {
         options: {
           presets: ['es2015', 'react', 'stage-0'],
         },
+      },
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/i,

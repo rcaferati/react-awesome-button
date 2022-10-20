@@ -1,0 +1,20 @@
+// [Default] variables
+@import '../../base/variables.scss';
+// [Extend/Overwrite] variables
+@import './config/structure.scss';
+@import './config/colors.scss';
+
+// [Default] Custom Properties
+@import '../../base/custom-properties.scss';
+
+// [Default] Lists
+@import '../../base/lists.scss';
+// [Extend/Overwrite] Lists
+
+// [Default] Main Styles
+@import '../../base/main.scss';
+// [Extend] Main Styles
+@import './config/main.scss';
+
+// [Default] Progress Styles
+@import '../../base/progress.scss';

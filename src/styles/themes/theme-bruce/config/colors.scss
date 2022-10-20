@@ -1,0 +1,50 @@
+$dark: #3a3a3a;
+$white: #fbfbfb;
+$purple: #733086;
+$green: #77cd38;
+$yellow: #ffe727;
+
+$button-primary-color: $dark;
+$button-primary-color-dark: darken($dark, 15%);
+$button-primary-color-light: $white;
+$button-primary-color-hover: darken($button-primary-color, 5%);
+$button-primary-color-active: darken($button-primary-color, 10%);
+$button-primary-border: 2px solid $dark;
+
+$button-secondary-color: $white;
+$button-secondary-color-dark: $dark;
+$button-secondary-color-light: $dark;
+$button-secondary-color-hover: darken($button-secondary-color, 5%);
+$button-secondary-color-active: darken($button-secondary-color, 10%);
+$button-secondary-border: 2px solid $dark;
+
+$button-anchor-color: $yellow;
+$button-anchor-border-color: #876753;
+$button-anchor-color-dark: darken($dark, 10%);
+$button-anchor-color-light: lighten($button-anchor-border-color, 5%);
+$button-anchor-color-hover: $button-anchor-color;
+$button-anchor-color-active: $button-anchor-color;
+$button-anchor-border: 2px solid $button-anchor-border-color;
+
+$button-placeholder-color: #302e3c;
+$button-placeholder-border-color: #844d38;
+$button-placeholder-color-dark: $button-placeholder-border-color;
+$button-placeholder-color-light: lighten($button-placeholder-border-color, 5%);
+$button-placeholder-color-hover: $button-placeholder-color;
+$button-placeholder-color-active: $button-placeholder-color;
+$button-placeholder-border: 2px solid $button-placeholder-border-color;
+
+$button-disabled-color: #302e3c;
+$button-disabled-border-color: #844d38;
+$button-disabled-color-dark: $button-disabled-border-color;
+$button-disabled-color-light: lighten($button-disabled-border-color, 5%);
+$button-disabled-color-hover: $button-disabled-color;
+$button-disabled-color-active: $button-disabled-color;
+$button-disabled-border: 2px solid $button-disabled-border-color;
+
+$button-danger-color: $purple;
+$button-danger-color-dark: darken($button-danger-color, 15%);
+$button-danger-color-light: $green;
+$button-danger-color-hover: darken($button-danger-color, 2%);
+$button-danger-color-active: darken($button-danger-color, 5%);
+$button-danger-border: none;

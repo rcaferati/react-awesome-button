@@ -13,6 +13,13 @@ $button-anchor-color-hover: darken($button-anchor-color, 2%);
 $button-anchor-color-active: darken($button-anchor-color, 5%);
 $button-anchor-border: none;
 
+$button-danger-color: #c42e2e;
+$button-danger-color-dark: darken($button-danger-color, 15%);
+$button-danger-color-light: lighten($button-danger-color, 75%);
+$button-danger-color-hover: darken($button-danger-color, 2%);
+$button-danger-color-active: darken($button-danger-color, 5%);
+$button-danger-border: none;
+
 $button-secondary-color: #f2f6f9;
 $button-secondary-color-dark: darken($button-primary-color, 15%);
 $button-secondary-color-light: $button-primary-color;

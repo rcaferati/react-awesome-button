@@ -23,6 +23,7 @@
   --button-horizontal-padding: #{$button-horizontal-padding};
 
   --button-raise-level: #{$button-raise-level};
+  --button-pressed-level: #{$button-pressed-level};
   --button-hover-pressure: #{$button-hover-pressure};
 
   --loading-transition-timing: #{$loading-transition-timing};
@@ -51,6 +52,13 @@
   --button-anchor-color-active: #{$button-anchor-color-active};
   --button-anchor-border: #{$button-anchor-border};
 
+  --button-danger-color: #{$button-danger-color};
+  --button-danger-color-dark: #{$button-danger-color-dark};
+  --button-danger-color-light: #{$button-danger-color-light};
+  --button-danger-color-hover: #{$button-danger-color-hover};
+  --button-danger-color-active: #{$button-danger-color-active};
+  --button-danger-border: #{$button-danger-border};
+  
   --button-disabled-color: #{$button-disabled-color};
   --button-disabled-color-dark: #{$button-disabled-color-dark};
   --button-disabled-color-light: #{$button-disabled-color-light};

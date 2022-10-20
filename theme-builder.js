@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import shell from 'shelljs';
+const fs = require('fs');
+const path = require('path');
+const shell = require('shelljs');
 
 const THEMES = path.resolve(__dirname, 'src/styles/themes');
 const THEMES_PATH = './dist/themes';

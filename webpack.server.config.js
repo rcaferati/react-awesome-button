@@ -3,6 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 const config = {
+  mode: 'production',
   entry: {
     'react-awesome-button-server': ['./demo/demo.js'],
   },
