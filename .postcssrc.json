@@ -1,7 +1,7 @@
 {
   "plugins": {
     "autoprefixer": {
-      "browserlist": ["last 2 versions"]
+      "browserlist": ["> 2%"]
     }
   }
 }
