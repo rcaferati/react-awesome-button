@@ -17,7 +17,7 @@
 
 ## Live demo
 
-Checkout the live demo with the `CSS customizer` at my <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/" target="_blank">web portfolio</a> page.
+Checkout the live demo with the `CSS customizer` at <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/" target="_blank">awesome-button.caferati.me</a>.
 
 [<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-customizer.png?raw=true" width="800" />](https://awesome-button.caferati.me/)
 
