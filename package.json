@@ -1,6 +1,6 @@
 {
   "name": "react-awesome-button",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Performant, extendable, highly customisable, production ready React Component that renders an animated basic set of UI buttons",
   "main": "dist/index",
   "types": "dist/src/index.d.ts",
