@@ -27,7 +27,7 @@ You can run this demo locally on `8080` by cloning this repository and running `
 
 Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/storybook/web" target="_blank">web portfolio</a> page.
 
-[<img src="https://caferati.me/images/images/react-awesome-button-storybook.png" width="800" />](https://awesome-button.caferati.me/storybook/web)
+[<img src="https://caferati.me/images/react-awesome-button-storybook.png" width="800" />](https://awesome-button.caferati.me/storybook/web)
 
 ## Figma File
 
