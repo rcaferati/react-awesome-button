@@ -31,7 +31,7 @@ export type ButtonType = {
   extra?: React.ReactNode;
   href?: string;
   moveEvents?: Boolean;
-  onMouseDown?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onMouseDown?: any;
   onMouseUp?: (event: React.MouseEvent | React.TouchEvent) => void;
   onPress?: (event: React.MouseEvent | React.TouchEvent) => void;
   onPressed?: (event: React.MouseEvent | React.TouchEvent) => void;
@@ -81,8 +81,9 @@ const AwesomeButton = ({
   const container = React.useRef(null);
   const child = React.useRef(null);
   const over = React.useRef(false);
-  const pressed = React.useRef(null);
+  const pressed = React.useRef(0);
   const timer = React.useRef(null);
+  const touchScreen = React.useRef(0);
   const RenderComponent: React.FunctionComponent =
     element || (href ? Anchor : Button);
 
@@ -142,16 +143,7 @@ const AwesomeButton = ({
     ]);
 
   const checkActive = () => {
-    if (timer.current) {
-      clearTimeout(timer.current);
-    }
-
-    if (active === true) {
-      setPressPosition(`${rootElement}--active`);
-      return;
-    }
-
-    if (pressPosition !== null) {
+    if (pressPosition !== null && active === false) {
       clearPress({ force: true });
     }
   };
@@ -171,28 +163,24 @@ const AwesomeButton = ({
   React.useEffect(checkDisabled, [placeholder, children, disabled]);
 
   const clearPressCallback = () => {
-    // leave false e force false não é release;
-    // mas teria que evitar;
+    pressed.current = 0;
     onReleased && onReleased(container.current);
   };
 
   const clearPress = ({ force = false, leave = false }: any = {}) => {
-    // remove supperficial mouse-move
     toggleMoveClasses({
       element: container.current,
       root: rootElement,
       cssModule,
     });
 
+    // soft clear-press
+    if (leave === true && pressed.current === 0) {
+      return;
+    }
+
     let nextPressPosition = active && !force ? `${rootElement}--active` : null;
 
-    // não tem active;
-    // leave === true é só no mouse leave;
-    // leave === false, em todos os outros;
-    // if (pressPosition === null && leave === false) {
-    // configura o evento;
-
-    // E SE TIVER PRESSIONANDO?
     if (content?.current?.clearCssEvent) {
       content.current.clearCssEvent();
     }
@@ -203,12 +191,7 @@ const AwesomeButton = ({
       }).then(clearPressCallback);
     }
 
-    // if (nextPressPosition === null && over.current === true) {
-    //   nextPressPosition = `${rootElement}--middle`;
-    // }
-
     setPressPosition(nextPressPosition);
-    // setPressPosition(null);
   };
 
   const createRipple = (event: any) => {
@@ -221,20 +204,23 @@ const AwesomeButton = ({
   };
 
   const pressIn = (event: React.MouseEvent | React.TouchEvent) => {
-    if (isDisabled === true || active === true) {
+    if (isDisabled === true || pressed.current === 2) {
       return;
     }
-    pressed.current = new Date().getTime();
+    pressed.current = 1;
     setCssEndEvent(content.current, 'transition', {
       tolerance: 1,
     }).then(() => {
-      // Full press-in
       onPressed && onPressed(event);
     });
     setPressPosition(`${rootElement}--active`);
   };
 
   const pressOut = (event: React.MouseEvent | React.TouchEvent) => {
+    if (isDisabled === true || pressed.current !== 1) {
+      return;
+    }
+
     if (timer.current) {
       clearTimeout(timer.current);
     }
@@ -249,6 +235,11 @@ const AwesomeButton = ({
     }
 
     handleAction(event);
+
+    if (active === true) {
+      pressed.current = 2;
+      return;
+    }
     clearPress();
   };
 
@@ -273,10 +264,19 @@ const AwesomeButton = ({
     if (IS_TOUCH) {
       events.onTouchStart = (event: React.TouchEvent) => {
         onMouseDown && onMouseDown(event);
+        touchScreen.current = event?.changedTouches?.[0]?.screenY;
         pressIn(event);
       };
       events.onTouchEnd = (event: React.TouchEvent) => {
         onMouseUp && onMouseUp(event);
+        const diff =
+          touchScreen.current && event?.changedTouches?.[0]?.screenY
+            ? Math.abs(touchScreen.current - event.changedTouches[0].screenY)
+            : 0;
+        if (diff > button.current.offsetHeight) {
+          clearPress({ force: true });
+          return;
+        }
         pressOut(event);
       };
       return events;
@@ -284,6 +284,11 @@ const AwesomeButton = ({
 
     events.onMouseLeave = () => {
       over.current = false;
+      if (active === true && pressed.current !== 2) {
+        clearPress({ force: true });
+        return;
+      }
+      // SOFT CLEAR PRESS;
       clearPress({ leave: true });
     };
     events.onMouseDown = (event: React.MouseEvent) => {
@@ -295,11 +300,10 @@ const AwesomeButton = ({
     };
     events.onMouseUp = (event: React.MouseEvent) => {
       onMouseUp && onMouseUp(event);
-      if (isDisabled === true || active === true) {
+      if (isDisabled === true) {
         event.preventDefault();
         return;
       }
-
       pressOut(event);
     };
 
