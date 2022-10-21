@@ -4,7 +4,7 @@
 
 `react-awesome-button` is a performant, extendable, highly customisable, production ready React Component that renders an animated set of 3D UI buttons. Bundled together with a _social share_ and _progress enabled_ components.
 
-[<img width="400" alt="react-awesome-button demo" src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/theme-set.gif?raw=true">](https://awesome-button.caferati.me)
+[<img width="400" alt="react-awesome-button demo" src="https://caferati.me/images/theme-set.gif">](https://awesome-button.caferati.me)
 
 ## Key Features
 
@@ -19,7 +19,7 @@
 
 Checkout the live demo with the `CSS customizer` at <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/" target="_blank">awesome-button.caferati.me</a>.
 
-[<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-customizer.png?raw=true" width="800" />](https://awesome-button.caferati.me/)
+[<img src="https://caferati.me/images/react-awesome-button-customizer.png" width="800" />](https://awesome-button.caferati.me/)
 
 You can run this demo locally on `8080` by cloning this repository and running `npm start`
 
@@ -27,13 +27,13 @@ You can run this demo locally on `8080` by cloning this repository and running `
 
 Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/storybook/web" target="_blank">web portfolio</a> page.
 
-[<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/react-awesome-button-storybook.png?raw=true" width="800" />](https://awesome-button.caferati.me/storybook/web)
+[<img src="https://caferati.me/images/images/react-awesome-button-storybook.png" width="800" />](https://awesome-button.caferati.me/storybook/web)
 
 ## Figma File
 
 Import it directly into your [Figma](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue) project.
 
-[<img src="https://github.com/rcaferati/react-awesome-button/blob/master/demo/public/images/figma.png?raw=true" width="800" />](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue)
+[<img src="https://caferati.me/images/figma.png" width="800" />](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue)
 
 You can run the storybook locally on `6006` by cloning this repository and running `npm run storybook`
 
@@ -236,7 +236,7 @@ Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus 
 
 Checkout the React Native version of the Awesome Button UI Component at [rcaferati/react-native-really-awesome-button](https://github.com/rcaferati/react-native-really-awesome-button)
 
-<img width="280" src='https://raw.githubusercontent.com/rcaferati/react-native-really-awesome-button/master/demo/demo-button-cartman.gif?raw=true' />
+<img width="280" src='https://caferati.me/images/demo-button-cartman.gif' />
 
 ## Author
 
