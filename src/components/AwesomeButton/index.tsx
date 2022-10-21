@@ -9,8 +9,10 @@ import {
 } from '../../helpers/components';
 
 const ROOTELM = 'aws-btn';
-const ANIMATION_DELAY = 100;
 const IS_WINDOW = typeof window !== 'undefined';
+const IS_TOUCH =
+  (IS_WINDOW && 'ontouchstart' in window) ||
+  (typeof window !== 'undefined' && navigator.maxTouchPoints > 0);
 
 const Anchor: React.FunctionComponent = (props: any) => <a {...props} />;
 const Button: React.FunctionComponent = (props: any) => <button {...props} />;
@@ -29,11 +31,11 @@ export type ButtonType = {
   extra?: React.ReactNode;
   href?: string;
   moveEvents?: Boolean;
-  onMouseDown?: (event: React.MouseEvent) => void;
-  onMouseUp?: (event: React.MouseEvent) => void;
-  onPress?: (event: React.MouseEvent) => void;
-  onPressed?: (event: React.MouseEvent) => void;
-  onReleased?: (event: React.MouseEvent) => void;
+  onMouseDown?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onMouseUp?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onPress?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onPressed?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onReleased?: (event: HTMLElement) => void;
   placeholder?: Boolean;
   ripple?: Boolean;
   rootElement?: string;
@@ -124,10 +126,7 @@ const AwesomeButton = ({
         return classToModules(classList, cssModule);
       }
 
-      return classList
-        .join(' ')
-        .trim()
-        .replace(/[\s]+/gi, ' ');
+      return classList.join(' ').trim().replace(/[\s]+/gi, ' ');
     }, [
       rootElement,
       type,
@@ -221,7 +220,7 @@ const AwesomeButton = ({
     });
   };
 
-  const pressIn = (event: React.MouseEvent) => {
+  const pressIn = (event: React.MouseEvent | React.TouchEvent) => {
     if (isDisabled === true || active === true) {
       return;
     }
@@ -235,12 +234,11 @@ const AwesomeButton = ({
     setPressPosition(`${rootElement}--active`);
   };
 
-  const pressOut = (event: React.MouseEvent) => {
+  const pressOut = (event: React.MouseEvent | React.TouchEvent) => {
     if (timer.current) {
       clearTimeout(timer.current);
     }
 
-    const diff = new Date().getTime() - pressed.current;
     if (ripple === true) {
       createRipple(event);
     }
@@ -251,17 +249,10 @@ const AwesomeButton = ({
     }
 
     handleAction(event);
-
-    const time = ANIMATION_DELAY - diff;
-
-    // if (time > 0) {
-    //   timer.current = setTimeout(clearPress, time);
-    //   return;
-    // }
     clearPress();
   };
 
-  const handleAction = (event: React.MouseEvent) => {
+  const handleAction = (event: any) => {
     const element = container.current;
     if (!element) {
       return;
@@ -277,26 +268,39 @@ const AwesomeButton = ({
           event.preventDefault();
         }
       },
-      onMouseLeave: () => {
-        over.current = false;
-        clearPress({ leave: true });
-      },
-      onMouseDown: (event: React.MouseEvent) => {
-        onMouseDown && onMouseDown(event);
-        if (event?.nativeEvent?.button !== 0) {
-          return;
-        }
-        pressIn(event);
-      },
-      onMouseUp: (event: React.MouseEvent) => {
-        onMouseUp && onMouseUp(event);
-        if (isDisabled === true || active === true) {
-          event.preventDefault();
-          return;
-        }
+    };
 
+    if (IS_TOUCH) {
+      events.onTouchStart = (event: React.TouchEvent) => {
+        onMouseDown && onMouseDown(event);
+        pressIn(event);
+      };
+      events.onTouchEnd = (event: React.TouchEvent) => {
+        onMouseUp && onMouseUp(event);
         pressOut(event);
-      },
+      };
+      return events;
+    }
+
+    events.onMouseLeave = () => {
+      over.current = false;
+      clearPress({ leave: true });
+    };
+    events.onMouseDown = (event: React.MouseEvent) => {
+      onMouseDown && onMouseDown(event);
+      if (event?.nativeEvent?.button !== 0) {
+        return;
+      }
+      pressIn(event);
+    };
+    events.onMouseUp = (event: React.MouseEvent) => {
+      onMouseUp && onMouseUp(event);
+      if (isDisabled === true || active === true) {
+        event.preventDefault();
+        return;
+      }
+
+      pressOut(event);
     };
 
     if (moveEvents === true) {
@@ -322,17 +326,18 @@ const AwesomeButton = ({
           state,
         });
       };
-    } else {
-      events.onMouseEnter = () => {
-        over.current = true;
-        toggleMoveClasses({
-          element: container.current,
-          root: rootElement,
-          cssModule,
-          state: 'middle',
-        });
-      };
+      return events;
     }
+
+    events.onMouseEnter = () => {
+      over.current = true;
+      toggleMoveClasses({
+        element: container.current,
+        root: rootElement,
+        cssModule,
+        state: 'middle',
+      });
+    };
 
     return events;
   };

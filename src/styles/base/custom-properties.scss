@@ -28,7 +28,7 @@
 
   --loading-transition-timing: #{$loading-transition-timing};
   --loading-transition-speed: #{$loading-transition-speed};
-  --loading-transition-end-speed: #{$loading-transition-speed / 20};
+  --loading-transition-end-speed: #{calc($loading-transition-speed / 20)};
   --transform-speed: #{$transform-speed};
 
   --button-primary-color: #{$button-primary-color};
@@ -58,7 +58,7 @@
   --button-danger-color-hover: #{$button-danger-color-hover};
   --button-danger-color-active: #{$button-danger-color-active};
   --button-danger-border: #{$button-danger-border};
-  
+
   --button-disabled-color: #{$button-disabled-color};
   --button-disabled-color-dark: #{$button-disabled-color-dark};
   --button-disabled-color-light: #{$button-disabled-color-light};
