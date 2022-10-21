@@ -17,18 +17,19 @@ const useStateSync = (initial: any) => {
   const ref = React.useRef(initial);
 
   const setSyncValue = (newValue: any) => {
-    ref.current = {
+    const newState = {
       ...ref.current,
       ...newValue,
     };
 
-    setValue(ref.current);
+    ref.current = newState;
+    setValue(newState);
   };
 
   return [value, setSyncValue, ref.current];
 };
 
-type ButtonTypeModified = Omit<ButtonType, "onPress">;
+type ButtonTypeModified = Omit<ButtonType, 'onPress'>;
 
 export type ButtonProgressType = {
   onPress: (event: React.MouseEvent, next: () => void) => void;
@@ -78,10 +79,7 @@ const AwesomeButtonProgress = ({
       `${root}--progress`,
     ];
 
-    return className
-      .join(' ')
-      .trim()
-      .replace(/[\s]+/gi, ' ');
+    return className.join(' ').trim().replace(/[\s]+/gi, ' ');
   };
 
   const endLoading = (endState = true, errorLabel: any = null) => {
@@ -93,10 +91,6 @@ const AwesomeButtonProgress = ({
   };
 
   const startLoading = () => {
-    setState({
-      active: true,
-    });
-
     frameThrower(4, () => {
       setState({
         loadingStart: true,
@@ -129,7 +123,17 @@ const AwesomeButtonProgress = ({
     }, releaseDelay);
   };
 
+  const handleActivation = React.useCallback(() => {
+    setState({
+      active: true,
+    });
+  }, [setState]);
+
   const handleAction = async (event: React.MouseEvent) => {
+    if (stateRef?.loadingStart === true) {
+      return;
+    }
+
     startLoading();
     await onceTransitionEnd(content.current);
     onPress && onPress(event, endLoading);
@@ -146,6 +150,7 @@ const AwesomeButtonProgress = ({
       type={type}
       className={getRootClassName()}
       onPress={handleAction}
+      onMouseDown={handleActivation}
       cssModule={cssModule}
       active={active}
       extra={
