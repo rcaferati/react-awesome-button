@@ -4,7 +4,7 @@ import {
   beforeFutureCssLayout as frameThrower,
   setCssEndEvent,
   // @ts-ignore
-} from 'web-animation-club';
+} from '@rcaferati/wac';
 import AwesomeButton, { ButtonType } from '../AwesomeButton';
 import { getClassName } from '../../helpers/components';
 
