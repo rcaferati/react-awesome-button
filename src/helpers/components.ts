@@ -1,5 +1,5 @@
 // @ts-ignore
-import { setCssEndEvent } from 'web-animation-club';
+import { setCssEndEvent } from '@rcaferati/wac';
 
 const POSITION_STATES = ['middle', 'left', 'right'];
 

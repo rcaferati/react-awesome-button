@@ -1,6 +1,6 @@
 import * as React from 'react';
 // @ts-ignore
-import { setCssEndEvent } from 'web-animation-club';
+import { setCssEndEvent } from '@rcaferati/wac';
 import {
   classToModules,
   getClassName,
