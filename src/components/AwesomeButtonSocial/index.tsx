@@ -3,8 +3,7 @@ import AwesomeButton, { ButtonType } from '../AwesomeButton/index';
 import Sharer, { isMobile } from './sharer';
 import getIcon from './icons';
 
-const ICON_HEIGHT = 23;
-const ICON_WIDTH = 30;
+const ICON_SIZE = 24;
 
 type SharerType = {
   image?: string;
@@ -122,8 +121,8 @@ const AwesomeButtonSocial = ({
     }
     return getIcon({
       type,
-      width: icon === true ? ICON_WIDTH : icon.width || ICON_WIDTH,
-      height: icon === true ? ICON_HEIGHT : icon.height || ICON_HEIGHT,
+      width: icon === true ? ICON_SIZE : icon.width || ICON_SIZE,
+      height: icon === true ? ICON_SIZE : icon.height || ICON_SIZE,
       color: extra.disabled ? 'rgba(255,255,255,0.35)' : '#FFF',
     });
   };

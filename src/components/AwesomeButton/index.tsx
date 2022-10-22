@@ -264,14 +264,14 @@ const AwesomeButton = ({
     if (IS_TOUCH) {
       events.onTouchStart = (event: React.TouchEvent) => {
         onMouseDown && onMouseDown(event);
-        touchScreen.current = event?.changedTouches?.[0]?.screenY;
+        touchScreen.current = event?.changedTouches?.[0]?.clientY;
         pressIn(event);
       };
       events.onTouchEnd = (event: React.TouchEvent) => {
         onMouseUp && onMouseUp(event);
         const diff =
-          touchScreen.current && event?.changedTouches?.[0]?.screenY
-            ? Math.abs(touchScreen.current - event.changedTouches[0].screenY)
+          touchScreen.current && event?.changedTouches?.[0]?.clientY
+            ? Math.abs(touchScreen.current - event.changedTouches[0].clientY)
             : 0;
         if (diff > button.current.offsetHeight) {
           clearPress({ force: true });
