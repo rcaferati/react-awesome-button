@@ -19,21 +19,13 @@
 
 Checkout the live demo with the `CSS customizer` at <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/" target="_blank">awesome-button.caferati.me</a>.
 
-[<img src="https://caferati.me/images/react-awesome-button-customizer.png" width="800" />](https://awesome-button.caferati.me/)
-
-You can run this demo locally on `8080` by cloning this repository and running `npm start`
-
-## Storybook
-
-Checkout the `Storybook` at my <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/storybook/web" target="_blank">web portfolio</a> page.
-
-[<img src="https://caferati.me/images/react-awesome-button-storybook.png" width="800" />](https://awesome-button.caferati.me/storybook/web)
+[<img src="https://caferati.me/images/github/awesome-button-web.png" width="800" />](https://awesome-button.caferati.me)
 
 ## Figma File
 
 Import it directly into your [Figma](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue) project.
 
-[<img src="https://caferati.me/images/figma.png" width="800" />](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue)
+[<img src="https://caferati.me/images/github/figma-awesome-button.png" width="800" />](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue)
 
 You can run the storybook locally on `6006` by cloning this repository and running `npm run storybook`
 
