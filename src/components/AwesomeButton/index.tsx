@@ -72,9 +72,6 @@ const AwesomeButton = ({
   type = 'primary',
   visible = true,
 }: ButtonType) => {
-  const [isDisabled, setDisabled] = React.useState(
-    disabled || (placeholder && !children)
-  );
   const [pressPosition, setPressPosition] = React.useState(null);
   const button = React.useRef(null);
   const content = React.useRef(null);
@@ -90,6 +87,13 @@ const AwesomeButton = ({
   const extraProps = {
     href,
   };
+
+  const isDisabled = React.useMemo(()=>{
+    if (placeholder === true && !children) {
+      return true;
+    }
+    return disabled;
+  },[placeholder, children, disabled])
 
   React.useEffect(() => {
     if (button?.current) {
@@ -149,18 +153,6 @@ const AwesomeButton = ({
   };
 
   React.useEffect(checkActive, [active]);
-
-  const checkDisabled = () => {
-    if (placeholder === true && !children) {
-      setDisabled(true);
-      return;
-    }
-    if (isDisabled !== disabled) {
-      setDisabled(disabled);
-    }
-  };
-
-  React.useEffect(checkDisabled, [placeholder, children, disabled]);
 
   const clearPressCallback = () => {
     pressed.current = 0;

@@ -30,13 +30,12 @@ $button-placeholder-color-hover: $button-placeholder-color;
 $button-placeholder-color-active: $button-placeholder-color;
 $button-placeholder-border: 1px solid $button-placeholder-border-color;
 
-$button-disabled-color: #302E3C;
-$button-disabled-border-color: #844D38;
-$button-disabled-color-dark: $button-disabled-border-color;
-$button-disabled-color-light: lighten($button-disabled-border-color, 5%);
+$button-disabled-color: #E0E0E0;
+$button-disabled-color-dark: darken($button-disabled-color, 20%);
+$button-disabled-color-light: darken($button-disabled-color, 15%);
 $button-disabled-color-hover: $button-disabled-color;
 $button-disabled-color-active: $button-disabled-color;
-$button-disabled-border: 1px solid $button-disabled-border-color;
+$button-disabled-border: 1px solid darken($button-disabled-color, 17.5%);
 
 $button-danger-color: #2D2D3A;
 $button-danger-color-dark: darken($button-danger-color, 15%);

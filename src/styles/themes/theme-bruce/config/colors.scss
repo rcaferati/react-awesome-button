@@ -34,13 +34,12 @@ $button-placeholder-color-hover: $button-placeholder-color;
 $button-placeholder-color-active: $button-placeholder-color;
 $button-placeholder-border: 2px solid $button-placeholder-border-color;
 
-$button-disabled-color: #302e3c;
-$button-disabled-border-color: #844d38;
-$button-disabled-color-dark: $button-disabled-border-color;
-$button-disabled-color-light: lighten($button-disabled-border-color, 5%);
+$button-disabled-color: #CACACA;
+$button-disabled-color-dark: darken($button-disabled-color, 20%);
+$button-disabled-color-light: darken($button-disabled-color, 15%);
 $button-disabled-color-hover: $button-disabled-color;
 $button-disabled-color-active: $button-disabled-color;
-$button-disabled-border: 2px solid $button-disabled-border-color;
+$button-disabled-border: 2px solid darken($button-disabled-color, 17.5%);
 
 $button-danger-color: $purple;
 $button-danger-color-dark: darken($button-danger-color, 15%);

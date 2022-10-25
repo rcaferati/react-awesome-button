@@ -53,15 +53,6 @@ $button-colors: (
     var(--button-disabled-border)
   ),
   (
-    'disabled',
-    var(--button-danger-color),
-    var(--button-danger-color-dark),
-    var(--button-danger-color-light),
-    var(--button-danger-color-hover),
-    var(--button-danger-color-active),
-    var(--button-danger-border)
-  ),
-  (
     'placeholder',
     var(--button-placeholder-color),
     var(--button-placeholder-color-dark),
