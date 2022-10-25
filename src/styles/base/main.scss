@@ -224,10 +224,10 @@ button.#{$button-root} {
   }
   &:before {
     content: ' ';
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--button-shadow-color);
     width: calc(100% - 2px);
-    height: calc(100% - (var(--button-raise-level) * 2));
-    bottom: calc(0px - (var(--button-raise-level) / 2));
+    height: calc(100% - (var(--button-raise-level) * var(--button-shadow-divisor)));
+    bottom: calc(0px - (var(--button-raise-level) / var(--button-shadow-divisor)));
     left: 1px;
     position: absolute;
     border-radius: var(--button-default-border-radius);

@@ -31,7 +31,7 @@ $button-disabled-color-dark: darken($button-disabled-color, 20%);
 $button-disabled-color-light: darken($button-disabled-color, 15%);
 $button-disabled-color-hover: $button-disabled-color;
 $button-disabled-color-active: $button-disabled-color;
-$button-disabled-border: none;
+$button-disabled-border: 2px solid darken($button-disabled-color, 17.5%);
 
 $button-danger-color: #3db64b;
 $button-danger-color-dark: #d2e054;
