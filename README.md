@@ -4,7 +4,7 @@
 
 `react-awesome-button` is a performant, extendable, highly customisable, production ready React Component that renders an animated set of 3D UI buttons. Bundled together with a _social share_ and _progress enabled_ components.
 
-[<img width="400" alt="react-awesome-button demo" src="https://caferati.me/images/theme-set.gif">](https://awesome-button.caferati.me)
+[<img width="480" alt="react-awesome-button demo" src="https://caferati.me/images/awesome-button.gif">](https://awesome-button.caferati.me)
 
 ## Key Features
 
