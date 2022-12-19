@@ -77,9 +77,19 @@ export function createRippleEffect({ event, button, content, className }: any) {
   const top = window.pageYOffset || document.documentElement.scrollTop || 0;
   const bubble = document.createElement('span');
   const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
+  
+  let pageX, pageY;
+  if (event.nativeEvent instanceof TouchEvent) {
+    pageX = event.changedTouches[0].pageX;
+    pageY = event.changedTouches[0].pageY;
+  } else {
+    pageX = event.pageX;
+    pageY = event.pageY;
+  }
+
   bubble.className = className;
-  bubble.style.top = `-${size / 2 - (event.pageY - bounds.top - top)}px`;
-  bubble.style.left = `-${size / 2 - (event.pageX - bounds.left)}px`;
+  bubble.style.top = `-${size / 2 - (pageY - bounds.top - top)}px`;
+  bubble.style.left = `-${size / 2 - (pageX - bounds.left)}px`;
   bubble.style.width = `${size}px`;
   bubble.style.height = `${size}px`;
 
