@@ -5,6 +5,7 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react-jsx",
+    "lib": ["DOM"],
     "allowJs": true,
     "declaration": true,
     "moduleResolution": "node",

@@ -1,5 +1,4 @@
 import * as React from 'react';
-// @ts-ignore
 import { setCssEndEvent } from '@rcaferati/wac';
 import {
   classToModules,
@@ -12,10 +11,14 @@ const ROOTELM = 'aws-btn';
 const IS_WINDOW = typeof window !== 'undefined';
 const IS_TOUCH =
   (IS_WINDOW && 'ontouchstart' in window) ||
-  (typeof window !== 'undefined' && navigator.maxTouchPoints > 0);
+  (IS_WINDOW && navigator.maxTouchPoints > 0);
 
-const Anchor: React.FunctionComponent = (props: any) => <a {...props} />;
-const Button: React.FunctionComponent = (props: any) => <button {...props} />;
+const Anchor = React.forwardRef<HTMLAnchorElement>((props, ref) => (
+  <a ref={ref} {...props} />
+));
+const Button = React.forwardRef<HTMLButtonElement>((props, ref) => (
+  <button ref={ref} {...props} />
+));
 
 export type ButtonType = {
   active?: Boolean;
@@ -27,14 +30,16 @@ export type ButtonType = {
   containerProps?: any;
   cssModule?: any;
   disabled?: Boolean;
-  element?: React.FunctionComponent;
+  element?: React.ForwardRefExoticComponent<
+    React.RefAttributes<HTMLAnchorElement | HTMLDivElement | HTMLButtonElement>
+  >;
   extra?: React.ReactNode;
   href?: string;
   moveEvents?: Boolean;
   onMouseDown?: any;
   onMouseUp?: (event: React.MouseEvent | React.TouchEvent) => void;
-  onPress?: (event: React.MouseEvent | React.TouchEvent) => void;
-  onPressed?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onPress?: any;
+  onPressed?: any;
   onReleased?: (event: HTMLElement) => void;
   placeholder?: Boolean;
   ripple?: Boolean;
@@ -81,19 +86,20 @@ const AwesomeButton = ({
   const pressed = React.useRef(0);
   const timer = React.useRef(null);
   const touchScreen = React.useRef(0);
-  const RenderComponent: React.FunctionComponent =
-    element || (href ? Anchor : Button);
+  const RenderComponent: React.ForwardRefExoticComponent<
+    React.RefAttributes<HTMLAnchorElement | HTMLDivElement | HTMLButtonElement>
+  > = element || (href ? Anchor : Button);
 
   const extraProps = {
     href,
   };
 
-  const isDisabled = React.useMemo(()=>{
+  const isDisabled = React.useMemo(() => {
     if (placeholder === true && !children) {
       return true;
     }
     return disabled;
-  },[placeholder, children, disabled])
+  }, [placeholder, children, disabled]);
 
   React.useEffect(() => {
     if (button?.current) {
@@ -202,9 +208,7 @@ const AwesomeButton = ({
     pressed.current = 1;
     setCssEndEvent(content.current, 'transition', {
       tolerance: 1,
-    }).then(() => {
-      onPressed && onPressed(event);
-    });
+    }).then(() => onPressed && onPressed(event));
     setPressPosition(`${rootElement}--active`);
   };
 
@@ -240,7 +244,6 @@ const AwesomeButton = ({
     if (!element) {
       return;
     }
-
     onPress && onPress(event);
   };
 
