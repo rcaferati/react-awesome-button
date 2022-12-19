@@ -19,8 +19,6 @@
     "build": "webpack --mode production",
     "build:typescript": "webpack --mode production --config webpack.typescript.config.js",
     "build:scss": "webpack --mode production --config webpack.scss.config.js && rm ./dist/styles.js",
-    "build:website": "webpack --mode production --config webpack.website.config.js",
-    "build:server": "webpack --mode production --config webpack.server.config.js",
     "build:themes": "babel-node ./theme-builder.js",
     "lint": "eslint src/**",
     "prepublish": "npm run build && npm run build:scss && npm run build:themes",
