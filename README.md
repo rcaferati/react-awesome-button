@@ -205,7 +205,7 @@ If nothing is passed on the `sharer` prop, the component automatically gets the 
         }}
       >
         Button
-      </AwesomeButton>
+      </AwesomeButtonSocial>
     );
   }
 ```
