@@ -48,21 +48,6 @@ function Button() {
 }
 ```
 
-### CSS Modules
-
-```jsx
-import { AwesomeButton } from 'react-awesome-button';
-import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss';
-
-function Button() {
-  return (
-    <AwesomeButton cssModule={AwesomeButtonStyles} type="primary">
-      Button
-    </AwesomeButton>
-  );
-}
-```
-
 ### `AwesomeButton` rendered with a button tag
 
 Renders the component with a `button` HTML tag and an `onPress` prop called on animation release.
