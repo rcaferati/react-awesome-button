@@ -1,11 +1,9 @@
 import * as React from 'react';
 import AwesomeButton, { ButtonType } from '../AwesomeButton/index';
 import Sharer, { isMobile } from './sharer';
-import getIcon from './icons';
+import type { SharePayload } from './sharer';
 
-const ICON_SIZE = 24;
-
-type SharerType = {
+export type SharerType = {
   image?: string;
   message?: string;
   phone?: string;
@@ -13,126 +11,191 @@ type SharerType = {
   user?: string;
 };
 
-type DimensionsType = {
+export type DimensionsType = {
   width: number;
   height: number;
 };
 
-type SocialButtonType = {
+export type SocialButtonType = {
   sharer?: SharerType;
-  icon?: boolean | DimensionsType;
   dimensions?: DimensionsType;
 };
+
+export type AwesomeButtonSocialProps = SocialButtonType & ButtonType;
+
+const DEFAULT_DIMENSIONS: DimensionsType = {
+  width: 640,
+  height: 480,
+};
+
+const DEFAULT_WINDOW_TITLE = 'Share';
+
+const IS_BROWSER =
+  typeof window !== 'undefined' && typeof document !== 'undefined';
 
 const AwesomeButtonSocial = ({
   onPress = null,
   children = null,
-  icon = true,
   sharer = {},
-  dimensions = {
-    width: 640,
-    height: 480,
-  },
+  dimensions = DEFAULT_DIMENSIONS,
   type,
+  href = null,
   ...extra
-}: SocialButtonType & ButtonType) => {
-  const isWindow = typeof window !== 'undefined';
-  const mobile = React.useRef(isMobile()).current;
+}: AwesomeButtonSocialProps) => {
+  // Evaluate once per mounted instance (sufficient for UA-based behavior)
+  const mobileRef = React.useRef<boolean>(IS_BROWSER ? isMobile() : false);
 
-  const getUrl = () => {
-    if (sharer?.url) {
-      return sharer.url;
+  const popupDimensions = React.useMemo<DimensionsType>(
+    () => ({
+      width: dimensions?.width ?? DEFAULT_DIMENSIONS.width,
+      height: dimensions?.height ?? DEFAULT_DIMENSIONS.height,
+    }),
+    [dimensions]
+  );
+
+  const getUrl = React.useCallback((): string | null => {
+    const raw = sharer?.url;
+    if (typeof raw === 'string') {
+      const trimmed = raw.trim();
+      if (trimmed) return trimmed;
     }
-    if (isWindow) {
-      return window.location.href;
+
+    if (IS_BROWSER) {
+      return window.location.href || null;
     }
+
     return null;
-  };
+  }, [sharer?.url]);
 
-  const getMessage = () => {
-    if (sharer?.message) {
-      return sharer.message;
+  const getMessage = React.useCallback((): string | null => {
+    const raw = sharer?.message;
+    if (typeof raw === 'string') {
+      const trimmed = raw.trim();
+      if (trimmed) return trimmed;
     }
-    if (isWindow) {
-      const message = document.querySelector('title');
-      if (message?.innerHTML) {
-        return message.innerHTML;
-      }
+
+    if (IS_BROWSER) {
+      const titleEl = document.querySelector('title');
+      const title = titleEl?.textContent?.trim();
+      return title || null;
     }
+
     return null;
-  };
+  }, [sharer?.message]);
 
-  const getImage = () => {
-    if (sharer?.image) {
-      return sharer.image;
+  const getImage = React.useCallback((): string | null => {
+    const raw = sharer?.image;
+    if (typeof raw === 'string') {
+      const trimmed = raw.trim();
+      if (trimmed) return trimmed;
     }
-    if (isWindow !== null) {
-      const img = document.querySelector('meta[property="og:image"]');
-      if (img) {
-        return img.getAttribute('content');
-      }
+
+    if (IS_BROWSER) {
+      const meta = document.querySelector(
+        'meta[property="og:image"]'
+      ) as HTMLMetaElement | null;
+      const content = meta?.getAttribute('content')?.trim();
+      return content || null;
     }
+
     return null;
-  };
+  }, [sharer?.image]);
 
-  const handlePress = (event: React.MouseEvent) => {
-    if (onPress) {
-      onPress(event);
-      return;
-    }
-
-    if (extra.href) {
-      return;
-    }
-
-    // @ts-ignore
-    const sharerData = Sharer({
-      height: dimensions?.height,
-      width: dimensions?.width,
+  const buildSharePayload = React.useCallback((): SharePayload | null => {
+    const payload = Sharer({
+      width: popupDimensions.width,
+      height: popupDimensions.height,
       url: getUrl(),
       message: getMessage(),
       image: getImage(),
-      type,
-      user: sharer.user,
-      phone: sharer.phone,
+      type: type ?? '',
+      user: sharer?.user ?? null,
+      phone: sharer?.phone ?? null,
     });
 
-    if (!sharerData?.url) {
-      return;
-    }
-
-    if (navigator?.share && mobile) {
-      navigator.share({
-        url: sharerData.url,
-        text: sharerData.text,
-        title: sharerData.title,
-      });
-      return;
-    }
-
-    if (isWindow) {
-      window.open(sharerData.url, sharerData.title, sharerData.extra);
-    }
-  };
-
-  const renderIcon = () => {
-    if (!icon) {
+    if (!payload?.url) {
       return null;
     }
-    return getIcon({
-      type,
-      width: icon === true ? ICON_SIZE : icon.width || ICON_SIZE,
-      height: icon === true ? ICON_SIZE : icon.height || ICON_SIZE,
-      color: extra.disabled ? 'rgba(255,255,255,0.35)' : '#FFF',
-    });
-  };
+
+    return payload;
+  }, [
+    getImage,
+    getMessage,
+    getUrl,
+    popupDimensions.height,
+    popupDimensions.width,
+    sharer?.phone,
+    sharer?.user,
+    type,
+  ]);
+
+  const openNativeShare = React.useCallback(
+    async (payload: SharePayload): Promise<boolean> => {
+      if (
+        typeof navigator === 'undefined' ||
+        typeof navigator.share !== 'function'
+      ) {
+        return false;
+      }
+
+      try {
+        await navigator.share({
+          url: payload.url ?? undefined,
+          text: payload.text ?? undefined,
+          title: payload.title ?? undefined,
+        });
+        return true;
+      } catch {
+        // User cancellation / unsupported data / platform error -> fallback
+        return false;
+      }
+    },
+    []
+  );
+
+  const openWindowShare = React.useCallback((payload: SharePayload): void => {
+    if (!IS_BROWSER || !payload.url) {
+      return;
+    }
+
+    const targetOrTitle = payload.title || DEFAULT_WINDOW_TITLE;
+    const features = payload.extra || undefined;
+
+    window.open(payload.url, targetOrTitle, features);
+  }, []);
+
+  const handlePress = React.useCallback(
+    async (event: Parameters<NonNullable<ButtonType['onPress']>>[0]) => {
+      // Consumer override keeps full control
+      if (onPress) {
+        onPress(event);
+        return;
+      }
+
+      // Let native anchor navigation handle href mode
+      if (href) {
+        return;
+      }
+
+      const payload = buildSharePayload();
+      if (!payload?.url) {
+        return;
+      }
+
+      if (IS_BROWSER && mobileRef.current) {
+        const shared = await openNativeShare(payload);
+        if (shared) {
+          return;
+        }
+      }
+
+      openWindowShare(payload);
+    },
+    [buildSharePayload, href, onPress, openNativeShare, openWindowShare]
+  );
 
   return (
-    <AwesomeButton
-      type={type}
-      onPress={handlePress}
-      {...extra}
-      before={renderIcon()}>
+    <AwesomeButton type={type} href={href} onPress={handlePress} {...extra}>
       {children}
     </AwesomeButton>
   );

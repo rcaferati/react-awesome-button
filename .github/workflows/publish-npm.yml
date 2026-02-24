@@ -1,0 +1,63 @@
+name: Publish package to npm
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    # Only publish from this repository (prevents accidental runs in forks)
+    if: github.repository == 'rcaferati/react-awesome-button'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify package identity
+        run: |
+          node -p "require('./package.json').name"
+          node -p "require('./package.json').version"
+
+      - name: Run tests
+        run: npm test -- --passWithNoTests
+
+      - name: Build package
+        run: npm run build:all
+
+      - name: Verify tag matches package version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          PKG_VERSION="v$(node -p "require('./package.json').version")"
+          echo "Git tag: $TAG"
+          echo "Package version tag: $PKG_VERSION"
+          if [ "$TAG" != "$PKG_VERSION" ]; then
+            echo "Tag/version mismatch"
+            exit 1
+          fi
+
+      - name: Publish to npm (scoped public package)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public

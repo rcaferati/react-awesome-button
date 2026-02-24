@@ -1,65 +1,80 @@
-# React &lt;AwesomeButton /&gt; UI Component
+# React `<AwesomeButton />` UI Components
 
-[![Travis](https://img.shields.io/travis/rcaferati/react-awesome-button/master.svg)](https://travis-ci.org/rcaferati/react-awesome-button) ![NPM](https://img.shields.io/npm/v/react-awesome-button.svg)
+`@rcaferati/react-awesome-button` provides three related button components:
 
-`react-awesome-button` is a performant, extendable, highly customisable, production ready React Component that renders an animated set of 3D UI buttons. Bundled together with a _social share_ and _progress enabled_ components.
+- **`AwesomeButton`** — animated base button
+- **`AwesomeButtonProgress`** — progress flow wrapper on top of `AwesomeButton`
+- **`AwesomeButtonSocial`** — social/share wrapper on top of `AwesomeButton`
 
-[<img width="480" alt="react-awesome-button demo" src="https://caferati.me/images/awesome-button.gif">](https://awesome-button.caferati.me)
+This README is updated for the current component patterns and prop behavior.
 
-## Key Features
-
-- 60fps 3D animated button
-- Animated **progress** button
-- **Social icons** and network specific **share methods**
-- OnPress ripple effect
-- Look and feel customisable and extendable in two ways: via **CSS custom properties** or **SASS** variables and lists ([scss config file](https://github.com/rcaferati/react-awesome-button/blob/master/src/styles/default.scss)).
-- Use it with **CSSModules** or \*\*Plain CSS
-
-## Live demo
-
-Checkout the live demo with the `CSS customizer` at <a title="React Awesome Button - CSS Customizer" href="https://awesome-button.caferati.me/" target="_blank">awesome-button.caferati.me</a>.
-
-[<img src="https://caferati.me/images/github/awesome-button-web.png" width="800" />](https://awesome-button.caferati.me)
-
-## Figma File
-
-Import it directly into your [Figma](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue) project.
-
-[<img src="https://caferati.me/images/github/figma-awesome-button.png" width="800" />](https://www.figma.com/file/Ug8sNPzmevU3ZQus9Klu5aHq/react-awesome-button-theme-blue)
-
-You can run the storybook locally on `6006` by cloning this repository and running `npm run storybook`
+---
 
 ## Installation
 
-```
-npm install --save react-awesome-button
+```bash
+npm install @rcaferati/react-awesome-button
 ```
 
-## Styling with plain CSS and CSS Modules
+---
 
-### Plain CSS
+## Quick Start
+
+### Plain CSS (no CSS Modules)
 
 ```jsx
-import { AwesomeButton } from 'react-awesome-button';
-import 'react-awesome-button/dist/styles.css';
+import React from 'react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import '@rcaferati/react-awesome-button/styles.css';
 
-function Button() {
+export default function Example() {
   return <AwesomeButton type="primary">Button</AwesomeButton>;
 }
 ```
 
-### `AwesomeButton` rendered with a button tag
+---
 
-Renders the component with a `button` HTML tag and an `onPress` prop called on animation release.
+## Styling with Theme CSS Modules (Blue Theme)
+
+If you want to use the package theme module object (for `cssModule`), import a built theme module and pass it to the component.
+
+> Note: depending on your bundler/module interop, the imported theme may be on `.default`.
 
 ```jsx
-import { AwesomeButton } from 'react-awesome-button';
-import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss';
+import React from 'react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
-function Button() {
+const blueTheme = themeBlue?.default ?? themeBlue;
+
+export default function Example() {
+  return (
+    <AwesomeButton cssModule={blueTheme} type="primary">
+      Button
+    </AwesomeButton>
+  );
+}
+```
+
+---
+
+## `AwesomeButton`
+
+### Basic button (`button` element)
+
+If `href` is **not** provided, `AwesomeButton` renders a button-like element and calls `onPress` on release.
+
+```jsx
+import React from 'react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
+
+const blueTheme = themeBlue?.default ?? themeBlue;
+
+export default function Example() {
   return (
     <AwesomeButton
-      cssModule={AwesomeButtonStyles}
+      cssModule={blueTheme}
       type="primary"
       onPress={() => {
         // do something
@@ -70,70 +85,216 @@ function Button() {
 }
 ```
 
-### `AwesomeButton` rendered with an anchor tag
+### Anchor mode (`href` provided)
 
-Render the component with an `anchor` HTML tag setting the `href` attribute.
+If `href` is provided, it renders anchor-like behavior and lets native navigation happen.
 
 ```jsx
-import { AwesomeButton } from 'react-awesome-button';
-import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss';
+import React from 'react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
-function Button() {
+const blueTheme = themeBlue?.default ?? themeBlue;
+
+export default function Example() {
   return (
     <AwesomeButton
-      cssModule={AwesomeButtonStyles}
+      cssModule={blueTheme}
       type="primary"
-      href="https://google.com">
-      Button
+      href="https://example.com"
+      containerProps={{ target: '_blank', rel: 'noreferrer noopener' }}>
+      Open website
     </AwesomeButton>
   );
 }
 ```
 
-### `AwesomeButton` props
+### Icons (recommended pattern)
 
-| Attribute      |     Type     |  Default  | Description                                                                                              |
-| :------------- | :----------: | :-------: | :------------------------------------------------------------------------------------------------------- |
-| type           |   `string`   | `primary` | Render a specific button type, styled by the `.scss` type list                                           |
-| size           |   `string`   |  `auto`   | Render a specific button size, styled by the `.scss` size list                                           |
-| element        |    `node`    |  `null`   | Overwrites the default container element renderer, useful for using it with react-router Link component. |
-| disabled       |    `bool`    |  `false`  | Render the disabled button                                                                               |
-| visible        |    `bool`    |  `true`   | Toggle button visibility                                                                                 |
-| ripple         |    `bool`    |  `false`  | Sets up the button with the onPress ripple effect                                                        |
-| placeholder    |    `bool`    |  `true `  | Should render the animated placeholder on empty `children`                                               |
-| onPress        |  `function`  |  `null`   | Default `pressRelease` event function                                                                    |
-| onPressed      |  `function`  |  `null`   | Event function triggered only on full button press                                                       |
-| onReleased     |  `function`  |  `null`   | Event function triggered on button full animation release                                                |
-| onMouseDown    |  `function`  |  `null`   | Event function coupled with the element's `onMouseDown`                                                  |
-| onMouseUp      |  `function`  |  `null`   | Event function coupled with the element's `onMouseUp`                                                    |
-| href           |   `string`   |  `null`   | Forces the button to be rendered on an `anchor` container and sets the href to the specified value       |
-| className      |   `string`   |  `null`   | Adds a `className` to the button container element                                                       |
-| style          |   `object`   |  `null`   | Passes a `style` object to the container element                                                         |
-| containerProps |   `object`   |  `null`   | Exposes an option for freely adding props to the button container element                                |
-| cssModule      |   `object`   |  `null`   | Accepts a css module configuration from the themed `module.scss` files                                   |
-| target         |   `string`   |  `null`   | When used together with `href` renders an anchor with a specific target attribute                        |
-| before         | `React.Node` |  `null`   | Render a `node` before the main content `span` container; useful for setting icons                       |
-| after          | `React.Node` |  `null`   | Render a `node` after the main content `span` container; useful for setting icons                        |
-| between        |   `string`   |  `null`   | Sets the content elements relation to `space-between`; useful for setting icons                          |
-| active         |    `bool`    |  `false`  | When set to `true` activates the pressIn animation                                                       |
-
-### `AwesomeButtonProgress` basic example
-
-Checkout this example live on the [storyboard](https://caferati.me/demo/react-awesome-button/storybook/?selectedKind=AwesomeButtonProgress&selectedStory=Success).
+Use `before` / `after` to render icons.  
+For **icon-only** buttons, pass the icon using `before` and omit children.
 
 ```jsx
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss';
+import React from 'react';
+import { Play, ArrowRight, Sparkles } from 'lucide-react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
-function Button() {
+const blueTheme = themeBlue?.default ?? themeBlue;
+
+export default function Example() {
+  return (
+    <div style={{ display: 'grid', gap: 12 }}>
+      <AwesomeButton
+        cssModule={blueTheme}
+        type="primary"
+        size="medium"
+        before={<Sparkles size={16} aria-hidden="true" />}
+        after={<ArrowRight size={16} aria-hidden="true" />}>
+        Continue
+      </AwesomeButton>
+
+      {/* Icon-only button */}
+      <AwesomeButton
+        cssModule={blueTheme}
+        type="primary"
+        size="medium"
+        before={<Play size={16} aria-hidden="true" />}
+      />
+    </div>
+  );
+}
+```
+
+### Sizes and auto width
+
+- `size="small" | "medium" | "large"` → fixed-size button
+- `size={null}` → **auto width** (content-driven width)
+
+```jsx
+import React from 'react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+
+export default function Example() {
+  return (
+    <div style={{ display: 'grid', gap: 12 }}>
+      <AwesomeButton size="small" type="primary">
+        Small
+      </AwesomeButton>
+      <AwesomeButton size="medium" type="primary">
+        Medium
+      </AwesomeButton>
+      <AwesomeButton size="large" type="primary">
+        Large
+      </AwesomeButton>
+      <AwesomeButton size={null} type="primary">
+        Auto width grows with content
+      </AwesomeButton>
+    </div>
+  );
+}
+```
+
+---
+
+## `AwesomeButton` Props (current)
+
+| Prop             | Type                             |     Default | Description                                                                 |
+| ---------------- | -------------------------------- | ----------: | --------------------------------------------------------------------------- |
+| `type`           | `string`                         | `'primary'` | Visual variant key (styled by theme/class names)                            |
+| `size`           | `string \| null`                 |      `null` | Button size key (`'small'`, `'medium'`, `'large'`) or `null` for auto width |
+| `active`         | `boolean`                        |     `false` | Controlled pressed/active visual state                                      |
+| `disabled`       | `boolean`                        |     `false` | Disables interactions                                                       |
+| `visible`        | `boolean`                        |      `true` | Toggles visible state class                                                 |
+| `placeholder`    | `boolean`                        |      `true` | If `true` and `children` is empty, renders placeholder/disabled state       |
+| `between`        | `boolean`                        |     `false` | Uses `space-between` layout for content (useful with icons)                 |
+| `ripple`         | `boolean`                        |     `false` | Enables ripple effect on successful press release                           |
+| `moveEvents`     | `boolean`                        |      `true` | Enables pointer move position classes (`left/middle/right`)                 |
+| `href`           | `string \| null`                 |      `null` | Enables anchor-like mode                                                    |
+| `element`        | `React component \| null`        |      `null` | Custom forwarded root element component                                     |
+| `rootElement`    | `string`                         | `'aws-btn'` | Base class prefix                                                           |
+| `className`      | `string \| null`                 |      `null` | Extra class names                                                           |
+| `style`          | `React.CSSProperties`            |        `{}` | Inline styles for root element                                              |
+| `containerProps` | `object`                         |        `{}` | Additional props forwarded to root element                                  |
+| `cssModule`      | `Record<string, string> \| null` |      `null` | CSS module mapping (theme object)                                           |
+| `before`         | `React.ReactNode`                |      `null` | Content rendered before label                                               |
+| `after`          | `React.ReactNode`                |      `null` | Content rendered after label                                                |
+| `extra`          | `React.ReactNode`                |      `null` | Extra content rendered inside wrapper (used by wrappers like Progress)      |
+| `children`       | `React.ReactNode`                |      `null` | Main label/content                                                          |
+| `onPress`        | `(event) => void`                |      `null` | Called on press release/activation                                          |
+| `onPressed`      | `(event) => void`                |      `null` | Called when press-in animation completes                                    |
+| `onReleased`     | `(element: HTMLElement) => void` |      `null` | Called when release cycle is cleared                                        |
+| `onMouseDown`    | `(event) => void`                |      `null` | Pointer/mouse/touch down callback                                           |
+| `onMouseUp`      | `(event) => void`                |      `null` | Pointer/mouse/touch up callback                                             |
+
+---
+
+## `AwesomeButtonProgress`
+
+`AwesomeButtonProgress` wraps `AwesomeButton` and manages a progress lifecycle.  
+Its `onPress` receives a second callback argument:
+
+- `next(true)` → success flow
+- `next(false, 'Failed')` → error flow
+
+### Basic success flow (async)
+
+```jsx
+import React from 'react';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
+
+const blueTheme = themeBlue?.default ?? themeBlue;
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default function Example() {
   return (
     <AwesomeButtonProgress
-      cssModule={AwesomeButtonStyles}
+      cssModule={blueTheme}
       type="primary"
-      onPress={(event, release) => {
-        // do a sync/async task then call `release()`
+      loadingLabel="Verifying…"
+      resultLabel="Verified!"
+      releaseDelay={500}
+      onPress={async (_event, next) => {
+        await sleep(900);
+        next(true);
       }}>
-      Button
+      Verify
+    </AwesomeButtonProgress>
+  );
+}
+```
+
+### Error flow
+
+```jsx
+import React from 'react';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default function Example() {
+  return (
+    <AwesomeButtonProgress
+      type="danger"
+      loadingLabel="Publishing…"
+      resultLabel="Done!"
+      onPress={async (_event, next) => {
+        await sleep(900);
+        next(false, 'Failed');
+      }}>
+      Publish
+    </AwesomeButtonProgress>
+  );
+}
+```
+
+### With icon (`before`)
+
+```jsx
+import React from 'react';
+import { Shield } from 'lucide-react';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
+
+const blueTheme = themeBlue?.default ?? themeBlue;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default function Example() {
+  return (
+    <AwesomeButtonProgress
+      cssModule={blueTheme}
+      type="primary"
+      size="medium"
+      before={<Shield size={16} aria-hidden="true" />}
+      loadingLabel="Verifying…"
+      resultLabel="Verified!"
+      onPress={async (_event, next) => {
+        await sleep(900);
+        next(true);
+      }}>
+      Verify signature
     </AwesomeButtonProgress>
   );
 }
@@ -141,88 +302,191 @@ function Button() {
 
 ### `AwesomeButtonProgress` specific props
 
-Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus the following ones.
+> `AwesomeButtonProgress` accepts all `AwesomeButton` props **except** `active` and replaces `onPress` with the progress version below.
 
-| Attribute    |    Type    |  Default   | Description                                                                      |
-| :----------- | :--------: | :--------: | :------------------------------------------------------------------------------- |
-| onPress      | `function` |   `null`   | Default `onPress` function returning the `event` and a button `release` strategy |
-| loadingLabel |  `string`  | `Wait ..`  | Progress button loading label text                                               |
-| resultLabel  |  `string`  | `Success!` | Progress button success label text                                               |
-| releaseDelay |  `number`  |    500     | Delay for releasing the button after the progress animation                      |
+| Prop           | Type                    |      Default | Description                                                         |
+| -------------- | ----------------------- | -----------: | ------------------------------------------------------------------- |
+| `onPress`      | `(event, next) => void` |       `null` | Progress action handler. Call `next(true)` or `next(false, label?)` |
+| `loadingLabel` | `string`                |   `'Wait..'` | Loading phase label                                                 |
+| `resultLabel`  | `string`                | `'Success!'` | Success label                                                       |
+| `releaseDelay` | `number`                |        `500` | Delay before reset after progress end                               |
 
-### `AwesomeButtonSocial` basic example
+---
 
-If nothing is passed on the `sharer` prop, the component automatically gets the page's own `title` and `og:image` properties; otherwise, it's setup by the `sharer`.
+## `AwesomeButtonSocial`
+
+`AwesomeButtonSocial` wraps `AwesomeButton` and builds a social/share action when no custom `onPress` is provided.
+
+### Behavior summary (current)
+
+On press, the component follows this order:
+
+1. If you provide `onPress`, **your handler is used** (full override)
+2. If `href` is provided, **native anchor navigation** is used
+3. Otherwise it builds a share payload and:
+   - tries `navigator.share(...)` on mobile (when supported)
+   - falls back to popup/window share (or direct URL fallback for some types like `instagram`)
+
+### Basic share example (GitHub style + custom icon)
 
 ```jsx
-  import { AwesomeButtonSocial } from 'react-awesome-button';
-  import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss'
+import React from 'react';
+import { Github } from 'lucide-react';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
-  function Button() {
-    return (
-      <AwesomeButtonSocial
-        cssModule={AwesomeButtonStyles}
-        type="facebook"
-        sharer={{
-          url="https://caferati.me"
-        }}
-      >
-        Button
-      </AwesomeButton>
-    );
-  }
+const blueTheme = themeBlue?.default ?? themeBlue;
+
+export default function Example() {
+  return (
+    <AwesomeButtonSocial
+      cssModule={blueTheme}
+      type="github"
+      before={<Github size={16} aria-hidden="true" />}
+      sharer={{
+        url: 'https://example.com',
+        message: 'Check this out',
+      }}>
+      GitHub
+    </AwesomeButtonSocial>
+  );
+}
 ```
 
-### `AwesomeButtonSocial` whatsapp example
+### WhatsApp example
 
 ```jsx
-  import { AwesomeButtonSocial } from 'react-awesome-button';
-  import AwesomeButtonStyles from 'react-awesome-button/src/styles/styles.scss'
+import React from 'react';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
 
-  function Button() {
-    return (
-      <AwesomeButtonSocial
-        cssModule={AwesomeButtonStyles}
-        type="whatsapp"
-        sharer={{
-          phone: '############',
-          message: 'Whatsapp init message'
-        }}
-      >
-        Button
-      </AwesomeButton>
-    );
-  }
+export default function Example() {
+  return (
+    <AwesomeButtonSocial
+      type="whatsapp"
+      sharer={{
+        phone: '5511999999999',
+        message: 'Hello from AwesomeButton',
+        url: 'https://example.com',
+      }}>
+      WhatsApp
+    </AwesomeButtonSocial>
+  );
+}
+```
+
+### Instagram-style button (direct URL fallback)
+
+`instagram` is treated as a direct URL fallback (no dedicated web popup sharer endpoint).
+
+```jsx
+import React from 'react';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
+
+export default function Example() {
+  return (
+    <AwesomeButtonSocial
+      type="instagram"
+      sharer={{
+        url: 'https://example.com',
+        message: 'Open this link',
+      }}>
+      Instagram
+    </AwesomeButtonSocial>
+  );
+}
+```
+
+### `href` mode (bypass sharer logic)
+
+If `href` is present, the component behaves like an anchor and does **not** execute the share flow.
+
+```jsx
+import React from 'react';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
+
+export default function Example() {
+  return (
+    <AwesomeButtonSocial
+      type="github"
+      href="https://github.com/your-org/your-repo"
+      containerProps={{ target: '_blank', rel: 'noreferrer noopener' }}>
+      Open GitHub
+    </AwesomeButtonSocial>
+  );
+}
 ```
 
 ### `AwesomeButtonSocial` specific props
 
-Being a wrapper on the **`AwesomeButton`** component, it accepts its props plus the following ones.
+> `AwesomeButtonSocial` accepts all `AwesomeButton` props and adds the props below.
 
-| Attribute      |          Type          | Default | Description                                                                                                                                 |
-| :------------- | :--------------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| type           |        `string`        | `null`  | Render a button type (Facebook, Instagram, Twitter, Github, Youtube, Linkedin, Pinterest, Reddit, Messenger, Whatsapp)                      |
-| icon           | `bool` or `Dimensions` | `true`  | Setting to `false` avoids icon rendering; if the dimensions type is passed in `{width: number, height: number}`, configures the button size |
-| sharer.url     |        `string`        | `null`  | Url string to be used on the sharer                                                                                                         |
-| sharer.image   |        `string`        | `null`  | Image url to be rendered on the sharer                                                                                                      |
-| sharer.message |        `string`        | `null`  | Message string to be rendered on the shared post                                                                                            |
-| sharer.phone   |        `string`        | `null`  | Phone number to be used when using the `Whatsapp` sharer type                                                                               |
-| sharer.user    |        `string`        | `null`  | Username to be redirected when using the `Messenger` sharer type                                                                            |
+| Prop             | Type                                |                       Default | Description                                                     |
+| ---------------- | ----------------------------------- | ----------------------------: | --------------------------------------------------------------- |
+| `sharer`         | `object`                            |                          `{}` | Share payload source (falls back to page metadata when omitted) |
+| `dimensions`     | `{ width: number; height: number }` | `{ width: 640, height: 480 }` | Popup window dimensions for share flows                         |
+| `sharer.url`     | `string`                            |              current page URL | URL to share (falls back to `window.location.href`)             |
+| `sharer.message` | `string`                            |                    page title | Share message/text (falls back to document title)               |
+| `sharer.image`   | `string`                            |               `og:image` meta | Image URL used by supported sharers (e.g. Pinterest)            |
+| `sharer.phone`   | `string`                            |                        `null` | Phone for WhatsApp                                              |
+| `sharer.user`    | `string`                            |                        `null` | Username for Messenger direct flow                              |
 
-## React Native Version
+### Supported share `type` values (Sharer utility)
 
-Checkout the React Native version of the Awesome Button UI Component at [rcaferati/react-native-really-awesome-button](https://github.com/rcaferati/react-native-really-awesome-button)
+The built-in sharer currently recognizes these values:
 
-<img width="280" src='https://caferati.me/images/demo-button-cartman.gif' />
+- `facebook`
+- `twitter`
+- `pinterest`
+- `linkedin`
+- `reddit`
+- `whatsapp`
+- `messenger`
+- `mail`
+- `instagram`
 
-## Author
+> Any other value can still be used as a visual button type, but the built-in share payload may return empty if the sharer type is unsupported.
 
-#### Rafael Caferati
+---
 
-- Checkout my <a href="https://caferati.me" title="Full-Stack Web Developer, UI/UX Javascript Specialist" target="_blank">Full-Stack Web Developer Website</a>
-- Other open source projects @ <a title="Web Software Developer Code Laboratory" target="_blank" href="https://caferati.me/labs">Code Laboratory</a>
-- A scope of my work @ <a title="Web Software Developer Portfolio" target="_blank" href="https://caferati.me/portfolio">Web Developer Portfolio</a>
+## Notes on CSS Modules / Theme Objects
+
+When using the theme module import, some bundlers expose the object as `default`.  
+This pattern is safe:
+
+```js
+const blueTheme = themeBlue?.default ?? themeBlue;
+```
+
+Then pass it to any button component via:
+
+```jsx
+<AwesomeButton cssModule={blueTheme}>Button</AwesomeButton>
+```
+
+---
+
+## Recommended patterns (current)
+
+### ✅ Icon-only buttons
+
+Use `before` and omit `children`:
+
+```jsx
+<AwesomeButton before={<Play size={16} aria-hidden="true" />} />
+```
+
+### ✅ Progress buttons
+
+Use `onPress={async (_event, next) => { ...; next(true|false); }}`  
+Do **not** pass manual `loading` props to `AwesomeButtonProgress`.
+
+### ✅ Social buttons
+
+Use `before` for icons (e.g. Lucide icons).  
+The social component does **not** need built-in icon usage to work.
+
+---
 
 ## License
 
-MIT. Copyright (c) 2019 Rafael Caferati.
+MIT

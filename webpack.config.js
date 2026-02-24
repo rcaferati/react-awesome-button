@@ -1,26 +1,41 @@
+// webpack.config.js
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const path = require('path');
-
-const config = {
+module.exports = {
   mode: 'production',
+
   entry: {
-    index: ['./src/index.ts'],
+    index: path.resolve(__dirname, 'src/index.ts'),
   },
+
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    libraryTarget: 'umd',
-    library: 'react-awesome-button',
-    globalObject: 'this',
+    library: {
+      name: 'react-awesome-button',
+      type: 'umd',
+      umdNamedDefine: true,
+    },
+    globalObject: "typeof self !== 'undefined' ? self : this",
   },
+
   externals: {
     react: {
       root: 'React',
-      commonjs2: 'react',
       commonjs: 'react',
+      commonjs2: 'react',
       amd: 'react',
     },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom',
+    },
+
+    // Keep only if any source still imports prop-types.
+    // Safe to remove once confirmed unused.
     'prop-types': {
       root: 'PropTypes',
       commonjs: 'prop-types',
@@ -28,26 +43,33 @@ const config = {
       amd: 'prop-types',
     },
   },
+
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
         exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx|mjs)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['es2015', 'react', 'stage-0'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         },
       },
     ],
   },
+
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs'],
   },
+
   optimization: {
     minimize: true,
     minimizer: [
@@ -58,6 +80,6 @@ const config = {
       }),
     ],
   },
-};
 
-module.exports = config;
+  stats: 'errors-warnings',
+};

@@ -1,14 +1,33 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react-jsx",
-    "lib": ["DOM"],
-    "allowJs": true,
-    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    "target": "ES2018",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
-  }
+
+    "jsx": "react-jsx",
+    "lib": ["ES2018", "DOM", "DOM.Iterable"],
+
+    "allowJs": true,
+    "checkJs": false,
+
+    "declaration": true,
+
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/*.stories.*"
+  ]
 }

@@ -1,59 +1,83 @@
+// webpack.scss.config.js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
-const config = {
+module.exports = {
   mode: 'production',
+
   entry: {
-    styles: ['./src/styles/index.ts'],
+    styles: [path.resolve(__dirname, 'src/styles/index.ts')],
   },
+
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    libraryTarget: 'umd',
   },
+
   module: {
     rules: [
+      // Keep JS handling for mixed codebases (if any JS gets imported by style entries)
       {
-        test: /\.js$/,
+        test: /\.(js|jsx|mjs)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['es2015', 'react', 'stage-0'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         },
       },
+
       {
-        test: /\.ts?$/,
-        use: 'ts-loader',
+        test: /\.tsx?$/,
         exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
       },
+
       {
         test: /\.scss$/i,
         use: [
+          MiniCssExtractPlugin.loader,
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'css-loader',
+            options: {
+              // postcss-loader + sass-loader apply to @import-ed resources
+              importLoaders: 2,
+            },
           },
-          'css-loader',
           'postcss-loader',
           'sass-loader',
         ],
       },
+
       {
         test: /\.css$/i,
         use: [
+          MiniCssExtractPlugin.loader,
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'css-loader',
+            options: {
+              // postcss-loader applies to @import-ed CSS
+              importLoaders: 1,
+            },
           },
-          'css-loader?importLoaders=1!postcss-loader',
+          'postcss-loader',
         ],
       },
     ],
   },
-  optimization: {},
+
+  resolve: {
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs'],
+  },
+
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `styles.css`,
+      filename: 'styles.css',
     }),
   ],
-};
 
-module.exports = config;
+  stats: 'errors-warnings',
+};
