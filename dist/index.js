@@ -1,2 +1,1179 @@
-/*! For license information please see index.js.LICENSE.txt */
-!function webpackUniversalModuleDefinition(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(require("react")):"function"==typeof define&&define.amd?define(["react"],t):"object"==typeof exports?exports["react-awesome-button"]=t(require("react")):e["react-awesome-button"]=t(e.React)}(this,(e=>(()=>{var t={967:function(e){!function webpackUniversalModuleDefinition(t,n){e.exports=n()}(0,(()=>(()=>{"use strict";var e={d:(t,n)=>{for(var c in n)e.o(n,c)&&!e.o(t,c)&&Object.defineProperty(t,c,{enumerable:!0,get:n[c]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t),r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},t={};e.r(t),e.d(t,{beforeCssLayout:()=>beforeCssLayout,beforeFutureCssLayout:()=>beforeFutureCssLayout,frameThrower:()=>frameThrower,onceAnimationEnd:()=>onceAnimationEnd,onceNextCssLayout:()=>onceNextCssLayout,onceTransitionEnd:()=>onceTransitionEnd,recursiveAnimationFrame:()=>recursiveAnimationFrame,setCssEndEvent:()=>setCssEndEvent});var recursiveAnimationFrame=function(e,t){window&&e&&Number.isInteger(e)&&e>0?window.requestAnimationFrame((function(){recursiveAnimationFrame(e-1,t)})):t()};function setCssEndEvent(e,t,n){var c=void 0===n?{}:n,r=c.tolerance,o=void 0===r?0:r,i=c.propertyName;return new Promise((function(n){var c;if(e){var r=null,l=t.charAt(0).toUpperCase()+t.slice(1),a=0;void 0!==e.style["Webkit".concat(l)]&&(r="webkit".concat(l,"End")),void 0!==(null===(c=e.style)||void 0===c?void 0:c.OTransition)&&(r="o".concat(t,"End")),void 0!==e.style[t]&&(r="".concat(t,"end")),e.clearCssEndEvent&&e.clearCssEndEvent(),e.clearCssEndEvent=function(){e.removeEventListener(r,end)},e.addEventListener(r,end)}else n(!1);function end(t){if((t.srcElement||t.target)===e){if(a>=o){if(i&&i!==t.propertyName)return;e.removeEventListener(r,end),n(t)}a+=1}}}))}function beforeCssLayout(e){"undefined"!=typeof window&&(null===window||void 0===window?void 0:window.requestAnimationFrame)||e(),window.requestAnimationFrame(e)}function beforeFutureCssLayout(e,t){"undefined"!=typeof window&&(null===window||void 0===window?void 0:window.requestAnimationFrame)||t(),recursiveAnimationFrame(e+1,t)}function frameThrower(e){return new Promise((function(t){beforeFutureCssLayout(e,t)}))}function onceNextCssLayout(){return new Promise((function(e){recursiveAnimationFrame(2,e)}))}function onceTransitionEnd(e,t){return void 0===t&&(t={}),new Promise((function(n){setCssEndEvent(e,"transition",t).then(n)}))}function onceAnimationEnd(e,t){return void 0===t&&(t={}),new Promise((function(n){setCssEndEvent(e,"animation",t).then(n)}))}return t})()))},251:(e,t,n)=>{"use strict";var c=n(787),r=Symbol.for("react.element"),o=Symbol.for("react.fragment"),i=Object.prototype.hasOwnProperty,l=c.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,a={key:!0,ref:!0,__self:!0,__source:!0};function q(e,t,n){var c,o={},u=null,s=null;for(c in void 0!==n&&(u=""+n),void 0!==t.key&&(u=""+t.key),void 0!==t.ref&&(s=t.ref),t)i.call(t,c)&&!a.hasOwnProperty(c)&&(o[c]=t[c]);if(e&&e.defaultProps)for(c in t=e.defaultProps)void 0===o[c]&&(o[c]=t[c]);return{$$typeof:r,type:e,key:u,ref:s,props:o,_owner:l.current}}t.jsx=q,t.jsxs=q},893:(e,t,n)=>{"use strict";e.exports=n(251)},787:t=>{"use strict";t.exports=e}},n={};function __webpack_require__(e){var c=n[e];if(void 0!==c)return c.exports;var r=n[e]={exports:{}};return t[e].call(r.exports,r,r.exports,__webpack_require__),r.exports}__webpack_require__.d=(e,t)=>{for(var n in t)__webpack_require__.o(t,n)&&!__webpack_require__.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:t[n]})},__webpack_require__.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),__webpack_require__.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};var c={};return(()=>{"use strict";__webpack_require__.r(c),__webpack_require__.d(c,{AwesomeButton:()=>components_AwesomeButton,AwesomeButtonProgress:()=>components_AwesomeButtonProgress,AwesomeButtonSocial:()=>components_AwesomeButtonSocial});var e=__webpack_require__(893),t=__webpack_require__(787),n=__webpack_require__(967),r=["middle","left","right"];function serialize(e,t){return void 0===t&&(t="&"),Object.entries(e).map((function(e){var t=e[0],n=e[1];return"".concat(t,"=").concat(n)})).join(t)}function classToModules(e,t){if(void 0===e&&(e=[]),!t)return e.join(" ").trim();for(var n=[],c=e.length;c--;)t[e[c]]&&n.push(t[e[c]]);return n.join(" ").trim()}function getClassName(e,t){return void 0===e&&(e=""),t&&t[e]||e}function toggleMoveClasses(e){var t,n=e.element,c=e.root,o=e.cssModule,i=void 0===o?null:o,l=e.state,a=void 0===l?null:l;if(!(null===(t=null==n?void 0:n.classList)||void 0===t?void 0:t.remove))return!1;if(!a)return[classToModules(["".concat(c,"--").concat(r[0])],i),classToModules(["".concat(c,"--").concat(r[1])],i),classToModules(["".concat(c,"--").concat(r[2])],i)].forEach((function(e){e&&n.classList.remove(e)})),!1;for(var u=r.filter((function(e){return e!==a})),s=u.length;s--;){var d=classToModules(["".concat(c,"--").concat(u[s])],i);d&&n.classList.remove(d)}var v=classToModules(["".concat(c,"--").concat(a)],i);return v&&n.classList.add(v),!0}var __assign=function(){return __assign=Object.assign||function(e){for(var t,n=1,c=arguments.length;n<c;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},__assign.apply(this,arguments)},o="undefined"!=typeof window,i=o&&"ontouchstart"in window||o&&navigator.maxTouchPoints>0,l=t.forwardRef((function(t,n){return(0,e.jsx)("a",__assign({ref:n},t))})),a=t.forwardRef((function(t,n){return(0,e.jsx)("button",__assign({ref:n},t))}));const components_AwesomeButton=function(c){var r=c.active,u=void 0!==r&&r,s=c.after,d=void 0===s?null:s,v=c.before,f=void 0===v?null:v,p=c.between,h=void 0!==p&&p,m=c.children,w=void 0===m?null:m,b=c.className,g=void 0===b?null:b,y=c.containerProps,_=void 0===y?{}:y,M=c.cssModule,C=void 0===M?null:M,E=c.disabled,L=void 0!==E&&E,z=c.element,x=void 0===z?null:z,O=c.extra,j=void 0===O?null:O,S=c.href,k=void 0===S?null:S,P=c.moveEvents,T=void 0===P||P,R=c.onMouseDown,N=void 0===R?null:R,A=c.onMouseUp,F=void 0===A?null:A,H=c.onPress,V=void 0===H?null:H,D=c.onPressed,W=void 0===D?null:D,I=c.onReleased,U=void 0===I?null:I,Y=c.placeholder,B=void 0===Y||Y,X=c.ripple,G=void 0!==X&&X,$=c.rootElement,J=void 0===$?"aws-btn":$,K=c.size,Q=void 0===K?null:K,Z=c.style,ee=void 0===Z?{}:Z,te=c.type,ne=void 0===te?"primary":te,ce=c.visible,re=void 0===ce||ce,oe=t.useState(null),ie=oe[0],le=oe[1],ae=t.useRef(null),ue=t.useRef(null),se=t.useRef(null),de=t.useRef(null),ve=t.useRef(!1),fe=t.useRef(0),pe=t.useRef(null),he=t.useRef(0),me=x||(k?l:a),we={href:k},be=t.useMemo((function(){return!0===B&&!w||L}),[B,w,L]);t.useEffect((function(){return(null==ae?void 0:ae.current)&&(se.current=ae.current.parentNode),function(){(null==pe?void 0:pe.current)&&clearTimeout(pe.current)}}),[]);t.useEffect((function(){null!==ie&&!1===u&&clearPress({force:!0})}),[u]);var ge,clearPressCallback=function(){fe.current=0,U&&U(se.current)},clearPress=function(e){var t,c=void 0===e?{}:e,r=c.force,o=void 0!==r&&r,i=c.leave,l=void 0!==i&&i;if(toggleMoveClasses({element:se.current,root:J,cssModule:C}),!0!==l||0!==fe.current){var a=u&&!o?"".concat(J,"--active"):null;(null===(t=null==ue?void 0:ue.current)||void 0===t?void 0:t.clearCssEvent)&&ue.current.clearCssEvent(),null===a&&(null==ie?void 0:ie.match(/active/gim))&&(0,n.setCssEndEvent)(ue.current,"transition",{tolerance:1}).then(clearPressCallback),le(a)}},createRipple=function(e){!function createRippleEffect(e){var t,c,r=e.event,o=e.button,i=e.content,l=e.className,a=o.getBoundingClientRect(),u=window.pageYOffset||document.documentElement.scrollTop||0,s=document.createElement("span"),d=a.width<50?3*a.width:2*a.width;r.nativeEvent instanceof TouchEvent?(t=r.changedTouches[0].pageX,c=r.changedTouches[0].pageY):(t=r.pageX,c=r.pageY),s.className=l,s.style.top="-".concat(d/2-(c-a.top-u),"px"),s.style.left="-".concat(d/2-(t-a.left),"px"),s.style.width="".concat(d,"px"),s.style.height="".concat(d,"px"),(0,n.setCssEndEvent)(s,"animation").then((function(){window.requestAnimationFrame((function(){i.removeChild(s)}))})),window.requestAnimationFrame((function(){i.appendChild(s)}))}({event:e,button:ae.current,content:ue.current,className:getClassName("".concat(J,"__bubble"),C)})},pressIn=function(e){!0!==be&&2!==fe.current&&(fe.current=1,(0,n.setCssEndEvent)(ue.current,"transition",{tolerance:1}).then((function(){return W&&W(e)})),le("".concat(J,"--active")))},pressOut=function(e){if(!0!==be&&1===fe.current){if(pe.current&&clearTimeout(pe.current),!0===G&&createRipple(e),o&&ae.current){var t=new Event("btn-press");ae.current.dispatchEvent(t)}handleAction(e),!0!==u?clearPress():fe.current=2}},handleAction=function(e){se.current&&V&&V(e)};return(0,e.jsx)(me,__assign({style:ee,className:t.useMemo((function(){var e=[J,ne&&"".concat(J,"--").concat(ne),Q&&"".concat(J,"--").concat(Q),re&&"".concat(J,"--visible"),h&&"".concat(J,"--between"),B&&!w&&"".concat(J,"--placeholder")||null];return!0===be&&e.push("".concat(J,"--disabled")),ie&&e.push(ie),g&&e.push.apply(e,g.split(" ")),C&&C["aws-btn"]?classToModules(e,C):e.join(" ").trim().replace(/[\s]+/gi," ")}),[J,ne,Q,re,h,B,w,be,ie,g,C]),role:"button",ref:se},_,we,(ge={onClick:function(e){k&&be&&e.preventDefault()}},i?(ge.onTouchStart=function(e){var t,n;N&&N(e),he.current=null===(n=null===(t=null==e?void 0:e.changedTouches)||void 0===t?void 0:t[0])||void 0===n?void 0:n.clientY,pressIn(e)},ge.onTouchEnd=function(e){var t,n;F&&F(e),(he.current&&(null===(n=null===(t=null==e?void 0:e.changedTouches)||void 0===t?void 0:t[0])||void 0===n?void 0:n.clientY)?Math.abs(he.current-e.changedTouches[0].clientY):0)>ae.current.offsetHeight?clearPress({force:!0}):pressOut(e)},ge):(ge.onMouseLeave=function(){ve.current=!1,!0!==u||2===fe.current?clearPress({leave:!0}):clearPress({force:!0})},ge.onMouseDown=function(e){var t;N&&N(e),0===(null===(t=null==e?void 0:e.nativeEvent)||void 0===t?void 0:t.button)&&pressIn(e)},ge.onMouseUp=function(e){F&&F(e),!0!==be?pressOut(e):e.preventDefault()},!0===T?(ge.onMouseMove=function(e){if(!0!==be){ve.current=!0;var t=ae.current,n=t.getBoundingClientRect().left,c=t.offsetWidth,r=e.pageX<n+.3*c?"left":e.pageX>n+.65*c?"right":"middle";toggleMoveClasses({element:se.current,root:J,cssModule:C,state:r})}},ge):(ge.onMouseEnter=function(){ve.current=!0,toggleMoveClasses({element:se.current,root:J,cssModule:C,state:"middle"})},ge))),{children:(0,e.jsxs)("span",__assign({ref:ae,className:getClassName("".concat(J,"__wrapper"),C)},{children:[(0,e.jsxs)("span",__assign({ref:ue,className:getClassName("".concat(J,"__content"),C)},{children:[f,(0,e.jsx)("span",__assign({ref:de},{children:w})),d]})),j]}))}))};var sharer_assign=function(){return sharer_assign=Object.assign||function(e){for(var t,n=1,c=arguments.length;n<c;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},sharer_assign.apply(this,arguments)};function Sharer(e){var t=e.url,n=e.message,c=e.title,r=e.image,o=e.user,i=e.type,l=e.phone,a=e.width,u=e.height,s={},d={};switch(i){case"facebook":d.u=encodeURIComponent(t),s.url="https://www.facebook.com/sharer.php?".concat(serialize(d,"&")),s.title="Facebook Sharer";break;case"twitter":d.text=n,d.url=t,s.height=250,s.url="https://twitter.com/share?".concat(serialize(d,"&")),s.title="Twitter Sharer";break;case"pinterest":d.url=t,r&&(d.media=r),s.url="https://pinterest.com/pin/create/button/?".concat(serialize(d,"&")),s.title="Pinterest Sharer";break;case"google":case"gplus":d.url=t,s.url="https://plus.google.com/share?".concat(serialize(d,"&")),s.title="Google+ Sharer",s.width=400;break;case"linkedin":d.mini=!0,d.url=t,d.title=n||c,s.url="https://www.linkedin.com/shareArticle?".concat(serialize(d,"&")),s.title="Linkedin Sharer";break;case"reddit":d.url=t,d.title=n||c,s.url="https://www.reddit.com/submit?".concat(serialize(d,"&")),s.title="",s.width=850;break;case"whatsapp":d.phone=null==l?void 0:l.replace(/\+|(|)/gim,""),d.title=n||c,s.url="https://api.whatsapp.com/send?".concat(serialize(d,"&")),s.title="Whatsapp Message",s.width=850;break;case"messenger":s.url="https://m.me/".concat(o),s.title="Messenger Message",s.width=850;break;case"mail":s.url="mailto:".concat(t),s.title="_self";break;case"instagram":s.url=t,s.title="_self";break;default:return s}return s.extra=serialize(sharer_assign({width:"".concat(s.width||a,"px"),height:"".concat(s.height||u,"px")},function centerWindow(e,t){if("undefined"==typeof window)return{top:0,left:0};var n=window.screenLeft,c=void 0===n?0:n,r=window.screenTop,o=void 0===r?0:r,i=window.innerWidth,l=window.innerHeight,a=i||(document.documentElement.clientWidth?document.documentElement.clientWidth:0);return{top:(l||(document.documentElement.clientHeight?document.documentElement.clientHeight:0))/2-t/2+o,left:a/2-e/2+c}}(s.width||a,s.height||u)),","),s}var icons_assign=function(){return icons_assign=Object.assign||function(e){for(var t,n=1,c=arguments.length;n<c;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},icons_assign.apply(this,arguments)},u={youtube:"M38.1,23H11.9c-4.1,0-7.6,3.4-7.6,7.6v6.1c0,4.1,3.4,7.6,7.6,7.6h26.3c4.1,0,7.6-3.4,7.6-7.6v-6.1C45.8,26.4,42.4,23,38.1,23z M17.4,27.7h-2.5v12.2h-2.4V27.7h-2.5v-2h7.3V27.7z M24.3,39.9h-2.1v-1.2c-0.4,0.4-0.8,0.8-1.2,0.9c-0.4,0.3-0.8,0.3-1.2,0.3c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.3-0.3-0.8-0.3-1.4v-8.6h2.1v8c0,0.3,0.1,0.4,0.2,0.5c0.1,0.1,0.3,0.2,0.4,0.2c0.2,0,0.3-0.1,0.6-0.3c0.3-0.2,0.4-0.3,0.7-0.6v-7.9h2.1v10.6H24.3z M31.9,37.7c0,0.8-0.2,1.4-0.5,1.7C31,39.8,30.5,40,29.9,40c-0.4,0-0.8-0.1-1.1-0.3c-0.3-0.2-0.6-0.4-0.9-0.7v0.8h-2.1V25.7h2.1v4.6c0.3-0.3,0.6-0.6,0.9-0.8c0.3-0.2,0.7-0.3,0.9-0.3c0.7,0,1.2,0.3,1.5,0.7s0.5,1.1,0.5,1.9L31.9,37.7L31.9,37.7z M39.2,34.9h-4v1.9c0,0.6,0.1,0.9,0.2,1.2c0.2,0.3,0.3,0.3,0.7,0.3c0.3,0,0.6-0.1,0.8-0.3c0.2-0.2,0.2-0.6,0.2-1.2v-0.5h2.2v0.5c0,1.1-0.3,1.9-0.8,2.5c-0.5,0.5-1.3,0.8-2.4,0.8c-0.9,0-1.7-0.3-2.2-0.8C33.3,38.8,33,38,33,37v-4.7c0-0.9,0.3-1.7,0.9-2.2c0.6-0.6,1.4-0.8,2.3-0.8c0.9,0,1.7,0.3,2.2,0.8c0.5,0.5,0.8,1.3,0.8,2.3V34.9z M36.1,30.9c-0.3,0-0.6,0.1-0.7,0.3c-0.2,0.2-0.3,0.5-0.3,0.9v1.1H37v-1.1c0-0.4-0.1-0.8-0.3-0.9C36.6,31.1,36.4,30.9,36.1,30.9z M28.8,30.9c-0.2,0-0.3,0-0.4,0.1c-0.2,0.1-0.3,0.2-0.4,0.3v6.5c0.2,0.2,0.3,0.3,0.5,0.3c0.2,0.1,0.3,0.1,0.5,0.1c0.3,0,0.4-0.1,0.6-0.3c0.1-0.2,0.2-0.4,0.2-0.8v-5.4c0-0.3-0.1-0.6-0.3-0.8C29.4,31,29.1,30.9,28.8,30.9z M15.3,19.4h2.6v-6.5l3.1-9.1h-2.7L16.7,10h-0.2l-1.7-6.3h-2.7l3.2,9.5V19.4z M24.6,19.6c1.1,0,1.9-0.3,2.5-0.8s0.9-1.4,0.9-2.4v-6c0-0.8-0.3-1.6-0.9-2.2s-1.4-0.8-2.4-0.8c-1.1,0-1.9,0.3-2.5,0.8c-0.7,0.5-0.9,1.3-0.9,2.1v6c0,1,0.3,1.8,0.9,2.4C22.8,19.4,23.6,19.6,24.6,19.6z M23.7,10.3c0-0.3,0.1-0.4,0.3-0.6c0.2-0.2,0.4-0.3,0.7-0.3c0.3,0,0.6,0.1,0.8,0.3c0.2,0.2,0.3,0.3,0.3,0.6v6.3c0,0.3-0.1,0.6-0.3,0.8c-0.2,0.2-0.4,0.3-0.8,0.3s-0.6-0.1-0.8-0.3c-0.2-0.2-0.3-0.4-0.3-0.8L23.7,10.3L23.7,10.3z M31.6,19.5c0.4,0,0.9-0.1,1.4-0.3c0.5-0.3,0.9-0.6,1.4-1.1v1.3h2.4V7.8h-2.4v8.8c-0.3,0.3-0.4,0.4-0.8,0.6c-0.3,0.2-0.5,0.3-0.7,0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.2-0.3-0.2-0.6V7.8h-2.4v9.6c0,0.7,0.2,1.2,0.4,1.5C30.7,19.4,31.1,19.5,31.6,19.5z",mail:"M4.9,14L25,30.5L45.1,14v-3.7H4.9V14z M4.9,36.4l9.9-11l-9.9-8.9C4.9,16.6,4.9,36.4,4.9,36.4zM45.1,36.7L34.9,25.5L45,16.7L45.1,36.7L45.1,36.7z M25,33.7l-8.2-6.8L4.9,39.6h40.2L33.2,26.8L25,33.7z",facebook:"M31.6,44.5V25.7h8l1.3-8h-9.4v-4c0-2.7,1.3-4,4-4h4V1.5c-1.3,0-4.3,0-6.7,0c-6.7,0-9.4,4-9.4,10.7v5.4h-8v8h8v18.8L31.6,44.5L31.6,44.5z",whatsapp:"M2.5,46.6c0.6-1.9,1.2-3.6,1.8-5.4c0.6-1.7,1.1-3.5,1.8-5.2c0.3-0.9,0.2-1.5-0.2-2.3c-2.4-4.4-3.1-9.1-2.3-14c0.7-4.2,2.5-7.8,5.3-11c4.7-5.1,10.6-7.6,17.5-7.3c5.1,0.2,9.6,2.1,13.4,5.4c3.6,3.1,5.9,7,7,11.6c0.9,3.7,0.8,7.4-0.3,11.1c-1.4,4.6-4,8.5-7.8,11.4c-5.4,4.1-11.4,5.3-18,4c-2-0.4-3.9-1.1-5.6-2c-0.3-0.2-0.5-0.2-0.9-0.1c-3.4,1.1-6.7,2.2-10.1,3.2C3.7,46.2,3.2,46.4,2.5,46.6z M8.3,40.9c0.2,0,0.3-0.1,0.3-0.1c2.1-0.7,4.2-1.3,6.3-2c0.2-0.1,0.5,0,0.7,0.1c0.9,0.5,1.8,1,2.7,1.4c3.9,1.6,7.9,1.9,11.9,0.8c4.8-1.3,8.5-4.2,11-8.6c2.2-3.7,2.9-7.7,2.2-11.9C42.7,15.2,39.9,11,35.4,8c-3.9-2.6-8.3-3.5-12.9-2.7c-4,0.6-7.4,2.5-10.2,5.4c-2.4,2.5-4,5.5-4.7,8.8c-1,4.9-0.3,9.5,2.4,13.7c0.5,0.8,0.5,1.5,0.2,2.3C9.5,37.3,8.9,39.1,8.3,40.9z M36.8,29.8c0,1.7-0.9,3.1-2.5,3.9c-1.6,0.8-3.3,1-5,0.4c-1.5-0.6-3.1-1.2-4.6-1.9c-2-1-3.6-2.4-5-4c-1.6-1.8-3-3.7-4.1-5.9c-0.8-1.5-1.3-3.1-1.1-4.8c0.2-1.8,1-3.3,2.5-4.4c0.3-0.2,0.7-0.3,1.1-0.4c0.5,0,1,0,1.4,0.1c0.4,0,0.6,0.3,0.8,0.6c0.4,0.9,0.7,1.7,1,2.6c0.2,0.6,0.4,1.2,0.7,1.8c0.3,0.7,0.1,1.3-0.3,1.8c-0.4,0.5-0.8,0.9-1.2,1.3C20,21.2,20,21.6,20.2,22c1,1.9,2.3,3.5,4,4.9c1.1,0.9,2.3,1.5,3.6,2.2c0.4,0.2,0.7,0.2,1-0.2c0.6-0.7,1.3-1.4,1.9-2.1c0.4-0.5,0.6-0.6,1.1-0.3c1.5,0.8,3.1,1.6,4.6,2.4C36.8,29,36.9,29.3,36.8,29.8z",messenger:"M27.5,30l-5.4-5.7L11.7,30l11.5-12.2l5.5,5.7L39,17.8L27.5,30z M25.5,3.8c-11.6,0-21.1,8.7-21.1,19.5c0,6.1,3.1,11.6,7.9,15.2v7.4l7.2-3.9c1.9,0.5,3.9,0.8,6,0.8c11.6,0,21.1-8.7,21.1-19.5S37.1,3.8,25.5,3.8z",instagram:"M25,13.3c-5.8,0-10.6,4.7-10.6,10.6S19.1,34.6,25,34.6S35.6,29.8,35.6,24S30.8,13.3,25,13.3z M25,30.7c-3.7,0-6.8-3.1-6.8-6.8s3.1-6.8,6.8-6.8s6.8,3.1,6.8,6.8S28.7,30.7,25,30.7z M36.1,10.6c1.3,0,2.4,1.1,2.4,2.4s-1.1,2.4-2.4,2.4c-1.3,0-2.4-1.1-2.4-2.4S34.7,10.6,36.1,10.6z M42.3,6.8c-2.2-2.2-5.2-3.4-8.7-3.4H16.4c-7.2,0-12,4.8-12,12v17c0,3.6,1.2,6.7,3.5,8.9c2.2,2.2,5.2,3.2,8.6,3.2h17c3.6,0,6.6-1.2,8.7-3.2c2.2-2.2,3.4-5.2,3.4-8.8V15.4C45.6,11.9,44.5,8.9,42.3,6.8z M42,32.6c0,2.6-0.9,4.7-2.4,6.1s-3.6,2.2-6.1,2.2h-17c-2.5,0-4.6-0.7-6.1-2.2s-2.2-3.6-2.2-6.2v-17c0-2.5,0.7-4.6,2.2-6.1C11.8,8,14,7.2,16.5,7.2h17.1c2.5,0,4.6,0.7,6.1,2.2c1.4,1.5,2.2,3.6,2.2,6v17.2H42z",twitter:"M49.3,9.1c-1.8,0.8-3.6,1.3-5.6,1.5c2-1.2,3.6-3.1,4.3-5.4c-1.9,1.1-4,1.9-6.2,2.4c-1.8-1.9-4.3-3.1-7.1-3.1c-5.4,0-9.8,4.4-9.8,9.8c0,0.8,0.1,1.5,0.3,2.2C17,16.1,9.8,12.2,5,6.3c-0.8,1.4-1.3,3.1-1.3,4.9c0,3.4,1.7,6.4,4.3,8.1c-1.6-0.1-3.1-0.5-4.4-1.2v0.1c0,4.7,3.4,8.7,7.8,9.6c-0.8,0.2-1.7,0.3-2.6,0.3c-0.6,0-1.2-0.1-1.8-0.2c1.2,3.9,4.9,6.7,9.1,6.8c-3.3,2.6-7.6,4.2-12.1,4.2c-0.8,0-1.6,0-2.3-0.1c4.3,2.8,9.5,4.4,15,4.4c18,0,27.8-14.9,27.8-27.8c0-0.4,0-0.8,0-1.3C46.4,12.7,48,11,49.3,9.1z",github:"M25,2.5C12.2,2.5,1.9,12.8,1.9,25.6c0,10.2,6.6,18.9,15.8,21.9c1.2,0.2,1.5-0.5,1.5-1.1c0-0.5,0-2.1,0-4c-6.4,1.4-7.8-3-7.8-3c-1-2.7-2.6-3.4-2.6-3.4C6.7,34.6,9,34.6,9,34.6c2.3,0.2,3.5,2.4,3.5,2.4c2.1,3.5,5.4,2.5,6.7,1.9c0.2-1.5,0.8-2.5,1.5-3.1c-5.1-0.6-10.5-2.6-10.5-11.4c0-2.5,0.9-4.6,2.4-6.2c-0.2-0.6-1-2.9,0.2-6.1c0,0,1.9-0.6,6.3,2.4c1.8-0.5,3.8-0.8,5.8-0.8s3.9,0.3,5.8,0.8c4.4-3,6.3-2.4,6.3-2.4c1.3,3.2,0.5,5.5,0.2,6.1c1.5,1.6,2.4,3.7,2.4,6.2c0,8.9-5.4,10.8-10.5,11.4c0.8,0.7,1.6,2.1,1.6,4.3c0,2.9,0,5.6,0,6.4c0,0.6,0.4,1.3,1.5,1.1C41.4,44.5,48,35.9,48,25.7C48.1,12.8,37.8,2.5,25,2.5z",linkedin:"M13.8,41.7H5.4V13.6h8.4C13.8,13.6,13.8,41.7,13.8,41.7z M44.7,41.7h-8.4v-15c0-3.9-1.4-5.9-4.2-5.9c-2.2,0-3.6,1.1-4.3,3.3c0,3.5,0,17.6,0,17.6h-8.4c0,0,0.1-25.3,0-28.1h6.7l0.5,5.6h0.2c1.7-2.8,4.5-4.7,8.3-4.7c2.9,0,5.2,0.8,7,2.8s2.7,4.7,2.7,8.5L44.7,41.7L44.7,41.7z M9.6,2.3C12,2.3,14,4.2,14,6.5s-2,4.2-4.4,4.2S5.2,8.8,5.2,6.5C5.3,4.2,7.2,2.3,9.6,2.3z",gplus:"M29.9,5.2c0,0-9.1,0-12.2,0C12.2,5.2,6.9,9.1,6.9,14c0,5,3.8,8.8,9.5,8.8c0.4,0,0.7-0.1,1.1-0.1c-0.4,0.7-0.7,1.5-0.7,2.3c0,1.4,0.7,2.5,1.7,3.4c-0.7,0-1.4,0-2.1,0c-6.9,0-12.2,4.4-12.2,8.9c0,4.5,5.9,7.4,12.7,7.4c7.9,0,12.2-4.5,12.2-8.9c0-3.6-1-5.8-4.4-8.1c-1.1-0.8-3.3-2.7-3.3-3.9c0-1.3,0.4-2,2.4-3.5c2-1.6,3.5-3.5,3.5-6.1c0-3.2-1.3-7-4-7H28L29.9,5.2z M25.8,35c0.1,0.4,0.2,0.8,0.2,1.3c0,3.6-2.3,6.5-9,6.5c-4.7,0-8.2-3-8.2-6.6c0-3.5,4.3-6.5,9-6.4c1.1,0,2.1,0.2,3.1,0.5C23.5,32,25.3,33,25.8,35z M18.2,21.5c-3.2-0.1-6.2-3.6-6.8-7.8s1.6-7.4,4.8-7.4c3.2,0.1,6.2,3.4,6.8,7.7C23.6,18.2,21.4,21.6,18.2,21.5z M39.8,21v-6h-3.9v6h-6v4h6v6h3.9v-6h6v-3.9L39.8,21L39.8,21z",pinterest:"M7.6,17.7c0,3.3,1.1,6.6,3.3,8.5c0.5,0.4,1.7,1.3,2.6,1.3c0.7,0,0.8-0.8,1-1.4c1-3.3,0.1-1.9-1.1-4.7c-1.3-2.8-0.4-7.3,1.1-9.6c2.9-4.4,6.2-6,11.6-6c3.1,0,5.4,1.1,7.1,2.6c6.1,5.2,1.9,21.8-5.6,20.9c-7.5-0.8-1.4-10-1.4-14c0-6.2-8.5-5.2-8.5,2.7c0,2.7,1.1,3.5,0.9,4.2c-1.1,3.8-1.9,8.2-2.9,12.2c-1.1,4.1-1,7.5-0.6,11.7c0,0.1,0.1,0.2,0.2,0.2c0.1,0.1,0.2,0,0.3-0.1c2.9-2.9,4.8-7.7,5.5-10.5c0.4-1.5,0.9-3.3,1.2-4.8c0.1-0.3,0.7,0.6,1.1,1c3.1,2.8,8.4,2.2,11.8,0.1c6.6-4,9.4-15.4,5.9-22.2c-1-1.9-2-2.8-3.4-4.3C31.8-0.1,19.3,0.2,13.2,6C9.9,9.1,7.6,12.7,7.6,17.7L7.6,17.7z",reddit:"M48.9,18.6L48.9,18.6c0,0.1,0,0.2,0,0.3c0,1.2-0.4,2.4-1,3.3s-1.4,1.7-2.4,2.2c0.1,0.5,0.1,1,0.1,1.4c0,2.6-0.9,5.1-2.4,7.2l0,0l0,0c-2.8,3.8-7.2,6.1-11.6,7.2l0,0l0,0c-2.3,0.6-4.8,0.9-7.2,0.9c-3.6,0-7.2-0.7-10.6-2l0,0l0,0C10.3,37.7,7,35.4,5,32c-1.1-1.8-1.7-3.9-1.7-6.1c0-0.5,0-1,0.1-1.4c-0.9-0.5-1.7-1.3-2.3-2.1c-0.6-1-1-2.1-1.1-3.2l0,0l0,0l0,0c0-1.6,0.7-3.2,1.8-4.4s2.6-1.9,4.2-1.9h0.1c0.2,0,0.3,0,0.5,0c0.8,0,1.6,0.1,2.4,0.4l0,0l0,0c0.7,0.3,1.3,0.6,1.9,1.1c0.2-0.1,0.4-0.2,0.6-0.3c3.5-2.1,7.6-2.9,11.6-3.2c0-2,0.3-4.1,1.2-5.9c0.8-1.5,2.2-2.7,3.9-3.1l0,0l0,0c0.6-0.1,1.3-0.2,1.9-0.2c1.7,0,3.4,0.4,4.9,1c0.7-1.1,1.7-1.9,2.8-2.3l0,0l0,0c0.7-0.2,1.4-0.3,2.1-0.3c0.8,0,1.5,0.1,2.2,0.5l0,0l0,0l0,0c1,0.4,1.9,1.1,2.5,2.1c0.6,0.9,1,2,1,3.2c0,0.2,0,0.4,0,0.6l0,0l0,0c-0.1,1.5-0.9,2.8-1.9,3.7c-1.1,0.9-2.4,1.5-3.8,1.5c-0.2,0-0.4,0-0.7,0c-1.4-0.1-2.7-0.8-3.6-1.8c-1-1-1.6-2.4-1.6-3.8C34,6,34,6,34,5.9c-1.3-0.6-2.7-1.1-4.1-1.1c-0.2,0-0.4,0-0.6,0l0,0c-1,0.1-2,0.8-2.4,1.7l0,0l0,0c-0.7,1.4-0.8,3-0.9,4.6c3.9,0.3,7.9,1.2,11.4,3.2l0,0l0,0c0.1,0,0.2,0.1,0.3,0.2c0.2-0.2,0.5-0.4,0.8-0.6c1.1-0.7,2.3-1.1,3.5-1.1c0.6,0,1.1,0.1,1.6,0.2l0,0l0,0l0,0l0,0c1.3,0.3,2.4,1.1,3.3,2.1C48.2,15.9,48.8,17.2,48.9,18.6L48.9,18.6L48.9,18.6z M42.5,26c0-1.8-0.6-3.6-1.7-5c-2.1-2.9-5.2-4.8-8.5-5.8l0,0c-0.6-0.2-1.3-0.4-1.9-0.5c-1.9-0.4-3.9-0.7-5.9-0.7c-2.7,0-5.3,0.4-7.9,1.2c-3.3,1.1-6.5,2.9-8.5,5.8l0,0c-1,1.4-1.6,3.2-1.6,5c0,0.7,0.1,1.3,0.3,2l0,0c0.4,1.4,1.1,2.7,2,3.8c0.9,1.1,2.1,2.1,3.3,2.9c0.3,0.2,0.5,0.3,0.8,0.5c3.5,2,7.6,2.9,11.6,2.9c0.7,0,1.4,0,2-0.1c4.1-0.3,8.2-1.6,11.5-4l0,0c1.1-0.8,2-1.7,2.8-2.8s1.3-2.3,1.6-3.6l0,0l0,0C42.5,27,42.5,26.5,42.5,26zM37.3,5.5c0,0.1,0,0.1,0,0.2l0,0l0,0c0,0.7,0.3,1.3,0.8,1.8s1.1,0.8,1.8,0.8l0,0l0,0H40c0.7,0,1.3-0.3,1.8-0.8s0.8-1.1,0.9-1.8l0,0l0,0c0-0.1,0-0.1,0-0.2c0-0.7-0.3-1.4-0.9-1.9c-0.5-0.5-1.2-0.8-1.9-0.8c-0.2,0-0.4,0-0.7,0.1l0,0l0,0c-0.6,0.1-1.1,0.5-1.5,1C37.5,4.4,37.3,4.9,37.3,5.5z M8.2,16.2c-0.5-0.2-1.1-0.4-1.6-0.4c-0.1,0-0.2,0-0.3,0l0,0l0,0c-0.8,0-1.6,0.4-2.1,0.9c-0.6,0.5-1,1.3-1,2.1l0,0l0,0c0,0.1,0,0.1,0,0.2c0,0.5,0.2,1,0.4,1.4C3.8,20.7,4,21,4.3,21.3C5.2,19.3,6.6,17.6,8.2,16.2zM45.7,18.9c0-0.4-0.1-0.9-0.3-1.3l0,0l0,0c-0.3-0.6-0.7-1-1.3-1.4c-0.5-0.3-1.2-0.5-1.8-0.5s-1.1,0.1-1.7,0.4c1.6,1.4,3,3.1,3.9,5.1c0.3-0.3,0.5-0.6,0.7-0.9C45.6,19.9,45.7,19.4,45.7,18.9z M32.9,29.2c-0.2-0.1-0.5-0.2-0.8-0.2c-0.2,0-0.5,0.1-0.7,0.2c-2.1,1.1-4.6,1.7-7.1,1.7c-1.9,0-3.7-0.3-5.4-1.1l0,0l0,0c-0.3-0.1-0.5-0.3-0.9-0.5c-0.2-0.1-0.3-0.2-0.5-0.2C17.3,29,17.1,29,16.9,29s-0.4,0-0.6,0.1l0,0l0,0c-0.3,0.1-0.5,0.3-0.7,0.5s-0.2,0.5-0.2,0.7s0.1,0.5,0.2,0.7c0.1,0.2,0.3,0.4,0.6,0.5c2.4,1.4,5.2,2.1,8.1,2.1c2.6,0,5.2-0.5,7.5-1.5l0,0l0,0c0.3-0.2,0.7-0.3,1.1-0.5c0.2-0.1,0.4-0.2,0.5-0.4c0.2-0.2,0.3-0.4,0.4-0.6l0,0c0-0.1,0-0.2,0-0.3c0-0.2-0.1-0.4-0.1-0.5C33.3,29.5,33.1,29.3,32.9,29.2zM16.8,19.8c-1.7,0-3.1,1.4-3.1,3.1s1.4,3.1,3.1,3.1s3.1-1.4,3.1-3.1C19.9,21.1,18.5,19.8,16.8,19.8z M32.1,19.8c-1.7,0-3.1,1.4-3.1,3.1s1.4,3.1,3.1,3.1s3.1-1.4,3.1-3.1C35.1,21.1,33.8,19.8,32.1,19.8z"};const s=function getIcon(t){var n=t.type,c=t.width,r=t.height,o=t.color;return(0,e.jsx)("svg",icons_assign({version:"1.1",xmlns:"http://www.w3.org/2000/svg",preserveAspectRatio:"xMidYMid meet",viewBox:"0 0 50 50",width:c,height:r},{children:(0,e.jsx)("path",{fill:o,d:u[n]})}))};var AwesomeButtonSocial_assign=function(){return AwesomeButtonSocial_assign=Object.assign||function(e){for(var t,n=1,c=arguments.length;n<c;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},AwesomeButtonSocial_assign.apply(this,arguments)},__rest=function(e,t){var n={};for(var c in e)Object.prototype.hasOwnProperty.call(e,c)&&t.indexOf(c)<0&&(n[c]=e[c]);if(null!=e&&"function"==typeof Object.getOwnPropertySymbols){var r=0;for(c=Object.getOwnPropertySymbols(e);r<c.length;r++)t.indexOf(c[r])<0&&Object.prototype.propertyIsEnumerable.call(e,c[r])&&(n[c[r]]=e[c[r]])}return n};const components_AwesomeButtonSocial=function(n){var c=n.onPress,r=void 0===c?null:c,o=n.children,i=void 0===o?null:o,l=n.icon,a=void 0===l||l,u=n.sharer,d=void 0===u?{}:u,v=n.dimensions,f=void 0===v?{width:640,height:480}:v,p=n.type,h=__rest(n,["onPress","children","icon","sharer","dimensions","type"]),m="undefined"!=typeof window,w=t.useRef(function isMobile(){var e;return"undefined"!=typeof navigator&&(null===(e=null===navigator||void 0===navigator?void 0:navigator.userAgent)||void 0===e?void 0:e.match(/iPhone|iPad|iPod|Android/i))}()).current,getMessage=function(){if(null==d?void 0:d.message)return d.message;if(m){var e=document.querySelector("title");if(null==e?void 0:e.innerHTML)return e.innerHTML}return null},getImage=function(){if(null==d?void 0:d.image)return d.image;if(null!==m){var e=document.querySelector('meta[property="og:image"]');if(e)return e.getAttribute("content")}return null};return(0,e.jsx)(components_AwesomeButton,AwesomeButtonSocial_assign({type:p,onPress:function(e){if(r)r(e);else if(!h.href){var t=Sharer({height:null==f?void 0:f.height,width:null==f?void 0:f.width,url:(null==d?void 0:d.url)?d.url:m?window.location.href:null,message:getMessage(),image:getImage(),type:p,user:d.user,phone:d.phone});(null==t?void 0:t.url)&&((null===navigator||void 0===navigator?void 0:navigator.share)&&w?navigator.share({url:t.url,text:t.text,title:t.title}):m&&window.open(t.url,t.title,t.extra))}}},h,{before:a?s({type:p,width:!0===a?24:a.width||24,height:!0===a?24:a.height||24,color:h.disabled?"rgba(255,255,255,0.35)":"#FFF"}):null},{children:i}))};var AwesomeButtonProgress_assign=function(){return AwesomeButtonProgress_assign=Object.assign||function(e){for(var t,n=1,c=arguments.length;n<c;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e},AwesomeButtonProgress_assign.apply(this,arguments)},__awaiter=function(e,t,n,c){return new(n||(n=Promise))((function(r,o){function fulfilled(e){try{step(c.next(e))}catch(e){o(e)}}function rejected(e){try{step(c.throw(e))}catch(e){o(e)}}function step(e){e.done?r(e.value):function adopt(e){return e instanceof n?e:new n((function(t){t(e)}))}(e.value).then(fulfilled,rejected)}step((c=c.apply(e,t||[])).next())}))},__generator=function(e,t){var n,c,r,o,i={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return o={next:verb(0),throw:verb(1),return:verb(2)},"function"==typeof Symbol&&(o[Symbol.iterator]=function(){return this}),o;function verb(o){return function(l){return function step(o){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,c&&(r=2&o[0]?c.return:o[0]?c.throw||((r=c.return)&&r.call(c),0):c.next)&&!(r=r.call(c,o[1])).done)return r;switch(c=0,r&&(o=[2&o[0],r.value]),o[0]){case 0:case 1:r=o;break;case 4:return i.label++,{value:o[1],done:!1};case 5:i.label++,c=o[1],o=[0];continue;case 7:o=i.ops.pop(),i.trys.pop();continue;default:if(!(r=i.trys,(r=r.length>0&&r[r.length-1])||6!==o[0]&&2!==o[0])){i=0;continue}if(3===o[0]&&(!r||o[1]>r[0]&&o[1]<r[3])){i.label=o[1];break}if(6===o[0]&&i.label<r[1]){i.label=r[1],r=o;break}if(r&&i.label<r[2]){i.label=r[2],i.ops.push(o);break}r[2]&&i.ops.pop(),i.trys.pop();continue}o=t.call(e,i)}catch(e){o=[6,e],c=0}finally{n=r=0}if(5&o[0])throw o[1];return{value:o[0]?o[1]:void 0,done:!0}}([o,l])}}},AwesomeButtonProgress_rest=function(e,t){var n={};for(var c in e)Object.prototype.hasOwnProperty.call(e,c)&&t.indexOf(c)<0&&(n[c]=e[c]);if(null!=e&&"function"==typeof Object.getOwnPropertySymbols){var r=0;for(c=Object.getOwnPropertySymbols(e);r<c.length;r++)t.indexOf(c[r])<0&&Object.prototype.propertyIsEnumerable.call(e,c[r])&&(n[c[r]]=e[c[r]])}return n},d="undefined"!=typeof window;const components_AwesomeButtonProgress=function(c){var r=c.onPress,o=void 0===r?null:r,i=c.rootElement,l=void 0===i?null:i,a=c.loadingLabel,u=void 0===a?"Wait..":a,s=c.resultLabel,v=void 0===s?"Success!":s,f=(c.disabled,c.cssModule),p=void 0===f?null:f,h=c.children,m=void 0===h?null:h,w=c.size,b=void 0===w?null:w,g=c.type,y=void 0===g?null:g,_=c.releaseDelay,M=void 0===_?500:_,C=AwesomeButtonProgress_rest(c,["onPress","rootElement","loadingLabel","resultLabel","disabled","cssModule","children","size","type","releaseDelay"]),E=l||"aws-btn",L=t.useRef(null),z=t.useRef(null),x=function(e){var n=t.useState(e),c=n[0],r=n[1],o=t.useRef(e);return[c,function(e){var t=AwesomeButtonProgress_assign(AwesomeButtonProgress_assign({},o.current),e);o.current=t,r(t)},o.current]}({loadingEnd:!1,loadingStart:!1,loadingError:!1,errorLabel:null,active:!1}),O=(x[0],x[1]),j=x[2];t.useEffect((function(){return function(){(null==L?void 0:L.current)&&clearTimeout(L.current)}}),[]);var S,k,P,endLoading=function(e,t){void 0===e&&(e=!0),void 0===t&&(t=null),O({loadingEnd:!0,loadingError:!e,errorLabel:t})},clearStagedWrapperAnimation=function(){L.current=setTimeout((function(){d&&(0,n.beforeFutureCssLayout)(2,(function(){var e;e=function(){O({loadingError:!1,errorLabel:null})},O({loadingStart:!1,loadingEnd:!1,active:!1}),(0,n.beforeFutureCssLayout)(2,e)}))}),M)},T=t.useCallback((function(){O({active:!0})}),[O]),R=j.active,N=j.errorLabel;return(0,e.jsx)(components_AwesomeButton,AwesomeButtonProgress_assign({size:b,type:y,className:(S=j.loadingStart,k=j.loadingEnd,P=j.loadingError,[S&&"".concat(E,"--start")||null,k&&"".concat(E,"--end")||null,P&&"".concat(E,"--errored")||null,"".concat(E,"--progress")].join(" ").trim().replace(/[\s]+/gi," ")),onPress:function(e){return __awaiter(void 0,void 0,void 0,(function(){return __generator(this,(function(t){switch(t.label){case 0:return!0===(null==j?void 0:j.loadingStart)?[2]:((0,n.beforeFutureCssLayout)(4,(function(){O({loadingStart:!0})})),[4,(0,n.onceTransitionEnd)(z.current)]);case 1:return t.sent(),o&&o(e,endLoading),(0,n.setCssEndEvent)(z.current,"transition",{tolerance:3}).then(clearStagedWrapperAnimation),[2]}}))}))},onMouseDown:T,cssModule:p,active:R,extra:(0,e.jsx)("span",{children:(0,e.jsx)("span",{ref:z,"data-loading":u||null,"data-status":N||v||null,className:getClassName("".concat(E,"__progress"),p)})})},C,{children:(0,e.jsx)("span",{children:m})}))}})(),c})()));
+'use strict';
+
+var React = require('react');
+var wac = require('@rcaferati/wac');
+var jsxRuntime = require('react/jsx-runtime');
+
+function _interopNamespace(e) {
+  if (e && e.__esModule) return e;
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () { return e[k]; }
+        });
+      }
+    });
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+
+var React__namespace = /*#__PURE__*/_interopNamespace(React);
+
+// src/components/AwesomeButton/index.tsx
+var POSITION_STATES = ["middle", "left", "right"];
+function classToModules(className = [], cssModule) {
+  if (!cssModule) {
+    return className.join(" ").trim();
+  }
+  const ClassName = [];
+  let i = className.length;
+  while (i--) {
+    if (cssModule[className[i]]) {
+      ClassName.push(cssModule[className[i]]);
+    }
+  }
+  return ClassName.join(" ").trim();
+}
+function getClassName(className = "", cssModule) {
+  if (cssModule) {
+    return cssModule[className] || className;
+  }
+  return className;
+}
+function toggleMoveClasses({
+  element,
+  root,
+  cssModule = null,
+  state = null
+}) {
+  var _a;
+  if (!((_a = element == null ? void 0 : element.classList) == null ? void 0 : _a.remove)) {
+    return false;
+  }
+  if (!state) {
+    const states = [
+      classToModules([`${root}--${POSITION_STATES[0]}`], cssModule),
+      classToModules([`${root}--${POSITION_STATES[1]}`], cssModule),
+      classToModules([`${root}--${POSITION_STATES[2]}`], cssModule)
+    ];
+    states.forEach((state2) => {
+      if (state2) {
+        element.classList.remove(state2);
+      }
+    });
+    return false;
+  }
+  const options = POSITION_STATES.filter((item) => item !== state);
+  let i = options.length;
+  while (i--) {
+    const cls2 = classToModules([`${root}--${options[i]}`], cssModule);
+    if (cls2) {
+      element.classList.remove(cls2);
+    }
+  }
+  const cls = classToModules([`${root}--${state}`], cssModule);
+  if (cls) {
+    element.classList.add(cls);
+  }
+  return true;
+}
+function createRippleEffect({ event, button, content, className }) {
+  const bounds = button.getBoundingClientRect();
+  const top = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const bubble = document.createElement("span");
+  const size = bounds.width < 50 ? bounds.width * 3 : bounds.width * 2;
+  let pageX, pageY;
+  if (event.nativeEvent instanceof TouchEvent) {
+    pageX = event.changedTouches[0].pageX;
+    pageY = event.changedTouches[0].pageY;
+  } else {
+    pageX = event.pageX;
+    pageY = event.pageY;
+  }
+  bubble.className = className;
+  bubble.style.top = `-${size / 2 - (pageY - bounds.top - top)}px`;
+  bubble.style.left = `-${size / 2 - (pageX - bounds.left)}px`;
+  bubble.style.width = `${size}px`;
+  bubble.style.height = `${size}px`;
+  wac.setCssEndEvent(bubble, "animation").then(() => {
+    window.requestAnimationFrame(() => {
+      content.removeChild(bubble);
+    });
+  });
+  window.requestAnimationFrame(() => {
+    content.appendChild(bubble);
+  });
+}
+var ROOTELM = "aws-btn";
+var Anchor = React__namespace.forwardRef((props, ref) => /* @__PURE__ */ jsxRuntime.jsx("a", { ref, ...props }));
+Anchor.displayName = "AwesomeButtonAnchor";
+var Button = React__namespace.forwardRef((props, ref) => /* @__PURE__ */ jsxRuntime.jsx("button", { ref, ...props }));
+Button.displayName = "AwesomeButtonButton";
+function isActivationKey(event) {
+  return event.key === "Enter" || event.key === " " || event.key === "Spacebar";
+}
+function getMoveState(clientX, element) {
+  const { left } = element.getBoundingClientRect();
+  const width = element.offsetWidth;
+  if (clientX < left + width * 0.3) return "left";
+  if (clientX > left + width * 0.65) return "right";
+  return "middle";
+}
+function isKeyboardClick(event) {
+  return event.detail === 0;
+}
+var AwesomeButton = ({
+  active = false,
+  after = null,
+  before = null,
+  between = false,
+  children = null,
+  className = null,
+  containerProps = {},
+  cssModule = null,
+  disabled = false,
+  element = null,
+  extra = null,
+  href = null,
+  moveEvents = true,
+  onMouseDown = null,
+  onMouseUp = null,
+  onPress = null,
+  onPressed = null,
+  onReleased = null,
+  placeholder = true,
+  ripple = false,
+  rootElement = ROOTELM,
+  size = null,
+  style = {},
+  type = "primary",
+  visible = true
+}) => {
+  const [pressPosition, setPressPosition] = React__namespace.useState(null);
+  const rootRef = React__namespace.useRef(null);
+  const wrapperRef = React__namespace.useRef(null);
+  const contentRef = React__namespace.useRef(null);
+  const pressedRef = React__namespace.useRef(0);
+  const activePointerIdRef = React__namespace.useRef(null);
+  const pointerStartYRef = React__namespace.useRef(null);
+  const RenderComponent = element || (href ? Anchor : Button);
+  const isDisabled = React__namespace.useMemo(() => {
+    if (placeholder === true && !children) {
+      return true;
+    }
+    return disabled;
+  }, [placeholder, children, disabled]);
+  const isNativeButton = RenderComponent === Button;
+  const isAnchorLike = Boolean(href);
+  const needsButtonRole = !isNativeButton && !isAnchorLike;
+  const interactiveRole = needsButtonRole ? "button" : void 0;
+  const rootClassName = React__namespace.useMemo(() => {
+    const classList = [
+      rootElement,
+      ...type ? [`${rootElement}--${type}`] : [],
+      ...size ? [`${rootElement}--${size}`] : [],
+      ...visible ? [`${rootElement}--visible`] : [],
+      ...between ? [`${rootElement}--between`] : [],
+      ...placeholder && !children ? [`${rootElement}--placeholder`] : [],
+      ...isDisabled ? [`${rootElement}--disabled`] : [],
+      ...pressPosition ? [pressPosition] : []
+    ];
+    if (className) {
+      classList.push(...className.trim().split(/\s+/).filter(Boolean));
+    }
+    if (cssModule && cssModule[rootElement]) {
+      return classToModules(classList, cssModule);
+    }
+    return classList.join(" ").trim().replace(/\s+/g, " ");
+  }, [
+    rootElement,
+    type,
+    size,
+    visible,
+    between,
+    placeholder,
+    children,
+    isDisabled,
+    pressPosition,
+    className,
+    cssModule
+  ]);
+  const handleAction = React__namespace.useCallback(
+    (event) => {
+      if (!rootRef.current || isDisabled) return;
+      onPress == null ? void 0 : onPress(event);
+    },
+    [isDisabled, onPress]
+  );
+  const clearPressCallback = React__namespace.useCallback(() => {
+    pressedRef.current = 0;
+    if (rootRef.current) {
+      onReleased == null ? void 0 : onReleased(rootRef.current);
+    }
+  }, [onReleased]);
+  const clearPress = React__namespace.useCallback(
+    ({
+      force = false,
+      leave = false
+    } = {}) => {
+      var _a, _b;
+      toggleMoveClasses({
+        element: rootRef.current,
+        root: rootElement,
+        cssModule
+      });
+      if (leave === true && pressedRef.current === 0) {
+        return;
+      }
+      const nextPressPosition = active && !force ? `${rootElement}--active` : null;
+      (_b = (_a = contentRef.current) == null ? void 0 : _a.clearCssEvent) == null ? void 0 : _b.call(_a);
+      if (nextPressPosition === null && pressPosition === `${rootElement}--active` && contentRef.current) {
+        wac.setCssEndEvent(contentRef.current, "transition", {
+          tolerance: 1
+        }).then(clearPressCallback);
+      }
+      setPressPosition(nextPressPosition);
+    },
+    [active, clearPressCallback, cssModule, pressPosition, rootElement]
+  );
+  React__namespace.useEffect(() => {
+    if (active === false && pressedRef.current === 2) {
+      clearPress({ force: true });
+    }
+  }, [active, clearPress]);
+  React__namespace.useEffect(() => {
+    return () => {
+      var _a, _b;
+      (_b = (_a = contentRef.current) == null ? void 0 : _a.clearCssEvent) == null ? void 0 : _b.call(_a);
+    };
+  }, []);
+  const dispatchPressEvent = React__namespace.useCallback(() => {
+    if (typeof window === "undefined" || !wrapperRef.current) return;
+    const eventTrigger = new Event("btn-press");
+    wrapperRef.current.dispatchEvent(eventTrigger);
+  }, []);
+  const createRipple = React__namespace.useCallback(
+    (event) => {
+      if (!wrapperRef.current || !contentRef.current) return;
+      createRippleEffect({
+        event,
+        button: wrapperRef.current,
+        content: contentRef.current,
+        className: getClassName(`${rootElement}__bubble`, cssModule)
+      });
+    },
+    [cssModule, rootElement]
+  );
+  const pressIn = React__namespace.useCallback(
+    (event) => {
+      if (isDisabled || pressedRef.current === 2) {
+        return;
+      }
+      pressedRef.current = 1;
+      if (contentRef.current) {
+        wac.setCssEndEvent(contentRef.current, "transition", {
+          tolerance: 1
+        }).then(() => {
+          onPressed == null ? void 0 : onPressed(event);
+        });
+      } else {
+        onPressed == null ? void 0 : onPressed(event);
+      }
+      setPressPosition(`${rootElement}--active`);
+    },
+    [isDisabled, onPressed, rootElement]
+  );
+  const pressOut = React__namespace.useCallback(
+    (event, options = {}) => {
+      const { allowRipple = false } = options;
+      if (isDisabled || pressedRef.current !== 1) {
+        return;
+      }
+      if (allowRipple && ripple) {
+        createRipple(event);
+      }
+      dispatchPressEvent();
+      handleAction(event);
+      if (active === true) {
+        pressedRef.current = 2;
+        return;
+      }
+      clearPress();
+    },
+    [
+      active,
+      clearPress,
+      createRipple,
+      dispatchPressEvent,
+      handleAction,
+      isDisabled,
+      ripple
+    ]
+  );
+  const handlePointerDown = React__namespace.useCallback(
+    (event) => {
+      var _a;
+      onMouseDown == null ? void 0 : onMouseDown(event);
+      if (isDisabled) return;
+      if (event.button !== 0) return;
+      activePointerIdRef.current = event.pointerId;
+      pointerStartYRef.current = event.clientY;
+      if (event.pointerType !== "mouse" && ((_a = rootRef.current) == null ? void 0 : _a.setPointerCapture)) {
+        try {
+          rootRef.current.setPointerCapture(event.pointerId);
+        } catch (e) {
+        }
+      }
+      pressIn(event);
+    },
+    [isDisabled, onMouseDown, pressIn]
+  );
+  const handlePointerUp = React__namespace.useCallback(
+    (event) => {
+      var _a;
+      onMouseUp == null ? void 0 : onMouseUp(event);
+      if (activePointerIdRef.current !== null && event.pointerId !== activePointerIdRef.current) {
+        return;
+      }
+      if (event.pointerType !== "mouse" && ((_a = rootRef.current) == null ? void 0 : _a.releasePointerCapture)) {
+        try {
+          rootRef.current.releasePointerCapture(event.pointerId);
+        } catch (e) {
+        }
+      }
+      if (event.pointerType === "touch" && pointerStartYRef.current !== null && wrapperRef.current) {
+        const diff = Math.abs(pointerStartYRef.current - event.clientY);
+        if (diff > wrapperRef.current.offsetHeight) {
+          activePointerIdRef.current = null;
+          pointerStartYRef.current = null;
+          clearPress({ force: true });
+          return;
+        }
+      }
+      activePointerIdRef.current = null;
+      pointerStartYRef.current = null;
+      if (isDisabled) {
+        event.preventDefault();
+        return;
+      }
+      pressOut(event, { allowRipple: true });
+    },
+    [clearPress, isDisabled, onMouseUp, pressOut]
+  );
+  const handlePointerCancel = React__namespace.useCallback(
+    (event) => {
+      if (activePointerIdRef.current !== null && event.pointerId !== activePointerIdRef.current) {
+        return;
+      }
+      activePointerIdRef.current = null;
+      pointerStartYRef.current = null;
+      clearPress({ force: true });
+    },
+    [clearPress]
+  );
+  const handlePointerLeave = React__namespace.useCallback(
+    (event) => {
+      if (event.pointerType && event.pointerType !== "mouse") {
+        return;
+      }
+      if (active === true && pressedRef.current !== 2) {
+        clearPress({ force: true });
+        return;
+      }
+      clearPress({ leave: true });
+    },
+    [active, clearPress]
+  );
+  const handlePointerMove = React__namespace.useCallback(
+    (event) => {
+      if (moveEvents !== true || isDisabled === true) return;
+      if (event.pointerType !== "mouse") return;
+      if (!wrapperRef.current) return;
+      const state = getMoveState(event.clientX, wrapperRef.current);
+      toggleMoveClasses({
+        element: rootRef.current,
+        root: rootElement,
+        cssModule,
+        state
+      });
+    },
+    [moveEvents, isDisabled, rootElement, cssModule]
+  );
+  const handleMouseEnterFallback = React__namespace.useCallback(() => {
+    if (moveEvents === true || isDisabled === true) return;
+    toggleMoveClasses({
+      element: rootRef.current,
+      root: rootElement,
+      cssModule,
+      state: "middle"
+    });
+  }, [moveEvents, isDisabled, rootElement, cssModule]);
+  const handleClick = React__namespace.useCallback(
+    (event) => {
+      if (isDisabled === true) {
+        if (href) {
+          event.preventDefault();
+        }
+        return;
+      }
+      if (isKeyboardClick(event)) {
+        handleAction(event);
+      }
+    },
+    [handleAction, href, isDisabled]
+  );
+  const handleKeyDown = React__namespace.useCallback(
+    (event) => {
+      if (!needsButtonRole || isDisabled) return;
+      if (!isActivationKey(event)) return;
+      if (event.repeat) return;
+      if (event.key === " " || event.key === "Spacebar") {
+        event.preventDefault();
+      }
+      pressIn(event);
+    },
+    [isDisabled, needsButtonRole, pressIn]
+  );
+  const handleKeyUp = React__namespace.useCallback(
+    (event) => {
+      if (!needsButtonRole || isDisabled) return;
+      if (!isActivationKey(event)) return;
+      event.preventDefault();
+      pressOut(event, { allowRipple: false });
+    },
+    [isDisabled, needsButtonRole, pressOut]
+  );
+  const mergedContainerProps = containerProps != null ? containerProps : {};
+  const containerTabIndex = mergedContainerProps.tabIndex;
+  const rootExtraProps = {};
+  if (href) {
+    rootExtraProps.href = href;
+  }
+  if (isNativeButton) {
+    if (mergedContainerProps.type == null) {
+      rootExtraProps.type = "button";
+    }
+    rootExtraProps.disabled = isDisabled;
+  }
+  const RenderComponentAny = RenderComponent;
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    RenderComponentAny,
+    {
+      ...mergedContainerProps,
+      ...rootExtraProps,
+      style,
+      className: rootClassName,
+      role: interactiveRole,
+      "aria-disabled": isDisabled || void 0,
+      tabIndex: needsButtonRole ? isDisabled ? -1 : containerTabIndex != null ? containerTabIndex : 0 : containerTabIndex,
+      ref: rootRef,
+      onClick: handleClick,
+      onPointerDown: handlePointerDown,
+      onPointerUp: handlePointerUp,
+      onPointerCancel: handlePointerCancel,
+      onPointerLeave: handlePointerLeave,
+      onPointerMove: handlePointerMove,
+      onMouseEnter: handleMouseEnterFallback,
+      onKeyDown: handleKeyDown,
+      onKeyUp: handleKeyUp,
+      children: /* @__PURE__ */ jsxRuntime.jsxs(
+        "span",
+        {
+          ref: wrapperRef,
+          className: getClassName(`${rootElement}__wrapper`, cssModule),
+          children: [
+            /* @__PURE__ */ jsxRuntime.jsxs(
+              "span",
+              {
+                ref: contentRef,
+                className: getClassName(`${rootElement}__content`, cssModule),
+                children: [
+                  before,
+                  /* @__PURE__ */ jsxRuntime.jsx("span", { children }),
+                  after
+                ]
+              }
+            ),
+            extra
+          ]
+        }
+      )
+    }
+  );
+};
+var AwesomeButton_default = AwesomeButton;
+
+// src/components/AwesomeButtonSocial/sharer.tsx
+var DEFAULT_POPUP_WIDTH = 640;
+var DEFAULT_POPUP_HEIGHT = 480;
+var MIN_POPUP_WIDTH = 320;
+var MIN_POPUP_HEIGHT = 240;
+var MIN_COORDINATE = 0;
+var TWITTER_POPUP_HEIGHT = 250;
+var WIDE_POPUP_WIDTH = 850;
+var EMPTY_STRING = "";
+var MAILTO_SELF_TARGET = "_self";
+var DEFAULT_SHARE_TITLE = "Share";
+var MOBILE_USER_AGENT_REGEX = /iPhone|iPad|iPod|Android/i;
+var URL_FACEBOOK_SHARER = "https://www.facebook.com/sharer/sharer.php";
+var URL_TWITTER_INTENT_TWEET = "https://twitter.com/intent/tweet";
+var URL_PINTEREST_CREATE_PIN = "https://pinterest.com/pin/create/button/";
+var URL_LINKEDIN_SHARE_OFFSITE = "https://www.linkedin.com/sharing/share-offsite/";
+var URL_REDDIT_SUBMIT = "https://www.reddit.com/submit";
+var URL_WHATSAPP_SEND = "https://api.whatsapp.com/send";
+var URL_MESSENGER_BASE = "https://m.me";
+var URL_MAILTO_PROTOCOL = "mailto:";
+function isNonEmptyString(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+function toQuery(params) {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value == null) return;
+    const stringValue = String(value).trim();
+    if (!stringValue) return;
+    searchParams.set(key, stringValue);
+  });
+  return searchParams.toString();
+}
+function withQuery(baseUrl, params) {
+  const query = toQuery(params);
+  return query ? `${baseUrl}?${query}` : baseUrl;
+}
+function toWindowFeatures(params) {
+  return Object.entries(params).filter(
+    ([, value]) => value != null && String(value).trim() !== EMPTY_STRING
+  ).map(([key, value]) => `${key}=${String(value)}`).join(",");
+}
+function clampNumber(value, fallback = MIN_COORDINATE, options) {
+  const safe = Number.isFinite(value) ? value : fallback;
+  const min = options == null ? void 0 : options.min;
+  const max = options == null ? void 0 : options.max;
+  if (typeof min === "number" && safe < min) return min;
+  if (typeof max === "number" && safe > max) return max;
+  return safe;
+}
+function normalizePopupDimensions(width, height) {
+  return {
+    width: clampNumber(width, DEFAULT_POPUP_WIDTH, { min: MIN_POPUP_WIDTH }),
+    height: clampNumber(height, DEFAULT_POPUP_HEIGHT, {
+      min: MIN_POPUP_HEIGHT
+    })
+  };
+}
+function isMobile() {
+  var _a;
+  if (typeof navigator === "undefined") {
+    return false;
+  }
+  const nav = navigator;
+  if (typeof ((_a = nav.userAgentData) == null ? void 0 : _a.mobile) === "boolean") {
+    return nav.userAgentData.mobile;
+  }
+  const userAgent = navigator.userAgent || EMPTY_STRING;
+  return MOBILE_USER_AGENT_REGEX.test(userAgent);
+}
+function centerWindow(width, height) {
+  var _a, _b;
+  if (typeof window === "undefined") {
+    return { top: MIN_COORDINATE, left: MIN_COORDINATE };
+  }
+  const safeWidth = clampNumber(width, DEFAULT_POPUP_WIDTH, {
+    min: MIN_COORDINATE
+  });
+  const safeHeight = clampNumber(height, DEFAULT_POPUP_HEIGHT, {
+    min: MIN_COORDINATE
+  });
+  const screenLeft = typeof window.screenLeft === "number" ? window.screenLeft : typeof window.screenX === "number" ? window.screenX : MIN_COORDINATE;
+  const screenTop = typeof window.screenTop === "number" ? window.screenTop : typeof window.screenY === "number" ? window.screenY : MIN_COORDINATE;
+  const viewportWidth = window.innerWidth || (typeof document !== "undefined" ? ((_a = document.documentElement) == null ? void 0 : _a.clientWidth) || MIN_COORDINATE : MIN_COORDINATE);
+  const viewportHeight = window.innerHeight || (typeof document !== "undefined" ? ((_b = document.documentElement) == null ? void 0 : _b.clientHeight) || MIN_COORDINATE : MIN_COORDINATE);
+  return {
+    top: Math.max(
+      MIN_COORDINATE,
+      Math.round(viewportHeight / 2 - safeHeight / 2 + screenTop)
+    ),
+    left: Math.max(
+      MIN_COORDINATE,
+      Math.round(viewportWidth / 2 - safeWidth / 2 + screenLeft)
+    )
+  };
+}
+function sanitizePhone(phone) {
+  if (!isNonEmptyString(phone)) return void 0;
+  const digits = phone.replace(/[^\d]/g, "");
+  return digits || void 0;
+}
+function getShareText(message, title) {
+  if (isNonEmptyString(message)) return message.trim();
+  if (isNonEmptyString(title)) return title.trim();
+  return void 0;
+}
+function getShareTitle(title, message) {
+  if (isNonEmptyString(title)) return title.trim();
+  if (isNonEmptyString(message)) return message.trim();
+  return void 0;
+}
+function buildPopupExtra(width, height) {
+  const dims = normalizePopupDimensions(width, height);
+  const { top, left } = centerWindow(dims.width, dims.height);
+  return toWindowFeatures({
+    width: dims.width,
+    height: dims.height,
+    top,
+    left,
+    resizable: "yes",
+    scrollbars: "yes",
+    toolbar: "no",
+    menubar: "no",
+    status: "no",
+    noopener: "yes",
+    noreferrer: "yes"
+  });
+}
+function withPopup(payload, dims) {
+  const normalized = normalizePopupDimensions(dims.width, dims.height);
+  return {
+    ...payload,
+    extra: buildPopupExtra(normalized.width, normalized.height)
+  };
+}
+function normalizeType(type) {
+  return String(type || EMPTY_STRING).trim().toLowerCase();
+}
+function Sharer({
+  url,
+  message,
+  title,
+  image,
+  user,
+  type,
+  phone,
+  width,
+  height
+}) {
+  const shareUrl = isNonEmptyString(url) ? url.trim() : EMPTY_STRING;
+  const shareText = getShareText(message, title);
+  const shareTitle = getShareTitle(title, message);
+  const shareType = normalizeType(type);
+  const dims = normalizePopupDimensions(width, height);
+  switch (shareType) {
+    case "facebook": {
+      if (!shareUrl) return {};
+      return withPopup(
+        {
+          url: withQuery(URL_FACEBOOK_SHARER, {
+            u: shareUrl
+          }),
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: shareText
+        },
+        dims
+      );
+    }
+    case "twitter": {
+      if (!shareUrl && !shareText) return {};
+      return withPopup(
+        {
+          url: withQuery(URL_TWITTER_INTENT_TWEET, {
+            text: shareText,
+            url: shareUrl || void 0
+          }),
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: shareText
+        },
+        {
+          width: dims.width,
+          height: TWITTER_POPUP_HEIGHT
+        }
+      );
+    }
+    case "pinterest": {
+      if (!shareUrl) return {};
+      return withPopup(
+        {
+          url: withQuery(URL_PINTEREST_CREATE_PIN, {
+            url: shareUrl,
+            media: isNonEmptyString(image) ? image.trim() : void 0,
+            description: shareText
+          }),
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: shareText
+        },
+        dims
+      );
+    }
+    case "linkedin": {
+      if (!shareUrl) return {};
+      return withPopup(
+        {
+          url: withQuery(URL_LINKEDIN_SHARE_OFFSITE, {
+            url: shareUrl
+          }),
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: shareText
+        },
+        dims
+      );
+    }
+    case "reddit": {
+      if (!shareUrl) return {};
+      return withPopup(
+        {
+          url: withQuery(URL_REDDIT_SUBMIT, {
+            url: shareUrl,
+            title: shareText || shareTitle
+          }),
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: shareText
+        },
+        {
+          width: WIDE_POPUP_WIDTH,
+          height: dims.height
+        }
+      );
+    }
+    case "whatsapp": {
+      const cleanPhone = sanitizePhone(phone);
+      const textForWhatsApp = [shareText, shareUrl].filter(Boolean).join(" ").trim() || void 0;
+      if (!cleanPhone && !textForWhatsApp) return {};
+      return withPopup(
+        {
+          url: withQuery(URL_WHATSAPP_SEND, {
+            phone: cleanPhone,
+            text: textForWhatsApp
+          }),
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: textForWhatsApp
+        },
+        {
+          width: WIDE_POPUP_WIDTH,
+          height: dims.height
+        }
+      );
+    }
+    case "messenger": {
+      if (!isNonEmptyString(user)) return {};
+      return withPopup(
+        {
+          url: `${URL_MESSENGER_BASE}/${encodeURIComponent(user.trim())}`,
+          title: shareTitle || DEFAULT_SHARE_TITLE,
+          text: shareText
+        },
+        {
+          width: WIDE_POPUP_WIDTH,
+          height: dims.height
+        }
+      );
+    }
+    case "mail": {
+      const subject = shareTitle || shareText || EMPTY_STRING;
+      const body = [shareText, shareUrl].filter(Boolean).join("\n\n").trim();
+      const query = toQuery({
+        subject: subject || void 0,
+        body: body || void 0
+      });
+      return {
+        url: `${URL_MAILTO_PROTOCOL}${query ? `?${query}` : EMPTY_STRING}`,
+        title: MAILTO_SELF_TARGET,
+        text: shareText
+      };
+    }
+    case "instagram": {
+      if (!shareUrl) return {};
+      return {
+        url: shareUrl,
+        title: MAILTO_SELF_TARGET,
+        text: shareText
+      };
+    }
+    default:
+      return {};
+  }
+}
+var DEFAULT_DIMENSIONS = {
+  width: 640,
+  height: 480
+};
+var DEFAULT_WINDOW_TITLE = "Share";
+var IS_BROWSER = typeof window !== "undefined" && typeof document !== "undefined";
+var AwesomeButtonSocial = ({
+  onPress = null,
+  children = null,
+  sharer = {},
+  dimensions = DEFAULT_DIMENSIONS,
+  type,
+  href = null,
+  ...extra
+}) => {
+  const mobileRef = React__namespace.useRef(IS_BROWSER ? isMobile() : false);
+  const popupDimensions = React__namespace.useMemo(
+    () => {
+      var _a, _b;
+      return {
+        width: (_a = dimensions == null ? void 0 : dimensions.width) != null ? _a : DEFAULT_DIMENSIONS.width,
+        height: (_b = dimensions == null ? void 0 : dimensions.height) != null ? _b : DEFAULT_DIMENSIONS.height
+      };
+    },
+    [dimensions]
+  );
+  const getUrl = React__namespace.useCallback(() => {
+    const raw = sharer == null ? void 0 : sharer.url;
+    if (typeof raw === "string") {
+      const trimmed = raw.trim();
+      if (trimmed) return trimmed;
+    }
+    if (IS_BROWSER) {
+      return window.location.href || null;
+    }
+    return null;
+  }, [sharer == null ? void 0 : sharer.url]);
+  const getMessage = React__namespace.useCallback(() => {
+    var _a;
+    const raw = sharer == null ? void 0 : sharer.message;
+    if (typeof raw === "string") {
+      const trimmed = raw.trim();
+      if (trimmed) return trimmed;
+    }
+    if (IS_BROWSER) {
+      const titleEl = document.querySelector("title");
+      const title = (_a = titleEl == null ? void 0 : titleEl.textContent) == null ? void 0 : _a.trim();
+      return title || null;
+    }
+    return null;
+  }, [sharer == null ? void 0 : sharer.message]);
+  const getImage = React__namespace.useCallback(() => {
+    var _a;
+    const raw = sharer == null ? void 0 : sharer.image;
+    if (typeof raw === "string") {
+      const trimmed = raw.trim();
+      if (trimmed) return trimmed;
+    }
+    if (IS_BROWSER) {
+      const meta = document.querySelector(
+        'meta[property="og:image"]'
+      );
+      const content = (_a = meta == null ? void 0 : meta.getAttribute("content")) == null ? void 0 : _a.trim();
+      return content || null;
+    }
+    return null;
+  }, [sharer == null ? void 0 : sharer.image]);
+  const buildSharePayload = React__namespace.useCallback(() => {
+    var _a, _b;
+    const payload = Sharer({
+      width: popupDimensions.width,
+      height: popupDimensions.height,
+      url: getUrl(),
+      message: getMessage(),
+      image: getImage(),
+      type: type != null ? type : "",
+      user: (_a = sharer == null ? void 0 : sharer.user) != null ? _a : null,
+      phone: (_b = sharer == null ? void 0 : sharer.phone) != null ? _b : null
+    });
+    if (!(payload == null ? void 0 : payload.url)) {
+      return null;
+    }
+    return payload;
+  }, [
+    getImage,
+    getMessage,
+    getUrl,
+    popupDimensions.height,
+    popupDimensions.width,
+    sharer == null ? void 0 : sharer.phone,
+    sharer == null ? void 0 : sharer.user,
+    type
+  ]);
+  const openNativeShare = React__namespace.useCallback(
+    async (payload) => {
+      var _a, _b, _c;
+      if (typeof navigator === "undefined" || typeof navigator.share !== "function") {
+        return false;
+      }
+      try {
+        await navigator.share({
+          url: (_a = payload.url) != null ? _a : void 0,
+          text: (_b = payload.text) != null ? _b : void 0,
+          title: (_c = payload.title) != null ? _c : void 0
+        });
+        return true;
+      } catch (e) {
+        return false;
+      }
+    },
+    []
+  );
+  const openWindowShare = React__namespace.useCallback((payload) => {
+    if (!IS_BROWSER || !payload.url) {
+      return;
+    }
+    const targetOrTitle = payload.title || DEFAULT_WINDOW_TITLE;
+    const features = payload.extra || void 0;
+    window.open(payload.url, targetOrTitle, features);
+  }, []);
+  const handlePress = React__namespace.useCallback(
+    async (event) => {
+      if (onPress) {
+        onPress(event);
+        return;
+      }
+      if (href) {
+        return;
+      }
+      const payload = buildSharePayload();
+      if (!(payload == null ? void 0 : payload.url)) {
+        return;
+      }
+      if (IS_BROWSER && mobileRef.current) {
+        const shared = await openNativeShare(payload);
+        if (shared) {
+          return;
+        }
+      }
+      openWindowShare(payload);
+    },
+    [buildSharePayload, href, onPress, openNativeShare, openWindowShare]
+  );
+  return /* @__PURE__ */ jsxRuntime.jsx(AwesomeButton_default, { type, href, onPress: handlePress, ...extra, children });
+};
+var AwesomeButtonSocial_default = AwesomeButtonSocial;
+var ROOTELM2 = "aws-btn";
+var LOADING_ANIMATION_STEPS = 3;
+var IS_WINDOW = typeof window !== "undefined";
+function useSyncedObjectState(initial) {
+  const [value, setValue] = React__namespace.useState(initial);
+  const ref = React__namespace.useRef(initial);
+  const setSyncValue = React__namespace.useCallback((patch) => {
+    setValue((prev) => {
+      const next = { ...prev, ...patch };
+      ref.current = next;
+      return next;
+    });
+  }, []);
+  return { value, setSyncValue, ref };
+}
+var AwesomeButtonProgress = ({
+  onPress = null,
+  rootElement = ROOTELM2,
+  loadingLabel = "Wait..",
+  resultLabel = "Success!",
+  disabled = false,
+  cssModule = null,
+  children = null,
+  size = null,
+  type = null,
+  releaseDelay = 500,
+  className = null,
+  extra: userExtra = null,
+  onMouseDown: userOnMouseDown = null,
+  onPressed: userOnPressed = null,
+  ...extra
+}) => {
+  var _a;
+  const root = rootElement || ROOTELM2;
+  const timeoutRef = React__namespace.useRef(null);
+  const contentRef = React__namespace.useRef(null);
+  const isMountedRef = React__namespace.useRef(true);
+  const runIdRef = React__namespace.useRef(0);
+  const busyRef = React__namespace.useRef(false);
+  const {
+    value: state,
+    setSyncValue: setState,
+    ref: stateRef
+  } = useSyncedObjectState({
+    loadingEnd: false,
+    loadingStart: false,
+    loadingError: false,
+    errorLabel: null,
+    active: false
+  });
+  const clearTimeoutIfAny = React__namespace.useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, []);
+  React__namespace.useEffect(() => {
+    return () => {
+      var _a2, _b;
+      isMountedRef.current = false;
+      runIdRef.current += 1;
+      clearTimeoutIfAny();
+      (_b = (_a2 = contentRef.current) == null ? void 0 : _a2.clearCssEvent) == null ? void 0 : _b.call(_a2);
+    };
+  }, [clearTimeoutIfAny]);
+  const progressClassName = React__namespace.useMemo(() => {
+    const { loadingStart, loadingEnd, loadingError } = state;
+    const parts = [
+      `${root}--progress`,
+      loadingStart ? `${root}--start` : null,
+      loadingEnd ? `${root}--end` : null,
+      loadingError ? `${root}--errored` : null,
+      className
+    ];
+    return parts.filter(Boolean).join(" ").trim().replace(/\s+/g, " ");
+  }, [state, root, className]);
+  const endLoading = React__namespace.useCallback(
+    (endState = true, errorLabel2 = null) => {
+      if (!isMountedRef.current) return;
+      if (busyRef.current !== true) return;
+      setState({
+        loadingEnd: true,
+        loadingError: !endState,
+        errorLabel: errorLabel2
+      });
+    },
+    [setState]
+  );
+  const startLoading = React__namespace.useCallback(() => {
+    wac.beforeFutureCssLayout(4, () => {
+      if (!isMountedRef.current) return;
+      setState({
+        loadingStart: true
+      });
+    });
+  }, [setState]);
+  const clearLoading = React__namespace.useCallback(
+    (callback) => {
+      if (!isMountedRef.current) return;
+      setState({
+        loadingStart: false,
+        loadingEnd: false,
+        active: false
+      });
+      wac.beforeFutureCssLayout(2, () => {
+        if (!isMountedRef.current) return;
+        callback == null ? void 0 : callback();
+      });
+    },
+    [setState]
+  );
+  const scheduleWrapperReset = React__namespace.useCallback(
+    (runIdAtSchedule) => {
+      clearTimeoutIfAny();
+      timeoutRef.current = setTimeout(() => {
+        if (!IS_WINDOW || !isMountedRef.current) return;
+        if (runIdRef.current !== runIdAtSchedule) return;
+        wac.beforeFutureCssLayout(2, () => {
+          if (!isMountedRef.current) return;
+          if (runIdRef.current !== runIdAtSchedule) return;
+          clearLoading(() => {
+            if (!isMountedRef.current) return;
+            if (runIdRef.current !== runIdAtSchedule) return;
+            setState({
+              loadingError: false,
+              errorLabel: null
+            });
+            busyRef.current = false;
+          });
+        });
+      }, Math.max(0, Number(releaseDelay) || 0));
+    },
+    [clearLoading, clearTimeoutIfAny, releaseDelay, setState]
+  );
+  const activateProgress = React__namespace.useCallback(() => {
+    setState({
+      active: true
+    });
+  }, [setState]);
+  const handleActivationMouseDown = React__namespace.useCallback(
+    (event) => {
+      activateProgress();
+      userOnMouseDown == null ? void 0 : userOnMouseDown(event);
+    },
+    [activateProgress, userOnMouseDown]
+  );
+  const handleActivationPressed = React__namespace.useCallback(
+    (event) => {
+      activateProgress();
+      userOnPressed == null ? void 0 : userOnPressed(event);
+    },
+    [activateProgress, userOnPressed]
+  );
+  const handleAction = React__namespace.useCallback(
+    async (event) => {
+      var _a2;
+      if (busyRef.current === true || stateRef.current.loadingStart === true) {
+        return;
+      }
+      busyRef.current = true;
+      runIdRef.current += 1;
+      const runId = runIdRef.current;
+      startLoading();
+      const contentEl = contentRef.current;
+      if (!contentEl) {
+        try {
+          onPress == null ? void 0 : onPress(event, endLoading);
+        } catch (e) {
+          endLoading(false);
+        }
+        return;
+      }
+      try {
+        await wac.onceTransitionEnd(contentEl);
+        if (!isMountedRef.current || runIdRef.current !== runId) {
+          return;
+        }
+        try {
+          onPress == null ? void 0 : onPress(event, endLoading);
+        } catch (e) {
+          endLoading(false);
+        }
+        (_a2 = contentEl == null ? void 0 : contentEl.clearCssEvent) == null ? void 0 : _a2.call(contentEl);
+        wac.setCssEndEvent(contentEl, "transition", {
+          tolerance: LOADING_ANIMATION_STEPS
+        }).then(() => {
+          if (!isMountedRef.current || runIdRef.current !== runId) return;
+          scheduleWrapperReset(runId);
+        });
+      } catch (e) {
+        if (!isMountedRef.current || runIdRef.current !== runId) return;
+        endLoading(false);
+        scheduleWrapperReset(runId);
+      }
+    },
+    [endLoading, onPress, scheduleWrapperReset, startLoading, stateRef]
+  );
+  const { active, errorLabel } = stateRef.current;
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    AwesomeButton_default,
+    {
+      ...extra,
+      rootElement: root,
+      disabled,
+      size,
+      type,
+      cssModule,
+      active,
+      className: progressClassName,
+      onPress: handleAction,
+      onMouseDown: handleActivationMouseDown,
+      onPressed: handleActivationPressed,
+      extra: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx("span", { children: /* @__PURE__ */ jsxRuntime.jsx(
+          "span",
+          {
+            ref: contentRef,
+            "data-loading": loadingLabel != null ? loadingLabel : void 0,
+            "data-status": (_a = errorLabel != null ? errorLabel : resultLabel) != null ? _a : void 0,
+            className: getClassName(`${root}__progress`, cssModule)
+          }
+        ) }),
+        userExtra
+      ] }),
+      children: /* @__PURE__ */ jsxRuntime.jsx("span", { children })
+    }
+  );
+};
+var AwesomeButtonProgress_default = AwesomeButtonProgress;
+
+exports.AwesomeButton = AwesomeButton_default;
+exports.AwesomeButtonProgress = AwesomeButtonProgress_default;
+exports.AwesomeButtonSocial = AwesomeButtonSocial_default;
+//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.js.map

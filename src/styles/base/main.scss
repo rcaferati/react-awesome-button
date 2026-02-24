@@ -1,20 +1,25 @@
 @mixin color-pattern($color) {
   $background: nth($color, 2);
+
   .#{$button-root}__wrapper {
     &:before {
       background: nth($color, 3);
     }
   }
+
   .#{$button-root}__content {
     background: nth($color, 2);
     color: nth($color, 4);
+
     path {
       fill: nth($color, 4);
     }
+
     @if (length($color) > 6) {
       border: nth($color, 7);
     }
   }
+
   @if (length($color) > 4) {
     .#{$button-root}__wrapper:hover {
       .#{$button-root}__content {
@@ -22,6 +27,7 @@
       }
     }
   }
+
   @if (length($color) > 5) {
     &.#{$button-root}--active {
       .#{$button-root}__wrapper {
@@ -31,16 +37,18 @@
       }
     }
   }
+
   &.#{$button-root}--progress {
-    .#{$button-root}__content {
-      > span {
-        display: flex;
-        height: 100%;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-      }
-    }
+    // .#{$button-root}__content {
+      // .#{$button-root}__label {
+        // display: flex;
+        // height: 100%;
+        // width: 100%;
+        // align-items: center;
+        // justify-content: center;
+      // }
+    // }
+
     .#{$button-root}__progress {
       &:before,
       &:after {
@@ -76,6 +84,7 @@
     transform: skewY(calc(1deg * var(--button-hover-pressure) * #{$direction}))
       translate3d(0, calc(-1px * var(--button-hover-pressure) / 2), 0);
   }
+
   .#{$button-root}__content {
     transform: skewY(
       calc(1deg * var(--button-hover-pressure) * #{-$direction})
@@ -119,6 +128,7 @@ button.#{$button-root} {
   @extend %clear-spacing;
   @extend %clear-focus;
   @extend %clear-selection;
+
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
@@ -162,9 +172,11 @@ button.#{$button-root} {
       top: auto;
       bottom: calc(var(--button-raise-level) * -1);
       z-index: 1;
-      transition: transform var(--transform-speed) ease-out,
-        background var(--transform-speed) ease-out;
+      transition:
+        transform var(--transform-speed) ease-out,
+        background-color var(--transform-speed) ease-out;
     }
+
     &:after {
       @extend %fill-parent;
       content: ' ';
@@ -190,21 +202,32 @@ button.#{$button-root} {
     backface-visibility: hidden;
     transform-style: flat;
     transform: skew(0) translate3d(0, 0, 0);
-    transition: border var(--transform-speed) ease-out,
+    transition:
+      border var(--transform-speed) ease-out,
       transform var(--transform-speed) ease-out,
-      background var(--transform-speed) ease-out,
+      background-color var(--transform-speed) ease-out,
       color var(--transform-speed) ease-out;
-    
+
     &:after {
       @extend %fill-parent;
     }
 
-    > span:nth-child(1) {
+    // Canonical label wrapper (component renders this class)
+    .#{$button-root}__label {
       display: flex;
       align-items: center;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      transform: skew(0) translate3d(0, 0, 0);
+      min-width: 0; // required so flex item can shrink and ellipsis can work
+
+      > svg:only-child {
+        margin: 0;
+      }
+    }
+
+    // Backward-compat fallback while component migration is in progress
+    > span:nth-child(1):not(.#{$button-root}__label) {
+      display: flex;
+      align-items: center;
+      min-width: 0;
 
       > svg:only-child {
         margin: 0;
@@ -219,20 +242,27 @@ button.#{$button-root} {
       margin-left: 4px;
     }
   }
+
   &:focus {
     @extend %clear-focus;
   }
+
   &:before {
     content: ' ';
     background-color: var(--button-shadow-color);
     width: calc(100% - 2px);
-    height: calc(100% - (var(--button-raise-level) * var(--button-shadow-divisor)));
-    bottom: calc(0px - (var(--button-raise-level) / var(--button-shadow-divisor)));
+    height: calc(
+      100% - (var(--button-raise-level) * var(--button-shadow-divisor))
+    );
+    bottom: calc(
+      0px - (var(--button-raise-level) / var(--button-shadow-divisor))
+    );
     left: 1px;
     position: absolute;
     border-radius: var(--button-default-border-radius);
     transform: skewY(0) translate3d(0, 0, 0);
-    transition: transform calc(var(--transform-speed) * 0.8) ease-out,
+    transition:
+      transform calc(var(--transform-speed) * 0.8) ease-out,
       background calc(var(--transform-speed) * 0.8) ease-out;
   }
 
@@ -241,6 +271,7 @@ button.#{$button-root} {
 
   &--placeholder {
     width: var(--button-default-placeholder-width);
+
     .#{$button-root}__content {
       > span {
         display: block;
@@ -265,37 +296,108 @@ button.#{$button-root} {
       }
     }
   }
+
   &--visible {
     opacity: 1;
   }
+
   &--between {
     .#{$button-root}__content {
       justify-content: space-between;
     }
   }
+
+  // Fixed-size buttons (small/medium/large): single line + ellipsis
+  &--fixed {
+    .#{$button-root}__content {
+      .#{$button-root}__label {
+        // IMPORTANT: block display makes text-overflow paint reliably
+        display: inline-block;
+        min-width: 0;
+        max-width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      > span:nth-child(1):not(.#{$button-root}__label) {
+        // IMPORTANT: same fallback behavior during migration
+        display: inline-block;
+        min-width: 0;
+        max-width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  // Auto-width buttons: one line, natural width growth (no ellipsis)
+  &--auto {
+    .#{$button-root}__content {
+      .#{$button-root}__label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 1 auto;
+        min-width: 0;
+        max-width: none;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+      }
+
+      > span:nth-child(1):not(.#{$button-root}__label) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 1 auto;
+        min-width: 0;
+        max-width: none;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+      }
+    }
+  }
+
   &--left {
     @include button-hover-skew(1);
   }
+
   &--right {
     @include button-hover-skew(-1);
   }
+
   &--middle {
     &:before {
       transform: translate3d(0, calc(-1px * var(--button-hover-pressure)), 0);
     }
+
     .#{$button-root}__content {
       transform: translate3d(0, calc(1px * var(--button-hover-pressure)), 0);
     }
   }
+
   &--icon {
     .#{$button-root}__content {
-      > span:nth-child(1) {
+      .#{$button-root}__label {
+        > svg {
+          vertical-align: middle;
+        }
+      }
+
+      // Backward-compat fallback during migration
+      > span:nth-child(1):not(.#{$button-root}__label) {
         > svg {
           vertical-align: middle;
         }
       }
     }
   }
+
   &--active {
     &:before {
       will-change: transform;
@@ -305,9 +407,11 @@ button.#{$button-root} {
         0
       );
     }
+
     .#{$button-root}__content {
       will-change: transform;
-      transition: transform calc(var(--transform-speed) * 0.8) ease-out,
+      transition:
+        transform calc(var(--transform-speed) * 0.8) ease-out,
         background calc(var(--transform-speed) * 0.8) ease-out,
         color calc(var(--transform-speed) * 0.8) ease-out;
       transform: translate3d(
@@ -317,34 +421,41 @@ button.#{$button-root} {
       );
     }
   }
+
   &--off {
     &:before {
       transform: translate3d(0, calc(var(--button-raise-level) * -1), 0);
       background-color: rgba(0, 0, 0, 0.05);
     }
+
     &:hover {
       .#{$button-root}__wrapper {
         &:before {
           background-color: #2d2d2d;
         }
       }
+
       .#{$button-root}__content {
         background-color: #313131;
         color: #3b3b3b;
       }
     }
+
     .#{$button-root}__wrapper {
       &:before {
         background-color: #323232;
       }
     }
+
     .#{$button-root}__content {
       background-color: #353535;
       color: #424242;
       transform: translate3d(0, var(--button-raise-level), 0);
     }
   }
+
   @include getSizes($button-sizes);
+
   &--fill {
     width: 100%;
   }

@@ -1,3 +1,4 @@
+// styles/base/progress.scss
 .#{$button-root} {
   &--progress {
     .#{$button-root}__wrapper > span:nth-child(2) {
@@ -22,7 +23,7 @@
       overflow: hidden;
       transition: border var(--transform-speed) ease-out,
         transform var(--transform-speed) ease-out,
-        background var(--transform-speed) ease-out,
+        background-color var(--transform-speed) ease-out,
         color var(--transform-speed) ease-out;
 
       > span {

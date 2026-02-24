@@ -1,13 +1,20 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:storybook/recommended"
+  ],
   "env": {
     "browser": true,
     "node": true,
     "jest": true,
     "es6": true
   },
-  "plugins": ["react", "jsx-a11y"],
+  "plugins": [
+    "react",
+    "jsx-a11y"
+  ],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
