@@ -5,6 +5,7 @@
 // Default theme module for stories that support `cssModule` (e.g. AwesomeButton family)
 import themeEric from '../src/styles/themes/theme-eric';
 
+
 const resolvedTheme = themeEric?.default || themeEric;
 
 const preview = {

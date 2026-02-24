@@ -1,16 +1,20 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Examining the syntax of Jest tests Should render a button with a progress bar 1`] = `
+exports[`Public API smoke tests renders AwesomeButton with before/after slots 1`] = `
 <button
-  className="aws-btn aws-btn--visible false aws-btn--progress"
-  href={null}
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible"
+  disabled={false}
   onClick={[Function]}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
-  role="button"
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
   style={{}}
+  type="button"
 >
   <span
     className="aws-btn__wrapper"
@@ -18,7 +22,248 @@ exports[`Examining the syntax of Jest tests Should render a button with a progre
     <span
       className="aws-btn__content"
     >
-      <span>
+      <span
+        aria-hidden="true"
+      >
+        ←
+      </span>
+      <span
+        className="aws-btn__label"
+      >
+        Continue
+      </span>
+      <span
+        aria-hidden="true"
+      >
+        →
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders AwesomeButton without crashing 1`] = `
+<button
+  aria-disabled={true}
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--placeholder aws-btn--disabled"
+  disabled={true}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders AwesomeButtonProgress without crashing 1`] = `
+<button
+  className="aws-btn aws-btn--auto aws-btn--visible aws-btn--progress"
+  disabled={false}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      >
+        <span />
+      </span>
+    </span>
+    <span>
+      <span
+        className="aws-btn__progress"
+        data-loading="Wait.."
+        data-status="Success!"
+      />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders AwesomeButtonSocial with sharer props 1`] = `
+<button
+  className="aws-btn aws-btn--auto aws-btn--github aws-btn--visible"
+  disabled={false}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      >
+        GitHub
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders AwesomeButtonSocial without crashing 1`] = `
+<button
+  aria-disabled={true}
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--placeholder aws-btn--disabled"
+  disabled={true}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders a button without moveEvents 1`] = `
+<button
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible"
+  disabled={false}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      >
+        Button
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders a primary button 1`] = `
+<button
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible"
+  disabled={false}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      >
+        Button
+      </span>
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Public API smoke tests renders a progress button with explicit success completion 1`] = `
+<button
+  className="aws-btn aws-btn--auto aws-btn--visible aws-btn--progress"
+  disabled={false}
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
+  style={{}}
+  type="button"
+>
+  <span
+    className="aws-btn__wrapper"
+  >
+    <span
+      className="aws-btn__content"
+    >
+      <span
+        className="aws-btn__label"
+      >
         <span>
           Button
         </span>
@@ -35,17 +280,21 @@ exports[`Examining the syntax of Jest tests Should render a button with a progre
 </button>
 `;
 
-exports[`Examining the syntax of Jest tests Should render a button without moveEvents 1`] = `
+exports[`Public API smoke tests renders a secondary button 1`] = `
 <button
-  className="aws-btn aws-btn--primary aws-btn--visible false"
-  href={null}
+  className="aws-btn aws-btn--auto aws-btn--secondary aws-btn--visible"
+  disabled={false}
   onClick={[Function]}
-  onMouseDown={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
   onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onMouseUp={[Function]}
-  role="button"
+  onPointerCancel={[Function]}
+  onPointerDown={[Function]}
+  onPointerLeave={[Function]}
+  onPointerMove={[Function]}
+  onPointerUp={[Function]}
   style={{}}
+  type="button"
 >
   <span
     className="aws-btn__wrapper"
@@ -53,154 +302,11 @@ exports[`Examining the syntax of Jest tests Should render a button without moveE
     <span
       className="aws-btn__content"
     >
-      <span>
-        Button
-      </span>
-    </span>
-  </span>
-</button>
-`;
-
-exports[`Examining the syntax of Jest tests Should render a primary button 1`] = `
-<button
-  className="aws-btn aws-btn--primary aws-btn--visible false"
-  href={null}
-  onClick={[Function]}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
-  role="button"
-  style={{}}
->
-  <span
-    className="aws-btn__wrapper"
-  >
-    <span
-      className="aws-btn__content"
-    >
-      <span>
-        Button
-      </span>
-    </span>
-  </span>
-</button>
-`;
-
-exports[`Examining the syntax of Jest tests Should render a secondary button 1`] = `
-<button
-  className="aws-btn aws-btn--secondary aws-btn--visible false"
-  href={null}
-  onClick={[Function]}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
-  role="button"
-  style={{}}
->
-  <span
-    className="aws-btn__wrapper"
-  >
-    <span
-      className="aws-btn__content"
-    >
-      <span>
-        Button
-      </span>
-    </span>
-  </span>
-</button>
-`;
-
-exports[`Examining the syntax of Jest tests renders AB without crashing 1`] = `
-<button
-  className="aws-btn aws-btn--primary aws-btn--visible false"
-  href={null}
-  onClick={[Function]}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
-  role="button"
-  style={{}}
->
-  <span
-    className="aws-btn__wrapper"
-  >
-    <span
-      className="aws-btn__content"
-    >
-      <span />
-    </span>
-  </span>
-</button>
-`;
-
-exports[`Examining the syntax of Jest tests renders ABP without crashing 1`] = `
-<button
-  className="aws-btn aws-btn--visible false aws-btn--progress"
-  href={null}
-  onClick={[Function]}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
-  role="button"
-  style={{}}
->
-  <span
-    className="aws-btn__wrapper"
-  >
-    <span
-      className="aws-btn__content"
-    >
-      <span>
-        <span />
-      </span>
-    </span>
-    <span>
       <span
-        className="aws-btn__progress"
-        data-loading="Wait.."
-        data-status="Success!"
-      />
-    </span>
-  </span>
-</button>
-`;
-
-exports[`Examining the syntax of Jest tests renders ABS without crashing 1`] = `
-<button
-  className="aws-btn aws-btn--primary aws-btn--visible false"
-  href={null}
-  onClick={[Function]}
-  onMouseDown={[Function]}
-  onMouseLeave={[Function]}
-  onMouseMove={[Function]}
-  onMouseUp={[Function]}
-  role="button"
-  style={{}}
->
-  <span
-    className="aws-btn__wrapper"
-  >
-    <span
-      className="aws-btn__content"
-    >
-      <svg
-        height={23}
-        preserveAspectRatio="xMidYMid meet"
-        version="1.1"
-        viewBox="0 0 50 50"
-        width={30}
-        xmlns="http://www.w3.org/2000/svg"
+        className="aws-btn__label"
       >
-        <path
-          fill="#FFF"
-        />
-      </svg>
-      <span />
+        Button
+      </span>
     </span>
   </span>
 </button>
