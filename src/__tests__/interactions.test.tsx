@@ -36,6 +36,32 @@ describe('v8 interaction smoke tests', () => {
     });
   });
 
+  it('AwesomeButton does not call onPress when disabled', async () => {
+    const onPress = jest.fn();
+
+    render(
+      <AwesomeButton onPress={onPress} disabled>
+        Disabled
+      </AwesomeButton>
+    );
+
+    fireEvent.click(screen.getByText('Disabled'));
+
+    await waitFor(() => {
+      expect(onPress).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  it('AwesomeButton renders anchor mode when href is provided', () => {
+    render(
+      <AwesomeButton href="https://example.com">Open website</AwesomeButton>
+    );
+
+    const link = screen.getByText('Open website').closest('a');
+    expect(link).toBeTruthy();
+    expect(link?.getAttribute('href')).toBe('https://example.com');
+  });
+
   it('AwesomeButtonProgress runs async success flow and completes', async () => {
     jest.useFakeTimers();
 
@@ -53,7 +79,32 @@ describe('v8 interaction smoke tests', () => {
       expect(onPress).toHaveBeenCalledTimes(1);
     });
 
-    // Flush timer-driven state updates inside act()
+    await act(async () => {
+      jest.advanceTimersByTime(60);
+    });
+
+    await waitFor(() => {
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('AwesomeButtonProgress runs async error flow and completes', async () => {
+    jest.useFakeTimers();
+
+    const onPress = jest.fn((_event, next) => {
+      setTimeout(() => next(false, 'Failed'), 50);
+    });
+
+    render(
+      <AwesomeButtonProgress onPress={onPress}>Publish</AwesomeButtonProgress>
+    );
+
+    fireEvent.click(screen.getByText('Publish'));
+
+    await waitFor(() => {
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
     await act(async () => {
       jest.advanceTimersByTime(60);
     });
@@ -90,6 +141,69 @@ describe('v8 interaction smoke tests', () => {
 
       const firstCallArgs = openSpy.mock.calls[0] ?? [];
       expect(String(firstCallArgs[0] ?? '')).toContain('linkedin.com');
+    } finally {
+      window.open = originalOpen;
+    }
+  });
+
+  it('AwesomeButtonSocial uses custom onPress override instead of sharer logic', async () => {
+    const originalOpen = window.open;
+    const openSpy = jest.fn();
+    const onPress = jest.fn();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).open = openSpy;
+
+    try {
+      render(
+        <AwesomeButtonSocial
+          type="linkedin"
+          sharer={{
+            url: 'https://example.com',
+            message: 'Check this out',
+          }}
+          onPress={onPress}>
+          Share custom
+        </AwesomeButtonSocial>
+      );
+
+      fireEvent.click(screen.getByText('Share custom'));
+
+      await waitFor(() => {
+        expect(onPress).toHaveBeenCalledTimes(1);
+      });
+
+      expect(openSpy).not.toHaveBeenCalled();
+    } finally {
+      window.open = originalOpen;
+    }
+  });
+
+  it('AwesomeButtonSocial href mode bypasses sharer/window.open', () => {
+    const originalOpen = window.open;
+    const openSpy = jest.fn();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).open = openSpy;
+
+    try {
+      render(
+        <AwesomeButtonSocial
+          type="github"
+          href="https://github.com/rcaferati/react-awesome-button">
+          Open GitHub
+        </AwesomeButtonSocial>
+      );
+
+      const link = screen.getByText('Open GitHub').closest('a');
+      expect(link).toBeTruthy();
+      expect(link?.getAttribute('href')).toBe(
+        'https://github.com/rcaferati/react-awesome-button'
+      );
+
+      fireEvent.click(screen.getByText('Open GitHub'));
+
+      expect(openSpy).not.toHaveBeenCalled();
     } finally {
       window.open = originalOpen;
     }
