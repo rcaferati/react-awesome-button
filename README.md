@@ -1,6 +1,6 @@
 # React `<AwesomeButton />` UI Components
 
-`react-awesome-button` provides three related button components:
+`@rcaferati/react-awesome-button` provides three related button components:
 
 - **`AwesomeButton`** — animated base button
 - **`AwesomeButtonProgress`** — progress flow wrapper on top of `AwesomeButton`
@@ -13,7 +13,7 @@ This README is updated for the current component patterns and prop behavior.
 ## Installation
 
 ```bash
-npm install react-awesome-button
+npm install @rcaferati/react-awesome-button
 ```
 
 ---
@@ -24,8 +24,8 @@ npm install react-awesome-button
 
 ```jsx
 import React from 'react';
-import { AwesomeButton } from 'react-awesome-button';
-import 'react-awesome-button/dist/styles.css';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import '@rcaferati/react-awesome-button/styles.css';
 
 export default function Example() {
   return <AwesomeButton type="primary">Button</AwesomeButton>;
@@ -36,14 +36,14 @@ export default function Example() {
 
 ## Styling with Theme CSS Modules (Blue Theme)
 
-If you want to use the package theme module object (for `cssModule`), import the blue theme and pass it to the component.
+If you want to use the package theme module object (for `cssModule`), import a built theme module and pass it to the component.
 
 > Note: depending on your bundler/module interop, the imported theme may be on `.default`.
 
 ```jsx
 import React from 'react';
-import { AwesomeButton } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 
@@ -66,8 +66,8 @@ If `href` is **not** provided, `AwesomeButton` renders a button-like element and
 
 ```jsx
 import React from 'react';
-import { AwesomeButton } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 
@@ -91,8 +91,8 @@ If `href` is provided, it renders anchor-like behavior and lets native navigatio
 
 ```jsx
 import React from 'react';
-import { AwesomeButton } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 
@@ -117,8 +117,8 @@ For **icon-only** buttons, pass the icon using `before` and omit children.
 ```jsx
 import React from 'react';
 import { Play, ArrowRight, Sparkles } from 'lucide-react';
-import { AwesomeButton } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 
@@ -153,7 +153,7 @@ export default function Example() {
 
 ```jsx
 import React from 'react';
-import { AwesomeButton } from 'react-awesome-button';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
 
 export default function Example() {
   return (
@@ -221,8 +221,8 @@ Its `onPress` receives a second callback argument:
 
 ```jsx
 import React from 'react';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 
@@ -250,7 +250,7 @@ export default function Example() {
 
 ```jsx
 import React from 'react';
-import { AwesomeButtonProgress } from 'react-awesome-button';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -275,8 +275,8 @@ export default function Example() {
 ```jsx
 import React from 'react';
 import { Shield } from 'lucide-react';
-import { AwesomeButtonProgress } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -332,8 +332,8 @@ On press, the component follows this order:
 ```jsx
 import React from 'react';
 import { Github } from 'lucide-react';
-import { AwesomeButtonSocial } from 'react-awesome-button';
-import themeBlue from 'react-awesome-button/src/styles/themes/theme-blue';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
+import themeBlue from '@rcaferati/react-awesome-button/themes/theme-blue';
 
 const blueTheme = themeBlue?.default ?? themeBlue;
 
@@ -357,7 +357,7 @@ export default function Example() {
 
 ```jsx
 import React from 'react';
-import { AwesomeButtonSocial } from 'react-awesome-button';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
 
 export default function Example() {
   return (
@@ -380,7 +380,7 @@ export default function Example() {
 
 ```jsx
 import React from 'react';
-import { AwesomeButtonSocial } from 'react-awesome-button';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
 
 export default function Example() {
   return (
@@ -402,7 +402,7 @@ If `href` is present, the component behaves like an anchor and does **not** exec
 
 ```jsx
 import React from 'react';
-import { AwesomeButtonSocial } from 'react-awesome-button';
+import { AwesomeButtonSocial } from '@rcaferati/react-awesome-button';
 
 export default function Example() {
   return (
@@ -460,7 +460,7 @@ const blueTheme = themeBlue?.default ?? themeBlue;
 Then pass it to any button component via:
 
 ```jsx
-cssModule = { blueTheme };
+<AwesomeButton cssModule={blueTheme}>Button</AwesomeButton>
 ```
 
 ---
