@@ -487,6 +487,15 @@ The social component does **not** need built-in icon usage to work.
 
 ---
 
+## Author
+
+**Rafael Caferati**  
+Website: [caferati.dev](https://caferati.dev)  
+LinkedIn: [linkedin.com/rcaferati](https://linkedin.com/in/rcaferati)  
+Instagram: [instagram.com/rcaferati](https://instagram.com/rcaferati)
+
+---
+
 ## License
 
 MIT
