@@ -26,6 +26,7 @@
   ],
   "sideEffects": [
     "**/*.css",
+    "**/*.scss",
     "dist/themes/**/*.js"
   ],
   "engines": {
@@ -82,7 +83,7 @@
     "build": "npm run build:all",
     "build:js": "tsup --config tsup.config.ts",
     "build:js:legacy": "webpack --mode production",
-    "build:scss": "webpack --mode production --config webpack.scss.config.js && node -e \"require('fs').rmSync('./dist/styles.js', { force: true })\"",
+    "build:scss": "webpack --mode production --config webpack.scss.config.js",
     "build:themes": "babel-node ./theme-builder.js",
     "build:all": "npm run build:js && npm run build:scss && npm run build:themes",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
@@ -139,7 +140,7 @@
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
     "sass": "^1.97.3",
-    "sass-loader": "^13.3.3",
+    "sass-loader": "^16.0.7",
     "shelljs": "^0.8.5",
     "storybook": "^10.2.11",
     "style-loader": "^4.0.0",
