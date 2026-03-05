@@ -1,6 +1,6 @@
 {
   "name": "@rcaferati/react-awesome-button",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "Performant, extendable, highly customisable, production ready React Component that renders an animated basic set of UI buttons",
   "author": "Rafael Caferati",
   "license": "MIT",
@@ -58,9 +58,17 @@
       "default": "./dist/AwesomeButtonSocial.mjs"
     },
     "./styles.css": "./dist/styles.css",
-    "./dist/styles.css": "./dist/styles.css",
-    "./themes/*": "./dist/themes/*.js",
-    "./dist/themes/*": "./dist/themes/*.js",
+    "./themes/*": {
+      "import": "./dist/themes/*.mjs",
+      "require": "./dist/themes/*.js",
+      "default": "./dist/themes/*.mjs"
+    },
+    "./themes/*.js": {
+      "import": "./dist/themes/*.mjs",
+      "require": "./dist/themes/*.js",
+      "default": "./dist/themes/*.mjs"
+    },
+    "./themes/*.css": "./dist/themes/*.css",
     "./package.json": "./package.json"
   },
   "typesVersions": {

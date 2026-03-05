@@ -153,6 +153,10 @@ button.#{$button-root} {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
 
+  &:hover {
+    text-decoration: none;
+  }
+
   .#{$button-root}__wrapper {
     position: relative;
     font-family: var(--button-font-family);
@@ -217,6 +221,7 @@ button.#{$button-root} {
       display: flex;
       align-items: center;
       min-width: 0; // required so flex item can shrink and ellipsis can work
+      text-decoration: none;
 
       > svg:only-child {
         margin: 0;
