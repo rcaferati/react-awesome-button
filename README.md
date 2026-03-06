@@ -10,6 +10,12 @@ This README is updated for the current v8 build outputs (including theme CSS + t
 
 ---
 
+## Preview
+
+[![React Awesome Button preview](https://caferati.dev/images/rab.gif)](https://caferati.dev/images/rab.gif)
+
+---
+
 ## Installation
 
 ```bash
