@@ -35,6 +35,8 @@ export type ButtonProgressType = {
   loadingLabel?: string;
   resultLabel?: string;
   releaseDelay?: number;
+  showProgressBar?: boolean;
+  progressLoadingTime?: number;
 };
 
 function useSyncedObjectState<T extends Record<string, any>>(initial: T) {
@@ -63,13 +65,20 @@ const AwesomeButtonProgress = ({
   size = null,
   type = null,
   releaseDelay = 500,
+  showProgressBar = true,
+  progressLoadingTime = 6000,
   className = null,
   extra: userExtra = null,
   onMouseDown: userOnMouseDown = null,
   onPressed: userOnPressed = null,
+  style: userStyle = {},
   ...extra
 }: ButtonProgressType & ButtonTypeModified) => {
   const root = rootElement || ROOTELM;
+  const resolvedProgressLoadingTime = Math.max(
+    0,
+    Number(progressLoadingTime) || 0
+  );
 
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = React.useRef<HTMLSpanElement | null>(null);
@@ -109,6 +118,7 @@ const AwesomeButtonProgress = ({
     const { loadingStart, loadingEnd, loadingError } = state;
     const parts = [
       `${root}--progress`,
+      showProgressBar ? null : `${root}--progress-bar-hidden`,
       loadingStart ? `${root}--start` : null,
       loadingEnd ? `${root}--end` : null,
       loadingError ? `${root}--errored` : null,
@@ -116,7 +126,19 @@ const AwesomeButtonProgress = ({
     ];
 
     return parts.filter(Boolean).join(' ').trim().replace(/\s+/g, ' ');
-  }, [state, root, className]);
+  }, [className, root, showProgressBar, state]);
+
+  const progressStyle = React.useMemo(
+    () =>
+      ({
+        ...(userStyle as React.CSSProperties),
+        ['--loading-transition-speed' as '--loading-transition-speed']:
+          `${resolvedProgressLoadingTime}ms`,
+        ['--loading-transition-end-speed' as '--loading-transition-end-speed']:
+          `${Math.max(1, Math.ceil(resolvedProgressLoadingTime / 20))}ms`,
+      }) as React.CSSProperties,
+    [resolvedProgressLoadingTime, userStyle]
+  );
 
   const endLoading = React.useCallback(
     (endState = true, errorLabel: string | null = null) => {
@@ -280,6 +302,7 @@ const AwesomeButtonProgress = ({
       size={size}
       type={type}
       cssModule={cssModule}
+      style={progressStyle}
       active={active}
       className={progressClassName}
       onPress={handleAction}

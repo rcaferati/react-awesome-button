@@ -33,6 +33,7 @@
   --loading-transition-speed: #{$loading-transition-speed};
   --loading-transition-end-speed: #{calc($loading-transition-speed / 20)};
   --transform-speed: #{$transform-speed};
+  --button-release-speed: #{calc($transform-speed * 0.8)};
 
   --button-primary-color: #{$button-primary-color};
   --button-primary-color-dark: #{$button-primary-color-dark};

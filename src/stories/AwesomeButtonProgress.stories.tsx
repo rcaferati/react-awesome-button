@@ -4,10 +4,18 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { fn } from 'storybook/test';
 
 import AwesomeButtonProgress from '../components/AwesomeButtonProgress';
+import defaultStyles from '../styles/themes/theme-blue';
 
 type AwesomeButtonProgressProps = React.ComponentProps<
   typeof AwesomeButtonProgress
 >;
+
+const resolvedDefaultStyles =
+  (
+    defaultStyles as Record<string, string> & {
+      default?: Record<string, string>;
+    }
+  )?.default ?? (defaultStyles as Record<string, string>);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -32,9 +40,10 @@ const meta: Meta<typeof AwesomeButtonProgress> = {
     loadingLabel: 'Wait..',
     resultLabel: 'Success!',
     releaseDelay: 500,
+    showProgressBar: true,
+    progressLoadingTime: 6000,
 
-    // Important: use default (non-themed) styling for this story file
-    cssModule: null,
+    cssModule: resolvedDefaultStyles,
 
     // Demo async handler: completes successfully after a short delay
     onPress: async (_event, next) => {
@@ -51,7 +60,7 @@ const meta: Meta<typeof AwesomeButtonProgress> = {
     cssModule: {
       control: false,
       description:
-        'Theme CSS module object. Set to null in this story file to use default class names.',
+        'Default CSS module object loaded from the bundled blue theme.',
       table: { category: 'Styling' },
     },
     className: {
@@ -114,6 +123,14 @@ const meta: Meta<typeof AwesomeButtonProgress> = {
       control: { type: 'number', min: 0, step: 100 },
       table: { category: 'Progress' },
     },
+    showProgressBar: {
+      control: 'boolean',
+      table: { category: 'Progress' },
+    },
+    progressLoadingTime: {
+      control: { type: 'number', min: 0, step: 100 },
+      table: { category: 'Progress' },
+    },
 
     href: {
       control: 'text',
@@ -171,7 +188,6 @@ export const PrimarySuccess: Story = {
   args: {
     children: 'Submit',
     type: 'primary',
-    cssModule: null,
     onPress: async (_event, next) => {
       await sleep(900);
       next(true);
@@ -184,7 +200,6 @@ export const SuccessCustomLabel: Story = {
     children: 'Save',
     type: 'secondary',
     resultLabel: 'Saved!',
-    cssModule: null,
     onPress: async (_event, next) => {
       await sleep(700);
       next(true);
@@ -197,7 +212,6 @@ export const ErrorFlow: Story = {
     children: 'Publish',
     type: 'danger',
     resultLabel: 'Done!',
-    cssModule: null,
     onPress: async (_event, next) => {
       await sleep(900);
       next(false, 'Failed');
@@ -209,7 +223,6 @@ export const FastRelease: Story = {
   args: {
     children: 'Quick action',
     releaseDelay: 150,
-    cssModule: null,
     onPress: async (_event, next) => {
       await sleep(400);
       next(true);
@@ -222,10 +235,55 @@ export const SlowOperation: Story = {
     children: 'Processing...',
     loadingLabel: 'Processing...',
     releaseDelay: 900,
-    cssModule: null,
     onPress: async (_event, next) => {
       await sleep(1800);
       next(true);
+    },
+  },
+};
+
+export const NoProgressBar: Story = {
+  args: {
+    children: 'Sync account',
+    loadingLabel: 'Syncing...',
+    resultLabel: 'Synced!',
+    showProgressBar: false,
+    onPress: async (_event, next) => {
+      await sleep(900);
+      next(true);
+    },
+  },
+};
+
+export const CustomProgressLoadingTime: Story = {
+  render: (args) => (
+    <div
+      style={{
+        display: 'grid',
+        gap: 12,
+        justifyItems: 'center',
+      }}>
+      <AwesomeButtonProgress
+        {...(args as AwesomeButtonProgressProps)}
+        progressLoadingTime={1200}>
+        Fast loading bar
+      </AwesomeButtonProgress>
+      <AwesomeButtonProgress
+        {...(args as AwesomeButtonProgressProps)}
+        progressLoadingTime={4000}>
+        Slow loading bar
+      </AwesomeButtonProgress>
+    </div>
+  ),
+  args: {
+    onPress: async (_event, next) => {
+      await sleep(1500);
+      next(true);
+    },
+  },
+  parameters: {
+    controls: {
+      exclude: ['children', 'progressLoadingTime'],
     },
   },
 };
@@ -234,7 +292,6 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     children: 'Disabled',
-    cssModule: null,
   },
 };
 
@@ -249,19 +306,16 @@ export const Sizes: Story = {
       }}>
       <AwesomeButtonProgress
         {...(args as AwesomeButtonProgressProps)}
-        cssModule={null}
         size="small">
         Small
       </AwesomeButtonProgress>
       <AwesomeButtonProgress
         {...(args as AwesomeButtonProgressProps)}
-        cssModule={null}
         size="medium">
         Medium
       </AwesomeButtonProgress>
       <AwesomeButtonProgress
         {...(args as AwesomeButtonProgressProps)}
-        cssModule={null}
         size="large">
         Large
       </AwesomeButtonProgress>
@@ -269,7 +323,6 @@ export const Sizes: Story = {
   ),
   args: {
     type: 'primary',
-    cssModule: null,
     onPress: async (_event, next) => {
       await sleep(700);
       next(true);
@@ -285,7 +338,6 @@ export const Sizes: Story = {
 export const PlaygroundWithCustomHandler: Story = {
   args: {
     children: 'Run task',
-    cssModule: null,
     onPress: async (_event, next) => {
       // Random success/error demo for interactive testing
       await sleep(800);
