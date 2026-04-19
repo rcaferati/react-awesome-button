@@ -6,7 +6,7 @@
 - **`AwesomeButtonProgress`** — progress flow wrapper on top of `AwesomeButton`
 - **`AwesomeButtonSocial`** — social/share wrapper on top of `AwesomeButton`
 
-This README is updated for the current v8 build outputs (including theme CSS + theme module mappings).
+This README is updated for the current `8.1.0` release outputs (including theme CSS + theme module mappings).
 
 ---
 
@@ -196,6 +196,29 @@ export default function Example() {
 }
 ```
 
+### Text transition (string labels only)
+
+Use `textTransition` when the button label is a plain string and you want label changes to animate.
+
+```jsx
+import React from 'react';
+import { AwesomeButton } from '@rcaferati/react-awesome-button';
+import '@rcaferati/react-awesome-button/styles.css';
+
+export default function Example() {
+  const [expanded, setExpanded] = React.useState(false);
+
+  return (
+    <AwesomeButton
+      type="primary"
+      textTransition
+      onPress={() => setExpanded((value) => !value)}>
+      {expanded ? 'Processing settlement report' : 'Generate report'}
+    </AwesomeButton>
+  );
+}
+```
+
 ---
 
 ## `AwesomeButton` Props
@@ -208,6 +231,7 @@ export default function Example() {
 | `disabled`       | `boolean`                                | `false`     | Disables interactions                                                  |
 | `visible`        | `boolean`                                | `true`      | Toggles visible state class                                            |
 | `placeholder`    | `boolean`                                | `false`     | If `true` and `children` is empty, renders placeholder/disabled state  |
+| `textTransition` | `boolean`                                | `false`     | Animates string-only label changes with a scrambling transition         |
 | `between`        | `boolean`                                | `false`     | Uses `space-between` layout for content (useful with icons)            |
 | `ripple`         | `boolean`                                | `false`     | Enables ripple effect on successful press release                      |
 | `moveEvents`     | `boolean`                                | `true`      | Enables pointer move position classes (`left/middle/right`)            |
@@ -291,6 +315,36 @@ export default function Example() {
 }
 ```
 
+### Spinner/text-only mode and custom bar timing
+
+Use `showProgressBar={false}` to keep the loading/result text flow while hiding the dark loading bar.
+Use `progressLoadingTime` to control how long the progress bar takes to advance during the loading phase.
+
+```jsx
+import React from 'react';
+import { AwesomeButtonProgress } from '@rcaferati/react-awesome-button';
+import '@rcaferati/react-awesome-button/styles.css';
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default function Example() {
+  return (
+    <AwesomeButtonProgress
+      type="primary"
+      loadingLabel="Syncing…"
+      resultLabel="Synced!"
+      showProgressBar={false}
+      progressLoadingTime={1500}
+      onPress={async (_event, next) => {
+        await sleep(900);
+        next(true);
+      }}>
+      Sync account
+    </AwesomeButtonProgress>
+  );
+}
+```
+
 ### With icon (`before`)
 
 ```jsx
@@ -325,12 +379,14 @@ export default function Example() {
 
 > `AwesomeButtonProgress` accepts all `AwesomeButton` props **except** `active` and replaces `onPress` with the progress version below.
 
-| Prop           | Type                    | Default      | Description                                                  |
-| -------------- | ----------------------- | ------------ | ------------------------------------------------------------ |
-| `onPress`      | `(event, next) => void` | `null`       | Progress handler. Call `next(true)` or `next(false, label?)` |
-| `loadingLabel` | `string`                | `'Wait…'`    | Loading phase label                                          |
-| `resultLabel`  | `string`                | `'Success!'` | Success label                                                |
-| `releaseDelay` | `number`                | `500`        | Delay before reset after progress end                        |
+| Prop                  | Type                    | Default      | Description                                                               |
+| --------------------- | ----------------------- | ------------ | ------------------------------------------------------------------------- |
+| `onPress`             | `(event, next) => void` | `null`       | Progress handler. Call `next(true)` or `next(false, label?)`              |
+| `loadingLabel`        | `string`                | `'Wait…'`    | Loading phase label                                                       |
+| `resultLabel`         | `string`                | `'Success!'` | Success label                                                             |
+| `releaseDelay`        | `number`                | `500`        | Delay before reset after progress end                                     |
+| `showProgressBar`     | `boolean`               | `true`       | Hides the dark loading bar when `false`, while keeping the progress flow  |
+| `progressLoadingTime` | `number`                | `6000`       | Loading-phase progress bar duration in milliseconds                       |
 
 ---
 

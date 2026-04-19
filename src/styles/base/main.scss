@@ -267,8 +267,8 @@ button.#{$button-root} {
     border-radius: var(--button-default-border-radius);
     transform: skewY(0) translate3d(0, 0, 0);
     transition:
-      transform calc(var(--transform-speed) * 0.8) ease-out,
-      background calc(var(--transform-speed) * 0.8) ease-out;
+      transform var(--button-release-speed) ease-out,
+      background var(--button-release-speed) ease-out;
   }
 
   @include getColors($button-social-colors);
@@ -416,14 +416,31 @@ button.#{$button-root} {
     .#{$button-root}__content {
       will-change: transform;
       transition:
-        transform calc(var(--transform-speed) * 0.8) ease-out,
-        background calc(var(--transform-speed) * 0.8) ease-out,
-        color calc(var(--transform-speed) * 0.8) ease-out;
+        transform var(--button-release-speed) ease-out,
+        background var(--button-release-speed) ease-out,
+        color var(--button-release-speed) ease-out;
       transform: translate3d(
         0,
         calc(var(--button-raise-level) - var(--button-pressed-level)),
         0
       );
+    }
+  }
+
+  &--releasing {
+    &:before {
+      will-change: transform;
+      transition:
+        transform var(--button-release-speed) ease-out,
+        background var(--button-release-speed) ease-out;
+    }
+
+    .#{$button-root}__content {
+      will-change: transform;
+      transition:
+        transform var(--button-release-speed) ease-out,
+        background var(--button-release-speed) ease-out,
+        color var(--button-release-speed) ease-out;
     }
   }
 

@@ -30,6 +30,7 @@ const meta: Meta<typeof AwesomeButton> = {
     between: false,
     disabled: false,
     placeholder: false,
+    textTransition: false,
     moveEvents: true,
     ripple: false,
     onPress: fn(),
@@ -115,6 +116,14 @@ const meta: Meta<typeof AwesomeButton> = {
         'If true and no children are provided, button becomes placeholder/disabled.',
       table: {
         category: 'State',
+      },
+    },
+    textTransition: {
+      control: 'boolean',
+      description:
+        'Animates string-only label changes with a scrambling transition.',
+      table: {
+        category: 'Behavior',
       },
     },
     moveEvents: {
@@ -244,6 +253,51 @@ export const ActiveControlled: Story = {
   },
 };
 
+export const TextTransition: Story = {
+  render: (args) => {
+    const [expanded, setExpanded] = React.useState(false);
+
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gap: 12,
+          justifyItems: 'center',
+        }}>
+        <AwesomeButton
+          {...(args as AwesomeButtonProps)}
+          textTransition
+          onPress={() => setExpanded((value) => !value)}>
+          {expanded ? 'Processing settlement report' : 'Generate report'}
+        </AwesomeButton>
+
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          style={{
+            border: '1px solid #ccc',
+            background: '#fff',
+            padding: '6px 10px',
+            borderRadius: 6,
+            cursor: 'pointer',
+            fontSize: 12,
+          }}>
+          Toggle label
+        </button>
+      </div>
+    );
+  },
+  args: {
+    children: 'Generate report',
+    textTransition: true,
+  },
+  parameters: {
+    controls: {
+      exclude: ['children', 'onPress'],
+    },
+  },
+};
+
 export const WithBeforeAfter: Story = {
   args: {
     children: 'Continue',
@@ -287,6 +341,56 @@ export const Sizes: Story = {
     type: 'primary',
   },
   parameters: {
+    controls: {
+      exclude: ['children', 'size'],
+    },
+  },
+};
+
+export const MultipleAutoSize: Story = {
+  render: (args) => {
+    const labels = [
+      'Go',
+      'Save',
+      'Submit',
+      'Launch Now',
+      'Continue',
+      'Review Details',
+      'Open Dashboard',
+      'Create New Project',
+      'Generate Monthly Report',
+      'Proceed to Final Confirmation',
+    ];
+
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gap: 12,
+          justifyItems: 'center',
+        }}>
+        {labels.map((label) => (
+          <AwesomeButton
+            key={label}
+            {...(args as AwesomeButtonProps)}
+            size={null}>
+            {label}
+          </AwesomeButton>
+        ))}
+      </div>
+    );
+  },
+  args: {
+    type: 'primary',
+    size: null,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Renders ten auto-width buttons with progressively different label lengths to validate intrinsic sizing.',
+      },
+    },
     controls: {
       exclude: ['children', 'size'],
     },

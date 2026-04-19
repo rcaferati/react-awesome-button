@@ -8,6 +8,13 @@ import {
 } from '../../helpers/components';
 
 const ROOTELM = 'aws-btn';
+const DEFAULT_AUTO_WIDTHS: {
+  content: number | null;
+  label: number | null;
+} = {
+  content: null,
+  label: null,
+};
 
 type RootDomElement = HTMLAnchorElement | HTMLButtonElement | HTMLDivElement;
 type CssModuleMap = Record<string, string>;
@@ -16,7 +23,7 @@ type CssEventClearableElement = HTMLSpanElement & {
 };
 
 type PointerMoveState = 'left' | 'middle' | 'right';
-type PressPhase = 0 | 1 | 2; // 0 idle, 1 pressed, 2 locked(active external)
+type PressPhase = 0 | 1 | 2 | 3; // 0 idle, 1 pressed, 2 locked(active external), 3 releasing
 
 type PressLikeEvent =
   | React.MouseEvent<RootDomElement>
@@ -30,6 +37,11 @@ type PointerLikeEvent =
   | React.TouchEvent<RootDomElement>;
 
 type ForwardableElementComponent = React.ForwardRefExoticComponent<any>;
+type TextTransitionFrame = {
+  from: string;
+  to: string;
+  startedAt: number;
+};
 
 const Anchor = React.forwardRef<
   HTMLAnchorElement,
@@ -67,6 +79,7 @@ export type ButtonType = {
   rootElement?: string;
   size?: string | null;
   style?: React.CSSProperties;
+  textTransition?: boolean;
   type?: string;
   visible?: boolean;
 };
@@ -87,6 +100,108 @@ function getMoveState(clientX: number, element: HTMLElement): PointerMoveState {
 function isKeyboardClick(event: React.MouseEvent<RootDomElement>): boolean {
   // Keyboard / AT "click" commonly has detail = 0
   return event.detail === 0;
+}
+
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+
+const TEXT_TRANSITION_DURATION = 320;
+const TEXT_TRANSITION_SETTLE_START = 0.45;
+const UPPERCASE_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const LOWERCASE_POOL = 'abcdefghijklmnopqrstuvwxyz';
+const DIGIT_POOL = '0123456789';
+const SYMBOL_POOL = '#%&^+=-';
+
+function extractStringChild(children: React.ReactNode): string | null {
+  return typeof children === 'string' ? children : null;
+}
+
+function getTransitionCharacterPool(character: string): string {
+  if (/[A-Z]/.test(character)) {
+    return UPPERCASE_POOL;
+  }
+  if (/[a-z]/.test(character)) {
+    return LOWERCASE_POOL;
+  }
+  if (/\d/.test(character)) {
+    return DIGIT_POOL;
+  }
+
+  return SYMBOL_POOL;
+}
+
+function getRandomTransitionCharacter(character: string): string {
+  if (!character || /\s/.test(character)) {
+    return character;
+  }
+
+  const pool = getTransitionCharacterPool(character);
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  return pool[randomIndex] || character;
+}
+
+function buildTextTransitionFrame(from: string, to: string, progress: number) {
+  const clampedProgress = Math.min(1, Math.max(0, progress));
+  const peakLength = Math.max(from.length, to.length);
+  const settleProgress =
+    clampedProgress <= TEXT_TRANSITION_SETTLE_START
+      ? 0
+      : (clampedProgress - TEXT_TRANSITION_SETTLE_START) /
+        (1 - TEXT_TRANSITION_SETTLE_START);
+
+  const currentLength =
+    clampedProgress < TEXT_TRANSITION_SETTLE_START
+      ? Math.ceil(
+          from.length +
+            (peakLength - from.length) *
+              (clampedProgress / TEXT_TRANSITION_SETTLE_START)
+        )
+      : Math.ceil(peakLength - (peakLength - to.length) * settleProgress);
+
+  const lockedCharacters = Math.floor(to.length * settleProgress);
+  let nextText = '';
+
+  for (let index = 0; index < currentLength; index += 1) {
+    const sourceCharacter = from[index] ?? to[index] ?? ' ';
+    const targetCharacter = to[index] ?? '';
+
+    if (/\s/.test(targetCharacter || sourceCharacter)) {
+      nextText += targetCharacter || sourceCharacter || ' ';
+      continue;
+    }
+
+    if (settleProgress >= 1 && index < to.length) {
+      nextText += targetCharacter;
+      continue;
+    }
+
+    if (index < lockedCharacters && index < to.length) {
+      nextText += targetCharacter;
+      continue;
+    }
+
+    nextText += getRandomTransitionCharacter(targetCharacter || sourceCharacter);
+  }
+
+  return nextText;
+}
+
+function readSnappedWidth(element: HTMLElement | null): number | null {
+  if (!element) {
+    return null;
+  }
+
+  const scrollWidth = element.scrollWidth;
+  if (scrollWidth > 0) {
+    return scrollWidth;
+  }
+
+  const rectWidth = element.getBoundingClientRect().width;
+  if (Number.isFinite(rectWidth) && rectWidth > 0) {
+    return Math.ceil(rectWidth);
+  }
+
+  return null;
 }
 
 const AwesomeButton = ({
@@ -113,23 +228,44 @@ const AwesomeButton = ({
   rootElement = ROOTELM,
   size = null,
   style = {},
+  textTransition = false,
   type = 'primary',
   visible = true,
 }: ButtonType) => {
-  const [pressPosition, setPressPosition] = React.useState<string | null>(null);
+  const stringChild = React.useMemo(() => extractStringChild(children), [children]);
+  const [pressPosition, setPressPosition] = React.useState<string | null>(
+    active ? `${rootElement}--active` : null
+  );
+  const [autoWidths, setAutoWidths] = React.useState<{
+    content: number | null;
+    label: number | null;
+  }>(DEFAULT_AUTO_WIDTHS);
+  const [displayedText, setDisplayedText] = React.useState<string | null>(
+    stringChild
+  );
 
   const rootRef = React.useRef<RootDomElement | null>(null);
   const wrapperRef = React.useRef<HTMLSpanElement | null>(null);
   const contentRef = React.useRef<CssEventClearableElement | null>(null);
+  const labelRef = React.useRef<HTMLSpanElement | null>(null);
 
   const pressedRef = React.useRef<PressPhase>(0);
   const activePointerIdRef = React.useRef<number | null>(null);
   const pointerStartYRef = React.useRef<number | null>(null);
+  const resizeObserverRef = React.useRef<ResizeObserver | null>(null);
+  const rafRef = React.useRef<number | null>(null);
+  const textTransitionRafRef = React.useRef<number | null>(null);
+  const mountedRef = React.useRef(true);
+  const displayedTextRef = React.useRef<string | null>(stringChild);
+  const targetTextRef = React.useRef<string | null>(stringChild);
+  const releaseRunRef = React.useRef(0);
 
   const RenderComponent = (element || (href ? Anchor : Button)) as
     | typeof Anchor
     | typeof Button
     | ForwardableElementComponent;
+  const activeClassName = `${rootElement}--active`;
+  const releasingClassName = `${rootElement}--releasing`;
 
   const isDisabled = React.useMemo(() => {
     if (placeholder === true && !children) {
@@ -139,6 +275,7 @@ const AwesomeButton = ({
   }, [placeholder, children, disabled]);
 
   const isAutoSize = size == null;
+  const shouldSnapAutoWidth = isAutoSize && !(placeholder === true && !children);
   const sizeModeClass = isAutoSize
     ? `${rootElement}--auto`
     : `${rootElement}--fixed`;
@@ -167,7 +304,11 @@ const AwesomeButton = ({
     }
 
     if (cssModule && cssModule[rootElement]) {
-      return classToModules(classList, cssModule);
+      return classList
+        .map((item) => cssModule[item] || item)
+        .join(' ')
+        .trim()
+        .replace(/\s+/g, ' ');
     }
 
     return classList.join(' ').trim().replace(/\s+/g, ' ');
@@ -194,12 +335,28 @@ const AwesomeButton = ({
     [isDisabled, onPress]
   );
 
-  const clearPressCallback = React.useCallback(() => {
-    pressedRef.current = 0;
-    if (rootRef.current) {
-      onReleased?.(rootRef.current);
-    }
-  }, [onReleased]);
+  const finalizeRelease = React.useCallback(
+    (runId: number) => {
+      if (!mountedRef.current || releaseRunRef.current !== runId) {
+        return;
+      }
+
+      pressedRef.current = 0;
+      setPressPosition((previous) =>
+        previous === releasingClassName ? null : previous
+      );
+
+      if (rootRef.current) {
+        onReleased?.(rootRef.current);
+      }
+    },
+    [onReleased, releasingClassName]
+  );
+
+  const cancelPendingRelease = React.useCallback(() => {
+    releaseRunRef.current += 1;
+    contentRef.current?.clearCssEvent?.();
+  }, []);
 
   const clearPress = React.useCallback(
     ({
@@ -217,25 +374,77 @@ const AwesomeButton = ({
         return;
       }
 
-      const nextPressPosition =
-        active && !force ? `${rootElement}--active` : null;
-
-      contentRef.current?.clearCssEvent?.();
-
-      if (
-        nextPressPosition === null &&
-        pressPosition === `${rootElement}--active` &&
-        contentRef.current
-      ) {
-        setCssEndEvent(contentRef.current, 'transition', {
-          tolerance: 1,
-        }).then(clearPressCallback);
+      if (pressedRef.current === 3 && pressPosition === releasingClassName) {
+        return;
       }
 
-      setPressPosition(nextPressPosition);
+      if (active && !force) {
+        pressedRef.current = 2;
+        setPressPosition((previous) =>
+          previous === activeClassName ? previous : activeClassName
+        );
+        return;
+      }
+
+      const hadVisualPress =
+        pressedRef.current !== 0 ||
+        pressPosition === activeClassName ||
+        pressPosition === releasingClassName;
+
+      cancelPendingRelease();
+
+      if (!hadVisualPress) {
+        pressedRef.current = 0;
+        setPressPosition(null);
+        return;
+      }
+
+      const currentRunId = releaseRunRef.current;
+      const contentElement = contentRef.current;
+
+      pressedRef.current = 3;
+
+      if (contentElement) {
+        setCssEndEvent(contentElement, 'transition', {
+          tolerance: 1,
+        }).then(() => {
+          finalizeRelease(currentRunId);
+        });
+      } else {
+        finalizeRelease(currentRunId);
+      }
+
+      setPressPosition((previous) =>
+        previous === releasingClassName ? previous : releasingClassName
+      );
     },
-    [active, clearPressCallback, cssModule, pressPosition, rootElement]
+    [
+      active,
+      activeClassName,
+      cancelPendingRelease,
+      cssModule,
+      finalizeRelease,
+      pressPosition,
+      releasingClassName,
+      rootElement,
+    ]
   );
+
+  React.useEffect(() => {
+    if (active !== true) {
+      return;
+    }
+
+    cancelPendingRelease();
+
+    if (pressedRef.current === 0) {
+      pressedRef.current = 2;
+    }
+
+    setPressPosition((previous) =>
+      previous === activeClassName ? previous : activeClassName
+    );
+  }, [active, activeClassName, cancelPendingRelease]);
 
   // IMPORTANT:
   // Only clear when external controlled `active` mode is turned off.
@@ -248,9 +457,270 @@ const AwesomeButton = ({
 
   React.useEffect(() => {
     return () => {
+      mountedRef.current = false;
+      resizeObserverRef.current?.disconnect();
+      resizeObserverRef.current = null;
+      if (rafRef.current !== null && typeof window !== 'undefined') {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      if (
+        textTransitionRafRef.current !== null &&
+        typeof window !== 'undefined'
+      ) {
+        window.cancelAnimationFrame(textTransitionRafRef.current);
+        textTransitionRafRef.current = null;
+      }
       contentRef.current?.clearCssEvent?.();
     };
   }, []);
+
+  const clearAutoWidthRaf = React.useCallback(() => {
+    if (rafRef.current !== null && typeof window !== 'undefined') {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  }, []);
+
+  const measureAutoWidth = React.useCallback(() => {
+    if (!shouldSnapAutoWidth) {
+      setAutoWidths((previous) =>
+        previous.content === null && previous.label === null
+          ? previous
+          : DEFAULT_AUTO_WIDTHS
+      );
+      return;
+    }
+
+    const contentElement = contentRef.current;
+    const labelElement = labelRef.current;
+
+    if (!contentElement || !labelElement) {
+      return;
+    }
+
+    const previousInlineValues = {
+      contentWidth: contentElement.style.width,
+      contentFlex: contentElement.style.flex,
+      labelWidth: labelElement.style.width,
+      labelFlexBasis: labelElement.style.flexBasis,
+      labelFlex: labelElement.style.flex,
+    };
+
+    contentElement.style.width = 'auto';
+    contentElement.style.flex = '0 1 auto';
+    labelElement.style.width = 'auto';
+    labelElement.style.flexBasis = 'auto';
+    labelElement.style.flex = '0 1 auto';
+
+    const nextWidths = {
+      content: readSnappedWidth(contentElement),
+      label: readSnappedWidth(labelElement),
+    };
+
+    contentElement.style.width = previousInlineValues.contentWidth;
+    contentElement.style.flex = previousInlineValues.contentFlex;
+    labelElement.style.width = previousInlineValues.labelWidth;
+    labelElement.style.flexBasis = previousInlineValues.labelFlexBasis;
+    labelElement.style.flex = previousInlineValues.labelFlex;
+
+    setAutoWidths((previous) =>
+      previous.content === nextWidths.content &&
+      previous.label === nextWidths.label
+        ? previous
+        : nextWidths
+    );
+  }, [shouldSnapAutoWidth]);
+
+  const scheduleAutoWidthMeasure = React.useCallback(() => {
+    if (typeof window === 'undefined') {
+      measureAutoWidth();
+      return;
+    }
+
+    clearAutoWidthRaf();
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (mountedRef.current) {
+        measureAutoWidth();
+      }
+    });
+  }, [clearAutoWidthRaf, measureAutoWidth]);
+
+  const clearTextTransitionRaf = React.useCallback(() => {
+    if (
+      textTransitionRafRef.current !== null &&
+      typeof window !== 'undefined'
+    ) {
+      window.cancelAnimationFrame(textTransitionRafRef.current);
+      textTransitionRafRef.current = null;
+    }
+  }, []);
+
+  const updateDisplayedText = React.useCallback((value: string | null) => {
+    displayedTextRef.current = value;
+    setDisplayedText((previous) => (previous === value ? previous : value));
+  }, []);
+
+  React.useEffect(() => {
+    if (textTransition !== true || stringChild == null) {
+      clearTextTransitionRaf();
+      targetTextRef.current = stringChild;
+      updateDisplayedText(stringChild);
+      return;
+    }
+
+    if (displayedTextRef.current == null) {
+      targetTextRef.current = stringChild;
+      updateDisplayedText(stringChild);
+      return;
+    }
+
+    if (
+      targetTextRef.current === stringChild &&
+      (textTransitionRafRef.current !== null ||
+        displayedTextRef.current === stringChild)
+    ) {
+      return;
+    }
+
+    if (typeof window === 'undefined') {
+      targetTextRef.current = stringChild;
+      updateDisplayedText(stringChild);
+      return;
+    }
+
+    const transitionFrame: TextTransitionFrame = {
+      from: displayedTextRef.current,
+      to: stringChild,
+      startedAt:
+        typeof window.performance?.now === 'function'
+          ? window.performance.now()
+          : Date.now(),
+    };
+
+    targetTextRef.current = stringChild;
+    clearTextTransitionRaf();
+
+    const tick = (timestamp: number) => {
+      const elapsed = Math.max(0, timestamp - transitionFrame.startedAt);
+      const progress = Math.min(1, elapsed / TEXT_TRANSITION_DURATION);
+
+      if (progress >= 1) {
+        textTransitionRafRef.current = null;
+        updateDisplayedText(transitionFrame.to);
+        return;
+      }
+
+      updateDisplayedText(
+        buildTextTransitionFrame(
+          transitionFrame.from,
+          transitionFrame.to,
+          progress
+        )
+      );
+
+      textTransitionRafRef.current = window.requestAnimationFrame(tick);
+    };
+
+    textTransitionRafRef.current = window.requestAnimationFrame(tick);
+  }, [
+    clearTextTransitionRaf,
+    stringChild,
+    textTransition,
+    updateDisplayedText,
+  ]);
+
+  useIsomorphicLayoutEffect(() => {
+    measureAutoWidth();
+  }, [
+    after,
+    before,
+    children,
+    displayedText,
+    measureAutoWidth,
+    placeholder,
+    size,
+    visible,
+  ]);
+
+  React.useEffect(() => {
+    if (!shouldSnapAutoWidth || typeof ResizeObserver === 'undefined') {
+      resizeObserverRef.current?.disconnect();
+      resizeObserverRef.current = null;
+      return;
+    }
+
+    resizeObserverRef.current?.disconnect();
+    const observer = new ResizeObserver(() => {
+      scheduleAutoWidthMeasure();
+    });
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+    if (labelRef.current) {
+      observer.observe(labelRef.current);
+    }
+
+    resizeObserverRef.current = observer;
+
+    return () => {
+      observer.disconnect();
+      if (resizeObserverRef.current === observer) {
+        resizeObserverRef.current = null;
+      }
+    };
+  }, [scheduleAutoWidthMeasure, shouldSnapAutoWidth]);
+
+  React.useEffect(() => {
+    if (
+      !shouldSnapAutoWidth ||
+      typeof document === 'undefined' ||
+      !('fonts' in document) ||
+      !(document as Document & { fonts?: FontFaceSet }).fonts?.ready
+    ) {
+      return;
+    }
+
+    let cancelled = false;
+
+    (document as Document & { fonts: FontFaceSet }).fonts.ready
+      .then(() => {
+        if (!cancelled) {
+          scheduleAutoWidthMeasure();
+        }
+      })
+      .catch(() => {
+        // no-op
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [scheduleAutoWidthMeasure, shouldSnapAutoWidth]);
+
+  const contentInlineStyle = React.useMemo<React.CSSProperties | undefined>(() => {
+    if (!shouldSnapAutoWidth || autoWidths.content == null) {
+      return undefined;
+    }
+
+    return {
+      width: `${autoWidths.content}px`,
+      flex: `0 0 ${autoWidths.content}px`,
+    };
+  }, [autoWidths.content, shouldSnapAutoWidth]);
+
+  const labelInlineStyle = React.useMemo<React.CSSProperties | undefined>(() => {
+    if (!shouldSnapAutoWidth || autoWidths.label == null) {
+      return undefined;
+    }
+
+    return {
+      width: `${autoWidths.label}px`,
+      flexBasis: `${autoWidths.label}px`,
+    };
+  }, [autoWidths.label, shouldSnapAutoWidth]);
 
   const dispatchPressEvent = React.useCallback(() => {
     if (typeof window === 'undefined' || !wrapperRef.current) return;
@@ -278,6 +748,7 @@ const AwesomeButton = ({
         return;
       }
 
+      cancelPendingRelease();
       pressedRef.current = 1;
 
       if (contentRef.current) {
@@ -290,9 +761,9 @@ const AwesomeButton = ({
         onPressed?.(event);
       }
 
-      setPressPosition(`${rootElement}--active`);
+      setPressPosition(activeClassName);
     },
-    [isDisabled, onPressed, rootElement]
+    [activeClassName, cancelPendingRelease, isDisabled, onPressed]
   );
 
   const pressOut = React.useCallback(
@@ -528,6 +999,9 @@ const AwesomeButton = ({
   }
 
   const RenderComponentAny = RenderComponent as any;
+  const renderedLabel = textTransition && stringChild != null
+    ? displayedText ?? stringChild
+    : children;
 
   return (
     <RenderComponentAny
@@ -559,10 +1033,14 @@ const AwesomeButton = ({
         className={getClassName(`${rootElement}__wrapper`, cssModule)}>
         <span
           ref={contentRef}
+          style={contentInlineStyle}
           className={getClassName(`${rootElement}__content`, cssModule)}>
           {before}
-          <span className={getClassName(`${rootElement}__label`, cssModule)}>
-            {children}
+          <span
+            ref={labelRef}
+            style={labelInlineStyle}
+            className={getClassName(`${rootElement}__label`, cssModule)}>
+            {renderedLabel}
           </span>
           {after}
         </span>

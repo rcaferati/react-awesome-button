@@ -52,24 +52,24 @@
       }
     }
     .#{$button-root}__content {
-      // safari span inheritance issue
-      > span > span,
-      > svg {
+      > * {
         transition: opacity 200ms ease-out;
       }
     }
     &.#{$button-root}--active {
       .#{$button-root}__content {
-        // safari span inheritance issue
-        > span > span,
-        > svg {
-          opacity: 0.1;
+        > * {
+          opacity: 0;
         }
       }
       .#{$button-root}__progress:after,
-      .#{$button-root}__progress:before,
-      .#{$button-root}__content:after {
+      .#{$button-root}__progress:before {
         display: block;
+      }
+      &:not(.#{$button-root}--progress-bar-hidden) {
+        .#{$button-root}__content:after {
+          display: block;
+        }
       }
     }
     .#{$button-root}__content {
@@ -90,26 +90,32 @@
         transform: translate3d(0, 50%, 0);
       }
     }
-    .#{$button-root}__content {
-      &:after {
-        transition: transform var(--loading-transition-speed) ease-out;
-        transform: translate3d(-15%, 0, 0);
+    &:not(.#{$button-root}--progress-bar-hidden) {
+      .#{$button-root}__content {
+        &:after {
+          transition: transform var(--loading-transition-speed) ease-out;
+          transform: translate3d(-15%, 0, 0);
+        }
       }
     }
   }
   &--errored {
-    .#{$button-root}__content {
-      &:after {
-        background-color: rgba(255, 0, 0, 0.75);
+    &:not(.#{$button-root}--progress-bar-hidden) {
+      .#{$button-root}__content {
+        &:after {
+          background-color: rgba(255, 0, 0, 0.75);
+        }
       }
     }
   }
   &--end {
-    .#{$button-root}__content {
-      &:after {
-        transition: transform var(--loading-transition-end-speed)
-          var(--loading-transition-timing);
-        transform: translate3d(0, 0, 0);
+    &:not(.#{$button-root}--progress-bar-hidden) {
+      .#{$button-root}__content {
+        &:after {
+          transition: transform var(--loading-transition-end-speed)
+            var(--loading-transition-timing);
+          transform: translate3d(0, 0, 0);
+        }
       }
     }
     .#{$button-root}__progress {

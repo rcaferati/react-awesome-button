@@ -86,7 +86,12 @@ exports[`Public API smoke tests renders AwesomeButtonProgress without crashing 1
   onPointerLeave={[Function]}
   onPointerMove={[Function]}
   onPointerUp={[Function]}
-  style={{}}
+  style={
+    {
+      "--loading-transition-end-speed": "300ms",
+      "--loading-transition-speed": "6000ms",
+    }
+  }
   type="button"
 >
   <span
@@ -252,7 +257,12 @@ exports[`Public API smoke tests renders a progress button with explicit success 
   onPointerLeave={[Function]}
   onPointerMove={[Function]}
   onPointerUp={[Function]}
-  style={{}}
+  style={
+    {
+      "--loading-transition-end-speed": "300ms",
+      "--loading-transition-speed": "6000ms",
+    }
+  }
   type="button"
 >
   <span
