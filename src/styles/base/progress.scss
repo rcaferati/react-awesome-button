@@ -1,7 +1,7 @@
 // styles/base/progress.scss
 .#{$button-root} {
   &--progress {
-    .#{$button-root}__wrapper > span:nth-child(2) {
+    .#{$button-root}__extra {
       position: absolute;
       top: var(--button-raise-level);
       left: 0;

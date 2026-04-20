@@ -28,6 +28,8 @@
   --button-hover-pressure: #{$button-hover-pressure};
   --button-shadow-color: #{$button-shadow-color};
   --button-shadow-divisor: #{$button-shadow-divisor};
+  --button-size-transition-speed: 125ms;
+  --button-size-transition-timing: cubic-bezier(0.3, 0.05, 0.2, 1);
 
   --loading-transition-timing: #{$loading-transition-timing};
   --loading-transition-speed: #{$loading-transition-speed};
@@ -76,6 +78,9 @@
   --button-placeholder-color-hover: #{$button-placeholder-color-hover};
   --button-placeholder-color-active: #{$button-placeholder-color-active};
   --button-placeholder-border: #{$button-placeholder-border};
+
+  --button-current-width: auto;
+  --button-current-height: var(--button-default-height);
 
   --button-mail-color: #{$button-mail-color};
   --button-mail-color-dark: #{$button-mail-color-dark};

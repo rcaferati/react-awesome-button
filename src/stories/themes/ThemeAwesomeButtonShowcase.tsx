@@ -133,7 +133,8 @@ export default function ThemeAwesomeButtonShowcase({
 
           <AwesomeButton
             {...(makeButtonProps(cssModule, 'link') as AwesomeButtonProps)}
-            href="https://example.com">
+            href="https://github.com/rcaferati"
+            containerProps={{ target: '_blank', rel: 'noreferrer noopener' }}>
             Open link
           </AwesomeButton>
 

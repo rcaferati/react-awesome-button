@@ -71,8 +71,8 @@
 @mixin getSizes($sizes) {
   @each $size in $sizes {
     &--#{nth($size, 1)} {
-      width: nth($size, 2);
-      height: nth($size, 3);
+      --button-current-width: #{nth($size, 2)};
+      --button-current-height: #{nth($size, 3)};
       font-size: nth($size, 4);
       line-height: nth($size, 5);
     }
@@ -132,9 +132,11 @@ button.#{$button-root} {
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
-  height: var(--button-default-height);
   position: relative;
   z-index: 1;
+  min-height: calc(var(--button-current-height) + var(--button-raise-level));
+  height: calc(var(--button-current-height) + var(--button-raise-level));
+  width: var(--button-current-width);
   background-color: transparent;
   font-size: var(--button-default-font-size);
   line-height: var(--button-default-line-height);
@@ -155,6 +157,19 @@ button.#{$button-root} {
 
   &:hover {
     text-decoration: none;
+  }
+
+  &--fixed {
+    &.#{$button-root}--animate-size {
+      transition:
+        opacity 0.1s ease-out,
+        width var(--button-size-transition-speed)
+          var(--button-size-transition-timing),
+        height var(--button-size-transition-speed)
+          var(--button-size-transition-timing),
+        min-height var(--button-size-transition-speed)
+          var(--button-size-transition-timing);
+    }
   }
 
   .#{$button-root}__wrapper {
@@ -198,11 +213,14 @@ button.#{$button-root} {
     flex: 1;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    min-height: var(--button-current-height);
     border-radius: var(--button-default-border-radius);
     text-indent: 0;
-    z-index: 1;
+    z-index: 2;
     overflow: hidden;
     padding: 0 var(--button-horizontal-padding);
+    box-sizing: border-box;
     backface-visibility: hidden;
     transform-style: flat;
     transform: skew(0) translate3d(0, 0, 0);
@@ -215,37 +233,43 @@ button.#{$button-root} {
     &:after {
       @extend %fill-parent;
     }
+  }
 
-    // Canonical label wrapper (component renders this class)
-    .#{$button-root}__label {
-      display: flex;
-      align-items: center;
-      min-width: 0; // required so flex item can shrink and ellipsis can work
-      text-decoration: none;
+  .#{$button-root}__slot {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+  }
 
-      > svg:only-child {
-        margin: 0;
-      }
-    }
+  .#{$button-root}__slot--before {
+    margin-right: 4px;
+  }
 
-    // Backward-compat fallback while component migration is in progress
-    > span:nth-child(1):not(.#{$button-root}__label) {
-      display: flex;
-      align-items: center;
-      min-width: 0;
+  .#{$button-root}__slot--after {
+    margin-left: 4px;
+  }
 
-      > svg:only-child {
-        margin: 0;
-      }
-    }
+  .#{$button-root}__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    flex: 0 1 auto;
+    text-decoration: none;
+  }
 
-    > svg:nth-child(1) {
-      margin-right: 4px;
-    }
+  .#{$button-root}__slot > svg,
+  .#{$button-root}__label > svg:only-child {
+    display: block;
+    margin: 0;
+  }
 
-    > svg:nth-last-child(1) {
-      margin-left: 4px;
-    }
+  .#{$button-root}__extra {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
   &:focus {
@@ -275,29 +299,23 @@ button.#{$button-root} {
   @include getColors($button-colors);
 
   &--placeholder {
-    width: var(--button-default-placeholder-width);
+    --button-current-width: var(--button-default-placeholder-width);
 
     .#{$button-root}__content {
-      > span {
+      color: transparent;
+
+      &:before {
+        content: '';
         display: block;
         width: 100%;
         height: 40%;
-        background-color: var(--button-placeholder-color-light);
+        min-height: 12px;
         border-radius: 2px;
+        background-color: var(--button-placeholder-color-light);
         position: relative;
         overflow: hidden;
-
-        &:before {
-          content: '';
-          background-color: rgba(0, 0, 0, 0.1);
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          animation: placeholder calc(var(--transform-speed) * 14) linear
-            forwards infinite;
-        }
+        animation: placeholder calc(var(--transform-speed) * 14) linear
+          forwards infinite;
       }
     }
   }
@@ -316,22 +334,10 @@ button.#{$button-root} {
   &--fixed {
     .#{$button-root}__content {
       .#{$button-root}__label {
-        // IMPORTANT: block display makes text-overflow paint reliably
-        display: inline-block;
+        display: block;
         min-width: 0;
         max-width: 100%;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      > span:nth-child(1):not(.#{$button-root}__label) {
-        // IMPORTANT: same fallback behavior during migration
-        display: inline-block;
-        min-width: 0;
-        max-width: 100%;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -353,17 +359,27 @@ button.#{$button-root} {
         overflow: visible;
         text-overflow: clip;
       }
+    }
 
-      > span:nth-child(1):not(.#{$button-root}__label) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 0 1 auto;
-        min-width: 0;
-        max-width: none;
-        white-space: nowrap;
-        overflow: visible;
-        text-overflow: clip;
+    &.#{$button-root}--animate-size.#{$button-root}--auto-size-ready {
+      .#{$button-root}__content {
+        transition:
+          border var(--transform-speed) ease-out,
+          transform var(--transform-speed) ease-out,
+          background-color var(--transform-speed) ease-out,
+          color var(--transform-speed) ease-out,
+          width var(--button-size-transition-speed)
+            var(--button-size-transition-timing),
+          flex-basis var(--button-size-transition-speed)
+            var(--button-size-transition-timing);
+      }
+
+      .#{$button-root}__label {
+        transition:
+          width var(--button-size-transition-speed)
+            var(--button-size-transition-timing),
+          flex-basis var(--button-size-transition-speed)
+            var(--button-size-transition-timing);
       }
     }
   }
@@ -387,19 +403,17 @@ button.#{$button-root} {
   }
 
   &--icon {
-    .#{$button-root}__content {
-      .#{$button-root}__label {
-        > svg {
-          vertical-align: middle;
-        }
-      }
+    --button-current-width: var(--button-icon-width);
+    --button-current-height: var(--button-icon-height);
 
-      // Backward-compat fallback during migration
-      > span:nth-child(1):not(.#{$button-root}__label) {
-        > svg {
-          vertical-align: middle;
-        }
-      }
+    .#{$button-root}__content {
+      padding: 0;
+      min-width: var(--button-icon-width);
+    }
+
+    .#{$button-root}__slot--before,
+    .#{$button-root}__slot--after {
+      margin: 0;
     }
   }
 
