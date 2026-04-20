@@ -2,7 +2,7 @@
 
 exports[`Public API smoke tests renders AwesomeButton with before/after slots 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible"
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--animate-size"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -21,21 +21,31 @@ exports[`Public API smoke tests renders AwesomeButton with before/after slots 1`
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
-        aria-hidden="true"
+        className="aws-btn__slot aws-btn__slot--before"
       >
-        ←
+        <span
+          aria-hidden="true"
+        >
+          ←
+        </span>
       </span>
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         Continue
       </span>
       <span
-        aria-hidden="true"
+        className="aws-btn__slot aws-btn__slot--after"
       >
-        →
+        <span
+          aria-hidden="true"
+        >
+          →
+        </span>
       </span>
     </span>
   </span>
@@ -45,7 +55,7 @@ exports[`Public API smoke tests renders AwesomeButton with before/after slots 1`
 exports[`Public API smoke tests renders AwesomeButton without crashing 1`] = `
 <button
   aria-disabled={true}
-  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--placeholder aws-btn--disabled"
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--animate-size aws-btn--placeholder aws-btn--disabled"
   disabled={true}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -64,18 +74,15 @@ exports[`Public API smoke tests renders AwesomeButton without crashing 1`] = `
   >
     <span
       className="aws-btn__content"
-    >
-      <span
-        className="aws-btn__label"
-      />
-    </span>
+      data-aws-btn-role="content"
+    />
   </span>
 </button>
 `;
 
 exports[`Public API smoke tests renders AwesomeButtonProgress without crashing 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--visible aws-btn--progress"
+  className="aws-btn aws-btn--auto aws-btn--visible aws-btn--animate-size aws-btn--progress"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -99,19 +106,25 @@ exports[`Public API smoke tests renders AwesomeButtonProgress without crashing 1
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         <span />
       </span>
     </span>
-    <span>
-      <span
-        className="aws-btn__progress"
-        data-loading="Wait.."
-        data-status="Success!"
-      />
+    <span
+      className="aws-btn__extra"
+    >
+      <span>
+        <span
+          className="aws-btn__progress"
+          data-loading="Wait.."
+          data-status="Success!"
+        />
+      </span>
     </span>
   </span>
 </button>
@@ -119,7 +132,7 @@ exports[`Public API smoke tests renders AwesomeButtonProgress without crashing 1
 
 exports[`Public API smoke tests renders AwesomeButtonSocial with sharer props 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--github aws-btn--visible"
+  className="aws-btn aws-btn--auto aws-btn--github aws-btn--visible aws-btn--animate-size"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -138,9 +151,11 @@ exports[`Public API smoke tests renders AwesomeButtonSocial with sharer props 1`
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         GitHub
       </span>
@@ -152,7 +167,7 @@ exports[`Public API smoke tests renders AwesomeButtonSocial with sharer props 1`
 exports[`Public API smoke tests renders AwesomeButtonSocial without crashing 1`] = `
 <button
   aria-disabled={true}
-  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--placeholder aws-btn--disabled"
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--animate-size aws-btn--placeholder aws-btn--disabled"
   disabled={true}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -171,18 +186,15 @@ exports[`Public API smoke tests renders AwesomeButtonSocial without crashing 1`]
   >
     <span
       className="aws-btn__content"
-    >
-      <span
-        className="aws-btn__label"
-      />
-    </span>
+      data-aws-btn-role="content"
+    />
   </span>
 </button>
 `;
 
 exports[`Public API smoke tests renders a button without moveEvents 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible"
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--animate-size"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -201,9 +213,11 @@ exports[`Public API smoke tests renders a button without moveEvents 1`] = `
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         Button
       </span>
@@ -214,7 +228,7 @@ exports[`Public API smoke tests renders a button without moveEvents 1`] = `
 
 exports[`Public API smoke tests renders a primary button 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible"
+  className="aws-btn aws-btn--auto aws-btn--primary aws-btn--visible aws-btn--animate-size"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -233,9 +247,11 @@ exports[`Public API smoke tests renders a primary button 1`] = `
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         Button
       </span>
@@ -246,7 +262,7 @@ exports[`Public API smoke tests renders a primary button 1`] = `
 
 exports[`Public API smoke tests renders a progress button with explicit success completion 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--visible aws-btn--progress"
+  className="aws-btn aws-btn--auto aws-btn--visible aws-btn--animate-size aws-btn--progress"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -270,21 +286,27 @@ exports[`Public API smoke tests renders a progress button with explicit success 
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         <span>
           Button
         </span>
       </span>
     </span>
-    <span>
-      <span
-        className="aws-btn__progress"
-        data-loading="Wait.."
-        data-status="Success!"
-      />
+    <span
+      className="aws-btn__extra"
+    >
+      <span>
+        <span
+          className="aws-btn__progress"
+          data-loading="Wait.."
+          data-status="Success!"
+        />
+      </span>
     </span>
   </span>
 </button>
@@ -292,7 +314,7 @@ exports[`Public API smoke tests renders a progress button with explicit success 
 
 exports[`Public API smoke tests renders a secondary button 1`] = `
 <button
-  className="aws-btn aws-btn--auto aws-btn--secondary aws-btn--visible"
+  className="aws-btn aws-btn--auto aws-btn--secondary aws-btn--visible aws-btn--animate-size"
   disabled={false}
   onClick={[Function]}
   onKeyDown={[Function]}
@@ -311,9 +333,11 @@ exports[`Public API smoke tests renders a secondary button 1`] = `
   >
     <span
       className="aws-btn__content"
+      data-aws-btn-role="content"
     >
       <span
         className="aws-btn__label"
+        data-aws-btn-role="label"
       >
         Button
       </span>

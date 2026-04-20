@@ -26,6 +26,7 @@ const meta: Meta<typeof AwesomeButton> = {
     children: 'Button',
     type: 'primary',
     size: 'medium',
+    animateSize: true,
     visible: true,
     between: false,
     disabled: false,
@@ -122,6 +123,14 @@ const meta: Meta<typeof AwesomeButton> = {
       control: 'boolean',
       description:
         'Animates string-only label changes with a scrambling transition.',
+      table: {
+        category: 'Behavior',
+      },
+    },
+    animateSize: {
+      control: 'boolean',
+      description:
+        'Animates fixed-size changes and measured auto-width changes when enabled.',
       table: {
         category: 'Behavior',
       },
@@ -228,7 +237,11 @@ export const LinkStyle: Story = {
     type: 'link',
     size: 'medium',
     children: 'Open link',
-    href: 'https://example.com',
+    href: 'https://github.com/rcaferati',
+    containerProps: {
+      target: '_blank',
+      rel: 'noreferrer noopener',
+    },
   },
 };
 
@@ -347,6 +360,77 @@ export const Sizes: Story = {
   },
 };
 
+export const AnimatedSizeChange: Story = {
+  render: (args) => {
+    const sizes: Array<'small' | 'medium' | 'large'> = [
+      'small',
+      'medium',
+      'large',
+    ];
+    const [index, setIndex] = React.useState(0);
+    const nextSize = sizes[index] ?? 'small';
+
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gap: 12,
+          justifyItems: 'center',
+        }}>
+        <div
+          style={{
+            display: 'grid',
+            gap: 8,
+            justifyItems: 'center',
+          }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>animated</span>
+          <AwesomeButton {...(args as AwesomeButtonProps)} size={nextSize}>
+            {nextSize}
+          </AwesomeButton>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gap: 8,
+            justifyItems: 'center',
+          }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>instant opt-out</span>
+          <AwesomeButton
+            {...(args as AwesomeButtonProps)}
+            animateSize={false}
+            size={nextSize}>
+            {nextSize}
+          </AwesomeButton>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIndex((value) => (value + 1) % sizes.length)}
+          style={{
+            border: '1px solid #ccc',
+            background: '#fff',
+            padding: '6px 10px',
+            borderRadius: 6,
+            cursor: 'pointer',
+            fontSize: 12,
+          }}>
+          Cycle size
+        </button>
+      </div>
+    );
+  },
+  args: {
+    type: 'primary',
+    size: 'small',
+  },
+  parameters: {
+    controls: {
+      exclude: ['children', 'animateSize', 'size'],
+    },
+  },
+};
+
 export const MultipleAutoSize: Story = {
   render: (args) => {
     const labels = [
@@ -400,6 +484,7 @@ export const MultipleAutoSize: Story = {
 export const AutoSizeAnimatedContentChange: Story = {
   render: (args) => {
     const [expanded, setExpanded] = React.useState(false);
+    const label = expanded ? 'Open analytics dashboard' : 'Open';
 
     return (
       <div
@@ -411,8 +496,8 @@ export const AutoSizeAnimatedContentChange: Story = {
         <AwesomeButton
           {...(args as AwesomeButtonProps)}
           size={null}
-          onPress={() => setExpanded((v) => !v)}>
-          {expanded ? 'Continue to checkout and review your order' : 'Continue'}
+          textTransition>
+          {label}
         </AwesomeButton>
 
         <button
@@ -426,7 +511,7 @@ export const AutoSizeAnimatedContentChange: Story = {
             cursor: 'pointer',
             fontSize: 12,
           }}>
-          Toggle content
+          Toggle label length
         </button>
       </div>
     );
@@ -434,17 +519,96 @@ export const AutoSizeAnimatedContentChange: Story = {
   args: {
     type: 'primary',
     size: null,
-    children: 'Continue',
+    textTransition: true,
+    children: 'Open',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Uses auto width (size=null) and toggles content after first render to validate animated width growth/shrink.',
+          'Uses an external toggle with auto width (size=null) and textTransition to validate Vue-parity grow-first and shrink-last choreography.',
       },
     },
     controls: {
-      exclude: ['children', 'size', 'onPress'],
+      exclude: ['children', 'size', 'textTransition'],
+    },
+  },
+};
+
+export const AnimatedAutoWidthChange: Story = {
+  render: (args) => {
+    const [expanded, setExpanded] = React.useState(false);
+    const label = expanded ? 'Open analytics dashboard' : 'Open';
+
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gap: 12,
+          justifyItems: 'center',
+        }}>
+        <div
+          style={{
+            display: 'grid',
+            gap: 8,
+            justifyItems: 'center',
+          }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>animated</span>
+          <AwesomeButton
+            {...(args as AwesomeButtonProps)}
+            size={null}
+            textTransition>
+            {label}
+          </AwesomeButton>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gap: 8,
+            justifyItems: 'center',
+          }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>instant opt-out</span>
+          <AwesomeButton
+            {...(args as AwesomeButtonProps)}
+            animateSize={false}
+            size={null}
+            textTransition>
+            {label}
+          </AwesomeButton>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          style={{
+            border: '1px solid #ccc',
+            background: '#fff',
+            padding: '6px 10px',
+            borderRadius: 6,
+            cursor: 'pointer',
+            fontSize: 12,
+          }}>
+          Toggle label length
+        </button>
+      </div>
+    );
+  },
+  args: {
+    type: 'primary',
+    size: null,
+    textTransition: true,
+    children: 'Open',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Compares animated and animateSize={false} auto-width label changes using the same external toggle flow as the Vue reference story.',
+      },
+    },
+    controls: {
+      exclude: ['children', 'animateSize', 'size', 'textTransition'],
     },
   },
 };

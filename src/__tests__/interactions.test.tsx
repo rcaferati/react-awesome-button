@@ -55,6 +55,22 @@ function dispatchPointerEvent(
   fireEvent(element, event);
 }
 
+function dispatchTransitionEnd(
+  element: Element,
+  propertyName: 'width' | 'flex-basis' = 'width'
+) {
+  const event = new Event('transitionend', {
+    bubbles: true,
+  });
+
+  Object.defineProperty(event, 'propertyName', {
+    configurable: true,
+    value: propertyName,
+  });
+
+  fireEvent(element, event);
+}
+
 const originalPointerEvent = window.PointerEvent;
 
 function mockAutoWidthScrollMetrics({
@@ -91,12 +107,13 @@ function mockAutoWidthScrollMetrics({
     .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
     .mockImplementation(function mockScrollWidth(this: HTMLElement) {
       const text = this.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+      const role = this.getAttribute('data-aws-btn-role');
 
-      if (this.classList.contains('aws-btn__label')) {
+      if (role === 'label' || this.classList.contains('aws-btn__label')) {
         return resolveWidth(text, labelWidths);
       }
 
-      if (this.classList.contains('aws-btn__content')) {
+      if (role === 'content' || this.classList.contains('aws-btn__content')) {
         return resolveWidth(text, contentWidths);
       }
 
@@ -133,6 +150,12 @@ function installRafMock() {
       window.cancelAnimationFrame = originalCancelAnimationFrame;
     },
   };
+}
+
+async function flushAnimationFrame(duration = 16) {
+  await act(async () => {
+    jest.advanceTimersByTime(duration);
+  });
 }
 
 describe('v8 interaction smoke tests', () => {
@@ -197,12 +220,18 @@ describe('v8 interaction smoke tests', () => {
 
   it('AwesomeButton renders anchor mode when href is provided', () => {
     render(
-      <AwesomeButton href="https://example.com">Open website</AwesomeButton>
+      <AwesomeButton
+        href="https://github.com/rcaferati"
+        containerProps={{ target: '_blank', rel: 'noreferrer noopener' }}>
+        Open website
+      </AwesomeButton>
     );
 
     const link = screen.getByText('Open website').closest('a');
     expect(link).toBeTruthy();
-    expect(link?.getAttribute('href')).toBe('https://example.com');
+    expect(link?.getAttribute('href')).toBe('https://github.com/rcaferati');
+    expect(link?.getAttribute('target')).toBe('_blank');
+    expect(link?.getAttribute('rel')).toBe('noreferrer noopener');
   });
 
   it('AwesomeButton applies and clears controlled active state from props', async () => {
@@ -266,7 +295,10 @@ describe('v8 interaction smoke tests', () => {
     expect(onPress).not.toHaveBeenCalled();
     expect(onReleased).not.toHaveBeenCalled();
 
-    deferredRelease.resolve();
+    await act(async () => {
+      deferredRelease.resolve();
+      await Promise.resolve();
+    });
 
     await waitFor(() => {
       expect(root?.className).not.toContain('aws-btn--releasing');
@@ -312,7 +344,10 @@ describe('v8 interaction smoke tests', () => {
     expect(root?.className).not.toContain('aws-btn--active');
     expect(onPress).not.toHaveBeenCalled();
 
-    deferredRelease.resolve();
+    await act(async () => {
+      deferredRelease.resolve();
+      await Promise.resolve();
+    });
 
     await waitFor(() => {
       expect(root?.className).not.toContain('aws-btn--releasing');
@@ -361,7 +396,10 @@ describe('v8 interaction smoke tests', () => {
       expect(root?.className).toContain('aws-btn--releasing');
       expect(onPress).not.toHaveBeenCalled();
 
-      deferredRelease.resolve();
+      await act(async () => {
+        deferredRelease.resolve();
+        await Promise.resolve();
+      });
 
       await waitFor(() => {
         expect(root?.className).not.toContain('aws-btn--releasing');
@@ -406,13 +444,54 @@ describe('v8 interaction smoke tests', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(root?.className).toContain('aws-btn--releasing');
 
-    deferredRelease.resolve();
+    await act(async () => {
+      deferredRelease.resolve();
+      await Promise.resolve();
+    });
 
     await waitFor(() => {
       expect(root?.className).not.toContain('aws-btn--releasing');
     });
 
     expect(onReleased).toHaveBeenCalledTimes(1);
+  });
+
+  it('AwesomeButton filters pressed and released timing to transform transitions', async () => {
+    render(<AwesomeButton>Transform only</AwesomeButton>);
+
+    const root = screen.getByText('Transform only').closest('button');
+    expect(root).toBeTruthy();
+
+    fireEvent.pointerDown(root!, {
+      button: 0,
+      pointerId: 1,
+      pointerType: 'mouse',
+      clientY: 10,
+    });
+
+    fireEvent.pointerUp(root!, {
+      pointerId: 1,
+      pointerType: 'mouse',
+      clientY: 10,
+    });
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    expect(mockSetCssEndEvent).toHaveBeenCalledTimes(2);
+    expect(mockSetCssEndEvent.mock.calls[0]?.[2]).toEqual(
+      expect.objectContaining({
+        propertyName: 'transform',
+        tolerance: 1,
+      })
+    );
+    expect(mockSetCssEndEvent.mock.calls[1]?.[2]).toEqual(
+      expect.objectContaining({
+        propertyName: 'transform',
+        tolerance: 1,
+      })
+    );
   });
 
   it('AwesomeButton ignores stale release completion when a new press starts mid-release', async () => {
@@ -453,7 +532,10 @@ describe('v8 interaction smoke tests', () => {
     expect(root?.className).toContain('aws-btn--active');
     expect(root?.className).not.toContain('aws-btn--releasing');
 
-    deferredRelease.resolve();
+    await act(async () => {
+      deferredRelease.resolve();
+      await Promise.resolve();
+    });
 
     await act(async () => {
       await Promise.resolve();
@@ -489,7 +571,10 @@ describe('v8 interaction smoke tests', () => {
     expect(root?.className).toContain('aws-btn--releasing');
     expect(root?.className).not.toContain('aws-btn--active');
 
-    deferredRelease.resolve();
+    await act(async () => {
+      deferredRelease.resolve();
+      await Promise.resolve();
+    });
 
     await waitFor(() => {
       expect(root?.className).not.toContain('aws-btn--releasing');
@@ -537,15 +622,20 @@ describe('v8 interaction smoke tests', () => {
 
       expect(content).toBeTruthy();
       expect(content?.style.width).toBe('153px');
-      expect(content?.style.flex).toBe('0 0 153px');
+      expect(content?.style.flexBasis).toBe('153px');
+      expect(content?.style.flexGrow).toBe('0');
+      expect(content?.style.flexShrink).toBe('0');
       expect(label.style.width).toBe('121px');
       expect(label.style.flexBasis).toBe('121px');
+      expect(label.style.flexGrow).toBe('0');
+      expect(label.style.flexShrink).toBe('0');
     } finally {
       scrollWidthMock.mockRestore();
     }
   });
 
-  it('AwesomeButton updates snapped auto width when content changes', () => {
+  it('AwesomeButton updates snapped auto width when content changes', async () => {
+    jest.useFakeTimers();
     const scrollWidthMock = mockAutoWidthScrollMetrics({
       labelWidths: {
         Go: 20,
@@ -556,6 +646,7 @@ describe('v8 interaction smoke tests', () => {
         'Open Dashboard': 153,
       },
     });
+    const rafMock = installRafMock();
 
     try {
       const { rerender } = render(<AwesomeButton size={null}>Go</AwesomeButton>);
@@ -571,13 +662,171 @@ describe('v8 interaction smoke tests', () => {
       label = screen.getByText('Open Dashboard');
       content = label.closest('.aws-btn__content') as HTMLElement | null;
 
+      expect(content?.style.width).toBe('52px');
+      expect(content?.style.flexBasis).toBe('52px');
+      expect(label.style.width).toBe('20px');
+      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalled();
+
+      await flushAnimationFrame();
+      await flushAnimationFrame();
+
+      label = screen.getByText('Open Dashboard');
+      content = label.closest('.aws-btn__content') as HTMLElement | null;
+
       expect(content?.style.width).toBe('153px');
-      expect(content?.style.flex).toBe('0 0 153px');
+      expect(content?.style.flexBasis).toBe('153px');
+      expect(content?.style.flexGrow).toBe('0');
+      expect(content?.style.flexShrink).toBe('0');
       expect(label.style.width).toBe('121px');
       expect(label.style.flexBasis).toBe('121px');
+      expect(label.style.flexGrow).toBe('0');
+      expect(label.style.flexShrink).toBe('0');
     } finally {
+      rafMock.restore();
       scrollWidthMock.mockRestore();
     }
+  });
+
+  it('AwesomeButton uses the latest animateSize behavior in ResizeObserver remeasurement callbacks', async () => {
+    jest.useFakeTimers();
+    const rafMock = installRafMock();
+    const labelWidths = {
+      Go: 20,
+    };
+    const contentWidths = {
+      Go: 52,
+    };
+    const scrollWidthMock = mockAutoWidthScrollMetrics({
+      labelWidths,
+      contentWidths,
+    });
+    const originalResizeObserver = window.ResizeObserver;
+    let resizeCallback: ResizeObserverCallback | null = null;
+
+    class ResizeObserverMock {
+      observe = jest.fn();
+      disconnect = jest.fn();
+
+      constructor(callback: ResizeObserverCallback) {
+        resizeCallback = callback;
+      }
+    }
+
+    Object.defineProperty(window, 'ResizeObserver', {
+      configurable: true,
+      writable: true,
+      value: ResizeObserverMock,
+    });
+    Object.defineProperty(globalThis, 'ResizeObserver', {
+      configurable: true,
+      writable: true,
+      value: ResizeObserverMock,
+    });
+
+    try {
+      const { rerender } = render(
+        <AwesomeButton size={null} animateSize={false}>
+          Go
+        </AwesomeButton>
+      );
+
+      const label = screen.getByText('Go');
+      const content = label.closest('.aws-btn__content') as HTMLElement | null;
+
+      expect(content?.style.width).toBe('52px');
+
+      rerender(
+        <AwesomeButton size={null} animateSize>
+          Go
+        </AwesomeButton>
+      );
+
+      labelWidths.Go = 28;
+      contentWidths.Go = 60;
+
+      act(() => {
+        resizeCallback?.([], {} as ResizeObserver);
+      });
+
+      expect(content?.style.width).toBe('52px');
+
+      await flushAnimationFrame();
+      expect(content?.style.width).toBe('52px');
+
+      await flushAnimationFrame();
+      expect(content?.style.width).toBe('60px');
+      expect(label.style.width).toBe('28px');
+      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalled();
+    } finally {
+      Object.defineProperty(window, 'ResizeObserver', {
+        configurable: true,
+        writable: true,
+        value: originalResizeObserver,
+      });
+      Object.defineProperty(globalThis, 'ResizeObserver', {
+        configurable: true,
+        writable: true,
+        value: originalResizeObserver,
+      });
+      scrollWidthMock.mockRestore();
+      rafMock.restore();
+    }
+  });
+
+  it('AwesomeButton adds animateSize by default and allows opting out', () => {
+    const { rerender } = render(
+      <AwesomeButton size="small">Animated</AwesomeButton>
+    );
+
+    let root = screen.getByText('Animated').closest('button');
+    expect(root?.className).toContain('aws-btn--animate-size');
+
+    rerender(
+      <AwesomeButton size="small" animateSize={false}>
+        Animated
+      </AwesomeButton>
+    );
+
+    root = screen.getByText('Animated').closest('button');
+    expect(root?.className).not.toContain('aws-btn--animate-size');
+  });
+
+  it('AwesomeButton preserves animateSize while fixed sizes change', () => {
+    const { rerender } = render(
+      <AwesomeButton size="small">Resize me</AwesomeButton>
+    );
+
+    let root = screen.getByText('Resize me').closest('button');
+    expect(root?.className).toContain('aws-btn--small');
+    expect(root?.className).toContain('aws-btn--animate-size');
+
+    rerender(<AwesomeButton size="large">Resize me</AwesomeButton>);
+
+    root = screen.getByText('Resize me').closest('button');
+    expect(root?.className).toContain('aws-btn--large');
+    expect(root?.className).toContain('aws-btn--animate-size');
+  });
+
+  it('AwesomeButton uses Vue-parity slot and label structure', () => {
+    const { container, rerender } = render(
+      <AwesomeButton
+        before={<span aria-hidden="true">←</span>}
+        after={<span aria-hidden="true">→</span>}>
+        Continue
+      </AwesomeButton>
+    );
+
+    const content = container.querySelector('.aws-btn__content') as HTMLElement | null;
+    expect(content).toBeTruthy();
+    expect(content?.querySelector('.aws-btn__slot--before')?.textContent).toContain('←');
+    expect(content?.querySelector('.aws-btn__label')?.textContent).toBe('Continue');
+    expect(content?.querySelector('.aws-btn__slot--after')?.textContent).toContain('→');
+
+    rerender(<AwesomeButton before={<span aria-hidden="true">★</span>} size={null} />);
+
+    const iconOnlyContent = container.querySelector('.aws-btn__content') as HTMLElement | null;
+    expect(iconOnlyContent?.querySelector('.aws-btn__slot--before')?.textContent).toContain('★');
+    expect(iconOnlyContent?.querySelector('.aws-btn__label')).toBeNull();
   });
 
   it('AwesomeButton does not apply snapped widths to fixed-size buttons', () => {
@@ -588,9 +837,13 @@ describe('v8 interaction smoke tests', () => {
 
     expect(content).toBeTruthy();
     expect(content?.style.width).toBe('');
-    expect(content?.style.flex).toBe('');
+    expect(content?.style.flexBasis).toBe('');
+    expect(content?.style.flexGrow).toBe('');
+    expect(content?.style.flexShrink).toBe('');
     expect(label.style.width).toBe('');
     expect(label.style.flexBasis).toBe('');
+    expect(label.style.flexGrow).toBe('');
+    expect(label.style.flexShrink).toBe('');
   });
 
   it('AwesomeButton snaps total auto width cleanly with before/after content', () => {
@@ -700,9 +953,256 @@ describe('v8 interaction smoke tests', () => {
       );
 
       expect(screen.getByText('Done')).toBeTruthy();
-      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalledTimes(0);
+      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalledTimes(1);
     } finally {
       rafMock.restore();
+    }
+  });
+
+  it('AwesomeButton grows auto width before starting textTransition on external rerender', async () => {
+    jest.useFakeTimers();
+    const rafMock = installRafMock();
+    const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0);
+    const scrollWidthMock = mockAutoWidthScrollMetrics({
+      labelWidths: {
+        Go: 20,
+        Launch: 62,
+      },
+      contentWidths: {
+        Go: 52,
+        Launch: 94,
+      },
+    });
+
+    try {
+      const { container, rerender } = render(
+        <AwesomeButton size={null} textTransition>
+          Go
+        </AwesomeButton>
+      );
+
+      const initialLabel = screen.getByText('Go');
+      const initialContent = initialLabel.closest('.aws-btn__content') as
+        | HTMLElement
+        | null;
+
+      expect(initialContent?.style.width).toBe('52px');
+
+      rerender(
+        <AwesomeButton size={null} textTransition>
+          Launch
+        </AwesomeButton>
+      );
+
+      const label = container.querySelector('.aws-btn__label') as HTMLElement;
+      const content = label.closest('.aws-btn__content') as HTMLElement | null;
+
+      expect(content?.style.width).toBe('52px');
+      expect(label.textContent).toBe('Go');
+
+      await flushAnimationFrame();
+
+      expect(content?.style.width).toBe('94px');
+      expect(label.textContent).toBe('Go');
+
+      await act(async () => {
+        jest.advanceTimersByTime(200);
+      });
+      await flushAnimationFrame();
+
+      expect(label.textContent).not.toBe('Go');
+
+      await act(async () => {
+        jest.advanceTimersByTime(520);
+      });
+      await flushAnimationFrame();
+
+      expect(label.textContent).toBe('Launch');
+      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalled();
+    } finally {
+      randomSpy.mockRestore();
+      rafMock.restore();
+      scrollWidthMock.mockRestore();
+    }
+  });
+
+  it('AwesomeButton waits for content width transition before starting grow textTransition', async () => {
+    jest.useFakeTimers();
+    const rafMock = installRafMock();
+    const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0);
+    const scrollWidthMock = mockAutoWidthScrollMetrics({
+      labelWidths: {
+        Open: 38,
+        'Open analytics dashboard': 163,
+      },
+      contentWidths: {
+        Open: 70,
+        'Open analytics dashboard': 203,
+      },
+    });
+
+    try {
+      const { container, rerender } = render(
+        <AwesomeButton size={null} textTransition>
+          Open
+        </AwesomeButton>
+      );
+
+      rerender(
+        <AwesomeButton size={null} textTransition>
+          Open analytics dashboard
+        </AwesomeButton>
+      );
+
+      const label = container.querySelector('.aws-btn__label') as HTMLElement;
+      const content = label.closest('.aws-btn__content') as HTMLElement | null;
+
+      await flushAnimationFrame();
+
+      expect(content?.style.width).toBe('203px');
+      expect(label.textContent).toBe('Open');
+
+      await act(async () => {
+        dispatchTransitionEnd(label, 'width');
+      });
+
+      await flushAnimationFrame();
+
+      expect(label.textContent).toBe('Open');
+
+      await act(async () => {
+        dispatchTransitionEnd(content as HTMLElement, 'width');
+      });
+
+      await flushAnimationFrame();
+      await flushAnimationFrame();
+
+      expect(label.textContent).not.toBe('Open');
+
+      await act(async () => {
+        jest.advanceTimersByTime(520);
+      });
+      await flushAnimationFrame();
+
+      expect(label.textContent).toBe('Open analytics dashboard');
+      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalled();
+    } finally {
+      randomSpy.mockRestore();
+      rafMock.restore();
+      scrollWidthMock.mockRestore();
+    }
+  });
+
+  it('AwesomeButton measures grow target widths correctly with cssModule-mapped label classes', async () => {
+    jest.useFakeTimers();
+    const rafMock = installRafMock();
+    const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0);
+    const scrollWidthMock = mockAutoWidthScrollMetrics({
+      labelWidths: {
+        Open: 38,
+        'Open analytics dashboard': 163,
+      },
+      contentWidths: {
+        Open: 70,
+        'Open analytics dashboard': 203,
+      },
+    });
+
+    const cssModule = {
+      'aws-btn': 'root_hash',
+      'aws-btn--auto': 'auto_hash',
+      'aws-btn--primary': 'primary_hash',
+      'aws-btn--visible': 'visible_hash',
+      'aws-btn--animate-size': 'animate_hash',
+      'aws-btn--auto-size-ready': 'ready_hash',
+      'aws-btn__wrapper': 'wrapper_hash',
+      'aws-btn__content': 'content_hash',
+      'aws-btn__label': 'label_hash',
+    };
+
+    try {
+      const { container, rerender } = render(
+        <AwesomeButton size={null} textTransition cssModule={cssModule}>
+          Open
+        </AwesomeButton>
+      );
+
+      rerender(
+        <AwesomeButton size={null} textTransition cssModule={cssModule}>
+          Open analytics dashboard
+        </AwesomeButton>
+      );
+
+      const label = container.querySelector('.label_hash') as HTMLElement;
+      const content = container.querySelector('.content_hash') as HTMLElement;
+
+      await flushAnimationFrame();
+
+      expect(content.style.width).toBe('203px');
+      expect(label.textContent).toBe('Open');
+    } finally {
+      randomSpy.mockRestore();
+      rafMock.restore();
+      scrollWidthMock.mockRestore();
+    }
+  });
+
+  it('AwesomeButton shrinks auto width only after textTransition settles on external rerender', async () => {
+    jest.useFakeTimers();
+    const rafMock = installRafMock();
+    const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0);
+    const scrollWidthMock = mockAutoWidthScrollMetrics({
+      labelWidths: {
+        Go: 20,
+        Launch: 62,
+      },
+      contentWidths: {
+        Go: 52,
+        Launch: 94,
+      },
+    });
+
+    try {
+      const { container, rerender } = render(
+        <AwesomeButton size={null} textTransition>
+          Launch
+        </AwesomeButton>
+      );
+
+      rerender(
+        <AwesomeButton size={null} textTransition>
+          Go
+        </AwesomeButton>
+      );
+
+      const label = container.querySelector('.aws-btn__label') as HTMLElement;
+      const content = label.closest('.aws-btn__content') as HTMLElement | null;
+
+      expect(content?.style.width).toBe('94px');
+
+      await flushAnimationFrame();
+
+      expect(content?.style.width).toBe('94px');
+      expect(label.textContent).not.toBe('Launch');
+
+      await act(async () => {
+        jest.advanceTimersByTime(240);
+      });
+
+      expect(content?.style.width).toBe('94px');
+
+      await act(async () => {
+        jest.advanceTimersByTime(220);
+      });
+      await flushAnimationFrame();
+
+      expect(label.textContent).toBe('Go');
+      expect(content?.style.width).toBe('52px');
+      expect(rafMock.requestAnimationFrameMock).toHaveBeenCalled();
+    } finally {
+      randomSpy.mockRestore();
+      rafMock.restore();
+      scrollWidthMock.mockRestore();
     }
   });
 
@@ -898,16 +1398,17 @@ describe('v8 interaction smoke tests', () => {
       render(
         <AwesomeButtonSocial
           type="github"
-          href="https://github.com/rcaferati/react-awesome-button">
+          href="https://github.com/rcaferati"
+          containerProps={{ target: '_blank', rel: 'noreferrer noopener' }}>
           Open GitHub
         </AwesomeButtonSocial>
       );
 
       const link = screen.getByText('Open GitHub').closest('a');
       expect(link).toBeTruthy();
-      expect(link?.getAttribute('href')).toBe(
-        'https://github.com/rcaferati/react-awesome-button'
-      );
+      expect(link?.getAttribute('href')).toBe('https://github.com/rcaferati');
+      expect(link?.getAttribute('target')).toBe('_blank');
+      expect(link?.getAttribute('rel')).toBe('noreferrer noopener');
 
       fireEvent.click(screen.getByText('Open GitHub'));
 

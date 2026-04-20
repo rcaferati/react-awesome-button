@@ -277,9 +277,13 @@ export const WithCustomOnPressOverride: Story = {
 
 export const AnchorModeBypassesShare: Story = {
   args: {
-    type: 'linkedin',
-    children: 'Go to docs',
-    href: 'https://example.com/docs',
+    type: 'github',
+    children: 'Open GitHub',
+    href: 'https://github.com/rcaferati',
+    containerProps: {
+      target: '_blank',
+      rel: 'noreferrer noopener',
+    },
   },
 };
 

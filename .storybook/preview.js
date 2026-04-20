@@ -2,6 +2,8 @@
 
 /** @type { import('@storybook/react-webpack5').Preview } */
 
+import './preview.css';
+
 // Default theme module for stories that support `cssModule` (e.g. AwesomeButton family)
 import themeEric from '../src/styles/themes/theme-eric';
 
