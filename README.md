@@ -286,6 +286,7 @@ export default function Example() {
 | `disabled` | `boolean` | `false` | Disables interactions |
 | `visible` | `boolean` | `true` | Toggles visible state class |
 | `placeholder` | `boolean` | `true` | If `true` and `children` is empty, renders placeholder/disabled state |
+| `lockedHover` | `boolean` | `false` | Locks the visual middle-hover position without changing interactivity |
 | `animateSize` | `boolean` | `true` | Animates fixed-size changes and measured auto-width changes |
 | `textTransition` | `boolean` | `false` | Animates string-only label changes with a scrambling transition |
 | `between` | `boolean` | `false` | Uses `space-between` layout for content |
@@ -307,6 +308,12 @@ export default function Example() {
 | `onReleased` | `(element: HTMLElement) => void` | `null` | Called when the release cycle clears |
 | `onMouseDown` | `(event) => void` | `null` | Pointer/mouse/touch down callback |
 | `onMouseUp` | `(event) => void` | `null` | Pointer/mouse/touch up callback |
+
+```tsx
+<AwesomeButton disabled lockedHover>
+  Locked hover
+</AwesomeButton>
+```
 
 ---
 

@@ -310,14 +310,12 @@ const AwesomeButtonProgress = ({
       onPressed={handleActivationPressed}
       extra={
         <>
-          <span>
-            <span
-              ref={contentRef}
-              data-loading={loadingLabel ?? undefined}
-              data-status={errorLabel ?? resultLabel ?? undefined}
-              className={getClassName(`${root}__progress`, cssModule)}
-            />
-          </span>
+          <span
+            ref={contentRef}
+            data-loading={loadingLabel ?? undefined}
+            data-status={errorLabel ?? resultLabel ?? undefined}
+            className={getClassName(`${root}__progress`, cssModule)}
+          />
           {userExtra}
         </>
       }>

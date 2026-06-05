@@ -40,7 +40,12 @@ function createDeferredPromise() {
 
 function dispatchPointerEvent(
   element: Element,
-  type: 'pointerDown' | 'pointerUp' | 'pointerLeave' | 'pointerCancel',
+  type:
+    | 'pointerDown'
+    | 'pointerUp'
+    | 'pointerLeave'
+    | 'pointerCancel'
+    | 'pointerMove',
   init: Record<string, unknown>
 ) {
   const event = createEvent[type](element, init);
@@ -216,6 +221,52 @@ describe('v8 interaction smoke tests', () => {
     await waitFor(() => {
       expect(onPress).toHaveBeenCalledTimes(0);
     });
+  });
+
+  it('AwesomeButton locks middle hover independently of disabled and pointer movement', () => {
+    const onPress = jest.fn();
+    const { rerender } = render(
+      <AwesomeButton lockedHover onPress={onPress}>
+        Locked
+      </AwesomeButton>
+    );
+
+    let root = screen.getByText('Locked').closest('button');
+    expect(root?.className).toContain('aws-btn--middle');
+    expect(root?.className).not.toContain('aws-btn--disabled');
+
+    dispatchPointerEvent(root!, 'pointerMove', {
+      bubbles: true,
+      pointerType: 'mouse',
+      clientX: 999,
+    });
+
+    expect(root?.className).toContain('aws-btn--middle');
+    expect(root?.className).not.toContain('aws-btn--left');
+    expect(root?.className).not.toContain('aws-btn--right');
+
+    rerender(
+      <AwesomeButton lockedHover disabled onPress={onPress}>
+        Locked
+      </AwesomeButton>
+    );
+
+    root = screen.getByText('Locked').closest('button');
+    expect(root?.className).toContain('aws-btn--middle');
+    expect(root?.className).toContain('aws-btn--disabled');
+
+    fireEvent.click(screen.getByText('Locked'));
+
+    expect(onPress).not.toHaveBeenCalled();
+
+    rerender(
+      <AwesomeButton onPress={onPress}>
+        Locked
+      </AwesomeButton>
+    );
+
+    root = screen.getByText('Locked').closest('button');
+    expect(root?.className).not.toContain('aws-btn--middle');
   });
 
   it('AwesomeButton renders anchor mode when href is provided', () => {

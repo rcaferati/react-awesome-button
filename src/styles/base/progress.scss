@@ -64,7 +64,7 @@
       }
       .#{$button-root}__progress:after,
       .#{$button-root}__progress:before {
-        display: block;
+        display: flex;
       }
       &:not(.#{$button-root}--progress-bar-hidden) {
         .#{$button-root}__content:after {

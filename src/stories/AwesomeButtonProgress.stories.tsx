@@ -34,6 +34,7 @@ const meta: Meta<typeof AwesomeButtonProgress> = {
     visible: true,
     between: false,
     placeholder: false,
+    lockedHover: false,
     moveEvents: true,
     ripple: false,
 
@@ -99,6 +100,11 @@ const meta: Meta<typeof AwesomeButtonProgress> = {
     },
     placeholder: {
       control: 'boolean',
+      table: { category: 'State' },
+    },
+    lockedHover: {
+      control: 'boolean',
+      description: 'Locks the visual middle-hover position.',
       table: { category: 'State' },
     },
 

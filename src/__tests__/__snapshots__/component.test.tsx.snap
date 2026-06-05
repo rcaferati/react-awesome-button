@@ -75,7 +75,12 @@ exports[`Public API smoke tests renders AwesomeButton without crashing 1`] = `
     <span
       className="aws-btn__content"
       data-aws-btn-role="content"
-    />
+    >
+      <span
+        aria-hidden="true"
+        className="aws-btn__placeholder"
+      />
+    </span>
   </span>
 </button>
 `;
@@ -118,13 +123,11 @@ exports[`Public API smoke tests renders AwesomeButtonProgress without crashing 1
     <span
       className="aws-btn__extra"
     >
-      <span>
-        <span
-          className="aws-btn__progress"
-          data-loading="Wait.."
-          data-status="Success!"
-        />
-      </span>
+      <span
+        className="aws-btn__progress"
+        data-loading="Wait.."
+        data-status="Success!"
+      />
     </span>
   </span>
 </button>
@@ -187,7 +190,12 @@ exports[`Public API smoke tests renders AwesomeButtonSocial without crashing 1`]
     <span
       className="aws-btn__content"
       data-aws-btn-role="content"
-    />
+    >
+      <span
+        aria-hidden="true"
+        className="aws-btn__placeholder"
+      />
+    </span>
   </span>
 </button>
 `;
@@ -300,13 +308,11 @@ exports[`Public API smoke tests renders a progress button with explicit success 
     <span
       className="aws-btn__extra"
     >
-      <span>
-        <span
-          className="aws-btn__progress"
-          data-loading="Wait.."
-          data-status="Success!"
-        />
-      </span>
+      <span
+        className="aws-btn__progress"
+        data-loading="Wait.."
+        data-status="Success!"
+      />
     </span>
   </span>
 </button>
