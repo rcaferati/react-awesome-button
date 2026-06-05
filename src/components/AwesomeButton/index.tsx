@@ -54,6 +54,7 @@ const AwesomeButton = ({
   element = null,
   extra = null,
   href = null,
+  lockedHover = false,
   moveEvents = true,
   onMouseDown = null,
   onMouseUp = null,
@@ -122,6 +123,7 @@ const AwesomeButton = ({
     cssModule,
     href,
     isDisabled,
+    lockedHover,
     moveEvents,
     needsButtonRole,
     onMouseDown,
@@ -152,6 +154,7 @@ const AwesomeButton = ({
       ...(between ? [`${rootElement}--between`] : []),
       ...(isPlaceholder ? [`${rootElement}--placeholder`] : []),
       ...(isDisabled ? [`${rootElement}--disabled`] : []),
+      ...(lockedHover ? [`${rootElement}--middle`] : []),
       ...(isIconOnly ? [`${rootElement}--icon`] : []),
       ...(pressClassName ? [pressClassName] : []),
     ];
@@ -179,6 +182,7 @@ const AwesomeButton = ({
     isDisabled,
     isIconOnly,
     isPlaceholder,
+    lockedHover,
     pressClassName,
     rootElement,
     shouldSnapAutoWidth,
@@ -255,6 +259,12 @@ const AwesomeButton = ({
               className={getClassName(`${rootElement}__label`, cssModule)}>
               {renderedLabel}
             </span>
+          ) : null}
+          {isPlaceholder ? (
+            <span
+              aria-hidden="true"
+              className={getClassName(`${rootElement}__placeholder`, cssModule)}
+            />
           ) : null}
           {hasAfter ? (
             <span

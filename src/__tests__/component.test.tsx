@@ -12,6 +12,17 @@ describe('Public API smoke tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('renders the placeholder cover inside the button content', () => {
+    const tree = create(<AwesomeButton />);
+    const content = tree.root.findByProps({ className: 'aws-btn__content' });
+    const placeholder = tree.root.findByProps({
+      className: 'aws-btn__placeholder',
+    });
+
+    expect(placeholder.props['aria-hidden']).toBe('true');
+    expect(content.children).toContain(placeholder);
+  });
+
   it('renders AwesomeButtonProgress without crashing', () => {
     const tree = create(
       <AwesomeButtonProgress onPress={(_event, next) => next(true)} />
@@ -50,6 +61,10 @@ describe('Public API smoke tests', () => {
         Button
       </AwesomeButtonProgress>
     );
+    const extra = tree.root.findByProps({ className: 'aws-btn__extra' });
+    const progress = tree.root.findByProps({ className: 'aws-btn__progress' });
+
+    expect(extra.children).toContain(progress);
     expect(tree).toMatchSnapshot();
   });
 

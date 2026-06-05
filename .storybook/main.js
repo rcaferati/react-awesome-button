@@ -28,6 +28,15 @@ const config = {
       ])
     );
 
+    // Storybook 10.2.x docs can lose React aliases in production export analysis
+    // and crash the Docs tab with "memo is not defined".
+    config.optimization ||= {};
+    config.optimization.providedExports = false;
+    config.optimization.sideEffects = false;
+    config.optimization.usedExports = false;
+    config.optimization.innerGraph = false;
+    config.optimization.mangleExports = false;
+
     return config;
   },
 };

@@ -303,17 +303,26 @@ button.#{$button-root} {
 
     .#{$button-root}__content {
       color: transparent;
+    }
+
+    .#{$button-root}__placeholder {
+      display: block;
+      width: 100%;
+      height: 40%;
+      min-height: 12px;
+      border-radius: 2px;
+      background-color: var(--button-placeholder-color-light);
+      position: relative;
+      overflow: hidden;
 
       &:before {
         content: '';
-        display: block;
+        background-color: rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 40%;
-        min-height: 12px;
-        border-radius: 2px;
-        background-color: var(--button-placeholder-color-light);
-        position: relative;
-        overflow: hidden;
+        height: 100%;
         animation: placeholder calc(var(--transform-speed) * 14) linear
           forwards infinite;
       }

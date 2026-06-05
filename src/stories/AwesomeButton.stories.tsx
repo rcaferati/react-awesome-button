@@ -31,6 +31,7 @@ const meta: Meta<typeof AwesomeButton> = {
     between: false,
     disabled: false,
     placeholder: false,
+    lockedHover: false,
     textTransition: false,
     moveEvents: true,
     ripple: false,
@@ -115,6 +116,13 @@ const meta: Meta<typeof AwesomeButton> = {
       control: 'boolean',
       description:
         'If true and no children are provided, button becomes placeholder/disabled.',
+      table: {
+        category: 'State',
+      },
+    },
+    lockedHover: {
+      control: 'boolean',
+      description: 'Locks the visual middle-hover position.',
       table: {
         category: 'State',
       },
@@ -249,6 +257,14 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     children: 'Disabled',
+  },
+};
+
+export const LockedHover: Story = {
+  args: {
+    disabled: true,
+    lockedHover: true,
+    children: 'Locked hover',
   },
 };
 

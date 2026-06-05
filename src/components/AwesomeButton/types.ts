@@ -81,6 +81,7 @@ export type ButtonType = {
   element?: ForwardableElementComponent | null;
   extra?: React.ReactNode;
   href?: string | null;
+  lockedHover?: boolean;
   moveEvents?: boolean;
   onMouseDown?: (event: PointerLikeEvent) => void;
   onMouseUp?: (event: PointerLikeEvent) => void;

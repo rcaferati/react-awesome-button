@@ -34,6 +34,7 @@ const meta: Meta<typeof AwesomeButtonSocial> = {
     between: false,
     disabled: false,
     placeholder: false,
+    lockedHover: false,
     moveEvents: true,
     ripple: false,
 
@@ -122,6 +123,11 @@ const meta: Meta<typeof AwesomeButtonSocial> = {
     },
     placeholder: {
       control: 'boolean',
+      table: { category: 'State' },
+    },
+    lockedHover: {
+      control: 'boolean',
+      description: 'Locks the visual middle-hover position.',
       table: { category: 'State' },
     },
 

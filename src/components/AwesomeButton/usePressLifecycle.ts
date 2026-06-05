@@ -41,6 +41,7 @@ type UsePressLifecycleParams = {
   active: boolean;
   cssModule: CssModuleMap | null;
   isDisabled: boolean;
+  lockedHover: boolean;
   moveEvents: boolean;
   needsButtonRole: boolean;
   href: string | null;
@@ -75,6 +76,7 @@ export default function usePressLifecycle({
   active,
   cssModule,
   isDisabled,
+  lockedHover,
   moveEvents,
   needsButtonRole,
   href,
@@ -166,11 +168,13 @@ export default function usePressLifecycle({
       force = false,
       leave = false,
     }: { force?: boolean; leave?: boolean } = {}) => {
-      toggleMoveClasses({
-        element: rootRef.current,
-        root: rootElement,
-        cssModule,
-      });
+      if (!lockedHover) {
+        toggleMoveClasses({
+          element: rootRef.current,
+          root: rootElement,
+          cssModule,
+        });
+      }
 
       if (leave === true && pressedRef.current === 0) {
         return;
@@ -228,6 +232,7 @@ export default function usePressLifecycle({
       contentRef,
       cssModule,
       finalizeRelease,
+      lockedHover,
       pressPosition,
       releasingClassName,
       rootElement,
@@ -428,7 +433,13 @@ export default function usePressLifecycle({
 
   const handlePointerMove = React.useCallback(
     (event: React.PointerEvent<RootDomElement>) => {
-      if (moveEvents !== true || isDisabled === true) return;
+      if (
+        lockedHover === true ||
+        moveEvents !== true ||
+        isDisabled === true
+      ) {
+        return;
+      }
       if (event.pointerType !== 'mouse') return;
       if (!wrapperRef.current) return;
 
@@ -441,11 +452,25 @@ export default function usePressLifecycle({
         state,
       });
     },
-    [cssModule, isDisabled, moveEvents, rootElement, rootRef, wrapperRef]
+    [
+      cssModule,
+      isDisabled,
+      lockedHover,
+      moveEvents,
+      rootElement,
+      rootRef,
+      wrapperRef,
+    ]
   );
 
   const handleMouseEnterFallback = React.useCallback(() => {
-    if (moveEvents === true || isDisabled === true) return;
+    if (
+      lockedHover === true ||
+      moveEvents === true ||
+      isDisabled === true
+    ) {
+      return;
+    }
 
     toggleMoveClasses({
       element: rootRef.current,
@@ -453,7 +478,7 @@ export default function usePressLifecycle({
       cssModule,
       state: 'middle',
     });
-  }, [cssModule, isDisabled, moveEvents, rootElement, rootRef]);
+  }, [cssModule, isDisabled, lockedHover, moveEvents, rootElement, rootRef]);
 
   const handleClick = React.useCallback(
     (event: React.MouseEvent<RootDomElement>) => {
