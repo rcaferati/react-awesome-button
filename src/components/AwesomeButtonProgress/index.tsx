@@ -11,6 +11,8 @@ import { getClassName } from '../../helpers/components';
 const ROOTELM = 'aws-btn';
 const LOADING_ANIMATION_STEPS = 3;
 const IS_WINDOW = typeof window !== 'undefined';
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
 type ButtonPressEvent = Parameters<NonNullable<ButtonType['onPress']>>[0];
 type ButtonMouseDownEvent = Parameters<
@@ -27,8 +29,17 @@ type ProgressState = {
   loadingStart: boolean;
   loadingError: boolean;
   errorLabel: string | null;
-  active: boolean;
+  progressActive: boolean;
 };
+
+type PendingProgressRun = {
+  event: ButtonPressEvent;
+  runId: number;
+};
+
+function shouldWaitForPhysicalRelease(event: ButtonPressEvent): boolean {
+  return event.type !== 'click';
+}
 
 export type ButtonProgressType = {
   onPress?: (event: ButtonPressEvent, next: EndLoadingFn) => void;
@@ -71,6 +82,7 @@ const AwesomeButtonProgress = ({
   extra: userExtra = null,
   onMouseDown: userOnMouseDown = null,
   onPressed: userOnPressed = null,
+  onReleased: userOnReleased = null,
   style: userStyle = {},
   ...extra
 }: ButtonProgressType & ButtonTypeModified) => {
@@ -81,10 +93,14 @@ const AwesomeButtonProgress = ({
   );
 
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const contentRef = React.useRef<HTMLSpanElement | null>(null);
+  const progressRef = React.useRef<HTMLSpanElement | null>(null);
   const isMountedRef = React.useRef(true);
   const runIdRef = React.useRef(0);
   const busyRef = React.useRef(false);
+  const disabledRef = React.useRef(disabled);
+  const pendingProgressRunRef = React.useRef<PendingProgressRun | null>(null);
+
+  disabledRef.current = disabled;
 
   const {
     value: state,
@@ -95,8 +111,13 @@ const AwesomeButtonProgress = ({
     loadingStart: false,
     loadingError: false,
     errorLabel: null,
-    active: false,
+    progressActive: false,
   });
+
+  const isDisabledNow = React.useCallback(
+    () => disabledRef.current === true,
+    []
+  );
 
   const clearTimeoutIfAny = React.useCallback(() => {
     if (timeoutRef.current) {
@@ -105,20 +126,48 @@ const AwesomeButtonProgress = ({
     }
   }, []);
 
+  const resetProgressState = React.useCallback(() => {
+    if (!isMountedRef.current) return;
+
+    clearTimeoutIfAny();
+    runIdRef.current += 1;
+    busyRef.current = false;
+    pendingProgressRunRef.current = null;
+    (progressRef.current as any)?.clearCssEvent?.();
+
+    setState({
+      loadingStart: false,
+      loadingEnd: false,
+      loadingError: false,
+      errorLabel: null,
+      progressActive: false,
+    });
+  }, [clearTimeoutIfAny, setState]);
+
   React.useEffect(() => {
+    isMountedRef.current = true;
+
     return () => {
       isMountedRef.current = false;
       runIdRef.current += 1; // invalidate pending async chains
+      pendingProgressRunRef.current = null;
       clearTimeoutIfAny();
-      (contentRef.current as any)?.clearCssEvent?.();
+      (progressRef.current as any)?.clearCssEvent?.();
     };
   }, [clearTimeoutIfAny]);
 
+  useIsomorphicLayoutEffect(() => {
+    if (disabled === true) {
+      resetProgressState();
+    }
+  }, [disabled, resetProgressState]);
+
   const progressClassName = React.useMemo(() => {
-    const { loadingStart, loadingEnd, loadingError } = state;
+    const { loadingStart, loadingEnd, loadingError, progressActive } = state;
     const parts = [
       `${root}--progress`,
       showProgressBar ? null : `${root}--progress-bar-hidden`,
+      progressActive ? `${root}--progress-active` : null,
       loadingStart ? `${root}--start` : null,
       loadingEnd ? `${root}--end` : null,
       loadingError ? `${root}--errored` : null,
@@ -144,6 +193,7 @@ const AwesomeButtonProgress = ({
     (endState = true, errorLabel: string | null = null) => {
       if (!isMountedRef.current) return;
       if (busyRef.current !== true) return;
+      if (isDisabledNow()) return;
 
       setState({
         loadingEnd: true,
@@ -151,17 +201,18 @@ const AwesomeButtonProgress = ({
         errorLabel,
       });
     },
-    [setState]
+    [isDisabledNow, setState]
   );
 
   const startLoading = React.useCallback(() => {
     frameThrower(4, () => {
       if (!isMountedRef.current) return;
+      if (isDisabledNow()) return;
       setState({
         loadingStart: true,
       });
     });
-  }, [setState]);
+  }, [isDisabledNow, setState]);
 
   const clearLoading = React.useCallback(
     (callback?: () => void) => {
@@ -170,7 +221,7 @@ const AwesomeButtonProgress = ({
       setState({
         loadingStart: false,
         loadingEnd: false,
-        active: false,
+        progressActive: false,
       });
 
       frameThrower(2, () => {
@@ -192,10 +243,12 @@ const AwesomeButtonProgress = ({
         frameThrower(2, () => {
           if (!isMountedRef.current) return;
           if (runIdRef.current !== runIdAtSchedule) return;
+          if (isDisabledNow()) return;
 
           clearLoading(() => {
             if (!isMountedRef.current) return;
             if (runIdRef.current !== runIdAtSchedule) return;
+            if (isDisabledNow()) return;
 
             setState({
               loadingError: false,
@@ -207,48 +260,40 @@ const AwesomeButtonProgress = ({
         });
       }, Math.max(0, Number(releaseDelay) || 0));
     },
-    [clearLoading, clearTimeoutIfAny, releaseDelay, setState]
+    [clearLoading, clearTimeoutIfAny, isDisabledNow, releaseDelay, setState]
   );
-
-  const activateProgress = React.useCallback(() => {
-    // Lock AwesomeButton active state before it performs release logic.
-    setState({
-      active: true,
-    });
-  }, [setState]);
 
   const handleActivationMouseDown = React.useCallback(
     (event: ButtonMouseDownEvent) => {
-      activateProgress();
       userOnMouseDown?.(event);
     },
-    [activateProgress, userOnMouseDown]
+    [userOnMouseDown]
   );
 
   const handleActivationPressed = React.useCallback(
     (event: ButtonPressedEvent) => {
-      // Keyboard activation path fallback (AwesomeButton calls onPressed for keyboard too).
-      activateProgress();
       userOnPressed?.(event);
     },
-    [activateProgress, userOnPressed]
+    [userOnPressed]
   );
 
-  const handleAction = React.useCallback(
-    async (event: ButtonPressEvent) => {
-      // Hard guard against double activation/races before loadingStart flips.
-      if (busyRef.current === true || stateRef.current.loadingStart === true) {
-        return;
+  const runProgress = React.useCallback(
+    async ({ event, runId }: PendingProgressRun) => {
+      if (!isMountedRef.current || runIdRef.current !== runId) return;
+      if (isDisabledNow()) return;
+
+      if (pendingProgressRunRef.current?.runId === runId) {
+        pendingProgressRunRef.current = null;
       }
 
-      busyRef.current = true;
-      runIdRef.current += 1;
-      const runId = runIdRef.current;
+      setState({
+        progressActive: true,
+      });
 
       startLoading();
 
-      const contentEl = contentRef.current;
-      if (!contentEl) {
+      const progressEl = progressRef.current;
+      if (!progressEl) {
         // Failsafe: invoke callback anyway, but don't crash. Leave busy state if never resolved.
         try {
           onPress?.(event, endLoading);
@@ -259,10 +304,13 @@ const AwesomeButtonProgress = ({
       }
 
       try {
-        // Wait the press transition in the inner button content before kicking progress flow.
-        await onceTransitionEnd(contentEl);
+        // Wait for the progress intro transition before kicking off user work.
+        await onceTransitionEnd(progressEl);
 
         if (!isMountedRef.current || runIdRef.current !== runId) {
+          return;
+        }
+        if (isDisabledNow()) {
           return;
         }
 
@@ -273,9 +321,9 @@ const AwesomeButtonProgress = ({
           endLoading(false);
         }
 
-        (contentEl as any)?.clearCssEvent?.();
+        (progressEl as any)?.clearCssEvent?.();
 
-        setCssEndEvent(contentEl as any, 'transition', {
+        setCssEndEvent(progressEl as any, 'transition', {
           tolerance: LOADING_ANIMATION_STEPS,
         }).then(() => {
           if (!isMountedRef.current || runIdRef.current !== runId) return;
@@ -289,10 +337,58 @@ const AwesomeButtonProgress = ({
         scheduleWrapperReset(runId);
       }
     },
-    [endLoading, onPress, scheduleWrapperReset, startLoading, stateRef]
+    [
+      endLoading,
+      isDisabledNow,
+      onPress,
+      scheduleWrapperReset,
+      setState,
+      startLoading,
+    ]
   );
 
-  const { active, errorLabel } = stateRef.current;
+  const handleAction = React.useCallback(
+    (event: ButtonPressEvent) => {
+      // Hard guard against double activation/races before loadingStart flips.
+      if (
+        isDisabledNow() ||
+        busyRef.current === true ||
+        stateRef.current.loadingStart === true ||
+        stateRef.current.progressActive === true
+      ) {
+        return;
+      }
+
+      busyRef.current = true;
+      runIdRef.current += 1;
+      const runId = runIdRef.current;
+      const run = { event, runId };
+
+      if (shouldWaitForPhysicalRelease(event)) {
+        pendingProgressRunRef.current = run;
+        return;
+      }
+
+      void runProgress(run);
+    },
+    [isDisabledNow, runProgress, stateRef]
+  );
+
+  const handleReleased = React.useCallback(
+    (element: HTMLElement) => {
+      const pendingRun = pendingProgressRunRef.current;
+
+      if (pendingRun) {
+        pendingProgressRunRef.current = null;
+        void runProgress(pendingRun);
+      }
+
+      userOnReleased?.(element);
+    },
+    [runProgress, userOnReleased]
+  );
+
+  const { errorLabel } = stateRef.current;
 
   return (
     <AwesomeButton
@@ -303,15 +399,15 @@ const AwesomeButtonProgress = ({
       type={type}
       cssModule={cssModule}
       style={progressStyle}
-      active={active}
       className={progressClassName}
       onPress={handleAction}
       onMouseDown={handleActivationMouseDown}
       onPressed={handleActivationPressed}
+      onReleased={handleReleased}
       extra={
         <>
           <span
-            ref={contentRef}
+            ref={progressRef}
             data-loading={loadingLabel ?? undefined}
             data-status={errorLabel ?? resultLabel ?? undefined}
             className={getClassName(`${root}__progress`, cssModule)}

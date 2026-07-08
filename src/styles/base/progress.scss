@@ -56,7 +56,7 @@
         transition: opacity 200ms ease-out;
       }
     }
-    &.#{$button-root}--active {
+    &.#{$button-root}--progress-active {
       .#{$button-root}__content {
         > * {
           opacity: 0;

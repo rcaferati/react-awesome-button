@@ -16,6 +16,9 @@ import type {
   RootDomElement,
 } from './types';
 
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+
 function isActivationKey(event: React.KeyboardEvent<RootDomElement>): boolean {
   return event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar';
 }
@@ -163,6 +166,24 @@ export default function usePressLifecycle({
     contentRef.current?.clearCssEvent?.();
   }, [contentRef]);
 
+  const resetTransientPressState = React.useCallback(() => {
+    cancelPendingRelease();
+
+    activePointerIdRef.current = null;
+    pointerStartYRef.current = null;
+    pressedRef.current = 0;
+
+    if (!lockedHover) {
+      toggleMoveClasses({
+        element: rootRef.current,
+        root: rootElement,
+        cssModule,
+      });
+    }
+
+    setPressPosition((previous) => (previous == null ? previous : null));
+  }, [cancelPendingRelease, cssModule, lockedHover, rootElement, rootRef]);
+
   const clearPress = React.useCallback(
     ({
       force = false,
@@ -269,7 +290,12 @@ export default function usePressLifecycle({
     (event: PressLikeEvent, options: { allowRipple?: boolean } = {}) => {
       const { allowRipple = false } = options;
 
-      if (isDisabled || pressedRef.current !== 1) {
+      if (isDisabled) {
+        resetTransientPressState();
+        return;
+      }
+
+      if (pressedRef.current !== 1) {
         return;
       }
 
@@ -295,11 +321,12 @@ export default function usePressLifecycle({
       handleAction,
       isDisabled,
       ripple,
+      resetTransientPressState,
     ]
   );
 
   React.useEffect(() => {
-    if (active !== true) {
+    if (active !== true || isDisabled === true) {
       return;
     }
 
@@ -312,7 +339,7 @@ export default function usePressLifecycle({
     setPressPosition((previous) =>
       previous === activeClassName ? previous : activeClassName
     );
-  }, [active, activeClassName, cancelPendingRelease]);
+  }, [active, activeClassName, cancelPendingRelease, isDisabled]);
 
   React.useEffect(() => {
     if (active === false && pressedRef.current === 2) {
@@ -320,7 +347,15 @@ export default function usePressLifecycle({
     }
   }, [active, clearPress]);
 
+  useIsomorphicLayoutEffect(() => {
+    if (isDisabled === true) {
+      resetTransientPressState();
+    }
+  }, [isDisabled, resetTransientPressState]);
+
   React.useEffect(() => {
+    mountedRef.current = true;
+
     return () => {
       mountedRef.current = false;
       contentRef.current?.clearCssEvent?.();
@@ -329,9 +364,10 @@ export default function usePressLifecycle({
 
   const handlePointerDown = React.useCallback(
     (event: React.PointerEvent<RootDomElement>) => {
+      if (isDisabled) return;
+
       onMouseDown?.(event);
 
-      if (isDisabled) return;
       if (event.button !== 0) return;
 
       activePointerIdRef.current = event.pointerId;
@@ -391,12 +427,21 @@ export default function usePressLifecycle({
 
       if (isDisabled) {
         event.preventDefault();
+        resetTransientPressState();
         return;
       }
 
       pressOut(event, { allowRipple: true });
     },
-    [clearPress, isDisabled, onMouseUp, pressOut, rootRef, wrapperRef]
+    [
+      clearPress,
+      isDisabled,
+      onMouseUp,
+      pressOut,
+      resetTransientPressState,
+      rootRef,
+      wrapperRef,
+    ]
   );
 
   const handlePointerCancel = React.useCallback(
