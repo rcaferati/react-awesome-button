@@ -1,16 +1,14 @@
 import * as React from 'react';
 import {
-  onceTransitionEnd,
   beforeFutureCssLayout as frameThrower,
-  setCssEndEvent,
   // @ts-ignore
 } from '@rcaferati/wac';
 import AwesomeButton, { ButtonType } from '../AwesomeButton';
 import { getClassName } from '../../helpers/components';
 
 const ROOTELM = 'aws-btn';
-const LOADING_ANIMATION_STEPS = 3;
 const IS_WINDOW = typeof window !== 'undefined';
+const BUTTON_TRANSITION_FALLBACK_MS = 220;
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
@@ -29,6 +27,7 @@ type ProgressState = {
   loadingStart: boolean;
   loadingError: boolean;
   errorLabel: string | null;
+  pressLockActive: boolean;
   progressActive: boolean;
 };
 
@@ -37,8 +36,17 @@ type PendingProgressRun = {
   runId: number;
 };
 
-function shouldWaitForPhysicalRelease(event: ButtonPressEvent): boolean {
+type PendingContentTransition = {
+  cleanup: () => void;
+};
+
+function shouldWaitForContentTransition(event: ButtonPressEvent): boolean {
   return event.type !== 'click';
+}
+
+function isTransformTransition(event: Event): boolean {
+  const { propertyName } = event as TransitionEvent;
+  return propertyName === 'transform' || propertyName === '-webkit-transform';
 }
 
 export type ButtonProgressType = {
@@ -98,7 +106,9 @@ const AwesomeButtonProgress = ({
   const runIdRef = React.useRef(0);
   const busyRef = React.useRef(false);
   const disabledRef = React.useRef(disabled);
-  const pendingProgressRunRef = React.useRef<PendingProgressRun | null>(null);
+  const pendingContentTransitionRef =
+    React.useRef<PendingContentTransition | null>(null);
+  const releasePendingRunRef = React.useRef<number | null>(null);
 
   disabledRef.current = disabled;
 
@@ -111,6 +121,7 @@ const AwesomeButtonProgress = ({
     loadingStart: false,
     loadingError: false,
     errorLabel: null,
+    pressLockActive: false,
     progressActive: false,
   });
 
@@ -126,13 +137,86 @@ const AwesomeButtonProgress = ({
     }
   }, []);
 
+  const clearContentTransitionWait = React.useCallback(() => {
+    const pending = pendingContentTransitionRef.current;
+    pendingContentTransitionRef.current = null;
+    pending?.cleanup();
+  }, []);
+
+  const getContentElement = React.useCallback(() => {
+    const wrapperElement = progressRef.current?.parentElement?.parentElement;
+
+    return (
+      wrapperElement?.querySelector(
+        '[data-aws-btn-role="content"]'
+      ) as HTMLElement | null
+    );
+  }, []);
+
+  const waitForContentTransition = React.useCallback(
+    (runId: number, fallbackMs: number) =>
+      new Promise<void>((resolve) => {
+        const contentElement = getContentElement();
+
+        clearContentTransitionWait();
+
+        if (!contentElement || !IS_WINDOW) {
+          resolve();
+          return;
+        }
+
+        let finished = false;
+        let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+        const cleanup = () => {
+          if (finished) return;
+
+          finished = true;
+          contentElement.removeEventListener('transitionend', handleTransitionEnd);
+
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+
+          if (pendingContentTransitionRef.current?.cleanup === cleanup) {
+            pendingContentTransitionRef.current = null;
+          }
+        };
+
+        const finalize = () => {
+          if (finished) return;
+
+          cleanup();
+          resolve();
+        };
+
+        function handleTransitionEnd(event: Event) {
+          if (event.target !== contentElement) return;
+          if (!isTransformTransition(event)) return;
+
+          finalize();
+        }
+
+        pendingContentTransitionRef.current = { cleanup };
+        contentElement.addEventListener('transitionend', handleTransitionEnd);
+        timeoutId = setTimeout(finalize, Math.max(0, fallbackMs));
+      }).then(() => {
+        if (!isMountedRef.current || runIdRef.current !== runId) return false;
+        if (isDisabledNow()) return false;
+        return true;
+      }),
+    [clearContentTransitionWait, getContentElement, isDisabledNow]
+  );
+
   const resetProgressState = React.useCallback(() => {
     if (!isMountedRef.current) return;
 
     clearTimeoutIfAny();
+    clearContentTransitionWait();
     runIdRef.current += 1;
     busyRef.current = false;
-    pendingProgressRunRef.current = null;
+    releasePendingRunRef.current = null;
     (progressRef.current as any)?.clearCssEvent?.();
 
     setState({
@@ -140,9 +224,10 @@ const AwesomeButtonProgress = ({
       loadingEnd: false,
       loadingError: false,
       errorLabel: null,
+      pressLockActive: false,
       progressActive: false,
     });
-  }, [clearTimeoutIfAny, setState]);
+  }, [clearContentTransitionWait, clearTimeoutIfAny, setState]);
 
   React.useEffect(() => {
     isMountedRef.current = true;
@@ -150,11 +235,12 @@ const AwesomeButtonProgress = ({
     return () => {
       isMountedRef.current = false;
       runIdRef.current += 1; // invalidate pending async chains
-      pendingProgressRunRef.current = null;
+      releasePendingRunRef.current = null;
+      clearContentTransitionWait();
       clearTimeoutIfAny();
       (progressRef.current as any)?.clearCssEvent?.();
     };
-  }, [clearTimeoutIfAny]);
+  }, [clearContentTransitionWait, clearTimeoutIfAny]);
 
   useIsomorphicLayoutEffect(() => {
     if (disabled === true) {
@@ -189,21 +275,6 @@ const AwesomeButtonProgress = ({
     [resolvedProgressLoadingTime, userStyle]
   );
 
-  const endLoading = React.useCallback(
-    (endState = true, errorLabel: string | null = null) => {
-      if (!isMountedRef.current) return;
-      if (busyRef.current !== true) return;
-      if (isDisabledNow()) return;
-
-      setState({
-        loadingEnd: true,
-        loadingError: !endState,
-        errorLabel,
-      });
-    },
-    [isDisabledNow, setState]
-  );
-
   const startLoading = React.useCallback(() => {
     frameThrower(4, () => {
       if (!isMountedRef.current) return;
@@ -221,6 +292,7 @@ const AwesomeButtonProgress = ({
       setState({
         loadingStart: false,
         loadingEnd: false,
+        pressLockActive: false,
         progressActive: false,
       });
 
@@ -245,6 +317,8 @@ const AwesomeButtonProgress = ({
           if (runIdRef.current !== runIdAtSchedule) return;
           if (isDisabledNow()) return;
 
+          releasePendingRunRef.current = runIdAtSchedule;
+
           clearLoading(() => {
             if (!isMountedRef.current) return;
             if (runIdRef.current !== runIdAtSchedule) return;
@@ -255,7 +329,9 @@ const AwesomeButtonProgress = ({
               errorLabel: null,
             });
 
-            busyRef.current = false;
+            if (releasePendingRunRef.current == null) {
+              busyRef.current = false;
+            }
           });
         });
       }, Math.max(0, Number(releaseDelay) || 0));
@@ -263,18 +339,67 @@ const AwesomeButtonProgress = ({
     [clearLoading, clearTimeoutIfAny, isDisabledNow, releaseDelay, setState]
   );
 
+  const endLoading = React.useCallback(
+    (runId: number, endState = true, errorLabel: string | null = null) => {
+      if (!isMountedRef.current) return;
+      if (busyRef.current !== true) return;
+      if (runIdRef.current !== runId) return;
+      if (isDisabledNow()) return;
+      if (stateRef.current.loadingEnd === true) return;
+
+      setState({
+        loadingEnd: true,
+        loadingError: !endState,
+        errorLabel,
+      });
+
+      void waitForContentTransition(
+        runId,
+        Math.max(300, Math.ceil(resolvedProgressLoadingTime / 20) + 120)
+      ).then((canContinue) => {
+        if (!canContinue) return;
+        scheduleWrapperReset(runId);
+      });
+    },
+    [
+      isDisabledNow,
+      resolvedProgressLoadingTime,
+      scheduleWrapperReset,
+      setState,
+      stateRef,
+      waitForContentTransition,
+    ]
+  );
+
   const handleActivationMouseDown = React.useCallback(
     (event: ButtonMouseDownEvent) => {
+      if (
+        !isDisabledNow() &&
+        busyRef.current !== true &&
+        'button' in event &&
+        event.button === 0
+      ) {
+        setState({
+          pressLockActive: true,
+        });
+      }
+
       userOnMouseDown?.(event);
     },
-    [userOnMouseDown]
+    [isDisabledNow, setState, userOnMouseDown]
   );
 
   const handleActivationPressed = React.useCallback(
     (event: ButtonPressedEvent) => {
+      if (!isDisabledNow()) {
+        setState({
+          pressLockActive: true,
+        });
+      }
+
       userOnPressed?.(event);
     },
-    [userOnPressed]
+    [isDisabledNow, setState, userOnPressed]
   );
 
   const runProgress = React.useCallback(
@@ -282,68 +407,40 @@ const AwesomeButtonProgress = ({
       if (!isMountedRef.current || runIdRef.current !== runId) return;
       if (isDisabledNow()) return;
 
-      if (pendingProgressRunRef.current?.runId === runId) {
-        pendingProgressRunRef.current = null;
-      }
-
       setState({
+        pressLockActive: true,
         progressActive: true,
       });
 
       startLoading();
 
-      const progressEl = progressRef.current;
-      if (!progressEl) {
-        // Failsafe: invoke callback anyway, but don't crash. Leave busy state if never resolved.
-        try {
-          onPress?.(event, endLoading);
-        } catch {
-          endLoading(false);
+      if (shouldWaitForContentTransition(event)) {
+        const canContinue = await waitForContentTransition(
+          runId,
+          BUTTON_TRANSITION_FALLBACK_MS
+        );
+
+        if (!canContinue) {
+          return;
         }
-        return;
       }
 
       try {
-        // Wait for the progress intro transition before kicking off user work.
-        await onceTransitionEnd(progressEl);
-
-        if (!isMountedRef.current || runIdRef.current !== runId) {
-          return;
-        }
-        if (isDisabledNow()) {
-          return;
-        }
-
-        try {
-          onPress?.(event, endLoading);
-        } catch {
-          // Sync exception in user handler -> mark as errored and continue lifecycle.
-          endLoading(false);
-        }
-
-        (progressEl as any)?.clearCssEvent?.();
-
-        setCssEndEvent(progressEl as any, 'transition', {
-          tolerance: LOADING_ANIMATION_STEPS,
-        }).then(() => {
-          if (!isMountedRef.current || runIdRef.current !== runId) return;
-          scheduleWrapperReset(runId);
+        onPress?.(event, (endState = true, errorLabel = null) => {
+          endLoading(runId, endState, errorLabel);
         });
       } catch {
-        // Transition promise failed/interrupted: fail safe reset state.
-        if (!isMountedRef.current || runIdRef.current !== runId) return;
-
-        endLoading(false);
-        scheduleWrapperReset(runId);
+        // Sync exception in user handler -> mark as errored and continue lifecycle.
+        endLoading(runId, false);
       }
     },
     [
       endLoading,
       isDisabledNow,
       onPress,
-      scheduleWrapperReset,
       setState,
       startLoading,
+      waitForContentTransition,
     ]
   );
 
@@ -364,11 +461,6 @@ const AwesomeButtonProgress = ({
       const runId = runIdRef.current;
       const run = { event, runId };
 
-      if (shouldWaitForPhysicalRelease(event)) {
-        pendingProgressRunRef.current = run;
-        return;
-      }
-
       void runProgress(run);
     },
     [isDisabledNow, runProgress, stateRef]
@@ -376,19 +468,31 @@ const AwesomeButtonProgress = ({
 
   const handleReleased = React.useCallback(
     (element: HTMLElement) => {
-      const pendingRun = pendingProgressRunRef.current;
+      const releaseRunId = releasePendingRunRef.current;
 
-      if (pendingRun) {
-        pendingProgressRunRef.current = null;
-        void runProgress(pendingRun);
+      if (releaseRunId != null && runIdRef.current === releaseRunId) {
+        releasePendingRunRef.current = null;
+        busyRef.current = false;
+        setState({
+          loadingError: false,
+          errorLabel: null,
+        });
+      } else if (
+        busyRef.current !== true &&
+        stateRef.current.pressLockActive === true &&
+        stateRef.current.progressActive !== true
+      ) {
+        setState({
+          pressLockActive: false,
+        });
       }
 
       userOnReleased?.(element);
     },
-    [runProgress, userOnReleased]
+    [setState, stateRef, userOnReleased]
   );
 
-  const { errorLabel } = stateRef.current;
+  const { errorLabel, pressLockActive } = stateRef.current;
 
   return (
     <AwesomeButton
@@ -399,6 +503,7 @@ const AwesomeButtonProgress = ({
       type={type}
       cssModule={cssModule}
       style={progressStyle}
+      active={pressLockActive}
       className={progressClassName}
       onPress={handleAction}
       onMouseDown={handleActivationMouseDown}

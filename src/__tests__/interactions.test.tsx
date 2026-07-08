@@ -62,7 +62,7 @@ function dispatchPointerEvent(
 
 function dispatchTransitionEnd(
   element: Element,
-  propertyName: 'width' | 'flex-basis' = 'width'
+  propertyName: 'width' | 'flex-basis' | 'transform' = 'width'
 ) {
   const event = new Event('transitionend', {
     bubbles: true,
@@ -74,6 +74,18 @@ function dispatchTransitionEnd(
   });
 
   fireEvent(element, event);
+}
+
+function getButtonContent(element: Element): HTMLElement {
+  const content = element.querySelector(
+    '[data-aws-btn-role="content"]'
+  ) as HTMLElement | null;
+
+  if (!content) {
+    throw new Error('Expected AwesomeButton content element.');
+  }
+
+  return content;
 }
 
 const originalPointerEvent = window.PointerEvent;
@@ -1442,23 +1454,22 @@ describe('v8 interaction smoke tests', () => {
     });
   });
 
-  it('AwesomeButtonProgress starts progress only after physical release settles', async () => {
-    const release = createDeferredPromise();
+  it('AwesomeButtonProgress keeps the button physically locked through progress', async () => {
     const onPress = jest.fn((_event, next) => next(true));
     const onReleased = jest.fn();
 
-    mockSetCssEndEvent
-      .mockResolvedValueOnce(undefined)
-      .mockReturnValueOnce(release.promise);
-
     render(
-      <AwesomeButtonProgress onPress={onPress} onReleased={onReleased}>
+      <AwesomeButtonProgress
+        onPress={onPress}
+        onReleased={onReleased}
+        releaseDelay={0}>
         Layered submit
       </AwesomeButtonProgress>
     );
 
     let root = screen.getByText('Layered submit').closest('button');
     expect(root).toBeTruthy();
+    const content = getButtonContent(root!);
 
     dispatchPointerEvent(root!, 'pointerDown', {
       bubbles: true,
@@ -1481,29 +1492,91 @@ describe('v8 interaction smoke tests', () => {
     });
 
     root = screen.getByText('Layered submit').closest('button');
-    expect(root?.className).toContain('aws-btn--releasing');
-    expect(root?.className).not.toContain('aws-btn--active');
-    expect(root?.className).not.toContain('aws-btn--progress-active');
-    expect(root?.className).not.toContain('aws-btn--start');
+    await waitFor(() => {
+      expect(root?.className).toContain('aws-btn--active');
+      expect(root?.className).toContain('aws-btn--progress-active');
+      expect(root?.className).toContain('aws-btn--start');
+      expect(root?.className).not.toContain('aws-btn--releasing');
+    });
+
     expect(onPress).not.toHaveBeenCalled();
 
-    await act(async () => {
-      release.resolve();
-      await release.promise;
-    });
+    dispatchTransitionEnd(content, 'width');
+    expect(onPress).not.toHaveBeenCalled();
+
+    dispatchTransitionEnd(content, 'transform');
 
     await waitFor(() => {
       root = screen.getByText('Layered submit').closest('button');
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(root?.className).toContain('aws-btn--active');
       expect(root?.className).toContain('aws-btn--progress-active');
       expect(root?.className).toContain('aws-btn--start');
+      expect(root?.className).toContain('aws-btn--end');
+      expect(root?.className).not.toContain('aws-btn--releasing');
+    });
+
+    dispatchTransitionEnd(content, 'transform');
+
+    await waitFor(() => {
+      root = screen.getByText('Layered submit').closest('button');
       expect(root?.className).not.toContain('aws-btn--active');
+      expect(root?.className).not.toContain('aws-btn--progress-active');
+      expect(root?.className).not.toContain('aws-btn--start');
+      expect(root?.className).not.toContain('aws-btn--end');
       expect(root?.className).not.toContain('aws-btn--releasing');
     });
 
     expect(onReleased).toHaveBeenCalledTimes(1);
+  });
+
+  it('AwesomeButtonProgress keeps custom-element keyboard activation locked into progress', async () => {
+    const onPress = jest.fn((_event, next) => next(true));
+    const CustomDiv = React.forwardRef<
+      HTMLDivElement,
+      React.HTMLAttributes<HTMLDivElement>
+    >((props, ref) => <div ref={ref} {...props} />);
+    CustomDiv.displayName = 'KeyboardProgressDiv';
+
+    render(
+      <AwesomeButtonProgress element={CustomDiv} onPress={onPress}>
+        Keyboard submit
+      </AwesomeButtonProgress>
+    );
+
+    let root = screen.getByText('Keyboard submit').closest('[role="button"]');
+    expect(root).toBeTruthy();
+    const content = getButtonContent(root!);
+
+    fireEvent.keyDown(root!, { key: 'Enter' });
+
+    await waitFor(() => {
+      root = screen.getByText('Keyboard submit').closest('[role="button"]');
+      expect(root?.className).toContain('aws-btn--active');
+    });
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    fireEvent.keyUp(root!, { key: 'Enter' });
+
+    await waitFor(() => {
+      root = screen.getByText('Keyboard submit').closest('[role="button"]');
+      expect(root?.className).toContain('aws-btn--active');
+      expect(root?.className).toContain('aws-btn--progress-active');
+      expect(root?.className).toContain('aws-btn--start');
+      expect(root?.className).not.toContain('aws-btn--releasing');
+    });
+
+    dispatchTransitionEnd(content, 'transform');
 
     await waitFor(() => {
       expect(onPress).toHaveBeenCalledTimes(1);
+      root = screen.getByText('Keyboard submit').closest('[role="button"]');
+      expect(root?.className).toContain('aws-btn--active');
+      expect(root?.className).toContain('aws-btn--end');
+      expect(root?.className).not.toContain('aws-btn--releasing');
     });
   });
 
@@ -1536,7 +1609,52 @@ describe('v8 interaction smoke tests', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('AwesomeButtonProgress clears active progress state when disabled mid-flight', () => {
+  it('AwesomeButtonProgress clears physical lock when disabled mid-press', () => {
+    const onPress = jest.fn((_event, next) => next(true));
+    const { rerender } = render(
+      <AwesomeButtonProgress onPress={onPress}>
+        Mid-press disable
+      </AwesomeButtonProgress>
+    );
+
+    let root = screen.getByText('Mid-press disable').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).toContain('aws-btn--active');
+
+    rerender(
+      <AwesomeButtonProgress disabled onPress={onPress}>
+        Mid-press disable
+      </AwesomeButtonProgress>
+    );
+
+    root = screen.getByText('Mid-press disable').closest('button');
+    expect(root?.className).toContain('aws-btn--disabled');
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--progress-active');
+    expect(root?.className).not.toContain('aws-btn--start');
+    expect(root?.className).not.toContain('aws-btn--end');
+
+    dispatchPointerEvent(root!, 'pointerUp', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('AwesomeButtonProgress clears active progress state when disabled mid-flight', async () => {
     const onPress = jest.fn((_event, next) => next(true));
     const { rerender } = render(
       <AwesomeButtonProgress onPress={onPress}>Queued submit</AwesomeButtonProgress>
@@ -1555,6 +1673,21 @@ describe('v8 interaction smoke tests', () => {
 
     expect(root?.className).toContain('aws-btn--active');
 
+    dispatchPointerEvent(root!, 'pointerUp', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    await waitFor(() => {
+      root = screen.getByText('Queued submit').closest('button');
+      expect(root?.className).toContain('aws-btn--active');
+      expect(root?.className).toContain('aws-btn--progress-active');
+      expect(root?.className).toContain('aws-btn--start');
+    });
+
     rerender(
       <AwesomeButtonProgress disabled onPress={onPress}>
         Queued submit
@@ -1572,6 +1705,82 @@ describe('v8 interaction smoke tests', () => {
     fireEvent.click(screen.getByText('Queued submit'));
 
     expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('AwesomeButtonProgress ignores stale next callbacks from older runs', async () => {
+    const nextCallbacks: Array<
+      (endState?: boolean, errorLabel?: string | null) => void
+    > = [];
+    const onPress = jest.fn((_event, next) => {
+      nextCallbacks.push(next);
+    });
+
+    render(
+      <AwesomeButtonProgress onPress={onPress} releaseDelay={0}>
+        Retry submit
+      </AwesomeButtonProgress>
+    );
+
+    const startRun = async (expectedPressCount: number) => {
+      let root = screen.getByText('Retry submit').closest('button');
+      expect(root).toBeTruthy();
+      const content = getButtonContent(root!);
+
+      dispatchPointerEvent(root!, 'pointerDown', {
+        bubbles: true,
+        button: 0,
+        clientY: 10,
+        pointerId: expectedPressCount,
+        pointerType: 'mouse',
+      });
+
+      dispatchPointerEvent(root!, 'pointerUp', {
+        bubbles: true,
+        button: 0,
+        clientY: 10,
+        pointerId: expectedPressCount,
+        pointerType: 'mouse',
+      });
+
+      await waitFor(() => {
+        root = screen.getByText('Retry submit').closest('button');
+        expect(root?.className).toContain('aws-btn--active');
+        expect(root?.className).toContain('aws-btn--progress-active');
+        expect(root?.className).toContain('aws-btn--start');
+      });
+
+      dispatchTransitionEnd(content, 'transform');
+
+      await waitFor(() => {
+        expect(onPress).toHaveBeenCalledTimes(expectedPressCount);
+      });
+
+      return { content };
+    };
+
+    const firstRun = await startRun(1);
+
+    await act(async () => {
+      nextCallbacks[0]?.(true);
+    });
+    dispatchTransitionEnd(firstRun.content, 'transform');
+
+    await waitFor(() => {
+      const root = screen.getByText('Retry submit').closest('button');
+      expect(root?.className).not.toContain('aws-btn--active');
+      expect(root?.className).not.toContain('aws-btn--progress-active');
+    });
+
+    await startRun(2);
+
+    await act(async () => {
+      nextCallbacks[0]?.(false, 'Old error');
+    });
+
+    const root = screen.getByText('Retry submit').closest('button');
+    const progress = root?.querySelector('.aws-btn__progress');
+    expect(root?.className).not.toContain('aws-btn--errored');
+    expect(progress?.getAttribute('data-status')).not.toBe('Old error');
   });
 
   it('AwesomeButtonProgress applies default runtime progress loading CSS vars', () => {
@@ -1617,6 +1826,9 @@ describe('v8 interaction smoke tests', () => {
 
     await waitFor(() => {
       expect(onPress).toHaveBeenCalledTimes(1);
+      expect(root?.className).toContain('aws-btn--active');
+      expect(root?.className).toContain('aws-btn--progress-active');
+      expect(root?.className).toContain('aws-btn--start');
     });
   });
 
