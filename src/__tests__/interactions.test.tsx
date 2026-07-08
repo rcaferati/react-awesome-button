@@ -223,6 +223,96 @@ describe('v8 interaction smoke tests', () => {
     });
   });
 
+  it('AwesomeButton clears transient press classes when disabled mid-press', () => {
+    const onPress = jest.fn();
+    const onReleased = jest.fn();
+    const { rerender } = render(
+      <AwesomeButton onPress={onPress} onReleased={onReleased}>
+        Gate
+      </AwesomeButton>
+    );
+
+    let root = screen.getByText('Gate').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).toContain('aws-btn--active');
+
+    rerender(
+      <AwesomeButton disabled onPress={onPress} onReleased={onReleased}>
+        Gate
+      </AwesomeButton>
+    );
+
+    root = screen.getByText('Gate').closest('button');
+    expect(root?.className).toContain('aws-btn--disabled');
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--releasing');
+
+    rerender(
+      <AwesomeButton onPress={onPress} onReleased={onReleased}>
+        Gate
+      </AwesomeButton>
+    );
+
+    root = screen.getByText('Gate').closest('button');
+    expect(root?.className).not.toContain('aws-btn--disabled');
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--releasing');
+    expect(onPress).not.toHaveBeenCalled();
+    expect(onReleased).not.toHaveBeenCalled();
+  });
+
+  it('AwesomeButton treats disabled pointer up as a visual cancel', () => {
+    const onPress = jest.fn();
+    const onReleased = jest.fn();
+    const { rerender } = render(
+      <AwesomeButton onPress={onPress} onReleased={onReleased}>
+        Cancel
+      </AwesomeButton>
+    );
+
+    let root = screen.getByText('Cancel').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).toContain('aws-btn--active');
+
+    rerender(
+      <AwesomeButton disabled onPress={onPress} onReleased={onReleased}>
+        Cancel
+      </AwesomeButton>
+    );
+
+    root = screen.getByText('Cancel').closest('button');
+    dispatchPointerEvent(root!, 'pointerUp', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--releasing');
+    expect(onPress).not.toHaveBeenCalled();
+    expect(onReleased).not.toHaveBeenCalled();
+  });
+
   it('AwesomeButton locks middle hover independently of disabled and pointer movement', () => {
     const onPress = jest.fn();
     const { rerender } = render(
@@ -505,6 +595,39 @@ describe('v8 interaction smoke tests', () => {
     });
 
     expect(onReleased).toHaveBeenCalledTimes(1);
+  });
+
+  it('AwesomeButton finalizes pointer release under React StrictMode', async () => {
+    const onReleased = jest.fn();
+
+    render(
+      <React.StrictMode>
+        <AwesomeButton onReleased={onReleased}>Strict release</AwesomeButton>
+      </React.StrictMode>
+    );
+
+    const root = screen.getByText('Strict release').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    dispatchPointerEvent(root!, 'pointerUp', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    await waitFor(() => {
+      expect(onReleased).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('AwesomeButton filters pressed and released timing to transform transitions', async () => {
@@ -1299,6 +1422,156 @@ describe('v8 interaction smoke tests', () => {
     await waitFor(() => {
       expect(onPress).toHaveBeenCalledTimes(1);
     });
+  });
+
+  it('AwesomeButtonProgress runs progress flow under React StrictMode', async () => {
+    const onPress = jest.fn((_event, next) => next(true));
+
+    render(
+      <React.StrictMode>
+        <AwesomeButtonProgress onPress={onPress}>
+          Strict submit
+        </AwesomeButtonProgress>
+      </React.StrictMode>
+    );
+
+    fireEvent.click(screen.getByText('Strict submit'));
+
+    await waitFor(() => {
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('AwesomeButtonProgress starts progress only after physical release settles', async () => {
+    const release = createDeferredPromise();
+    const onPress = jest.fn((_event, next) => next(true));
+    const onReleased = jest.fn();
+
+    mockSetCssEndEvent
+      .mockResolvedValueOnce(undefined)
+      .mockReturnValueOnce(release.promise);
+
+    render(
+      <AwesomeButtonProgress onPress={onPress} onReleased={onReleased}>
+        Layered submit
+      </AwesomeButtonProgress>
+    );
+
+    let root = screen.getByText('Layered submit').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--progress-active');
+    expect(root?.className).not.toContain('aws-btn--start');
+
+    dispatchPointerEvent(root!, 'pointerUp', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    root = screen.getByText('Layered submit').closest('button');
+    expect(root?.className).toContain('aws-btn--releasing');
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--progress-active');
+    expect(root?.className).not.toContain('aws-btn--start');
+    expect(onPress).not.toHaveBeenCalled();
+
+    await act(async () => {
+      release.resolve();
+      await release.promise;
+    });
+
+    await waitFor(() => {
+      root = screen.getByText('Layered submit').closest('button');
+      expect(root?.className).toContain('aws-btn--progress-active');
+      expect(root?.className).toContain('aws-btn--start');
+      expect(root?.className).not.toContain('aws-btn--active');
+      expect(root?.className).not.toContain('aws-btn--releasing');
+    });
+
+    expect(onReleased).toHaveBeenCalledTimes(1);
+
+    await waitFor(() => {
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('AwesomeButtonProgress does not activate from pointer down while disabled', () => {
+    const onPress = jest.fn((_event, next) => next(true));
+
+    render(
+      <AwesomeButtonProgress disabled onPress={onPress}>
+        Disabled submit
+      </AwesomeButtonProgress>
+    );
+
+    const root = screen.getByText('Disabled submit').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).toContain('aws-btn--disabled');
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--progress-active');
+    expect(root?.className).not.toContain('aws-btn--start');
+    expect(root?.className).not.toContain('aws-btn--end');
+    expect(root?.className).not.toContain('aws-btn--errored');
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('AwesomeButtonProgress clears active progress state when disabled mid-flight', () => {
+    const onPress = jest.fn((_event, next) => next(true));
+    const { rerender } = render(
+      <AwesomeButtonProgress onPress={onPress}>Queued submit</AwesomeButtonProgress>
+    );
+
+    let root = screen.getByText('Queued submit').closest('button');
+    expect(root).toBeTruthy();
+
+    dispatchPointerEvent(root!, 'pointerDown', {
+      bubbles: true,
+      button: 0,
+      clientY: 10,
+      pointerId: 1,
+      pointerType: 'mouse',
+    });
+
+    expect(root?.className).toContain('aws-btn--active');
+
+    rerender(
+      <AwesomeButtonProgress disabled onPress={onPress}>
+        Queued submit
+      </AwesomeButtonProgress>
+    );
+
+    root = screen.getByText('Queued submit').closest('button');
+    expect(root?.className).toContain('aws-btn--disabled');
+    expect(root?.className).not.toContain('aws-btn--active');
+    expect(root?.className).not.toContain('aws-btn--progress-active');
+    expect(root?.className).not.toContain('aws-btn--start');
+    expect(root?.className).not.toContain('aws-btn--end');
+    expect(root?.className).not.toContain('aws-btn--errored');
+
+    fireEvent.click(screen.getByText('Queued submit'));
+
+    expect(onPress).not.toHaveBeenCalled();
   });
 
   it('AwesomeButtonProgress applies default runtime progress loading CSS vars', () => {
