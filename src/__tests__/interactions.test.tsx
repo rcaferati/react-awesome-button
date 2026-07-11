@@ -371,6 +371,116 @@ describe('v8 interaction smoke tests', () => {
     expect(root?.className).not.toContain('aws-btn--middle');
   });
 
+  it('AwesomeButton reconciles locked hover before paint when it becomes enabled', () => {
+    const onPress = jest.fn();
+    const cssModule = {
+      'aws-btn': 'root_hash',
+      'aws-btn--auto': 'auto_hash',
+      'aws-btn--primary': 'primary_hash',
+      'aws-btn--visible': 'visible_hash',
+      'aws-btn--animate-size': 'animate_hash',
+      'aws-btn--disabled': 'disabled_hash',
+      'aws-btn--middle': 'middle_hash',
+      'aws-btn--left': 'left_hash',
+      'aws-btn--right': 'right_hash',
+      'aws-btn__wrapper': 'wrapper_hash',
+      'aws-btn__content': 'content_hash',
+      'aws-btn__label': 'label_hash',
+    };
+    const { container, rerender } = render(
+      <React.StrictMode>
+        <AwesomeButton
+          cssModule={cssModule}
+          disabled
+          lockedHover
+          onPress={onPress}>
+          Reconcile
+        </AwesomeButton>
+      </React.StrictMode>
+    );
+
+    let root = screen.getByText('Reconcile').closest('button');
+    expect(root?.className).toContain('disabled_hash');
+    expect(root?.className).toContain('middle_hash');
+
+    Object.defineProperty(root, 'matches', {
+      configurable: true,
+      value: jest.fn((selector: string) => selector === ':hover'),
+    });
+
+    rerender(
+      <React.StrictMode>
+        <AwesomeButton cssModule={cssModule} onPress={onPress}>
+          Reconcile
+        </AwesomeButton>
+      </React.StrictMode>
+    );
+
+    root = screen.getByText('Reconcile').closest('button');
+    expect(root?.className).not.toContain('disabled_hash');
+    expect(root?.className).toContain('middle_hash');
+
+    const wrapper = container.querySelector('.wrapper_hash') as HTMLElement;
+    Object.defineProperty(wrapper, 'offsetWidth', {
+      configurable: true,
+      value: 100,
+    });
+    jest.spyOn(wrapper, 'getBoundingClientRect').mockReturnValue({
+      bottom: 40,
+      height: 40,
+      left: 0,
+      right: 100,
+      top: 0,
+      width: 100,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    });
+
+    dispatchPointerEvent(root!, 'pointerMove', {
+      bubbles: true,
+      clientX: 10,
+      pointerType: 'mouse',
+    });
+    expect(root?.className).toContain('left_hash');
+    expect(root?.className).not.toContain('middle_hash');
+
+    dispatchPointerEvent(root!, 'pointerMove', {
+      bubbles: true,
+      clientX: 90,
+      pointerType: 'mouse',
+    });
+    expect(root?.className).toContain('right_hash');
+    expect(root?.className).not.toContain('left_hash');
+
+    fireEvent.click(screen.getByText('Reconcile'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('AwesomeButton clears locked hover when it unlocks outside the pointer', () => {
+    const onPress = jest.fn();
+    const { rerender } = render(
+      <AwesomeButton disabled lockedHover onPress={onPress}>
+        Outside
+      </AwesomeButton>
+    );
+
+    let root = screen.getByText('Outside').closest('button');
+    expect(root?.className).toContain('aws-btn--disabled');
+    expect(root?.className).toContain('aws-btn--middle');
+
+    Object.defineProperty(root, 'matches', {
+      configurable: true,
+      value: jest.fn(() => false),
+    });
+
+    rerender(<AwesomeButton onPress={onPress}>Outside</AwesomeButton>);
+
+    root = screen.getByText('Outside').closest('button');
+    expect(root?.className).not.toContain('aws-btn--disabled');
+    expect(root?.className).not.toContain('aws-btn--middle');
+  });
+
   it('AwesomeButton renders anchor mode when href is provided', () => {
     render(
       <AwesomeButton

@@ -117,7 +117,7 @@ const AwesomeButton = ({
     textTransition,
   });
 
-  const { handlers, pressClassName } = usePressLifecycle({
+  const { handlers, moveClassName, pressClassName } = usePressLifecycle({
     active,
     contentRef,
     cssModule,
@@ -156,6 +156,7 @@ const AwesomeButton = ({
       ...(isDisabled ? [`${rootElement}--disabled`] : []),
       ...(lockedHover ? [`${rootElement}--middle`] : []),
       ...(isIconOnly ? [`${rootElement}--icon`] : []),
+      ...(moveClassName ? [moveClassName] : []),
       ...(pressClassName ? [pressClassName] : []),
     ];
 
@@ -183,6 +184,7 @@ const AwesomeButton = ({
     isIconOnly,
     isPlaceholder,
     lockedHover,
+    moveClassName,
     pressClassName,
     rootElement,
     shouldSnapAutoWidth,

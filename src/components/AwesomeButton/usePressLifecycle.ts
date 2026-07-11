@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { setCssEndEvent } from '@rcaferati/wac';
-import {
-  createRippleEffect,
-  getClassName,
-  toggleMoveClasses,
-} from '../../helpers/components';
+import { createRippleEffect, getClassName } from '../../helpers/components';
 import type {
   ButtonType,
   CssEventClearableElement,
@@ -40,6 +36,18 @@ function getMoveState(clientX: number, element: HTMLElement): PointerMoveState {
   return 'middle';
 }
 
+function isElementHovered(element: RootDomElement | null): boolean {
+  if (!element?.matches) {
+    return false;
+  }
+
+  try {
+    return element.matches(':hover');
+  } catch {
+    return false;
+  }
+}
+
 type UsePressLifecycleParams = {
   active: boolean;
   cssModule: CssModuleMap | null;
@@ -72,6 +80,7 @@ type UsePressLifecycleResult = {
     onPointerMove: (event: React.PointerEvent<RootDomElement>) => void;
     onPointerUp: (event: React.PointerEvent<RootDomElement>) => void;
   };
+  moveClassName: string | null;
   pressClassName: string | null;
 };
 
@@ -100,11 +109,14 @@ export default function usePressLifecycle({
   const [pressPosition, setPressPosition] = React.useState<string | null>(
     active ? activeClassName : null
   );
+  const [movePosition, setMovePosition] =
+    React.useState<PointerMoveState | null>(null);
 
   const pressedRef = React.useRef<PressPhase>(0);
   const activePointerIdRef = React.useRef<number | null>(null);
   const pointerStartYRef = React.useRef<number | null>(null);
   const mountedRef = React.useRef(true);
+  const previousLockedHoverRef = React.useRef(lockedHover);
   const releaseRunRef = React.useRef(0);
 
   const createRipple = React.useCallback(
@@ -174,15 +186,11 @@ export default function usePressLifecycle({
     pressedRef.current = 0;
 
     if (!lockedHover) {
-      toggleMoveClasses({
-        element: rootRef.current,
-        root: rootElement,
-        cssModule,
-      });
+      setMovePosition(null);
     }
 
     setPressPosition((previous) => (previous == null ? previous : null));
-  }, [cancelPendingRelease, cssModule, lockedHover, rootElement, rootRef]);
+  }, [cancelPendingRelease, lockedHover]);
 
   const clearPress = React.useCallback(
     ({
@@ -190,11 +198,7 @@ export default function usePressLifecycle({
       leave = false,
     }: { force?: boolean; leave?: boolean } = {}) => {
       if (!lockedHover) {
-        toggleMoveClasses({
-          element: rootRef.current,
-          root: rootElement,
-          cssModule,
-        });
+        setMovePosition(null);
       }
 
       if (leave === true && pressedRef.current === 0) {
@@ -251,13 +255,10 @@ export default function usePressLifecycle({
       activeClassName,
       cancelPendingRelease,
       contentRef,
-      cssModule,
       finalizeRelease,
       lockedHover,
       pressPosition,
       releasingClassName,
-      rootElement,
-      rootRef,
     ]
   );
 
@@ -352,6 +353,19 @@ export default function usePressLifecycle({
       resetTransientPressState();
     }
   }, [isDisabled, resetTransientPressState]);
+
+  useIsomorphicLayoutEffect(() => {
+    const wasLockedHover = previousLockedHoverRef.current;
+    previousLockedHoverRef.current = lockedHover;
+
+    if (!wasLockedHover || lockedHover) {
+      return;
+    }
+
+    setMovePosition(
+      !isDisabled && isElementHovered(rootRef.current) ? 'middle' : null
+    );
+  }, [isDisabled, lockedHover, rootRef]);
 
   React.useEffect(() => {
     mountedRef.current = true;
@@ -455,6 +469,7 @@ export default function usePressLifecycle({
 
       activePointerIdRef.current = null;
       pointerStartYRef.current = null;
+      setMovePosition(null);
       clearPress({ force: true });
     },
     [clearPress]
@@ -465,6 +480,8 @@ export default function usePressLifecycle({
       if (event.pointerType && event.pointerType !== 'mouse') {
         return;
       }
+
+      setMovePosition(null);
 
       if (active === true && pressedRef.current !== 2) {
         clearPress({ force: true });
@@ -489,23 +506,9 @@ export default function usePressLifecycle({
       if (!wrapperRef.current) return;
 
       const state = getMoveState(event.clientX, wrapperRef.current);
-
-      toggleMoveClasses({
-        element: rootRef.current,
-        root: rootElement,
-        cssModule,
-        state,
-      });
+      setMovePosition(state);
     },
-    [
-      cssModule,
-      isDisabled,
-      lockedHover,
-      moveEvents,
-      rootElement,
-      rootRef,
-      wrapperRef,
-    ]
+    [isDisabled, lockedHover, moveEvents, wrapperRef]
   );
 
   const handleMouseEnterFallback = React.useCallback(() => {
@@ -517,13 +520,8 @@ export default function usePressLifecycle({
       return;
     }
 
-    toggleMoveClasses({
-      element: rootRef.current,
-      root: rootElement,
-      cssModule,
-      state: 'middle',
-    });
-  }, [cssModule, isDisabled, lockedHover, moveEvents, rootElement, rootRef]);
+    setMovePosition('middle');
+  }, [isDisabled, lockedHover, moveEvents]);
 
   const handleClick = React.useCallback(
     (event: React.MouseEvent<RootDomElement>) => {
@@ -579,6 +577,10 @@ export default function usePressLifecycle({
       onPointerMove: handlePointerMove,
       onPointerUp: handlePointerUp,
     },
+    moveClassName:
+      !lockedHover && movePosition
+        ? `${rootElement}--${movePosition}`
+        : null,
     pressClassName: pressPosition,
   };
 }
